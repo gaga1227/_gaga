@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	form input[type="text"] { 
+		background:none; border:none;
+		border-bottom:1px solid #000;
+		width:5em;
+		outline:0 none; }
+		
+	.feedback { font-weight:bold; }
+	.correct { color:#3C0; }
+	.incorrect { color:#f00; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngShowHideController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+		//utils
+		$scope.showFeedback = function(token){
+			var field = $scope.form[token];
+			return field.$dirty && !field.$isEmpty(field.$viewValue);
+		};
+		//handlers
+		$scope.checkQ1 = function(){
+			$scope.isQ1Correct = ($scope.a1 == 2 + 2);
+			//$scope.showQ1 = $scope.showFeedback('q1');
+		};
+		$scope.checkQ2 = function(){
+			$scope.isQ2Correct = ($scope.a2 == 16 * 2 + 1); 
+			$scope.showQ2 = $scope.showFeedback('q2');
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-show/hide</h2>
+	
+	<div ng-controller="ngShowHideController">
+		<h3>Answer the questions:</h3>
+		<form name="form" novalidate>
+		<p>
+			Q1. <b>2 + 2 =</b> <input name="q1" type="text" ng-model="a1" ng-change="checkQ1()">
+			<span class="feedback" ng-show="form.q1.$dirty && a1.length >= 1" ng-class="{'correct': isQ1Correct, 'incorrect': !isQ1Correct}">
+				<span ng-show="isQ1Correct">Correct!</span>
+				<span ng-hide="isQ1Correct">Incorrect!</span>
+			</span>
+		</p>
+		<p>
+			Q2. <b>16 * 2 + 1  =</b> <input name="q2" type="text" ng-model="a2" ng-change="checkQ2()">
+			<span class="feedback" ng-show="showQ2" ng-class="{'correct': isQ2Correct, 'incorrect': !isQ2Correct}">
+				<span ng-show="isQ2Correct">Correct!</span>
+				<span ng-hide="isQ2Correct">Incorrect!</span>
+			</span>
+		</p>
+		</form>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup></sup></dt>
+		<dd></dd></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngCloakController', ['$scope', function($scope){
+		$scope.greeting = '你好，';
+		$scope.person = '朋友';
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-cloak</h2>
+	
+	<div ng-controller="ngCloakController">
+		<p ng-cloak>{{greeting}} {{person}}!</p>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd><b>ng-cloak</b> can also be used to prevent flash of unrendered content.</dd></div>
+	</div>
+</body>
+</html>

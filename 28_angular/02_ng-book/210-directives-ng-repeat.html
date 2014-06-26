@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	.even 	{ background-color:rgba(255,0,0,0.1); }
+	.odd 	{ background-color:rgba(0,255,0,0.1); }
+	.first	{ margin-right:2em; }
+	.last	{ margin-left:2em; }
+	.middle	{ margin:0 2em; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngRepeatController', ['$scope', function($scope){
+		//model
+		$scope.collection = [];
+		$scope.count = 6;
+		//handler
+		function updateStaffCollection(){
+			var count = $scope.count;
+			$scope.collection = [];
+			while(count) {
+				id = $scope.count - count + 1;
+				$scope.collection.push({name:'staff'+id, city:'city'+id});
+				count--;
+			}
+		}
+		//actions
+		$scope.onChange = updateStaffCollection;
+		//init
+		updateStaffCollection();
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-repeat<sup></sup></h2>
+	
+	<div ng-controller="ngRepeatController">
+		<p>Adjust Staff List:<br><input type="range" min="1" max="12" step="1" ng-model="count" ng-change="onChange()"></p>
+		<div ng-repeat="staff in collection" ng-class="{even: !$even, odd: $even, first: $first, last: $last, middle: $middle}">
+			<span><b>id:</b> {{$index+1}} | <b>Name:</b> {{staff.name}}</span> | <span><b>City:</b> {{staff.city}}</span>
+		</div>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup></sup></dt>
+		<dd></dd></div>
+	</div>
+</body>
+</html>

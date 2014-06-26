@@ -1,0 +1,13 @@
+<div class="contaienr">
+	Search Customers: <input type="text" data-ng-model="keyword" />
+	<ul>
+		<li data-ng-repeat="customer in customers | filter:keyword | orderBy:'name'" class="list">
+			{{customer.name | uppercase}} - {{customer.city | lowercase}}
+		</li>
+	</ul>
+	<form name="form" novalidate>
+		New Customer Name: <input type="text" placeholder="Name" data-ng-model="newCustomer.name" required /><br>
+		New Customer City: <input type="text" placeholder="City" data-ng-model="newCustomer.city" required /><br>
+		<button data-ng-click="addCustomer(newCustomer)" data-ng-disabled="form.$invalid">Add Customer</button>
+	</form>
+</div>

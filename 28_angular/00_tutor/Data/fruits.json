@@ -1,0 +1,7 @@
+[
+	{ "name": "Orange", "taste": "juicy" },
+	{ "name": "Melon", "taste": "sweet" },
+	{ "name": "Pear", "taste": "crunchy" },
+	{ "name": "Kiwi", "taste": "sour" },
+	{ "name": "Grape", "taste": "sweet sour" }
+]

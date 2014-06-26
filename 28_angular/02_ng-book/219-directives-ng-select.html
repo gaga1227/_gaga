@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngSelectController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+		//model
+		$scope.cities = [
+			{name: "Shanghai", id: "001"},
+			{name: "Melbourne", id: "002"},
+			{name: "Hong Kong", id: "003"},
+			{name: "Tokyo", id: "004"}
+		];
+		$scope.bio = {
+			age: 	36,
+			gender: 'Male',
+			likes: 	'Food',
+			hates: 	'No food'
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>select / ng-select / ng-options</h2>
+	
+	<div ng-controller="ngSelectController">
+		<h3>Your City<sup>1</sup>: {{yourCity.name}}</h3>
+		<select ng-model="yourCity" ng-options="city.name for city in cities">
+			<option value="">-- Select City --</option>
+		</select>
+		<h3>Your Info<sup>2</sup>: {{val}}</h3>
+		<select ng-model="val" ng-options="key for (key, val) in bio">
+			<option value="">-- Select Info --</option>
+		</select>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>Populated from Array data</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>Populated from Object data</dd></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', '$parse', function($scope, $parse){
+		//data for parsing
+		$scope.data = {
+			name: 'John',
+			location: 'Melbourne',
+			job: 'Web Worker',
+			email: 'John@google.com'	
+		};
+		//watch some data and parse on update
+		$scope.$watch('expr', function(newVal, oldVal, scope){
+			if (newVal !== oldVal) {
+				//$parse converts expression to a function
+				var parseFun = $parse(newVal);
+				//parse function requires context scope
+				$scope.parsedValue = parseFun(scope);	
+			}
+		});
+	}]);
+</script>
+</head>
+<body>
+	<h1>Parse an Expression</h1>
+	<div ng-controller="MyController">
+		<p>Parse Data: <input type="text" placeholder="e.g. data.name" ng-model="expr"></p>
+		<p>Into Value: {{ parsedValue }}</p>
+	</div>
+</body>
+</html>

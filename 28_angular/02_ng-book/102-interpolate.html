@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', '$interpolate', function($scope, $interpolate){
+		//data preset
+		$scope.to = "John Smith";
+		$scope.loc = "Melbourne";
+		$scope.evt = "Housing Expo";
+		$scope.yr = "2013";
+		$scope.emailBody = "Dear {{recipient}}, welcome to {{year}}'s {{event}} of {{venue}}! ...";
+		
+		//abstract interpolate to function
+		function interpolate(input){
+			//normalize input
+			input = input || $scope.emailBody;
+			var //feed template string to $interpolate, returns a function 
+				template = $interpolate(input, true),
+				//update context object with expressions to be intepolated
+				contextObj = {
+					recipient: 	$scope.to,
+					venue: 		$scope.loc,
+					event: 		$scope.evt,
+					year: 		$scope.yr
+				},
+				result = (typeof(template) === 'function') ? template(contextObj) : 'Error! Template string must have at least one expression embedded! e.g. {{recipient}}'; 
+			//assign interpolated string template back to view
+			$scope.previewText = result;
+		}
+		
+		//watch template string input
+		$scope.$watch('emailBody', function(body){
+			interpolate(body);
+		});
+		
+		//watch other inputs
+		$scope.$watch('to', function(){
+			if ($scope.emailBody) { interpolate(); }
+		});
+		$scope.$watch('loc', function(){
+			if ($scope.emailBody) { interpolate(); }
+		});
+		$scope.$watch('evt', function(){
+			if ($scope.emailBody) { interpolate(); }
+		});
+		$scope.$watch('yr', function(){
+			if ($scope.emailBody) { interpolate(); }
+		});
+	}]);
+</script>
+</head>
+<body>
+	<h1>Interpolate a Template</h1>
+	<div ng-controller="MyController">
+		<p>
+			Interpolate Expressions:<br>
+			<input type="text" size="50" placeholder="recipient" ng-model="to"></p>
+			<input type="text" size="50" placeholder="venue" ng-model="loc"></p>
+			<input type="text" size="50" placeholder="event" ng-model="evt"></p>
+			<input type="text" size="50" placeholder="year" ng-model="yr"></p>
+		<p>
+			Template String:<br>
+			<textarea ng-model="emailBody" cols="40" rows="5" placeholder="Dear {recipient}, welcome to {year}'s {event} of {venue}! ..."></textarea>
+		</p>
+		<p>
+			Interpolated Template Preview:<br>
+			<span style="color:#00F">{{ previewText }}</span>
+		</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.run(function($rootScope){
+		$rootScope.someRootProperty = '$rootScope';
+		$rootScope.someRootMethod = function(){
+			alert('Calling from $rootScope');	
+		};
+	})
+	.controller('ngParentController', ['$scope', function($scope){
+		$scope.someModel = {};
+		$scope.someValue = 'string';
+		$scope.someModel.someValue = 'object';
+		$scope.parentAction = function(){
+			$scope.someValue = $scope.someValue + ' (parent)';
+			$scope.someModel.someValue = $scope.someModel.someValue + ' (parent)';
+		};
+	}])
+	.controller('ngChildController', ['$scope', function($scope){
+		$scope.childAction = function(){
+			//string value are copied/clones to child scope
+			$scope.someValue = $scope.someValue + ' (child)';
+			//obj value are referenced to child scope
+			$scope.someModel.someValue = $scope.someModel.someValue + ' (child)';
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>Directives with child scope<sup>1</sup></h2>
+	
+	<!-- ng-app -->
+	<div>
+		<h3>ng-app<sup>2</sup></h3>
+		<p>This is a <b>{{someRootProperty}}</b> value!</p>
+		<button ng-click="someRootMethod()">$rootScope Call</button>
+	</div>
+	
+	<!-- ng-controller -->
+	<div ng-controller="ngParentController">
+		<h3>ng-controller<sup>3</sup></h3>
+		<p>
+			<b>String(copy by val):</b> {{someValue}}<br>
+			<b>Object(copy by ref):</b> {{someModel.someValue}}<br>
+			<button ng-click="parentAction()">Parent Call Action</button>
+		</p>
+		<div ng-controller="ngChildController">
+			<b>String(copy by val):</b> {{someValue}}<br>
+			<b>Object(copy by ref):</b> {{someModel.someValue}}<br>
+			<button ng-click="childAction()">Child Call Action</button>
+		</div>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>These directives create a child scope that prototypically inherit from their parents, where you can have separate models and methods.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd><b>$rootScope</b> is like gloabl scope. Multiple <b>ng-app</b> in a single document requires manually bootstrap the application(s).</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>JavaScript values are either <b>copy by value</b> or <b>copy by reference</b>. String, Number, and Boolean are by value, Array, Object and function are by reference.</dd></div>
+	</div>
+</body>
+</html>

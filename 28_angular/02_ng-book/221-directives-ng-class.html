@@ -1,0 +1,102 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	button { margin:0 0.5em 0.5em 0; }
+	
+	.black	{ color:black; }
+	.red 	{ color:red; }
+	.green 	{ color:green; }
+	.blue 	{ color:blue; }
+	.purple { color:purple; }
+	
+	.big	{ font-size:1.5em; }
+	.med 	{ font-size:1em; }
+	.sml 	{ font-size:0.5em; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngClassController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+		
+		//vars
+		var colors = ['black','red','green','blue','purple'],
+			sizes = ['big','med','sml'];
+		
+		//function
+		function draw(arr){
+			if (!arr || !arr.length) return 'invalid array input';
+			var index = Math.round(Math.random() * (arr.length - 1));
+			return arr[index];
+		}
+		
+		//data
+		$scope.c1 = $scope.c2 = $scope.c3 = 'black';
+		$scope.s1 = $scope.s2 = $scope.s3 = 'med';
+		
+		//action
+		$scope.updateLook = function(c, s){
+			if (c) $scope[c] = draw(colors);
+			if (s) $scope[s] = draw(sizes);
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-class</h2>
+	
+	<div ng-controller="ngClassController">
+		<h3>Attribute Syntax: <br><small><code>ng-class="classExpr"</code></small></h3>
+		<p ng-class="c1"><b>Get me a new look</b></p>
+		<button ng-click="updateLook('c1')">NOW!</button>
+		<hr>
+		
+		<h3>Class Syntax: <br><small><code>class="ng-class:[classExpr1, classExpr2];"</code></small></h3>
+		<p class="ng-class:[c2, s2];"><b>Get me a new look</b></p>
+		<button ng-click="updateLook('c2', 's2')">NOW!</button>
+		<hr>
+		
+		<h3>Expressions in Array: <br><small><code>ng-class="[classExpr1, classExpr2]"</code></small></h3>
+		<p ng-class="[c3, s3]"><b>Get me a new look</b></p>
+		<button ng-click="updateLook('c3', 's3')">NOW!</button>
+		<hr>
+		
+		<h3>Expressions in Map: <br><small><code>ng-class="{class1: classExpr1, class2: classExpr2}"</code></small></h3>
+		<p 
+			ng-class="{
+				black: 	c4=='black',	
+				red: 	c4=='red',	
+				green: 	c4=='green',
+				blue: 	c4=='blue', 
+				purple: c4=='purple',
+				big: 	s4=='big',	
+				med: 	s4=='med', 
+				sml: 	s4=='sml'
+			}"><b>Get me a new look</b></p>
+		<button ng-click="c4='black'">Black</button>
+		<button ng-click="c4='red'">Red</button>
+		<button ng-click="c4='green'">Green</button>
+		<button ng-click="c4='blue'">Blue</button>
+		<button ng-click="c4='purple'">Purple</button>
+		<br>
+		<button ng-click="s4='big'">Big</button>
+		<button ng-click="s4='med'">Medium</button>
+		<button ng-click="s4='sml'">Small</button>
+	</div>
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

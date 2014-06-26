@@ -1,0 +1,39 @@
+<html data-ng-app>
+<body>
+	
+	<h3>Data-binding basics</h3>
+	Name: <input type="text" data-ng-model="name" /> {{name}}
+	<hr>
+
+	<h3>Looping with ng-repeat</h3>
+	<div class="contaienr" data-ng-init="fruits=['Apple','Banana','Cherry','Melon']">
+		<ul>
+			<li data-ng-repeat="fruit in fruits">{{fruit}}</li>
+		</ul>
+	</div>
+	<hr>
+	
+	<h3>Filtering, Sorting with Controller</h3>
+	<div class="contaienr" data-ng-controller="SimpleController">
+		Name: <input type="text" data-ng-model="keyword" />
+		<ul>
+			<li data-ng-repeat="customer in customers | filter:keyword | orderBy:'name'">
+				{{customer.name | uppercase}} - {{customer.city | lowercase}}
+			</li>
+		</ul>
+	</div>
+	<script>
+		function SimpleController($scope){
+			$scope.customers = [
+				{ name: 'Jamie Riley', city: 'Atlanta' },
+				{ name: 'Heedy Wahlin', city: 'New York' },
+				{ name: 'Thomas Winter', city: 'Seattle' },
+				{ name: 'Dave Jones', city: 'Phoenix' }
+			];
+		}
+	</script>
+	<hr>
+
+	<script src="../angular-1.2.6/angular.js"></script>
+</body>
+</html>

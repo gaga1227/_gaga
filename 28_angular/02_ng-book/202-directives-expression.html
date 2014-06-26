@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', function($scope){
+		window.scope = $scope;
+	}])
+	.directive('myDirective', [function(){
+		//ddo contains methods and properties to define and configure a directive
+		var ddo = {
+			restrict: 	'A',
+			replace:	true, 
+			template:	'<a href="{{myUrl}}" target="_blank">{{linkText}}</a>',
+			//create isolated scope
+			scope: {
+				//'@' binding strategy for binding text
+				myUrl: 		'@', 			//same attr name
+				linkText: 	'@myLinkText'	//with new attr name
+			},
+			//controller for isolated scope
+			controller: function($scope){
+				window.scope3 = $scope;	
+			}
+		};
+		return ddo;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<div ng-controller="MyController">
+		<h3>Directive Definition with Expression</h3>
+		<p my-directive my-url="http://www.google.com" my-link-text="Click me to go to Google"></p>
+	</div>
+</body>
+</html>

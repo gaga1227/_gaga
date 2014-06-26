@@ -1,0 +1,126 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	input[type="number"] {
+		background:none; border:none;
+		border-bottom:1px solid #000;
+		width:8em;
+		outline:0 none; }
+	input.ng-dirty.ng-invalid {
+		color:#fff;
+		background:#F00;
+	}
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngChangeController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+		//data
+		$scope.equation = {	gross:0, rate:0, tax:0, afterTax:0 };
+		//action
+		$scope.onChange = function(){
+			$scope.equation.tax = updateTax($scope.equation.gross);
+			$scope.equation.afterTax = $scope.equation.gross - $scope.equation.tax;
+			$scope.equation.rate = $scope.equation.tax / $scope.equation.gross * 100;
+		};
+		//init
+		$scope.onChange();
+		//functions
+		function updateTax(income){
+			//exit
+			if (isNaN(income) || income < 0) return 'invalid income';
+			//vars
+			var tax = 0,
+				thresh = 0,
+				base = 0,
+				rate = 0;
+			//update variables for calculation
+			if (0 <= income && income <= 18200){
+				thresh = 0;
+				base = 0;
+				rate = 0;
+			}
+			else if(18201 <= income && income <= 37000){
+				thresh = 18200;
+				base = 0;
+				rate = 0.19;
+			}
+			else if(37001 <= income && income <= 80000){
+				thresh = 37000;
+				base = 3572;
+				rate = 0.325;
+			}
+			else if(80001 <= income && income <= 180000){
+				thresh = 80000;
+				base = 17547;
+				rate = 0.37;
+			}
+			else {
+				thresh = 180000;
+				base = 54547;
+				rate = 0.45;
+			}
+			//calculate and return
+			tax = base + rate * (income - thresh);
+			//console.log(tax, thresh, base, rate);
+			return tax;
+		}
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-change</h2>
+
+	<div ng-controller="ngChangeController">
+		<h3>Check how much tax you need to pay (FY14):</h3>
+		<form name="form" novalidate>
+		<p>
+			<b>Input your taxable income:</b>
+			$<input type="number" required min="0"
+				ng-model="equation.gross"
+				ng-change="onChange()"><br>
+		</p>
+		<p>
+			<b>Your tax on above income:</b>
+			<b>${{ equation.tax | number:2 }}</b>
+		</p>
+		<p>
+			<b>Annual income before tax:</b>
+			<b>
+				${{ equation.gross | number:2 }} (yr) >
+				${{ (equation.gross / 12) | number:2 }} (m) > 
+				${{ (equation.gross / 26) | number:2 }} (f)
+			</b>
+		</p>
+		<p>
+			<b>Annual income after tax:</b>
+			<b>
+				${{ equation.afterTax | number:2 }} (yr) >
+				${{ equation.afterTax / 12 | number:2 }} (m) > 
+				${{ equation.afterTax / 26 | number:2 }} (f)
+			</b>
+		</p>
+		<p>
+			<b>Taxation rate:</b>
+			<b>
+				{{ equation.rate | number:2 }}%
+			</b>
+		</p>
+		</form>
+	</div>
+
+	<div class="footnotes">
+		<div><dt><sup></sup></dt>
+		<dd></dd></div>
+	</div>
+</body>
+</html>

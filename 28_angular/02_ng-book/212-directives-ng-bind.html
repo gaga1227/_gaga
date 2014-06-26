@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngBindController', ['$scope', function($scope){
+		$scope.greeting = 'Hola';
+		$scope.person = 'Amigo';
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2><span>{</span>{ <span>}</span>}<sup>1,2</sup> | ng-bind | ng-bind-template<sup>3</sup></h2>
+	
+	<div ng-controller="ngBindController">
+		<p><small><b><span>{</span>{<span>}</span>}: </b></small>{{greeting}} {{person}}!</p>
+		<p><small><b>ng-bind: </b></small><span ng-bind="greeting + ' ' + person + '!'"></span></p>
+		<p><small><b>ng-bind-template: </b></small><span ng-bind-template="{{greeting}} {{person}}!"></span></p>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>A shortcut for using <b>ng-bind</b> without an element, commonly used with inline text.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd><b>{</b><b>{</b><b>}</b><b>}</b> bindings might have a flash of unrendered content, use <b>ng-bind</b> instead.</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>Same as <b>ng-bind</b> but can use inline binding directive as you normally do.</dd></div>
+	</div>
+</body>
+</html>

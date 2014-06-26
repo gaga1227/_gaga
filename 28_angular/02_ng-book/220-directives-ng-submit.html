@@ -1,0 +1,82 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	.high 	{ color:#C00; font-size:1.1em; }
+	.med 	{ color:#F60; font-size:1em; }
+	.low 	{ color:#F90; font-size:0.9em; }
+	.index { 
+		display:inline-block; width:2em; height:2em; margin:0 0.5em 0 0; text-align:center; line-height:2em;
+		font-size:13px; font-weight:bold; color:#fff; background:#ccc;
+		/*border-radius*/-webkit-border-radius:50%; border-radius:50%;
+		/*background-clip*/-moz-background-clip:padding; -webkit-background-clip:padding; background-clip:padding-box; }
+	input.ng-invalid { border:2px solid red; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngSubmitController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+		
+		//model
+		$scope.todos = [
+			{title: "Buy milk", priority: "1"},
+			{title: "Buy another milk", priority: "2"},
+			{title: "Go home", priority: "3"},
+			{title: "Wash my socks", priority: "1"}
+		];
+		$scope.untitledCount = 0;
+		
+		function resetNewItemValues(){
+			var count = $scope.untitledCount ? ' ' + $scope.untitledCount : ''
+			$scope.newItem = {
+				title:'Untitled Task' + count,
+				priority: '3'
+			};
+		}
+		resetNewItemValues();
+				
+		//actions
+		$scope.addNewItem = function(){
+			$scope.todos.push({title: $scope.newItem.title, priority: $scope.newItem.priority});
+			$scope.untitledCount += 1;
+			resetNewItemValues();
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-submit</h2>
+	
+	<div ng-controller="ngSubmitController">
+		<h3>New item:</h3>
+		<form name="form" novalidate ng-submit="addNewItem()">
+			<input type="text" name="itemTitle" ng-model="newItem.title" required>
+			<select name="itemPriority" ng-model="newItem.priority">
+				<option value="1">High</option>
+				<option value="2">Medium</option>
+				<option value="3">Low</option>
+			</select>
+			<button type="submit" ng-disabled="!form.$valid">Add</button>
+		</form>
+		
+		<h3>To-do list:</h3>
+		<p ng-repeat="todo in todos | orderBy:['priority', 'title']">
+			<span class="index">{{$index+1}}</span>
+			<span ng-class="{high:(todo.priority == '1'), med:(todo.priority == '2'), low:(todo.priority == '3')}"><b>{{todo.title}}</b></span>
+		</p>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd><b>ng-submit</b> prevents the default form submission action, only if their's no <b>action</b> value specified on <b>form</b> tag</dd></div>
+	</div>
+</body>
+</html>

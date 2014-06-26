@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app='Guidebook'>
+  <head>
+    <script src='../../angular-1.2.6/angular.js'></script>
+	<script src='../../angular-1.2.6/angular-route.js'></script>
+	<script src='../../angular-1.2.6/i18n/angular-locale_en-au.js'></script>
+    <script src='Guidebook.js'></script>
+    <script src='controller/ChapterController.js'></script>
+    <script src='controller/NotesControllers.js'></script>
+    <script src='model/NoteModel.js'></script>
+    <script src='model/ChapterModel.js'></script>
+	<script src='view/directives/NoteList.js'></script>
+	
+    <link rel='stylesheet' href='view/styles.css'>
+    <title>AngularJS Starter Guidebook</title>
+  </head>
+  <body>
+    <h1>Welcome to the AngularJS Starter Guidebook</h1>
+    <div ng-view>
+      <!-- We'll add views here at runtime. -->
+    </div>
+  </body>
+</html>

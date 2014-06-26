@@ -1,0 +1,6 @@
+<form name='addNote'>
+  <label for='noteContent'>Enter a note about this chapter:</label>
+  <textarea id='noteContent' ng-model='note.content' ng-minlength="1" ng-maxlength="200"></textarea>
+  <button ng-click='cancel()'>Cancel</button>
+  <button ng-click='createNote()' ng-disabled="!note.content">Create Note</button>
+</form>

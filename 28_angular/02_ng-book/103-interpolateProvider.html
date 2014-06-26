@@ -1,0 +1,96 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* parser module */
+	angular.module('emailParser',[])
+	//config interpolate provider
+	.config(['$interpolateProvider', function($interpolateProvider){
+		//update interpolate symbol from '{{ }}' to '__ __'
+		$interpolateProvider.startSymbol('__');
+		$interpolateProvider.endSymbol('__');
+	}])
+	//abstract interpolate as a factory service
+	.factory('EmailParser', ['$interpolate', function($interpolate){
+		return {
+			parse: function(text, context) {
+				var template = $interpolate(text),
+					result = 'Error! Template string must have at least one expression embedded! e.g. {{recipient}}';
+				if (text && typeof(template) === 'function') {
+					result = template(context);
+				}
+				return result;
+			}
+		}
+	}]);
+	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp', ['emailParser'])
+	.controller('MyController', ['$scope', 'EmailParser', function($scope, EmailParser){		
+		//data preset
+		$scope.to = "John Smith";
+		$scope.loc = "Melbourne";
+		$scope.evt = "Housing Expo";
+		$scope.yr = "2013";
+		$scope.emailBody = "Dear __recipient__, welcome to __year__'s __event__ of __venue__! ...";
+		
+		//functions
+		function getCcontextObj() {
+			return {
+				recipient: 	$scope.to,
+				venue: 		$scope.loc,
+				event: 		$scope.evt,
+				year: 		$scope.yr
+			};
+		}
+		function updatePreviewText(input) {
+			input = input || $scope.emailBody;
+			$scope.previewText = EmailParser.parse(input, getCcontextObj());
+		}
+		
+		//watch template string input
+		$scope.$watch('emailBody', function(body){
+			updatePreviewText(body);
+		});
+		
+		//watch other inputs
+		$scope.$watch('to', function(){
+			if ($scope.emailBody) { updatePreviewText(); }
+		});
+		$scope.$watch('loc', function(){
+			if ($scope.emailBody) { updatePreviewText(); }
+		});
+		$scope.$watch('evt', function(){
+			if ($scope.emailBody) { updatePreviewText(); }
+		});
+		$scope.$watch('yr', function(){
+			if ($scope.emailBody) { updatePreviewText(); }
+		});
+	}]);
+</script>
+</head>
+<body>
+	<h1>Interpolate a Template (with custom config and service abstraction)</h1>
+	<div ng-controller="MyController">
+		<p>
+			Interpolate Expressions:<br>
+			<input type="text" size="50" placeholder="recipient" ng-model="to"></p>
+			<input type="text" size="50" placeholder="venue" ng-model="loc"></p>
+			<input type="text" size="50" placeholder="event" ng-model="evt"></p>
+			<input type="text" size="50" placeholder="year" ng-model="yr"></p>
+		<p>
+			Template String:<br>
+			<textarea ng-model="emailBody" cols="40" rows="5" placeholder="Dear _recipient_, welcome to _year_'s _event_ of _venue_! ..."></textarea>
+		</p>
+		<p>
+			Interpolated Template Preview:<br>
+			<span style="color:#00F">__ previewText __</span>
+		</p>
+	</div>
+</body>
+</html>

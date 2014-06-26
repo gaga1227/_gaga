@@ -1,0 +1,36 @@
+<html data-ng-app>
+<head>
+	<script src="../angular-1.2.6/angular.js"></script>
+	<script>
+		function clock($scope, $timeout) {
+			//clock loop
+			function updateTime() {
+				$scope.currentTime = new Date();
+				$scope.timeout = $timeout(updateTime, 1000);
+				$scope.clockTicking = true;
+			}
+			
+			//methods
+			$scope.startClock = function(){
+				updateTime();
+			}
+			$scope.stopClock = function(){
+				$timeout.cancel($scope.timeout);
+				$scope.clockTicking = false;
+			}
+			
+			//init
+			$scope.clockTicking = false;
+			updateTime();
+		}
+	</script>
+</head>
+<body>
+	<h3>Angular Clock</h3>
+	<div data-ng-controller="clock">
+		<p data-ng-bind-template="{{ currentTime | date: 'h:mm:ss a' }}"></p>
+		<button data-ng-click="stopClock()" data-ng-hide="!clockTicking">Stop Clock</button>
+		<button data-ng-click="startClock()" data-ng-hide="clockTicking">Start Clock</button>
+	</div>
+</body>
+</html>

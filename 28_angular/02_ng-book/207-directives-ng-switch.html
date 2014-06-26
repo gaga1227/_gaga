@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngSwitchController', ['$scope', function($scope){
+		$scope.month = 1;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-switch<sup>1</sup></h2>
+	
+	<div ng-controller="ngSwitchController">
+		<p>Switch target month:<br><input type="range" min="1" max="12" step="1" ng-model="month"></p>
+		<div ng-switch on="month">
+			<p>
+				Target Month: 
+				<span ng-switch-default>None Selected</span>
+				<span ng-switch-when="1">Jan</span>
+				<span ng-switch-when="2">Feb</span>
+				<span ng-switch-when="3">Mar</span>
+				<span ng-switch-when="4">Apr</span>
+				<span ng-switch-when="5">May</span>
+				<span ng-switch-when="6">Jun</span>
+				<span ng-switch-when="7">Jul</span>
+				<span ng-switch-when="8">Aug</span>
+				<span ng-switch-when="9">Sep</span>
+				<span ng-switch-when="10">Oct</span>
+				<span ng-switch-when="11">Nov</span>
+				<span ng-switch-when="12">Dec</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>Use <b>ng-switch-default</b> for default switch output when no <b>on</b> value is defined.</dd></div>
+	</div>
+</body>
+</html>

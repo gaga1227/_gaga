@@ -1,0 +1,15 @@
+<div class="contaienr">
+	Search Fruit: <input type="text" data-ng-model="keyword" />
+	<ul>
+		<li data-ng-repeat="fruit in fruits | filter:keyword | orderBy:order" class="list">
+			{{fruit.name | uppercase}} - {{fruit.taste | lowercase}}
+		</li>
+	</ul>
+	<form name="form" novalidate>
+		New Fruit Name: <input type="text" placeholder="Name" data-ng-model="newFruit.name" required /><br>
+		New Fruit Taste: <input type="text" placeholder="Taste" data-ng-model="newFruit.taste" required /><br>
+		<button data-ng-click="addFruit(newFruit)" data-ng-disabled="form.$invalid">Add Fruit</button><br />
+		<button data-ng-click="order='name'">Order by name</button><br />
+		<button data-ng-click="order='taste'">Order by taste</button>
+	</form>
+</div>

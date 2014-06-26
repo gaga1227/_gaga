@@ -1,0 +1,155 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}])
+	
+	/* -------------------------------------------------------------------------- */
+	/* directives */
+	.directive('myDirective', function() {
+		var ddo = {	
+			compile: function(tElement, tAttrs, transclude) {
+				return {
+					pre: function(scope, iElement, iAttrs, controller) { 
+						scope.d = {};
+						scope.d.name = 'myDirective';
+						scope.d.priority = '0';
+						scope.d.pre_timestamp = Date.now();
+					},
+					post: function(scope, iElement, iAttrs, controller) { 
+						scope.d.post_timestamp = Date.now();
+					}
+				}
+			}	
+		};
+		return ddo;
+	})
+	.directive('myDirective1', function() {
+		var ddo = {
+			priority: 1,
+			compile: function(tElement, tAttrs, transclude) {
+				return {
+					pre: function(scope, iElement, iAttrs, controller) { 
+						scope.d1 = {};
+						scope.d1.name = 'myDirective1';
+						scope.d1.priority = '1';
+						scope.d1.pre_timestamp = Date.now();
+					},
+					post: function(scope, iElement, iAttrs, controller) { 
+						scope.d1.post_timestamp = Date.now();
+					}
+				}
+			}			
+		};
+		return ddo;
+	})
+	.directive('myDirective2', function() {
+		var ddo = {
+			priority: 2,
+			compile: function(tElement, tAttrs, transclude) {
+				return {
+					pre: function(scope, iElement, iAttrs, controller) { 
+						scope.d2 = {};
+						scope.d2.name = 'myDirective2';
+						scope.d2.priority = '2';
+						scope.d2.pre_timestamp = Date.now();
+					},
+					post: function(scope, iElement, iAttrs, controller) { 
+						scope.d2.post_timestamp = Date.now();
+					}
+				}
+			}			
+		};
+		return ddo;
+	})
+	.directive('myDirective3', function() {
+		var ddo = {
+			priority: 3,
+			compile: function(tElement, tAttrs, transclude) {
+				return {
+					pre: function(scope, iElement, iAttrs, controller) { 
+						scope.d3 = {};
+						scope.d3.name = 'myDirective3';
+						scope.d3.priority = '3';
+						scope.d3.pre_timestamp = Date.now();
+					},
+					post: function(scope, iElement, iAttrs, controller) { 
+						scope.d3.post_timestamp = Date.now();
+					}
+				}
+			}			
+		};
+		return ddo;
+	});
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Priority:Number</h2>
+	<ol>
+		<li>Priority helps sort all the directives on a single DOM element, and determines the order by which their compile functions are called.</li>
+		<li>A higher priority directive is invoked before low priority directives attached to the same element.</li>
+		<li>Directives with same priority values are invoked by the order they are added</li>
+		<li>The default priority value is <b>0</b></li>
+		<li><b>ng-repeat</b> has the highest priority (<b>1000</b>) among all built-in directives</li>
+		<li><b>pre-link</b> functions are run in priority order</li>
+		<li><b>post-link</b> functions are run in reverse priority order</li>
+	</ol>
+	
+	<div ng-controller="ngController">
+		<table my-directive my-directive1 my-directive2 my-directive3>
+			<tr>
+				<th>Directive</th>
+				<th>Priority</th>
+				<th>Timestamp (pre-link)</th>
+				<th>Timestamp (post-link)</th>
+			</tr>
+			<tr>
+				<td>{{d3.name}}</td>
+				<td>{{d3.priority}}</td>
+				<td>{{d3.pre_timestamp}}</td>
+				<td>{{d3.post_timestamp}}</td>
+			</tr>
+			<tr>
+				<td>{{d2.name}}</td>
+				<td>{{d2.priority}}</td>
+				<td>{{d2.pre_timestamp}}</td>
+				<td>{{d2.post_timestamp}}</td>
+			</tr>
+			<tr>
+				<td>{{d1.name}}</td>
+				<td>{{d1.priority}}</td>
+				<td>{{d1.pre_timestamp}}</td>
+				<td>{{d1.post_timestamp}}</td>
+			</tr>
+			<tr>
+				<td>{{d.name}}</td>
+				<td>{{d.priority}}</td>
+				<td>{{d.pre_timestamp}}</td>
+				<td>{{d.post_timestamp}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

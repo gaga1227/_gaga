@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}])
+	
+	/* -------------------------------------------------------------------------- */
+	/* directives */
+	.directive('myDirective1', function() {
+		var ddo = {	
+			template:'<p>Direcitve with <b>String</b> template value</p>'
+		};
+		return ddo;
+	})
+	.directive('myDirective2', function() {
+		var ddo = {	
+			template:function(tElement, tAttrs){
+				return '<p>Direcitve with <b>Function</b> template value</p>';	
+			}
+		};
+		return ddo;
+	})
+	.directive('myDirective3', function() {
+		var ddo = {	
+			templateUrl:'data/template-url.html'
+		};
+		return ddo;
+	});
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Template:String or Function(tElement, tAttrs)</h2>
+	<ol>
+		<li>String value needs to be valid HTML string</li>
+		<li>String value must have a root DOM node/element wrapping texts or multiple childnodes</li>
+		<li>The function value is required to return a string value representing the template</li>
+		<li>The <code><b>t</b></code> from <code><b>Function(tElement, tAttrs)</b></code> stands for <b>template</b>, as opposed to <code><b>i</b></code> for <b>instance</b></li>
+	</ol>
+	<h2>Definition - TemplateUrl:String or Function(tElement, tAttrs)</h2>
+	<ol>
+		<li>Complex template strings (e.g. multi-line templates) should use <code><b>templateUrl</b></code> option instead</li>
+		<li>The function value is required to return the path to a template file in string</li>
+		<li>The path to the template file is passed through <code><b>$sce.getTrustedResourceUrl</b></code>, a built-in security layer that prevents templates being fetched from untrustworthy places.</li>
+		<li>Template file is fetched and then cached in the default <code><b>$templateCache</b></code> service</li>
+	</ol>
+	
+	<h2>Examples:</h2>
+	<div ng-controller="ngController">
+		<div my-directive1 class="directive"></div>
+		<div my-directive2 class="directive"></div>
+		<div my-directive3 class="directive"></div>
+	</div>
+
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

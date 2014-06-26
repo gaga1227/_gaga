@@ -1,0 +1,61 @@
+body { 
+  margin:0;
+}
+body > h1 {
+  text-align:center;
+}
+a, a:visited, a:active {
+  color: #69c;
+  text-decoration: none;
+}
+a:hover {
+  color: #69c;
+  text-decoration: underline;
+}
+a.pointer:hover { 
+  cursor: pointer; }
+ul {
+  width: auto;
+  padding:0;
+}
+li {
+  list-style-type: none;
+  border-top: 1px solid #ccc;
+  padding:0 20px;
+}
+li.odd { 
+  background:#f8f8f8;
+  overflow:hidden;
+}
+li.lastChild {
+  border-bottom: 1px solid #ccc;
+}
+ul.notes {
+  width: auto;
+  margin-left:5%;
+  padding:0;
+}
+ul.notes li {
+  padding:0;	
+}
+ul.notes li div {
+  float: left;
+  padding: 5px 0 10px 0;
+  font-size: 0.8em;
+  color: #666;
+}
+ul.notes li div + div {
+  float: right;
+}
+ul.notes li p {
+  clear: both;
+}
+form {
+  padding-left: 15px;
+}
+textarea {
+  display: block;
+  margin: 5px 0;
+  width: 250px;
+  height: 100px;
+}

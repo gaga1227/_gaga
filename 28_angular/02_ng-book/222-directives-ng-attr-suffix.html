@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-class</h2>
+	
+	<div ng-controller="ngController">
+		<h3>ng-attr-(suffix)<sup>1</sup></h3>
+		<div>
+			<p><b>Invalid Attribute Thrown by Browser</b>:</p>
+			<code><pre>
+&lt;svg>
+  &lt;circle cx="<span>{</span>{cx<span>}</span>}">&lt;/circle>
+&lt;/svg>
+			</pre></code>
+			
+			<p><b>The Right Way</b>:</p>
+			<code><pre>
+&lt;svg>
+  &lt;circle ng-attr-cx="<span>{</span>{cx<span>}</span>}">&lt;/circle>
+&lt;/svg>
+			</pre></code>
+		</div>
+	</div>
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup>1</sup></dt>
+			<dd><b>ng-attr-(suffix)</b> can be used to replace those attributes that are invalid by certain browser. The <b>(suffix)</b> part must be the same as the attribute name.</dd>
+		</div>
+	</div>
+</body>
+</html>

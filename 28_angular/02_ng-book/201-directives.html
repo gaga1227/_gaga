@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', function($scope){
+		//pass scope reference to window for testing purposes
+		window.scope = $scope;
+	}])
+	.directive('myDirective', [function(){
+		//ddo contains methods and properties to define and configure a directive
+		var ddo = {
+			//declaration style: 'E, A(default), C, M'
+			restrict: 	'EACM',
+			//replace directive element with template
+			replace:	true, 
+			//must have one root element(a wrapping html tag)
+			template:	'<a href="http://www.google.com" target="_blank">Click me to go to Google.</a>'
+		};
+		return ddo;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Directives<sup>1</sup></h1>
+	<div ng-controller="MyController">
+		<h3>Basic Custom Directive Definition</h3>
+		<p><b>E: </b><my-directive></my-directive></p>
+		<p><b>A: </b><span my-directive></span> <i>(default and recommended style)</i></p>
+		<p><b>C: </b><span class="my-directive"></span></p>
+		<p><b>M: </b><!-- directive: my-directive --></p>
+	</div>
+	<div class="footnotes">
+		<dt><sup>1</sup>Directives:</dt>
+		<dd>Declaring a directive is the act of placing a function within our HTML as an <b>Element</b>, <b>Attribute</b>, <b>Class</b>, or <b>Comment</b>.</dd>
+	</div>	
+</body>
+</html>

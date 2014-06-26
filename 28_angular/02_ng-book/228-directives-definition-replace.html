@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}])
+	
+	/* -------------------------------------------------------------------------- */
+	/* directives */
+	.directive('myDirective1', function() {
+		var ddo = {	
+			replace: true,
+			template:'<p>Direcitve with <b>replace:true</b>, template replaces directive container</p>'
+		};
+		return ddo;
+	})
+	.directive('myDirective2', function() {
+		var ddo = {	
+			template:'<p>Direcitve with <b>replace:false</b>, template appended as a child node within directive container</p>'
+		};
+		return ddo;
+	});
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Replace:Boolean</h2>
+	<ol>
+		<li>Default option value is <b>false</b></li>
+	</ol>
+		
+	<div ng-controller="ngController">
+		<div my-directive1 class="directive"></div>
+		<div my-directive2 class="directive"></div>
+	</div>
+
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

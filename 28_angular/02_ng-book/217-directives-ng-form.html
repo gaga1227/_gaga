@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	.error { color:#f00; }
+	input { outline:0 none; }
+	input.ng-dirty.ng-invalid { border:2px solid red; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngFormController', ['$scope', '$http', function($scope, $http){
+		//for debug
+		window.scope = $scope;
+		//data
+		var promise = $http({method:'GET', url:'data/form-fields.json'});
+		promise.then(
+			//success
+			function(resp){
+				console.log('[success]', resp);
+				$scope.fields = resp.data;
+			},
+			//error
+			function(resp){
+				console.log('[error]', resp);
+				$scope.fieldsDataStatus = resp.status;
+			}
+		);
+		//action
+		$scope.submitForm = function(){
+			alert('it works');	
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-form<sup>1</sup></h2>
+	
+	<div>
+		<h3>Dynamic fields form JSON data</h3>
+		<form name="signup_form" novalidate 
+			ng-controller="ngFormController"
+			ng-submit="submitForm()">
+			<fieldset 
+				ng-repeat="field in fields"
+				ng-form="signup_form_input">
+				<input type="{{field.type}}" name="dynamic_input" 
+					ng-required="field.isRequired"
+					ng-model="field.name"
+					placeholder="{{field.placeholder}}">
+				<span ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+					<span class="error" ng-show="signup_form_input.dynamic_input.$error.required"><b>This field is required</b></span>
+					<span class="error" ng-show="signup_form_input.dynamic_input.$error.email"><b>This is not a valid email</b></span>
+				</span>
+			</fieldset>
+			<fieldset>
+				<button type="submit" ng-disabled="signup_form.$invalid">Submit <sup>2</sup></button>
+			</fieldset>
+		</form>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd><b>ng-form</b> is used when dynamic form fields need to be generated from data (e.g. with ng-repeat), it works by embedding child angular form objects inside a master/parent <b>form</b> directive.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>The master/parent form automatically reads validation information from child form objects and update master form validation information accordingly.</dd></div>
+	</div>
+</body>
+</html>

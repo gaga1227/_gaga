@@ -1,0 +1,74 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+/* sideNav */
+.sideNav { max-width:300px; }
+	.sideNav ul,
+	.sideNav li { list-style:none; margin:0; padding:0; }
+	.sideNav li { border-bottom:1px solid #aaa; }
+		.sideNav a { display:block; padding:0.5em; color:black; font-weight:700; text-decoration:none!important; }
+		.sideNav a:hover { color:blue; background:#fff; }
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//data
+		$scope.myNavList = [
+			{label:'Nav item 1', url:'http://www.google.com?item=1'},
+			{label:'Nav item 2', url:'http://www.google.com?item=2'},
+			{label:'Nav item 3', url:'http://www.google.com?item=3'},
+			{label:'Nav item 4', url:'http://www.google.com?item=4'},
+			{label:'Nav item 5', url:'http://www.google.com?item=5'},
+		];
+		//for debug
+		window.scope = $scope;
+	}])
+	
+	/* -------------------------------------------------------------------------- */
+	/* directives */
+	.directive('myDirective', function() {
+		var ddo = {	
+			scope: {
+				myList: '='	
+			},
+			transclude: true,
+			replace: true,
+			templateUrl: 'data/transclude.html'
+		};
+		return ddo;
+	});
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Transclude:Boolean</h2>
+	<ol>
+		<li>Default option value is <b>false</b></li>
+	</ol>
+	
+	<div ng-controller="ngController">
+		<h2>Example: Basic Transclusion</h2>
+		<ul my-directive my-list="myNavList">
+			<li ng-repeat="list in myList()" id="{{index}}">
+				<a ng-href="{{list.url}}">{{list.label}}</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

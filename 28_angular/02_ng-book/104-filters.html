@@ -1,0 +1,120 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	dt { margin:10px 0 5px 0; font-size:1.1em; font-weight:bold; }
+	dd { margin:0; padding:5px 0; border-bottom:1px solid #ddd; }
+	dd i { display:inline-block; min-width:200px; color:#999; font-size:0.8em; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', '$timeout', function($scope, $timeout){
+		//dateObj
+		function updateTime() {
+			$scope.currentTime = new Date();
+			$scope.timeout = $timeout(updateTime, 1000);
+		}
+		updateTime();
+		
+		//array string
+		$scope.arrayStr = [ 'apple', 'pear', 'strawberry', 'watermelon', 'peach', 'grape', 'banana', 'orange' ];
+		$scope.arrayObj = [ {name:'John'}, {name:'Emily'}, {name:'Oliver'}, {name:'Ken'}, {name:'Mike'} ];
+		$scope.arrayNum = [ -3, -2, -1, 0, 1, 2, 3 ];
+		$scope.isBiggerThan = function(num) {
+			if (isNaN(num)) return false;
+			var input = parseInt($scope.input, 10);
+			return (input < num) ? true : false;
+		}
+		
+	}]);
+</script>
+</head>
+<body>
+	<h1>Filters</h1>
+	<div ng-controller="MyController">
+		<p>
+			Input:<br>
+			<input type="text" size="50" placeholder="Type any value" ng-model="input"></p>
+		<p>
+		
+		<dt>Number:</dt>
+		<dd>
+			<i>2 decimal points:</i>
+			{{ input | number:2 }}
+		</dd>
+
+		<dt>Currency:</dt>
+		<dd>
+			<i>price:</i>
+			{{ input | currency }}
+		</dd>
+		
+		<dt>Date:</dt>
+		<dd>
+			<i>day, date | time | zone:</i>
+			{{ currentTime | date:'EEEE, d MMM y | HH:mm:ss a | Z' }}
+		</dd>
+		
+		<dt>Filter:</dt>
+		<dd>
+			<i>with String, strict:</i>
+			{{ arrayStr | filter:input:true }}
+		</dd>
+		
+		<dt>Filter (with Object):</dt>
+		<dd>
+			<i>with Object:</i>
+			{{ arrayObj | filter:input }}
+		</dd>
+		
+		<dt>Filter (with Function):</dt>
+		<dd>
+			<i>with Function:</i>
+			{{ arrayNum | filter:isBiggerThan }}
+		</dd>
+		
+		<dt>JSON:</dt>
+		<dd>
+			<i>converts to string:</i>
+			{{ arrayObj | filter:input | json }}
+		</dd>
+		
+		<dt>LimitTo:</dt>
+		<dd>
+			<i>from start:</i>
+			{{ "I am limited to input length." | limitTo:input.length }}
+		</dd>
+		<dd>
+			<i>from end:</i>
+			{{ "I am limited to input length." | limitTo:-input.length }}
+		</dd>
+		<dd>
+			<i>array:</i>
+			{{ arrayNum |  limitTo:input.length }}
+		</dd>
+		
+		<dt>Font case:</dt>
+		<dd>
+			<i>uppercase:</i>
+			{{ input | uppercase }}
+		</dd>
+		<dd>
+			<i>lowercase:</i>
+			{{ input | lowercase }}
+		</dd>
+		
+		<dt>OrderBy:</dt>
+		<dd>
+			<i>name +:</i>
+			{{ arrayObj | orderBy:'name' }}
+		</dd>
+		<dd>
+			<i>name -:</i>
+			{{ arrayObj | orderBy:'-name' }}
+		</dd>
+	</div>
+</body>
+</html>

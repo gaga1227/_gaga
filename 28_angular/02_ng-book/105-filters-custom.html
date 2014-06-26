@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	dt { margin:10px 0 5px 0; font-size:1.1em; font-weight:bold; }
+	dd { margin:0; padding:5px 0; border-bottom:1px solid #ddd; }
+	dd i { display:inline-block; min-width:200px; color:#999; font-size:0.8em; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* filters module */
+	angular.module('myApp.filters', [])
+	.filter('capitalize', function(){
+		return function(input) {
+			if (input) {
+				return input[0].toUpperCase() + input.slice(1);	
+			}
+		};
+	});
+	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',['myApp.filters'])
+	.controller('MyController', ['$scope', function($scope){
+		
+	}]);
+</script>
+</head>
+<body>
+	<h1>Filters Custom</h1>
+	<div ng-controller="MyController">
+		<p>
+			Input:<br>
+			<input type="text" size="50" placeholder="Type any value" ng-model="input"></p>
+		<p>
+		
+		<dt>Capitalize:</dt>
+		<dd>
+			<i>capitalize:</i>
+			{{ input | capitalize }}
+		</dd>
+
+	</div>
+</body>
+</html>

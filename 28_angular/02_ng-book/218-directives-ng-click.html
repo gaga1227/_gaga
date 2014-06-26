@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	/* counter */
+	.count, button { display:inline-block; vertical-align:middle; }
+	.count { margin:0 10px; font-size:100px; font-weight:bold; }
+	button { padding:10px; font-weight:bold; font-size:20px; }
+	
+	/* position */
+	.map { 
+		width:300px; height:300px; margin:30px auto; 
+		border:1px solid #666; background:#FFF; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngClickCountController', ['$scope', function($scope){
+		//for debug
+		window.scope1 = $scope;
+		//actions
+		$scope.decrement = function(){
+			$scope.count--; 
+		};
+	}])
+	.controller('ngClickPositionController', ['$scope', function($scope){
+		//for debug
+		window.scope2 = $scope;
+		//actions
+		$scope.probe = function(e, offset){
+			//console.log(e);
+			$scope.x = offset ? e.offsetX : e.clientX;
+			$scope.y = offset ? e.offsetY : e.clientY;
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-click<sup>1</sup></h2>
+	
+	<div ng-controller="ngClickCountController" ng-init="count=0">
+		<h3>Counter (0-9)</h3>
+		<button ng-click="decrement()" ng-disabled="count<=0">-</button>
+		<span class="count">{{count}}</span>
+		<button ng-click="count=count+1" ng-disabled="count>=9">+</button>
+	</div>
+	
+	<div ng-controller="ngClickPositionController">
+		<h3>Get Position: x: <b>{{x}}</b> | y: <b>{{y}}</b></h3>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<button ng-click="probe($event)">Click me</button>
+		<div class="map" ng-click="probe($event, true)">
+		</div>	
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd><b>ng-click</b> will trigger a form submission if the form tag has no ng-submit, and ng-click is on the first button or input of type submit.</dd></div>
+	</div>
+</body>
+</html>

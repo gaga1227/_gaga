@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngIfController', ['$scope', function($scope){
+		
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-if<sup>1</sup></h2>
+	
+	<div ng-controller="ngIfController">
+		<p>Find hidden content:<br><input type="range" min="1" max="10" step="1" ng-model="key"></p>
+		<p>
+			<span ng-if="key == 1">Pica bu, <b>1</b>!</span>
+			<span ng-if="key == 5">Pica bu, <b>5</b>!</span>
+			<span ng-if="key == 8">Pica bu, <b>8</b>!</span>
+		</p>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd><b>ng-if</b> operates on the basis of remove/recreate DOM elements, which is different from <b>ng-hide/show</b> that are using CSS display property to hide and show elements.</dd></div>
+	</div>
+</body>
+</html>

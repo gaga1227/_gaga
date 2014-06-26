@@ -1,0 +1,5 @@
+[
+	{"placeholder":"Username", "type":"text", "isRequired":true},
+	{"placeholder":"Password", "type":"password", "isRequired":true},
+	{"placeholder":"Email(Optional)", "type":"email", "isRequired":false}
+]

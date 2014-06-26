@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	input.ng-dirty.ng-invalid 	{ border:2px solid #F00; }
+	input.ng-dirty.ng-valid 	{ border:2px solid #0C0; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	angular.module('myApp',[])
+	.controller('MyController', ['$scope', function($scope){
+		//pass scope reference to window for testing purposes
+		window.scope = $scope;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Form Validation</h1>
+	<div ng-controller="MyController">
+		<!-- 	
+			'novalidate' prevents browser natively validates the form, leaving it for ng 
+			ng also utilise HTML5 input types for built-in validation
+		-->
+		<h3>Built-in Validations</h3>
+		<form name="form" novalidate>
+			<input name="name" type="text" placeholder="Name" ng-model="ng.name" required ng-minlength="3"><br>
+			<input name="email" type="email" placeholder="Email" ng-model="ng.email" required><br>
+			<input name="number" type="number" placeholder="Number" ng-model="ng.num" required ng-maxlength="10"><br>
+			<input name="url" type="url" placeholder="URL" ng-model="ng.url" required><br>
+		</form>
+	</div>
+</body>
+</html>

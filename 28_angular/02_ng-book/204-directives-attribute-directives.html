@@ -1,0 +1,148 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngDisabledController', ['$scope', '$timeout', function($scope, $timeout){
+		//model
+		$scope.isDisabled = true;
+		$scope.secondsLeft = 5;
+		
+		//countdown to textarea enabling
+		function countdown(){
+			$timeout(function(){
+				if ($scope.secondsLeft > 0 ) {
+					$scope.secondsLeft--;
+					countdown();
+				}
+			}, 1000);
+		}
+		countdown();
+		
+		//delaying textarea enabling
+		$timeout(function(){
+			$scope.isDisabled = false;	
+		}, $scope.secondsLeft * 1000);
+	}])
+	.controller('ngReadonlyController', ['$scope', function($scope){
+		
+	}])
+	.controller('ngCheckedController', ['$scope', function($scope){
+		$scope.anotherProperty = false;
+	}])
+	.controller('ngSelectedController', ['$scope', function($scope){
+		
+	}])
+	.controller('ngHrefController', ['$scope', '$timeout', function($scope, $timeout){
+		//delay interpolation of href value
+		$timeout(function(){
+			$scope.myHref = 'http://www.google.com';
+		}, 2000);		
+	}])
+	.controller('ngSrcController', ['$scope', '$timeout', function($scope, $timeout){
+		//delay interpolation of src value
+		$timeout(function(){
+			$scope.mySrc = 'http://placehold.it/100x50';
+		}, 2000);	
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>Boolean Attributes<sup>1</sup></h2>
+	
+	<!-- ng-disabled -->
+	<div ng-controller="ngDisabledController">
+		<h3>ng-disabled</h3>
+		<p>
+			<input type="text" ng-model="textInput" placeholder="type to enable button">
+			<button ng-disabled="!textInput">Button</button>	
+		</p>
+		<p>
+			<textarea ng-disabled="isDisabled" rows="5" cols="30">Wait for {{secondsLeft}} seconds</textarea>
+		</p>
+	</div>
+	
+	<!-- ng-readonly -->
+	<div ng-controller="ngReadonlyController">
+		<h3>ng-readonly</h3>
+		<p>
+			Type to make sibling readonly<br>
+			<input type="text" ng-model="textInput"><br>
+		</p>
+		<p>
+			<textarea ng-readonly="textInput" rows="5" cols="30">Lorum ipsum...</textarea>
+		</p>
+	</div>
+	
+	<!-- ng-checked -->
+	<div ng-controller="ngCheckedController">
+		<h3>ng-checked<sup>2</sup></h3>
+		<p>
+			<label>someProperty = {{someProperty}}</label>
+			<input type="checkbox"
+				ng-checked="someProperty"
+				ng-model="someProperty"
+				ng-init="someProperty = true">
+		</p>
+		<p>
+			<label>anotherProperty = {{anotherProperty}}</label>
+			<input type="checkbox"
+				ng-checked="anotherProperty"
+				ng-model="anotherProperty">
+		</p>
+	</div>
+	
+	<!-- ng-selected -->
+	<div ng-controller="ngSelectedController">
+		<h3>ng-selected</h3>
+		<p>
+			<label>Select Two Fish:</label>
+			<input type="checkbox"
+				ng-model="isTwoFish"><br>
+			<select>
+				<option>One Fish</option>
+				<option ng-selected="isTwoFish">Two Fish</option>
+			</select>
+		</p>
+	</div>
+	
+	<h2>Boolean-like Attributes<sup>3</sup></h2>
+	
+	<!-- ng-href -->
+	<div ng-controller="ngHrefController">
+		<h3>ng-href</h3>
+		<p>
+			<a href="{{myHref}}" target="_blank">Unsafe Dynamic href Link when not interpolated</a><br>
+			<a ng-href="{{myHref}}" target="_blank">Safe Dynamic href Link when interpolated (in 2 seconds)</a>
+		</p>
+	</div>
+	
+	<!-- ng-src -->
+	<div ng-controller="ngSrcController">
+		<h3>ng-src</h3>
+		<p>
+			Unsafe Dynamic src Link when not interpolated (404 request):<br>
+			<img src="{{mySrc}}" alt=""><br>
+			Safe Dynamic src Link when interpolated (in 2 seconds):<br>
+			<img ng-src="{{mySrc}}" alt="">
+		</p>
+	</div>	
+	
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>In HTML5, boolean attributes are by default <b>true</b> if presence exists, <b>false</b> if presence doesn't exist, no matter what value is given.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>Needs to use <b>ng-model</b> to two-way bind the input value to <b>checked</b> attribute value</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>Act like Boolean Attributes but without HTML counterparts.</dd></div>
+	</div>
+</body>
+</html>

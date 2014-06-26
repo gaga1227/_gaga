@@ -1,0 +1,92 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition</h2>
+	<ol>
+		<li>A directive is defined with the <b><code>.directive()</code></b> method</li>
+		<li>The directive() method takes two arguments: <b>name:String<sup>1</sup></b> and <b>factory_function:Function</b></li>
+		<li>The factory function is expected to return an <b>directive definitions object (DDO):</b>
+			<div><code class="block language-javascript"><pre>
+angular.app('myApp',[])
+.directive('myDirective', function() {
+	var ddo = {
+		//definitions
+		//...
+	};
+	return ddo;
+});
+			</pre></code></div>
+		</li>
+		<li>The factory function can also return a function instead, which is called a <code><b>postLink</b></code> function and is usually used for simple directives.</li>
+		<li>The directive's factory function is involked once like controllers by <b><code>$injector.invoke</code></b></li>
+		<li>All possible options (properties and methods) for a DOO:
+			<div><code class="block language-javascript"><pre>
+angular.app('myApp',[])
+.directive('myDirective', function() {
+	var ddo = {
+		restrict: String,
+		priority: Number,
+		terminal: Boolean,
+		template: String or Template Function:
+			function(tElement, tAttrs) { ... },
+		templateUrl: String,
+		replace: Boolean or String,
+		scope: Boolean or Object,
+		transclude: Boolean,
+		controller: String or 
+			function(scope, element, attrs, transclude, otherInjectables) { ... },
+		controllerAs: String,
+		require: String,
+		link: function(scope, iElement, iAttrs) { ... },
+		compile: return an Object or
+			function(tElement, tAttrs, transclude) {
+				return {
+					pre: function(scope, iElement, iAttrs, controller) { ... },
+					post: function(scope, iElement, iAttrs, controller) { ... }
+				}
+				// or
+				return function postlink(...) { ... }
+			}
+		
+	};
+	return ddo;
+});
+			</pre></code></div>
+		</li>
+	</ol>
+	
+	<!--
+	<div ng-controller="ngController">
+		
+		
+	</div>
+	-->
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup>1</sup></dt>
+			<dd>Use prefixed directive names to avoid collision with future HTML standards, e.g. <b>my-directive</b></dd>
+		</div>
+	</div>
+</body>
+</html>

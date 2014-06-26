@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	input.ng-dirty.ng-invalid 	{ border:2px solid #F00; }
+	input.ng-dirty.ng-valid 	{ border:2px solid #0C0; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngModelController', ['$scope', function($scope){
+		$scope.expression = 'a';
+		$scope.form = {};
+		$scope.form.check2 = true;
+		$scope.form.select = '2012';
+		$scope.form.select2options = [{name:'Apple'}, {name:'Orange'}, {name:'Strawberry'}];
+	}]);
+</script>
+</head>
+<body>
+	<h1>Built-In Directives</h1>
+	<h2>ng-model</h2>
+	
+	<div ng-controller="ngModelController">
+		<p>
+			<b>Input:</b><br>
+			<input type="email" ng-model="form.input" placeholder="your email">
+		</p>
+		<p>
+			<b>Checkbox:</b><br>
+			<input type="checkbox" ng-model="form.check1">
+			<input type="checkbox" ng-model="form.check2">
+		</p>
+		<p>
+			<b>Radio button:</b><br>
+			<input type="radio" name="radiogroup" ng-model="form.radio" ng-value="expression">
+			<input type="radio" name="radiogroup" ng-model="form.radio" value="b">
+			<input type="radio" name="radiogroup" ng-model="form.radio" value="c">
+			<input type="radio" name="radiogroup" ng-model="form.radio" value="d">
+		</p>
+		<p>
+			<b>Select:</b><br>
+			<select ng-model="form.select1">
+				<option value="">-- choose year --</option>
+				<option>2012</option>
+				<option>2013</option>
+				<option>2014</option>
+			</select>
+			<br>
+			<select ng-model="form.select2" ng-options="fruit.name for fruit in form.select2options">
+				<option value="">-- choose fruit --</option>
+			</select>
+		</p>
+		<p>
+			<b>Textarea:</b><br>
+			<textarea ng-model="form.textarea" cols="25" rows="3" placeholder="your comment"></textarea>
+		</p>
+	</div>
+	
+	<div class="footnotes">
+		<div><dt><sup></sup></dt>
+		<dd></dd></div>
+	</div>
+</body>
+</html>

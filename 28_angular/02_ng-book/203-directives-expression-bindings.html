@@ -1,0 +1,63 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.directive('myDirective', [function(){
+		//ddo contains methods and properties to define and configure a directive
+		var ddo = {
+			restrict: 	'A',
+			replace:	true, 
+			scope: {
+				twoWayBind:	'=', //2-way binding 
+				oneWayBind:	'&', //1-way binding 
+				textBind: 	'@', //text bind
+			},
+			template: '\
+				<section>\
+					<div>\
+						<b>Isolated Private Scope (2-way-bind)</b><br>\
+						<input type="text" ng-model="twoWayBind" placeholder="myDirective.twoWayBind">\
+					</div>\
+					<div>\
+						<b>Isolated Private Scope (text-bind + 1-way-bind)</b><br>\
+						<a href="{{oneWayBind()}}" target="_blank">{{textBind + " " +oneWayBind()}}</a>\
+					</div>\
+				</section>\
+				'
+		};
+		return ddo;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<div>
+		<h3>Directive Definition with Expression Binding Options<sup></sup></h3>
+		<p>
+			<b>Root Scope</b><br>
+			<input type="text" ng-model="theirUrl" placeholder="$rootScope.theirUrl">
+		</p>
+		<p 
+			my-directive
+			one-way-bind="theirUrl"
+			two-way-bind="theirUrl"
+			text-bind="Click me to go to"></p>
+	</div>
+	<div class="footnotes">
+		<div><dt><sup>@</sup></dt>
+		<dd>Text bindings are prefixed with @, and they are always strings. Whatever you write as attribute value, it will be parsed and returned as strings. Which means anything inside curly braces, will reflect the value.</dd></div>
+		<div><dt><sup>&amp;</sup></dt>
+		<dd>One-way bindings are prefixed with & and they can be of any type. They are going be defined as getter functions (e.g. oneWayBind()) in the directive scope.</dd></div>
+		<div><dt><sup>=</sup></dt>
+		<dd>Two-way bindings are prefixed by = and can be of any type. These work like actual bindings, any changes to a bound value will be reflected in everywhere.</dd></div>
+	</div>
+</body>
+</html>

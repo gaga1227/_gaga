@@ -1,0 +1,250 @@
+<html data-ng-app="demoApp">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	
+	<link rel="stylesheet" href="Lib/normalize.css">
+	<style type="text/css">
+		
+		/* -------------------------------------------------------------------------- */
+		/* body */
+		body { margin:10px 20px; }
+		
+		/* -------------------------------------------------------------------------- */
+		/* header */
+		.header 			{ padding-bottom:20px; overflow:hidden; }
+		.header a 			{ display:inline-block; padding:5px; text-decoration:none; }
+		.header a:hover 	{ text-decoration:underline; }
+		.header a.current 	{ color:red; text-decoration:none!important; pointer-events:none; }
+		
+		/* -------------------------------------------------------------------------- */
+		/* nav */
+		.navItem {
+			/*transition*/
+			/*-webkit-transform:translate3d(0,0,0);*/
+			-webkit-transition:all 0.3s ease-in-out;
+			-moz-transition:all 0.3s ease-in-out;
+			-o-transition:all 0.3s ease-in-out;
+			transition:all 0.3s ease-in-out; }
+		/*start*/
+		.navItem.current-add,
+		.navItem.current-remove-active 	{ background:transparent; }
+		/*end*/
+		.navItem.current,
+		.navItem.current-add-active,
+		.navItem.current-remove			{ background:#f2f2f2; }		
+		
+		/* -------------------------------------------------------------------------- */
+		/* layout */
+		.viewContainer { position:relative; }
+		
+		/* -------------------------------------------------------------------------- */
+		/* view anim prep */
+		.view { 
+			/*transition*/
+			/*-webkit-transform:translate3d(0,0,0);*/
+			-webkit-transition:all 0.3s ease-in-out;
+			-moz-transition:all 0.3s ease-in-out;
+			-o-transition:all 0.3s ease-in-out;
+			transition:all 0.3s ease-in-out; }
+		.view.ng-enter, .view.ng-leave {
+			position:absolute; top:0; bottom:0;	}
+		
+		/* view anim start */
+		.view.ng-enter { 
+			opacity:0;
+			/*transform*/
+			-webkit-transform:translate3d(100%,0,0);
+			-moz-transform:translate3d(100%,0,0);
+			-ms-transform:translate3d(100%,0,0);
+			-o-transform:translate3d(100%,0,0);
+			transform:translate3d(100%,0,0); }
+		.view.ng-leave { 
+			opacity:1;
+			/*transform*/
+			-webkit-transform:translate3d(0,0,0);
+			-moz-transform:translate3d(0,0,0);
+			-ms-transform:translate3d(0,0,0);
+			-o-transform:translate3d(0,0,0);
+			transform:translate3d(0,0,0); }
+			
+		/* view anim end */
+		.view.ng-enter.ng-enter-active { 
+			opacity:1;
+			/*transform*/
+			-webkit-transform:translate3d(0,0,0);
+			-moz-transform:translate3d(0,0,0);
+			-ms-transform:translate3d(0,0,0);
+			-o-transform:translate3d(0,0,0);
+			transform:translate3d(0,0,0); }
+		.view.ng-leave.ng-leave-active { 
+			opacity:0;
+			/*transform*/
+			-webkit-transform:translate3d(-100%,0,0);
+			-moz-transform:translate3d(-100%,0,0);
+			-ms-transform:translate3d(-100%,0,0);
+			-o-transform:translate3d(-100%,0,0);
+			transform:translate3d(-100%,0,0); }	
+		
+		/* -------------------------------------------------------------------------- */
+		/* list anim */
+		.list { 
+			/*pre-set to avoid css glitch*/
+			max-height:100px;
+			/*transition*/
+			-webkit-transition:all 0.6s ease-in-out;
+			-moz-transition:all 0.6s ease-in-out;
+			-o-transition:all 0.6s ease-in-out;
+			transition:all 0.6s ease-in-out; }
+		
+		/* list anim start */
+		.list.ng-enter { opacity:0; max-height:0; }
+		.list.ng-leave { opacity:1; max-height:100px; }
+		.list.ng-move { opacity:0.3; background:ffff00; }
+			
+		/* list anim end */
+		.list.ng-enter.ng-enter-active { opacity:1; max-height:100px; }
+		.list.ng-leave.ng-leave-active { opacity:0; max-height:0; }	
+		.list.ng-move.ng-move-active { opacity:1; background:transparent; }	
+		
+		/* staggering */
+		.list.ng-enter-stagger,
+		.list.ng-leave-stagger,
+		.list.ng-move-stagger {
+			-webkit-transition-delay:0.05s;
+			-moz-transition-delay:0.05s;
+			-o-transition-delay:0.05s;
+			transition-delay:0.05s;
+			/* this is here to avoid accidental CSS inheritance */
+			-webkit-transition-duration:0;
+			-moz-transition-duration:0;
+			-o-transition-duration:0;
+			transition-duration:0; }
+	</style>
+	
+	<script src="../angular-1.2.6/angular.js"></script>
+	<script src="../angular-1.2.6/angular-route.js"></script>
+	<script src="../angular-1.2.6/angular-resource.js"></script>
+	<script src="../angular-1.2.6/angular-animate.js"></script>
+	
+	<script src="Lib/fastclick.js"></script>
+	<script>
+		window.addEventListener('load', function() {
+			FastClick.attach(document.body);
+		}, false);
+	</script>
+</head>
+<body>
+	<div class="header" data-ng-controller="controller0" >
+		<h3>Routes</h3>
+		<a href="#home" class="navItem" data-ng-class="{current:isCurrent('/home')}">Home</a> |
+		<a href="#customers" class="navItem" data-ng-class="{current:isCurrent('/customers')}">Customers</a> |
+		<a href="#fruits" class="navItem" data-ng-class="{current:isCurrent('/fruits')}">Fruits</a> |
+		<a href="#test" class="navItem" data-ng-class="{current:isCurrent('/test')}">Test</a>
+		<hr>
+	</div>
+	<div class="viewContainer">
+		<div data-ng-view="" class="view"></div>
+	</div>
+	<script>
+		//directive
+		var directives = {};
+		directives.isNavCurrent = function(route){
+			return {
+			};
+		}
+		
+		//factory
+		var factories = {};
+		factories.factoryHTTP = function($http){
+			//data placeholder
+			var fruits = [];
+			
+			//factory obj
+			var factory = {};
+			factory.getFruits = function($scope){
+				$http.get('Data/fruits.json')
+					.success(function(data){
+						$scope.fruits = fruits = data;
+					})
+					.error(function(data, status){
+						$scope.fruits = fruits;
+					});
+			}
+			factory.postFruits = function(newFruit){
+				fruits.push(newFruit);
+			}
+			
+			//return factory obj to whoever using it
+			return factory;
+		};
+		factories.factoryREST = function($resource){
+			return $resource('Data/fruits.json');
+		};
+		
+		//controllers
+		var controllers = {};
+		controllers.controller0 = function($scope, $location){
+			$scope.isCurrent = function(route){
+				return route === $location.path();
+			}
+		}
+		controllers.controller1 = function($scope){
+			//using hardcode data
+			$scope.customers = [
+				{ name: 'Jamie Riley', city: 'Atlanta' },
+				{ name: 'Heedy Wahlin', city: 'New York' },
+				{ name: 'Thomas Winter', city: 'Seattle' },
+				{ name: 'Dave Jones', city: 'Phoenix' }
+			];
+			$scope.addCustomer = function(newCustomer){
+				$scope.customers.push(
+					{ name: newCustomer.name, city: newCustomer.city }
+				);
+			};
+		}
+		controllers.controller2 = function($scope, factoryHTTP, factoryREST){
+			factoryHTTP.getFruits($scope); //HTTP		
+			//$scope.fruits = factoryREST.query(); //REST			
+			$scope.addFruit = function(newFruit){
+				factoryHTTP.postFruits({ name: newFruit.name, taste: newFruit.taste });
+			};
+		}
+		
+		//config
+		var configs = {};
+		configs.routes = function($routeProvider){
+			$routeProvider
+			    .when('/test', {
+					template: 			'<div><p>Template string test</p></div>'
+				})
+				.when('/home',
+					{
+						templateUrl:	'Partials/home.html'
+					})
+				.when('/customers',
+					{
+						controller:		'controller1',
+						templateUrl:	'Partials/customers.html'
+					})
+				.when('/fruits',
+					{
+						controller:		'controller2',
+						templateUrl:	'Partials/fruits.html'
+					})
+				.otherwise(
+					{
+						redirectTo: 	'/home'
+					});
+				
+		};
+		
+		//module
+		var App = angular.module('demoApp', ['ngRoute', 'ngResource', 'ngAnimate'])
+			.config(configs.routes)
+			.factory(factories)
+			.controller(controllers)
+			.directive(directives);
+			
+	</script>
+</body>
+</html>

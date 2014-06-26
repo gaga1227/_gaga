@@ -1,0 +1,74 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}])
+	
+	/* -------------------------------------------------------------------------- */
+	/* directives */
+	.directive('myChildScope', function() {
+		var ddo = {	
+			scope:true
+		};
+		return ddo;
+	})
+	.directive('myIsolateScope', function() {
+		var ddo = {	
+			scope:{},
+			template:"<div ng-init=prop6='f'>{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}</div>"
+		};
+		return ddo;
+	});
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Scope:Boolean|Object hash {}</h2>
+	<ol>
+		<li>When scope is set to <b>true</b>, a new scope object is created that prototypically inherits from its parent scope.</li>
+		<li>When scope is set to <b>{}</b>, an isolate scope is created. <b>No outer scope is available inside the directive's template</b>.</li>
+		<li>Isolate scope doesn't prototypically inherit</li>
+		<li>Two way data binding for inter scope communication on private isolate scope: <a href="203-directives-expression-bindings.html" target="_blank">203-directives-expression-bindings.html</a></li>
+	</ol>
+	
+	<h2>Examples</h2>
+	<div ng-controller="ngController">
+		<div ng-init="prop1='a'">
+			{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+			<div ng-init="prop2='b'">
+				{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+			</div>
+			<div ng-init="prop3='c'" my-child-scope>
+				{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+				<div ng-init="prop4='d'" my-child-scope>
+					{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+					<div ng-init="prop5='e'" my-isolate-scope>
+						{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

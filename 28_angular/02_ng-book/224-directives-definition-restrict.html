@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/prism.css">
+<style>
+</style>
+<script src="lib/prism.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',[])
+	.controller('ngController', ['$scope', function($scope){
+		//for debug
+		window.scope = $scope;
+	}]);
+</script>
+</head>
+<body>
+	<h1>Directives</h1>
+	<h2>Definition - Restrict:String</h2>
+	<ol>
+		<li>Optional</li>
+		<li>Defines in which format(s) directives will be declared in DOM</li>
+		<li>Available values:
+			<ul>
+				<li>E - Element name (<b>poor IE support</b>): <code class="block language-html">&lt;my-directive>&lt;/my-directive></code></li>
+				<li>A - Attribute (<b>default</b>): <code class="block language-html">&lt;div my-directive="exp">&lt;/div></code></li>
+				<li>C - Class: <code class="block language-html">&lt;div class="my-directive: exp;">&lt;/div></code></li>
+				<li>M - Comment (<b>avoid using, no practical values</b>): <code class="block language-html">&lt;!-- directive: my-directive exp --></code></li>
+			</ul>
+		</li>
+		<li>Default value: A (as attributes)</li>
+		<li>Option values can also be used in combination, e.g. <code class="block language-js">restrict: 'EA' //either element or attribute</code></li>
+		<li>Use an element when creating something brand new that will encapsulate a self-contained functionality.</li>
+		<li>Use an attribute when decorating(enhancing) an existing element with data or behavior.</li>
+	</ol>
+	
+	<!--
+	<div ng-controller="ngController">
+		
+	</div> -->
+
+	<div class="footnotes">
+		<div>
+			<dt><sup></sup></dt>
+			<dd></dd>
+		</div>
+	</div>
+</body>
+</html>

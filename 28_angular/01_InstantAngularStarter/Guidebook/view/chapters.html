@@ -1,0 +1,33 @@
+<ul>
+  <li class='chatper' ng-repeat='chapter in chapters | orderBy:"title"' ng-class-odd="'odd'" ng-class="{firstChild: $first, lastChild: $last}">
+	<h2>{{chapter.title}}</h2>
+	<p>{{chapter.summary | limitTo:130}}<span ng-show='chapter.summary.length > 130'>&hellip;</span></p>
+	<p>
+	  <a href='#/chapter/{{chapter.id}}'>
+		{{chapter.notes.length}}
+		<span ng-show='chapter.notes.length == 1'>note</span>
+		<span ng-show='chapter.notes.length != 1'>notes</span>
+	  </a>
+	  |
+	  <a href='#/addNote/{{chapter.id}}'>add note</a>
+	</p>
+	
+	<ul class='notes' ng-show='chapter.id == selectedChapterId'>
+	  <li ng-repeat='note in chapter.notes | orderBy:"id"'>
+		<div>#{{$index}}</div>
+		<div><a ng-click='onDelete(note.id)' class="pointer">delete</a></div>
+		<p>{{note.content}}</p>
+	  </li>
+	<ul>
+	
+  </li>
+</ul>
+
+
+<ul class='notes' ng-show='show'>
+  <li ng-repeat='note in notes | orderBy:orderValue'>
+    <div>#{{$index}}</div>
+    <div><a href ng-click='onDelete(note.id)'>delete</a></div>
+    <p>{{note.content}}</p>
+  </li>
+<ul>

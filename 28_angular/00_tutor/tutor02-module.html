@@ -1,0 +1,50 @@
+<html data-ng-app="demoApp">
+<head>
+	<script src="../angular-1.2.6/angular.js"></script>
+</head>
+<body>
+	<h3>Module with Controllers</h3>
+	<div class="contaienr" data-ng-controller="controller1">
+		Name: <input type="text" data-ng-model="keyword" />
+		<ul>
+			<li data-ng-repeat="customer in customers | filter:keyword | orderBy:'name'">
+				{{customer.name | uppercase}} - {{customer.city | lowercase}}
+			</li>
+		</ul>
+	</div>
+	<div class="contaienr" data-ng-controller="controller2">
+		Name: <input type="text" data-ng-model="keyword" />
+		<ul>
+			<li data-ng-repeat="fruit in fruits | filter:keyword | orderBy:'name'">
+				{{fruit.name | uppercase}} - {{fruit.taste | lowercase}}
+			</li>
+		</ul>
+	</div>
+	<script>
+		
+		//controllers
+		var controllers = {};
+		controllers.controller1 = function($scope){
+			$scope.customers = [
+				{ name: 'Jamie Riley', city: 'Atlanta' },
+				{ name: 'Heedy Wahlin', city: 'New York' },
+				{ name: 'Thomas Winter', city: 'Seattle' },
+				{ name: 'Dave Jones', city: 'Phoenix' }
+			];
+		}
+		controllers.controller2 = function($scope){
+			$scope.fruits = [
+				{ name: 'Orange', taste: 'juicy' },
+				{ name: 'Melon', taste: 'sweet' },
+				{ name: 'Pear', taste: 'crunchy' },
+				{ name: 'Kiwi', taste: 'sour' }
+			];
+		}
+		
+		//module
+		var App = angular.module('demoApp', []);
+		App.controller(controllers);
+		
+	</script>
+</body>
+</html>

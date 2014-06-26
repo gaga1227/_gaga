@@ -1,0 +1,176 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style>
+	/*form*/
+	input.ng-focused 						{ background:#FFC; }
+	input.ng-blurred.ng-dirty.ng-invalid 	{ border:2px solid #F00; }
+	input.ng-blurred.ng-dirty.ng-valid 		{ border:2px solid #0C0; }
+	
+	/*error*/
+	.error { color:#fff; background:red; font-weight:bold; }
+	.error > p { margin:0; padding:5px; }
+</style>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* custom validation module */
+	angular.module('validationExample',[])
+	.directive('ensureUnique', ['$http', function($http){
+		//recommended to use the "directive definition object(ddo)" form.
+		var ddo = {
+			require: 'ngModel',
+			link: function(scope, ele, attrs, ctrl){
+				scope.$watch(attrs.ngModel, function(n){
+					//exit if no value
+					if (!n) return;
+					//check via service
+					$http({
+						method: 'GET',
+						url:	'data/users.json'
+					})
+					.success(function(data){
+						//check uniqueness from usernames data
+						var input = n.toLowerCase(),
+							usernames = data.toString().toLowerCase(),
+							idx = usernames.indexOf(input + ','),
+							noMatch = (idx === -1);
+						//set uniqueness to field instance
+						ctrl.$setValidity('unique', noMatch);
+						//console.log('INPUT: ' + n, '\nNOMATCH: ' + noMatch);
+					})
+					.error(function(data){
+						//set uniqueness to field instance
+						ctrl.$setValidity('unique', false);
+					});
+				});
+			}
+		};
+		//return ddo
+		return ddo;
+	}])
+	.directive('ngFocus', [function(){
+		var FOCUS_CLASS = 'ng-focused',
+			BLUR_CLASS = 'ng-blurred',
+			ddo = {
+				restrict: 'A',
+				require: 'ngModel',
+				link: function(scope, ele, attrs, ctrl){
+					//reset custom value
+					ctrl.$focused = false;
+					//bind events
+					ele.bind('focus', function(e){
+						ele.addClass(FOCUS_CLASS);
+						ele.removeClass(BLUR_CLASS);
+						//apply custom value update in correct angular scope obj context
+						scope.$apply(function(){
+							ctrl.$focused = true;
+						});
+					});
+					ele.bind('blur', function(e){
+						ele.removeClass(FOCUS_CLASS);
+						ele.addClass(BLUR_CLASS);
+						scope.$apply(function(){
+							ctrl.$focused = false;
+						});
+					});
+				}
+			};
+		return ddo;
+	}]);
+	
+	/* -------------------------------------------------------------------------- */
+	/* main module */
+	angular.module('myApp',['validationExample'])
+	.controller('MyController', ['$scope', function($scope){
+		//pass scope reference to window for testing purposes
+		window.scope = $scope;
+		//submit function
+		$scope.signupForm = function(){
+			alert($scope.signup_form.$name + ' is submitted!');
+		};
+	}]);
+</script>
+</head>
+<body>
+	<h1>Form Validation</h1>
+	<div ng-controller="MyController">
+		<!-- 	
+			Using ng for custom validation logics
+		-->
+		<h3>Custom Validations after Blur</h3>
+		<form name="signup_form" novalidate ng-submit="signupForm()">
+			<!-- NAME -->
+			<div>
+				<input 
+					name="name" type="text" placeholder="Name" required 
+					ng-model="signup.name" ng-minlength="3" ng-maxlength="20" ng-focus>
+			</div>
+			<div class="error" 
+				ng-show="signup_form.name.$dirty && signup_form.name.$invalid && !signup_form.name.$focused">
+				<p ng-show="signup_form.name.$error.required">
+					Your name is required!
+				</p>
+				<p ng-show="signup_form.name.$error.minlength">
+					Your name is required to be at least 3 chars!
+				</p>
+				<p ng-show="signup_form.name.$error.maxlength">
+					Your name is required to be at most 20 chars!
+				</p>
+			</div>
+			
+			<!-- EMAIl -->
+			<div>
+				<input 
+					name="email" type="email" placeholder="Email" required 
+					ng-model="signup.email" ng-minlength="3" ng-maxlength="20" ng-focus>
+			</div>
+			<div class="error" 
+				ng-show="signup_form.email.$dirty && signup_form.email.$invalid && !signup_form.email.$focused">
+				<p ng-show="signup_form.email.$error.required">
+					Your email is required!
+				</p>
+				<p ng-show="signup_form.email.$error.minlength">
+					Your email is required to be at least 3 chars!
+				</p>
+				<p ng-show="signup_form.email.$error.maxlength">
+					Your email is required to be at most 20 chars!
+				</p>
+				<p ng-show="signup_form.email.$error.email">
+					Your input is not a valid email!
+				</p>
+			</div>
+			
+			<!-- USERNAME -->
+			<div>
+				<input 
+					name="username" type="text" placeholder="Username" required 
+					ng-model="signup.username" ng-minlength="3" ng-maxlength="20" ensure-unique ng-focus>
+			</div>
+			<div class="error" 
+				ng-show="signup_form.username.$dirty && signup_form.username.$invalid && !signup_form.username.$focused">
+				<p ng-show="signup_form.username.$error.required">
+					Your username is required!
+				</p>
+				<p ng-show="signup_form.username.$error.minlength">
+					Your username is required to be at least 3 chars!
+				</p>
+				<p ng-show="signup_form.username.$error.maxlength">
+					Your username is required to be at most 20 chars!
+				</p>
+				<!-- custom validation via directive 'ensureUnique' -->
+				<p ng-show="signup_form.username.$error.unique">
+					The username: {{signup.username | uppercase}} is taken, pick another one!
+				</p>
+			</div>
+			
+			<!-- BUTTON -->
+			<div>
+				<button type="submit" ng-disabled="signup_form.$invalid">Submit</button>
+			</div>		
+		</form>
+	</div>
+</body>
+</html>
