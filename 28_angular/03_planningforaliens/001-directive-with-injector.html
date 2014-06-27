@@ -9,13 +9,20 @@
 <body>
 	<h1>First Directive with Injector</h1>
 
-	<h2>Angular's Way</h2>
+	<h2>Angular's Way <sup>1</sup></h2>
 	<div ng-app="HelloWorld">
 		<div hello></div>
 	</div>
 
-	<h2>Injector's Way</h2>
+	<h2>Injector's Way <sup>2</sup></h2>
 	<div helloInjector></div>
+
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>Normal way of using Angular, nothing special</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>Mimics the inner works of Angular by manually construct and running a directive, with built-in angular functions.</dd></div>
+	</div>
 <script>
 	/* -------------------------------------------------------------------------- */
 	/* angular's way */

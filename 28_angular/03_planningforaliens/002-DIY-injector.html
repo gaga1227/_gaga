@@ -4,11 +4,79 @@
 <meta content="text/html; charset=UTF-8" http-equiv="content-type">
 <link rel="stylesheet" href="lib/normalize.css">
 <link rel="stylesheet" href="lib/main.css">
-<script src="../angular-1.2.9/angular.js"></script>
+<!-- <script src="../angular-1.2.9/angular.js"></script> -->
 </head>
 <body>
-	<h1>DIY Injector</h1>
+	<h1>DIY Angular-like module with Injector</h1>
+	<h2>The concept of an Angular module and DI, re-written with basic JS <sup>1</sup></h2>
+
+	<p id="target"></p>
+
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>This demonstrates the concept of Angular's module and DI with basic JS setup, Angular.js is not included in this demo.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>The demo will run an angular-like module (HelloWorld) within the custom namespace.</dd></div>
+	</div>
 <script>
+
+/* -------------------------------------------------------------------------- */
+//mimics angular's injector prototype obj
+var Injector = function(name){
+	var _namespace = namespace[name];
+	//returns injector instance
+	return {
+		//mimics angular's invoke function
+		invoke: function(input){
+			//prep callback and DI function names
+			var callback, args;
+			//injector gets an array
+			if (input instanceof Array) {
+				callback = input[input.length - 1];
+				args = input.splice(0, input.length - 1);
+			}
+			//injector gets a function
+			else {
+				callback = input;
+				args = input.toString();
+				args = args.replace(/ /g,'').match(/function\((.*)\)/)[1];
+				args = args.split(',');
+			}
+			//map DI function names to actual Functions in namespace
+			//returns an array of Function objects for callback
+			var funcs = args.map(function(arg){
+				return _namespace[arg];
+			});
+			//call callback
+			callback.apply(null, funcs);
+		}
+	};
+};
+
+/* -------------------------------------------------------------------------- */
+//angular's namespace (name of a module)
+//mimics a module defination
+var namespace = {
+	//mimics object in an agular module: controller, service, directive, etc.
+	HelloWorld: {
+		hello:function(val){
+			document.getElementById('target').innerHTML = val;
+		},
+		saywhat:function(){
+			return 'Hello World!';
+		}
+	}
+};
+
+//mimics using angular's built-in injector, with a module
+//as in the previous lesson: directive with injector
+var myInjector = Injector('HelloWorld');
+
+//init module
+myInjector.invoke(['hello', 'saywhat', function(helloRenamed, saywhatRenamed){
+	//now you can call functions from 'HelloWorld' module passed in via DI
+	helloRenamed(saywhatRenamed());
+}]);
 
 </script>
 </body>
