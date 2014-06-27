@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.2.9/angular.js"></script>
+</head>
+<body>
+	<h1>First Directive with Injector</h1>
+
+	<h2>Angular's Way</h2>
+	<div ng-app="HelloWorld">
+		<div hello></div>
+	</div>
+
+	<h2>Injector's Way</h2>
+	<div helloInjector></div>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* angular's way */
+
+	//create app module
+	var app = angular.module('HelloWorld',[]);
+
+	//register controller to module
+	app.controller('World', function($scope){
+		$scope.text = 'World!';
+	});
+
+	//register directive to module
+	app.directive('hello', function(){
+		return {
+			restrict: 'A',
+			template: '<p>Hello {{ text }}</p>',
+			controller: 'World'
+		};
+	});
+
+	/* -------------------------------------------------------------------------- */
+	/* injector's way */
+
+	//create injector
+	var injector = angular.injector(['ng']);
+
+	//init injector
+	injector.invoke(['$compile', '$rootScope', function($compile, $rootScope){
+
+		//controller function
+		var World = function(scope){
+			scope.text = 'Injector!';
+		};
+		//directive definition obj
+		var helloInjector = {
+			restrict: 'A',
+			template: '<p>Hello {{ text }}</p>',
+			controller: 'World'
+		};
+
+		//create template compiler instance with template string,
+		//returns compiler function
+		var templateFunction = $compile(helloInjector.template);
+		//create scope instance,
+		//returns scope object with no custom value
+		var scope = $rootScope.$new();
+		//init template compiler with updated scope model data,
+		//returns jqLite element
+		var element = templateFunction(scope);
+
+		//init controller with new scope obj,
+		//adds custom logics and updates to scope obj
+		World(scope);
+		//digest scope model update
+		scope.$digest();
+		//update view
+		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
+
+		//manually update scope data again
+		scope.text = 'again, Injector!';
+		//digest again to reflect menual update
+		scope.$digest();
+		//update view
+		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
+
+	}]);
+</script>
+</body>
+</html>
