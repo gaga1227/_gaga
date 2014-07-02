@@ -17,17 +17,17 @@
 		//for debug
 		window.scope = $scope;
 	}])
-	
+
 	/* -------------------------------------------------------------------------- */
 	/* directives */
 	.directive('myChildScope', function() {
-		var ddo = {	
+		var ddo = {
 			scope:true
 		};
 		return ddo;
 	})
 	.directive('myIsolateScope', function() {
-		var ddo = {	
+		var ddo = {
 			scope:{},
 			template:"<div ng-init=prop6='f'>{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}</div>"
 		};
@@ -44,26 +44,27 @@
 		<li>Isolate scope doesn't prototypically inherit</li>
 		<li>Two way data binding for inter scope communication on private isolate scope: <a href="203-directives-expression-bindings.html" target="_blank">203-directives-expression-bindings.html</a></li>
 	</ol>
-	
+
 	<h2>Examples</h2>
 	<div ng-controller="ngController">
-		<div ng-init="prop1='a'">
+		<div ng-init="prop1='a'" my-child-scope>
 			{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
-			<div ng-init="prop2='b'">
+			<div ng-init="prop2='b'" my-child-scope>
 				{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
-			</div>
-			<div ng-init="prop3='c'" my-child-scope>
-				{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
-				<div ng-init="prop4='d'" my-child-scope>
+				<div ng-init="prop3='c'" my-child-scope>
 					{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
-					<div ng-init="prop5='e'" my-isolate-scope>
+					<div ng-init="prop4='d'" my-child-scope>
 						{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+						<div ng-init="prop5='e'" my-child-scope>
+							{{prop1}}, {{prop2}}, {{prop3}}, {{prop4}}, {{prop5}}, {{prop6}}
+							<div my-isolate-scope></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="footnotes">
 		<div>
 			<dt><sup></sup></dt>

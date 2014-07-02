@@ -32,13 +32,13 @@
 		//for debug
 		window.scope = $scope;
 	}])
-	
+
 	/* -------------------------------------------------------------------------- */
 	/* directives */
 	.directive('myDirective', function() {
-		var ddo = {	
+		var ddo = {
 			scope: {
-				myList: '='	
+				myList: '='
 			},
 			transclude: true,
 			replace: true,
@@ -54,16 +54,18 @@
 	<ol>
 		<li>Default option value is <b>false</b></li>
 	</ol>
-	
+
 	<div ng-controller="ngController">
 		<h2>Example: Basic Transclusion</h2>
 		<ul my-directive my-list="myNavList">
-			<li ng-repeat="list in myList()" id="{{index}}">
+			<!-- to be transcluded -->
+			<li ng-repeat="list in myList" id="item{{$index+1}}">
 				<a ng-href="{{list.url}}">{{list.label}}</a>
 			</li>
+			<!-- /to be transcluded -->
 		</ul>
 	</div>
-	
+
 	<div class="footnotes">
 		<div>
 			<dt><sup></sup></dt>
