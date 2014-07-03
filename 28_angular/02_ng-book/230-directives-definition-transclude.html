@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="lib/prism.css">
 <style>
 /* sideNav */
-.sideNav { max-width:300px; }
+.sideNav {  }
 	.sideNav ul,
 	.sideNav li { list-style:none; margin:0; padding:0; }
 	.sideNav li { border-bottom:1px solid #aaa; }
@@ -38,11 +38,19 @@
 	.directive('myDirective', function() {
 		var ddo = {
 			scope: {
-				myList: '='
+				myList: '&'
 			},
 			transclude: true,
 			replace: true,
-			templateUrl: 'data/transclude.html'
+			templateUrl: 'data/transclude.html',
+			link: function(scope, element, attrs) {
+				scope.isoList = scope.myList().map(function(item){
+					return {
+						label: item.label + ' (iso)',
+						url: item.url + '&scope=iso'
+					}
+				});
+			}
 		};
 		return ddo;
 	});
@@ -56,19 +64,17 @@
 	</ol>
 
 	<div ng-controller="ngController">
-		<h2>Example: Basic Transclusion</h2>
+		<h2>Example: Basic Transclusion <sup>1</sup></h2>
 		<ul my-directive my-list="myNavList">
-			<!-- to be transcluded -->
-			<li ng-repeat="list in myList" id="item{{$index+1}}">
+			<li ng-repeat="list in myNavList" id="item{{$index+1}}">
 				<a ng-href="{{list.url}}">{{list.label}}</a>
 			</li>
-			<!-- /to be transcluded -->
 		</ul>
 	</div>
 
 	<div class="footnotes">
 		<div>
-			<dt><sup></sup></dt>
+			<dt><sup>1</sup></dt>
 			<dd></dd>
 		</div>
 	</div>

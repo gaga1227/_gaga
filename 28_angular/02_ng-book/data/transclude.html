@@ -1,4 +1,10 @@
 <div class="sideNav">
-	<h3>Side Navigation</h3>
+	<h3>Side Navigation (directive's isolated scope)<sup>2</sup></h3>
+	<ul>
+		<li ng-repeat="list in isoList" id="item{{$index+1}}">
+			<a ng-href="{{list.url}}">{{list.label}}</a>
+		</li>
+	</ul>
+	<h3>Side Navigation (transclusion's new child scope from main controller)<sup>3</sup></h3>
 	<ul ng-transclude></ul>
 </div>
