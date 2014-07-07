@@ -42,13 +42,17 @@
 			},
 			transclude: true,
 			replace: true,
-			templateUrl: 'data/transclude.html',
-			link: function($scope, element, attrs, controller) {
+			//templateUrl: 'data/transclude.html',
+			link: function($scope, element, attrs, controller, transclude) {
 				$scope.isoList = $scope.myList().map(function(item){
 					return {
 						label: item.label + ' (iso)',
 						url: item.url + '&scope=iso'
 					}
+				});
+				//only works when there's no template/templateURL
+				transclude($scope.$parent, function(clone, scope) {
+					element.append(clone);
 				});
 			}
 		};
@@ -64,7 +68,7 @@
 	</ol>
 
 	<div ng-controller="ngController">
-		<h2>Example: Basic Transclusion <sup>1</sup></h2>
+		<h2>Example: Transclusion Function<sup>1</sup></h2>
 		<ul my-directive my-list="myNavList">
 			<li ng-repeat="list in myNavList" id="item{{$index+1}}">
 				<a ng-href="{{list.url}}">{{list.label}}</a>
