@@ -1,3 +1,5 @@
+// structrue of a program
+
 #include <iostream>
 int main()
 {
