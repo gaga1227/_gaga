@@ -52,8 +52,8 @@ const char char_2 = U'A';	//char32_t
 const char char_3 = L'A';	//wchar_t
 
 //string types
-const string string_1 = u8'string';	//encoded using UTF-8
-const string string_2 = R'string'; 	//raw string
+const string string_1 = u8"string";	//encoded using UTF-8
+const string string_2 = R"string"; 	//raw string
 
 //others
 const bool foo = true;
