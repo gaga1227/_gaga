@@ -49,5 +49,39 @@ int main ()
 	}
 	cout << "DONE!\n" << endl;
 	
+	//Jump statements
+	for (int n=10; n>0; n--) {
+		if (n==5)
+		{
+			cout << "countdown skipped!" << ", ";
+			continue;
+		}
+		if (n==3)
+		{
+			cout << "countdown aborted!" << endl;
+			break;
+		}
+		cout << n << ", ";
+	}
+	
+	//loop using goto
+	int y=10;
+mylabel:
+	cout << y << ", ";
+	y--;
+	if (y>0) goto mylabel;
+	cout << "DONE!\n";
+
+	//switch
+	switch (x) {
+		case 1:
+		case 2:
+		case 3:
+			cout << "x is 1, 2 or 3";
+			break;
+		default:
+			cout << "x is not 1, 2 nor 3";
+	}
+	
 	return 0;
 }

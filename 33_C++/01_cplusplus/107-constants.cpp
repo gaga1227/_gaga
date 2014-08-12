@@ -58,7 +58,7 @@ const string string_2 = R"string"; 	//raw string
 //others
 const bool foo = true;
 const bool bar = false;
-const int* p = nullptr;
+const int *p = nullptr; //dereference operator '*'
 
 */
 
