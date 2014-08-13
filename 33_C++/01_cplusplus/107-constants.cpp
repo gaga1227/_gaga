@@ -25,6 +25,7 @@ const char text1 = 'A'; 			//single character literal
 const string text2 = 'Hello world'; //string
 
 //special characters
+const char char_sp0 = '\0';		//null character
 const char char_sp1 = '\n'; 	//newline
 const char char_sp2 = '\r';		//carriage return
 const char char_sp3 = '\t';		//tab
