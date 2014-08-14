@@ -16,6 +16,8 @@ void print_all (const int* start, const int* stop)
 	const int * current = start;
 	while (current <= stop) {
 	cout << *current << '\n';
+		//'const' only applies to the appointed value: '*current',
+		//pointer itself: 'current' can be updated, 
 		++current;     // increment pointer
 	}
 }
