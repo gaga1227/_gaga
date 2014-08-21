@@ -54,6 +54,7 @@ int main () {
 	
 	//init instance from class
 	//with arguments using overloading constructor function
+	//functional form
 	Rectangle rect(w,h);
 	
 	//set value in rect obj
@@ -64,6 +65,7 @@ int main () {
 	
 	//init instance using original constructor
 	//no arguments
+	//functional form
 	Rectangle rect0;
 	cout << "\nArea 0: " << rect0.area();
 	
