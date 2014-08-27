@@ -14,11 +14,11 @@ class CVector {
     CVector(int a, int b) : x(a), y(b) {}
     //define overloading operator function for addition +
     //using member overload
-	CVector operator+ (const CVector&); 
+	CVector operator+ (const CVector &param);
 };
 
 //implement overloading operator function
-CVector/*type*/ CVector::operator+/*access member*/ (const CVector& param) {
+CVector/*type*/ CVector::operator+/*access member*/ (const CVector &param) {
   CVector temp;
   temp.x = x + param.x;
   temp.y = y + param.y;
@@ -27,7 +27,7 @@ CVector/*type*/ CVector::operator+/*access member*/ (const CVector& param) {
 
 //define overloading operator function for addition -
 //using non-member overload
-CVector operator- (const CVector& param1, const CVector& param2) {
+CVector operator- (const CVector param1, const CVector param2) {
   CVector temp;
   temp.x = param1.x - param2.x;
   temp.y = param1.y - param2.y;
