@@ -18,6 +18,7 @@ class CVector {
 };
 
 //implement overloading operator function
+//ref: 203-functions-args_by_reference.cpp
 CVector/*type*/ CVector::operator+/*access member*/ (const CVector &param) {
   CVector temp;
   temp.x = x + param.x;

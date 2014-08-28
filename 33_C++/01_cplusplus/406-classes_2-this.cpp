@@ -17,6 +17,7 @@ class Dummy {
 };
 
 //member function implementation
+//ref: 203-functions-args_by_reference.cpp
 bool Dummy::isitme(Dummy &param) {
 	return (&param == this) ? true : false;
 }

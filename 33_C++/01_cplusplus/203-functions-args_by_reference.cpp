@@ -3,7 +3,7 @@
 using namespace std;
 
 //passing as reference using '&'
-void duplicate (int& a, int& b)
+void duplicate (int &a, int &b)
 {
   a *= 2;
   b *= 2;
@@ -11,7 +11,7 @@ void duplicate (int& a, int& b)
 
 //passing as reference using '&' to improve efficiency by avoiding value duplication 
 //but restricting to constants to prevent being modified
-string concatenate (const string& a, const string& b)
+string concatenate (const string &a, const string &b)
 {
   return a+b;
 }
