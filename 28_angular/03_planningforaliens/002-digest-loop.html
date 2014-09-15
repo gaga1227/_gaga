@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.2.9/angular.js"></script>
+</head>
+<body>
+	<h1>The $Digest Loop</h1>
+
+	<h2>Replace $digest with $apply <sup>1</sup></h2>
+	<div helloInjector></div>
+
+	<div class="footnotes">
+		<div><dt><sup>1</sup></dt>
+		<dd>Instead of calling $digest manually, we wrap our scope function inside the Angular $apply block, which will call $digest after running the scope function.</dd></div>
+	</div>
+<script>
+	/* -------------------------------------------------------------------------- */
+	/* Replace $digest with $apply */
+
+	//create injector
+	var injector = angular.injector(['ng']);
+
+	//init injector
+	injector.invoke(['$compile', '$rootScope', function($compile, $rootScope){
+		//controller function
+		var World = function(scope){
+			scope.text = '$Apply!';
+		};
+		//directive definition obj
+		var helloInjector = {
+			restrict: 'A',
+			template: '<p>Hello {{ text }}</p>',
+			controller: 'World'
+		};
+
+		//create template compiler instance with template string,
+		//returns compiler function
+		var templateFunction = $compile(helloInjector.template);
+		//create scope instance,
+		//returns scope object with no custom value
+		var scope = $rootScope.$new();
+		//init template compiler with updated scope model data,
+		//returns jqLite element
+		var element = templateFunction(scope);
+		//run controller function inside Angular's $apply fn
+		//which calls $digest after supplied function
+		scope.$apply(function(){
+			//init controller with new scope obj,
+			//adds custom logics and updates to scope obj
+			World(scope);
+		});
+		//update view
+		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
+	}]);
+</script>
+</body>
+</html>
