@@ -22,6 +22,9 @@
 		<dd>Normal way of using Angular, nothing special</dd></div>
 		<div><dt><sup>2</sup></dt>
 		<dd>Mimics the inner works of Angular by manually construct and running a directive, with built-in angular functions.</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>Instead of calling $digest manually, we wrap our scope updates inside the Angular $apply block, which will call $digest after running the scope updates.</dd></div>
+	</div>
 	</div>
 <script>
 	/* -------------------------------------------------------------------------- */
@@ -82,10 +85,12 @@
 		//update view
 		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
 
-		//manually update scope data again
-		scope.text = 'again, Injector!';
-		//digest again to reflect menual update
-		scope.$digest();
+		//update scope inside Angular's $apply fn
+		//which calls $digest after supplied function
+		scope.$apply(function(){
+			//update scope data again
+			scope.text = 'again, Injector! 3';
+		});
 		//update view
 		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
 

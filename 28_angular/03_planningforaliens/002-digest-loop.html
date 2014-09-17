@@ -9,52 +9,55 @@
 <body>
 	<h1>The $Digest Loop</h1>
 
-	<h2>Replace $digest with $apply <sup>1</sup></h2>
-	<div helloInjector></div>
+	<div ng-app="HelloWorld">
+		<div hello></div>
+	</div>
 
 	<div class="footnotes">
 		<div><dt><sup>1</sup></dt>
-		<dd>Instead of calling $digest manually, we wrap our scope function inside the Angular $apply block, which will call $digest after running the scope function.</dd></div>
+		<dd>Most of your Angualr code is wrapped inside an $apply call which will call $digest, this is how the myBind directive's $watch function handler is called the 1st time.</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>Any code outside of Angualr (e.g. setTimeout) is not inside $apply, hence not knowing about the updated model and the $watch function handler is never called.</dd></div>
 	</div>
 <script>
-	/* -------------------------------------------------------------------------- */
-	/* Replace $digest with $apply */
+	//create app module
+	var app = angular.module('HelloWorld',[]);
 
-	//create injector
-	var injector = angular.injector(['ng']);
+	//register controller to module
+	app.controller('World', function($scope, $timeout){
+		$scope.text = 'World!<sup>1</sup>';
+		//$timeout wraps the function content in an $apply call
+		//which put it in a try block and calls $digest afterwards
+		$timeout(function(){
+			$scope.text = 'Bob.<sup>2</sup>';
+		}, 2000);
+	});
 
-	//init injector
-	injector.invoke(['$compile', '$rootScope', function($compile, $rootScope){
-		//controller function
-		var World = function(scope){
-			scope.text = '$Apply!';
-		};
-		//directive definition obj
-		var helloInjector = {
+	//register directive to module
+	app.directive('hello', function(){
+		return {
 			restrict: 'A',
-			template: '<p>Hello {{ text }}</p>',
+			template: '<p>Hello <span my-bind="text"><sup>1</sup></span></p>',
 			controller: 'World'
 		};
+	});
 
-		//create template compiler instance with template string,
-		//returns compiler function
-		var templateFunction = $compile(helloInjector.template);
-		//create scope instance,
-		//returns scope object with no custom value
-		var scope = $rootScope.$new();
-		//init template compiler with updated scope model data,
-		//returns jqLite element
-		var element = templateFunction(scope);
-		//run controller function inside Angular's $apply fn
-		//which calls $digest after supplied function
-		scope.$apply(function(){
-			//init controller with new scope obj,
-			//adds custom logics and updates to scope obj
-			World(scope);
-		});
-		//update view
-		document.querySelector('div[helloInjector]').innerHTML = element[0].outerHTML;
-	}]);
+	//register custom bind directive
+	app.directive('myBind', function(){
+		return {
+			restrict: 'A',
+			//called upon angular's compile fn finding the directive,
+			//will bind the directive to the DOM element
+			link: function(scope, element, attrs){
+				var expression = attrs.myBind;
+				scope.$watch(expression, function(result){
+					//element is a jqLite obj
+					element.html(result);
+				});
+			}
+		};
+	});
+
 </script>
 </body>
 </html>
