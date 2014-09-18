@@ -84,6 +84,7 @@ app.directive('myRepeat', function(){
 					var newScope = scope.$new();
 					//assign item model to new child scope with model item name
 					newScope[itemName] = item;
+					//push new child scope to ref array to help future cleanup
 					scopes.push(newScope);
 					//transclude fn with child item scope passed in
 					transclude(newScope, function(clone){
