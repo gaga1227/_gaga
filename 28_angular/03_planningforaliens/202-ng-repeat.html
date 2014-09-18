@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+</head>
+<body>
+<!-- TITLE -->
+<h1>Custom ng-repeat</h1>
+<h2>Creating a custom ng-repeat directive with core Angular functions</h2>
+<!-- APP -->
+<div ng-app="myrepeat-app">
+	<h3>Todos:</h3>
+	<ul>
+		<li my-repeat="todo in todos">{{todo.text}}</li>
+	</ul>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b>transclude: "element"</b>: to transclude the entire elem rather than its content</dd></div>
+	<div><dt><sup>2</sup></dt>
+	<dd><b>transclude()</b>: using transclude fn to determine what to be transcluded</dd></div>
+	<div><dt><sup>3</sup></dt>
+	<dd><b>scope.$watchCollection</b>: watch scope model and trigger handler function</dd></div>
+	<div><dt><sup>4</sup></dt>
+	<dd><b>scope.$new()</b>: creating new scope object</dd></div>
+	<div><dt><sup>5</sup></dt>
+	<dd><b>scope.$apply</b>: putting handler fn execution result in the next digest loop</dd></div>
+	<div><dt><sup>6</sup></dt>
+	<dd><b>scope.$destroy();</b>: remove redundant scope objects from memory</dd></div>
+</div>
+<!-- JS -->
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('myrepeat-app', []);
+//demo transclude directive
+app.directive('transcludeDirective', function(){
+	return {
+		restrict: "A",
+		//makes transclude fn return the inner content elem as clone
+		transclude: true,
+		template: "<div ng-transclude><p>template stuff</p></div>"
+	};
+});
+//demo custom repeat directive
+app.directive('myRepeat', function(){
+	return {
+		restrict: "A",
+		//makes transclude fn return the entire elem as clone
+		transclude: "element",
+		//directive link fn, run after DOM compile
+		link: function(scope, elem, attrs, controller, transclude){
+			//parse expression in attrs
+			var split = attrs.myRepeat.split(' in '),
+				//get scope model
+				items = scope[split[1]],
+				//get model collection name
+				collectionName = split[1],
+				//get model item name
+				itemName = split[0],
+				//get parent container
+				parent = elem.parent(),
+				//child scope ref array
+				scopes = [];
+
+			//watch function on scope,
+			//handler fn will run when collection model updates
+			scope.$watchCollection(collectionName, function(items){
+				//clean up parent and attached scope objects in memory
+				angular.forEach(parent.children(), function(child){
+					//remove dom elem
+					child.remove();
+					//get item scope and remove from ref array
+					var scope = scopes.pop();
+					//remove item scop
+					scope.$destroy();
+				});
+				//loop through collection
+				angular.forEach(items, function(item){
+					//create new child scope for each item
+					var newScope = scope.$new();
+					//assign item model to new child scope with model item name
+					newScope[itemName] = item;
+					scopes.push(newScope);
+					//transclude fn with child item scope passed in
+					transclude(newScope, function(clone){
+						//append clone elem to parent
+						parent.append(clone);
+					});
+				});
+			});
+
+			//TEST manually update model outside of angular
+			setTimeout(function(){
+				//using $apply to put execution result in the next digest loop
+				scope.$apply(function(){
+					scope[collectionName].push({ text: "more more more ..." });
+				});
+			}, 1000);
+		},
+		//directive controller
+		controller: ['$scope', function($scope){
+			$scope.todos = [
+				{ text: "eat some food" },
+				{ text: "drink some water" },
+				{ text: "cook some meal" },
+				{ text: "do some extra works" }
+			];
+		}]
+	};
+});
+</script>
+</body>
+</html>
