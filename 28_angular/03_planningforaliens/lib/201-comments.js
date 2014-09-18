@@ -11,17 +11,17 @@
 				//model
 				$scope.comments = [
 					{
-						"text": "Comments 1"
+						"text": "Comment 1"
 					},
 					{
-						"text": "Comments 2"
+						"text": "Comment 2"
 					},
 					{
-						"text": "Comments 3"
+						"text": "Comment 3"
 					}
 				];
 			}],
-			templateUrl: 'partial/comments.html'
+			templateUrl: 'partial/201-comments.html'
 		}
 	});
 
