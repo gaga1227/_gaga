@@ -1,0 +1,48 @@
+.main {
+  width: 30rem;
+  margin: 0 auto;
+  background: #f8f8f8;
+}
+
+.comment {
+  min-height: 100px;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+.comment p {
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5em;
+  margin: 1rem 0;
+}
+
+.comment:nth-of-type(even) {
+  background: #f8f8f8;
+}
+
+.post {
+  width: 100%;
+  padding: 1rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  display: block;
+  margin: 0;
+  padding: 1rem;
+  font-size: 1.3rem;
+  resize: vertical;
+}
+
+button {
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1.3rem;
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
