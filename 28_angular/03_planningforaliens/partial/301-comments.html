@@ -1,0 +1,8 @@
+<div class="comment"
+	ng-repeat="comment in comments"
+	ng-bind-html="comment.md | mdToHtml">
+</div>
+<div class="post">
+	<textarea ng-model="commentMd"></textarea>
+	<button ng-click="post()">Post your comment</button>
+</div>
