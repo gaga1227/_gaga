@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+</head>
+<body>
+<!-- TITLE -->
+<h1>Providers</h1>
+<!-- APP -->
+<div ng-app="provider-demo">
+	<div ng-controller="AppCtrl">
+		<h3>App flow: Config vs. Run phase</h3>
+		<h3>App flow: DI with Providers, Services and Factories</h3>
+	</div>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup></sup></dt>
+	<dd></dd></div>
+</div>
+<!-- JS -->
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('provider-demo', []);
+
+//provider
+//providers are run first, whether it is a dependency or not
+app.provider('AppPvdr1', function(){
+	console.log('APP: provider 1');
+	//using 'this', provider functions are constructor functions
+	this.$get = function(){
+		//returned objects from $get fn are available in the run phase
+		return {};
+	}
+});
+app.provider('AppPvdr2', ['AppPvdr1Provider', function(AppPvdr1Provider){
+	console.log('APP: provider 2');
+	//using 'this', provider functions are constructor functions
+	this.sprinkles = false;
+	this.addSprinkles = function(){
+		this.sprinkles = true;
+	};
+	this.$get = function(){
+		//returned objects from $get fn are available in the run phase
+		if (this.sprinkles){
+			return {
+				icing: 'chocolate',
+				sprinkles: 'rainbow colored'
+			}
+		} else {
+			return {
+				icing: 'chocolate',
+				sprinkles: 'none. :-('
+			}
+		}
+	}
+}]);
+
+//service
+app.service('AppService', ['AppPvdr1', function(AppPvdr1){
+	console.log("APP: service");
+	console.log("- Service/Factory dependencies called.");
+	this.flavor = "vanilla";
+	this.icing = false;
+}]);
+
+//factory
+app.factory('AppFactory', ['AppPvdr2', 'AppService', function(AppPvdr2, AppService){
+	console.log("APP: factory");
+	console.log("- Service/Factory dependencies called.");
+	return {
+		type: "chocolate chip"
+	};
+}]);
+
+//app config
+app.config(['AppPvdr1Provider','AppPvdr2Provider', function(AppPvdr1Provider, AppPvdr2Provider){
+	console.log("APP: config");
+	console.log("- This is where you can manipulate Provider Constructors to config your app.");
+	console.log("-", AppPvdr1Provider);
+	console.log("-", AppPvdr2Provider);
+	//config providers before run
+	AppPvdr2Provider.addSprinkles();
+}]);
+
+//app run
+app.run(['AppPvdr1','AppPvdr2', 'AppService', function(AppPvdr1, AppPvdr2, AppService){
+	console.log("APP: run");
+	console.log("- This is where you can access Providers Members, Services and Factories.");
+	console.log("-", AppPvdr1);
+	console.log("-", AppPvdr2);
+	console.log("-", AppService);
+}]);
+
+//controller
+app.controller('AppCtrl',
+	['AppPvdr1', 'AppPvdr2', 'AppFactory',
+	function(AppPvdr1, AppPvdr2, AppFactory){
+	console.log("APP: controller");
+	console.log("- This is where you put your business logic for the app, with access to Providers, Services and Factories.");
+	console.log("-", AppPvdr1);
+	console.log("-", AppPvdr2);
+	console.log("-", AppFactory);
+}]);
+</script>
+</body>
+</html>
