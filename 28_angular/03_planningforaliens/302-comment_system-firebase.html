@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/203-comments.css">
+</head>
+<body>
+<!-- TITLE -->
+<h1>Comment System</h1>
+<h2>Adding Firebase</h2>
+<!-- APP -->
+<div class="main" ng-app="angular-demo">
+	<comments></comments>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b>app.constant</b>: using constants to define constant variables in app, which can be used via dependency injection.</dd></div>
+</div>
+<!-- JS -->
+<script src="../angular-1.2.9/angular.js"></script>
+<script src="../angular-1.2.9/angular-sanitize.js"></script>
+<script src="lib/markdown.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+<script src="lib/302-comments.js"></script>
+</body>
+</html>

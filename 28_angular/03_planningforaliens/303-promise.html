@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+</head>
+<body>
+<!-- TITLE -->
+<h1>Promise</h1>
+<h2>with $q and $http</h2>
+<!-- APP -->
+<div ng-app="myrepeat-app">
+	<h3>Todos:</h3>
+	<div ng-controller="httpCtrl">
+		<input ng-model="newTodo">
+		<button ng-click="addTodo();"><b>Add Todo</b></button>
+		<button ng-click="purgeTodos();">Start Fresh Again</button>
+		<p ng-repeat="todo in todos track by $index"><b>{{$index + 1}}: </b> {{ todo.text }}</p>
+	</div>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd>This demo uses the <b>REST</b> APIs from Firebase.</dd></div>
+	<div><dt><sup>2</sup></dt>
+	<dd><b>$http</b> call returns a promise</dd></div>
+	<div><dt><sup>3</sup></dt>
+	<dd>Use <b>$q.all</b> to collate an array of promises</dd></div>
+	<div><dt><sup>4</sup></dt>
+	<dd><b>ngRepeat</b> by default work with objects, use <b>track by $index</b> with arrays</dd></div>
+</div>
+<!-- JS -->
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('myrepeat-app', []);
+//register constant
+app.constant('FIREBASE_URL', 'https://angular-escape-plan.firebaseio.com/todos.json');
+//register controller
+app.controller('httpCtrl', ['$scope', '$http', 'FIREBASE_URL', function($scope, $http, FIREBASE_URL){
+	//model
+	$scope.todos = [];
+	$scope.newTodo = '';
+	//methods
+	$scope.addTodo = function(){
+		//validate
+		if (!$scope.newTodo) {
+			alert('Please enter a description for the new item!');
+			return;
+		}
+		//create temp todo obj
+		var todo = { "text": $scope.newTodo };
+		//push to local view model
+		$scope.todos.push(todo);
+		//reset newTodo
+		$scope.newTodo = '';
+		//put data to remote
+		putTodos();
+	};
+	$scope.purgeTodos = function(){
+		//skip if todos already empty
+		if (!$scope.todos.length) return;
+		//empty todos
+		$scope.todos = [];
+		//put data to remote
+		putTodos();
+	};
+	//private methods
+	function putTodos(){
+		$http({
+			method: 'PUT',
+			url: FIREBASE_URL,
+			data: $scope.todos
+		})
+		.success(function(){
+			//alert('Todos are PUT to remote');
+		});
+	}
+	function getTodos(){
+		$http.get(FIREBASE_URL)
+		.success(function(data, status, headers, config){
+			if (!data || data == 'null') {
+				$scope.todos = [];
+			} else {
+				$scope.todos = data;
+			}
+		})
+		.error(function(data, status, headers, config){
+			alert(status);
+		});
+	}
+	//init
+	getTodos();
+}]);
+</script>
+</body>
+</html>
