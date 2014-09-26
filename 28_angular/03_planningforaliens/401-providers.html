@@ -12,15 +12,27 @@
 <div ng-app="provider-demo">
 	<div ng-controller="AppCtrl">
 		<h3>App flow: Config vs. Run phase</h3>
+		<ol id="flow">
+		</ol>
+		<hr>
 		<h3>App flow: DI with Providers, Services and Factories</h3>
+		<ul>
+			<li><b>Providers</b> can have <b>Provider Constructor</b> dependencies only</li>
+			<li><b>Config</b> fn takes <b>Provider Constructor</b> dependencies only</li>
+			<li><b>Run</b> fn takes configured <b>Provider Object</b>, services and factories as dependencies</li>
+			<li><b>Controller</b> fn takes configured <b>Provider Object</b>, services and factories as dependencies</li>
+			<li><b>Before run phase</b>, dependencies are called afterwards</li>
+			<li><b>On and after run phase</b>, dependencies are called beforehand</li>
+		</ul>
 	</div>
 </div>
 <!-- NOTES -->
 <div class="footnotes">
-	<div><dt><sup></sup></dt>
-	<dd></dd></div>
+	<div><dt><sup>1</sup></dt>
+	<dd>Check browser console logs for more info.</dd></div>
 </div>
 <!-- JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="../angular-1.2.9/angular.js"></script>
 <script>
 //app def
@@ -30,6 +42,9 @@ var app = angular.module('provider-demo', []);
 //providers are run first, whether it is a dependency or not
 app.provider('AppPvdr1', function(){
 	console.log('APP: provider 1');
+
+	addItem('#flow', "<b>APP: provider 1</b>");
+
 	//using 'this', provider functions are constructor functions
 	this.$get = function(){
 		//returned objects from $get fn are available in the run phase
@@ -38,6 +53,11 @@ app.provider('AppPvdr1', function(){
 });
 app.provider('AppPvdr2', ['AppPvdr1Provider', function(AppPvdr1Provider){
 	console.log('APP: provider 2');
+	console.log("-", AppPvdr1Provider);
+
+	addItem('#flow', "<b>APP: provider 2</b>");
+	addItem('#flow', "- Provider dependency is called");
+
 	//using 'this', provider functions are constructor functions
 	this.sprinkles = false;
 	this.addSprinkles = function(){
@@ -63,6 +83,10 @@ app.provider('AppPvdr2', ['AppPvdr1Provider', function(AppPvdr1Provider){
 app.service('AppService', ['AppPvdr1', function(AppPvdr1){
 	console.log("APP: service");
 	console.log("- Service/Factory dependencies called.");
+
+	addItem('#flow', "<b>APP: service</b>");
+	addItem('#flow', "- Service/Factory dependencies called.");
+
 	this.flavor = "vanilla";
 	this.icing = false;
 }]);
@@ -71,6 +95,10 @@ app.service('AppService', ['AppPvdr1', function(AppPvdr1){
 app.factory('AppFactory', ['AppPvdr2', 'AppService', function(AppPvdr2, AppService){
 	console.log("APP: factory");
 	console.log("- Service/Factory dependencies called.");
+
+	addItem('#flow', "<b>APP: factory</b>");
+	addItem('#flow', "- Service/Factory dependencies called.");
+
 	return {
 		type: "chocolate chip"
 	};
@@ -82,6 +110,10 @@ app.config(['AppPvdr1Provider','AppPvdr2Provider', function(AppPvdr1Provider, Ap
 	console.log("- This is where you can manipulate Provider Constructors to config your app.");
 	console.log("-", AppPvdr1Provider);
 	console.log("-", AppPvdr2Provider);
+
+	addItem('#flow', "<b>APP: config</b>");
+	addItem('#flow', "- This is where you can manipulate Provider Constructors to config your app.");
+
 	//config providers before run
 	AppPvdr2Provider.addSprinkles();
 }]);
@@ -93,6 +125,9 @@ app.run(['AppPvdr1','AppPvdr2', 'AppService', function(AppPvdr1, AppPvdr2, AppSe
 	console.log("-", AppPvdr1);
 	console.log("-", AppPvdr2);
 	console.log("-", AppService);
+
+	addItem('#flow', "<b>APP: run</b>");
+	addItem('#flow', "- This is where you can access Providers Members, Services and Factories.");
 }]);
 
 //controller
@@ -104,7 +139,17 @@ app.controller('AppCtrl',
 	console.log("-", AppPvdr1);
 	console.log("-", AppPvdr2);
 	console.log("-", AppFactory);
+
+	addItem('#flow', "<b>APP: controller</b>");
+	addItem('#flow', "- This is where you put your business logic for the app, with access to Providers, Services and Factories.");
 }]);
+
+//utils function
+function addItem(target, content) {
+	var $target = $(target);
+	var $newItem = $('<li>').html(content);
+	$target.append($newItem);
+}
 </script>
 </body>
 </html>

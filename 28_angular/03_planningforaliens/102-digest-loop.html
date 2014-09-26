@@ -18,6 +18,8 @@
 		<dd>Most of your Angualr code is wrapped inside an $apply call which will call $digest, this is how the myBind directive's $watch function handler is called the 1st time.</dd></div>
 		<div><dt><sup>2</sup></dt>
 		<dd>Any code outside of Angualr (e.g. setTimeout) is not inside $apply, hence not knowing about the updated model and the $watch function handler is never called.</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>$watch can be unbind by calling the returned function from the binding call: scope.$watch()</dd></div>
 	</div>
 <script>
 	//create app module
@@ -50,9 +52,11 @@
 			//will bind the directive to the DOM element
 			link: function(scope, element, attrs){
 				var expression = attrs.myBind;
-				scope.$watch(expression, function(result){
+				var listener = scope.$watch(expression, function(result){
 					//element is a jqLite obj
 					element.html(result);
+					//unbind $watch after called, like bind-once
+					//listener();
 				});
 			}
 		};
