@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<link rel="stylesheet" href="lib/403-comments.css">
+</head>
+<body>
+<!-- TITLE -->
+<h1>Comment System</h1>
+<h2>Authentication and Sharing Data<sup>1</sup></h2>
+<!-- APP -->
+<div ng-app="angular-demo">
+	<div class="main">
+		<div class="header"></div>
+		<div ng-view></div>
+	</div>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b>Factory service for data sharing across scopes:</b> returned factory object contains methods and data objects, methods can update data objects directly with $rootScope and $apply, can also broadcast message from $rootScope</dd></div>
+</div>
+<!-- JS -->
+<script src="../angular-1.2.9/angular.js"></script>
+<script src="../angular-1.2.9/angular-route.js"></script>
+<script src="../angular-1.2.9/angular-sanitize.js"></script>
+<script src="lib/markdown.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+<script src="lib/403-comments.js"></script>
+</body>
+</html>

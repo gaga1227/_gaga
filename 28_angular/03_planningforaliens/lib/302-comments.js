@@ -4,7 +4,8 @@
 	var app = angular.module('angular-demo', ['ngSanitize', 'firebase']);
 
 	//register app constants
-	app.constant('FIREBASE_URL', 'https://angular-escape-plan.firebaseio.com');
+	//firebase account gaga1227@gmail.com
+	app.constant('FIREBASE_URL', 'https://angular-escape-plan.firebaseio.com/comments');
 
 	//register directive to module
 	app.directive('comments', function(){
