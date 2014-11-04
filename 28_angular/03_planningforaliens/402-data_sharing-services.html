@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style type="text/css">
+	.scope {
+		outline: 2px solid rgba(255,0,0,0.25);
+	}
+	.scope h3,
+	.scope h4 {
+		margin: 0.5em 0;
+	}
+	.scope h4 b {
+		opacity: 0.6;
+	}
+	.scope h4 span {
+		color: red;
+	}
+	.scope h3 {
+		font-size: 32px;
+	}
+	.scope .scope h3 {
+		font-size: 26px;
+	}
+	.scope .scope .scope h3 {
+		font-size: 20px;
+	}
+	.scope .scope .scope .scope h3 {
+		font-size: 16px;
+	}
+	.controls {
+		margin: 0.5em 0;
+	}
+</style>
+</head>
+<body>
+<!-- TITLE -->
+<h1>Sharing Data Between Scopes</h1>
+<h2>Using Services<sup>1</sup></h2>
+<!-- APP -->
+<div ng-app="datasharing-demo" class="scope">
+	<!-- 1 -->
+	<div class="scope" ng-controller="AppCtrl1">
+		<h3>Scope 1</h3>
+		<h4><b>Shared Data: </b> <span ng-bind="sharedData.data"></span></h4>
+		<div class="controls">
+			<input ng-model="inputMsg">
+			<button ng-click="set()">Set</button>
+			<button ng-click="reset()" ng-disabled="!sharedData.data">Reset</button>
+		</div>
+	</div><!-- /1 -->
+	<!-- 2 -->
+	<div class="scope" ng-controller="AppCtrl2">
+		<h3>Scope 2</h3>
+		<h4><b>Shared Data: </b> <span ng-bind="sharedData.data"></span></h4>
+		<div class="controls">
+			<input ng-model="inputMsg">
+			<button ng-click="set()">Set</button>
+			<button ng-click="reset()" ng-disabled="!sharedData.data">Reset</button>
+		</div>
+	</div><!-- /2 -->
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b>Services: </b> using services (Service, Factory, Provider) as shared-data entities with their singleton nature and share data via D.I. across different scopes.</dd></div>
+</div>
+<!-- JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('datasharing-demo', []);
+
+//controllers
+app.controller('AppCtrl1', ['$scope', 'SharedDataFactory', function($scope, SharedDataFactory){
+	//model
+	$scope.sharedData = SharedDataFactory;
+	$scope.inputMsg = 'data from scope 1';
+	//methods
+	$scope.reset = function(){
+		SharedDataFactory.reset();
+	};
+	$scope.set = function(data){
+		SharedDataFactory.setData($scope.inputMsg);
+	};
+}]);
+app.controller('AppCtrl2', ['$scope', 'SharedDataFactory', function($scope, SharedDataFactory){
+	//model
+	$scope.sharedData = SharedDataFactory;
+	$scope.inputMsg = 'data from scope 2';
+	//methods
+	$scope.reset = function(){
+		SharedDataFactory.reset();
+	};
+	$scope.set = function(data){
+		SharedDataFactory.setData($scope.inputMsg);
+	};
+}]);
+
+//services
+app.factory('SharedDataFactory', [function(){
+	return {
+		getData: function() {
+			return this.data;
+		},
+		setData: function(data) {
+			this.data = data;
+		},
+		reset: function() {
+			this.setData(null);
+		},
+		data: null
+	};
+}]);
+</script>
+</body>
+</html>
