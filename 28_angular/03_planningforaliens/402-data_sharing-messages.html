@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style type="text/css">
+	.scope {
+		outline: 2px solid rgba(255,0,0,0.25);
+	}
+	.scope h3,
+	.scope h4 {
+		margin: 0.5em 0;
+	}
+	.scope h4 b {
+		opacity: 0.6;
+	}
+	.scope h4 span {
+		color: red;
+	}
+	.scope h3 {
+		font-size: 32px;
+	}
+	.scope .scope h3 {
+		font-size: 26px;
+	}
+	.scope .scope .scope h3 {
+		font-size: 20px;
+	}
+	.scope .scope .scope .scope h3 {
+		font-size: 16px;
+	}
+	.controls {
+		margin: 0.5em 0;
+	}
+</style>
+</head>
+<body>
+<!-- TITLE -->
+<h1>Sharing Data Between Scopes</h1>
+<h2>$broadcast<sup>1</sup>, $emit<sup>2</sup>, $on<sup>3</sup></h2>
+<!-- APP -->
+<div ng-app="datasharing-demo" class="scope">
+	<h3>RootScope</h3>
+	<h4><b>Message: </b> <span ng-bind="rootMsg"></span></h4>
+	<div class="controls">
+		<input ng-model="inputMsg">
+		<button ng-click="broadcast()">$broadcast</button>
+	</div>
+	<!-- PARENT -->
+	<div class="scope" ng-controller="ParentCtrl">
+		<h3>Parent Scope</h3>
+		<h4><b>Message: </b> <span ng-bind="parentMsg"></span></h4>
+		<div class="controls">
+			<input ng-model="inputMsg">
+			<button ng-click="broadcast()">$broadcast</button>
+			<button ng-click="emit()">$emit</button>
+		</div>
+		<!-- SIBLING -->
+		<div class="scope" ng-controller="SiblingCtrl">
+			<h3>Sibling Scope</h3>
+			<h4><b>Message: </b> <span ng-bind="siblingMsg"></span></h4>
+			<div class="controls">
+				<input ng-model="inputMsg">
+				<button ng-click="emit()">$emit</button>
+			</div>
+		</div><!-- /SIBLING -->
+		<!-- SELF -->
+		<div class="scope" ng-controller="SelfCtrl">
+			<h3>Self Scope</h3>
+			<h4><b>Message: </b> <span ng-bind="selfMsg"></span></h4>
+			<div class="controls">
+				<input ng-model="inputMsg">
+				<button ng-click="broadcast()">$broadcast</button>
+				<button ng-click="emit()">$emit</button>
+			</div>
+			<!-- CHILD -->
+			<div class="scope" ng-controller="ChildCtrl">
+				<h3>Child Scope</h3>
+				<h4><b>Message: </b> <span ng-bind="childMsg"></span></h4>
+				<div class="controls">
+					<input ng-model="inputMsg">
+					<button ng-click="emit()">$emit</button>
+				</div>
+			</div><!-- /CHILD -->
+		</div><!-- /SELF -->
+	</div><!-- /PARENT -->
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b>$broadcast</b> sends messages to child scopes</dd></div>
+	<div><dt><sup>2</sup></dt>
+	<dd><b>$emit</b> sends messages to parent scopes</dd></div>
+	<div><dt><sup>3</sup></dt>
+	<dd><b>$on</b> registers messages event handlers</dd></div>
+	<div><dt><sup>4</sup></dt>
+	<dd><b>angular.element(ele).scope();</b> returns the scope obejct of DOM element: ele, outside of Angular</dd></div>
+</div>
+<!-- JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('datasharing-demo', []);
+//run
+app.run(['$rootScope', function($rootScope){
+	//model
+	$rootScope.inputMsg = 'Call from Root';
+	//method
+	$rootScope.broadcast = function(){
+		broadcast($rootScope, 'to-child', $rootScope.inputMsg);
+	};
+	//handler
+	$rootScope.$on('to-parent', function(e, data){
+		msgHandler($rootScope, 'rootMsg', e, data);
+	});
+}]);
+//controllers
+app.controller('ParentCtrl', ['$scope', function($scope){
+	//model
+	$scope.inputMsg = 'Call from Parent';
+	//method
+	$scope.broadcast = function(){
+		broadcast($scope, 'to-child', $scope.inputMsg);
+	};
+	$scope.emit = function(){
+		emit($scope, 'to-parent', $scope.inputMsg);
+	};
+	//handler
+	$scope.$on('to-child', function(e, data){
+		msgHandler($scope, 'parentMsg', e, data);
+	});
+	$scope.$on('to-parent', function(e, data){
+		msgHandler($scope, 'parentMsg', e, data);
+	});
+}]);
+app.controller('SelfCtrl', ['$scope', function($scope){
+	//model
+	$scope.inputMsg = 'Call from Self';
+	//method
+	$scope.broadcast = function(){
+		broadcast($scope, 'to-child', $scope.inputMsg);
+	};
+	$scope.emit = function(){
+		emit($scope, 'to-parent', $scope.inputMsg);
+	};
+	//handler
+	$scope.$on('to-child', function(e, data){
+		msgHandler($scope, 'selfMsg', e, data);
+	});
+	$scope.$on('to-parent', function(e, data){
+		msgHandler($scope, 'selfMsg', e, data);
+	});
+}]);
+app.controller('ChildCtrl', ['$scope', function($scope){
+	//model
+	$scope.inputMsg = 'Call from Child';
+	//method
+	$scope.emit = function(){
+		emit($scope, 'to-parent', $scope.inputMsg);
+	};
+	//handler
+	$scope.$on('to-child', function(e, data){
+		msgHandler($scope, 'childMsg', e, data);
+	});
+}]);
+app.controller('SiblingCtrl', ['$scope', function($scope){
+	//model
+	$scope.inputMsg = 'Call from Sibling';
+	//method
+	$scope.emit = function(){
+		emit($scope, 'to-parent', $scope.inputMsg);
+	};
+	//handler
+	$scope.$on('to-child', function(e, data){
+		msgHandler($scope, 'siblingMsg', e, data);
+	});
+}]);
+
+//shared utils
+function emit(scope, evtname, msg){
+	reset();
+	scope.$emit(evtname, msg);
+}
+function broadcast(scope, evtname, msg){
+	reset();
+	scope.$broadcast(evtname, msg);
+}
+function msgHandler(scope, prop, evt, data){
+	if (evt.targetScope == evt.currentScope ) return;
+	scope[prop] = data;
+	console.log(evt);
+}
+function reset(){
+	var $scopes = $('.ng-scope');
+	$scopes.each(function(idx, ele){
+		var scope = angular.element(ele).scope();
+		if (scope['rootMsg'] != undefined) scope['rootMsg'] = '';
+		if (scope['parentMsg'] != undefined) scope['parentMsg'] = '';
+		if (scope['selfMsg'] != undefined) scope['selfMsg'] = '';
+		if (scope['siblingMsg'] != undefined) scope['siblingMsg'] = '';
+		if (scope['childMsg'] != undefined) scope['childMsg'] = '';
+	});
+}
+</script>
+</body>
+</html>
