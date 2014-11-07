@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<style type="text/css">
+</style>
+</head>
+<body>
+<!-- TITLE -->
+<h1>Data Binding Options</h1>
+<h2>For isolated directives</h2>
+<!-- APP -->
+<div ng-app="databinding-demo" class="scope">
+	<say-hello
+		text="Text Binding, {{text1}}, and {{text2}}"
+		one-way="oneWay"
+		two-way="twoWay">
+	</say-hello>
+</div>
+<!-- NOTES -->
+<div class="footnotes">
+	<div><dt><sup>1</sup></dt>
+	<dd><b></b> </dd></div>
+</div>
+<!-- JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../angular-1.2.9/angular.js"></script>
+<script>
+//app def
+var app = angular.module('databinding-demo', []);
+
+//run
+app.run(['$rootScope', function($rootScope){
+	$rootScope.oneWay = 'One-way binding';
+	$rootScope.twoWay = { value: "Two-way binding", type: "This is a JS obj." };
+	$rootScope.text1 = 'parsed value 1';
+	$rootScope.text2 = 'parsed value 2';
+}]);
+
+//directives
+app.directive('sayHello', [function(){
+	return {
+		restrict: 'AE',
+		//define a value of scope makes an isolated scope
+		scope: {
+			textBind: 	'@text', //text bind
+			oneWayBind:	'&oneWay', //1-way binding
+			twoWayBind:	'=twoWay' //2-way binding
+		},
+		replace: true,
+		template: '\
+			<div class="sayHello">\
+				<p><b>"@" Text binding:</b> {{textBind}}</p>\
+				<p><b>"&" One-way binding:</b> {{oneWayBind()}}</p>\
+				<p><b>"=" Two-way binding:</b> {{twoWayBind}}</p>\
+			</div>\
+			'
+	}
+}]);
+
+
+
+</script>
+</body>
+</html>

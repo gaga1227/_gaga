@@ -6,7 +6,7 @@
 <style>
 </style>
 <script src="../angular-1.2.9/angular.js"></script>
-<script>	
+<script>
 	/* -------------------------------------------------------------------------- */
 	/* main module */
 	angular.module('myApp',[])
@@ -14,10 +14,10 @@
 		//ddo contains methods and properties to define and configure a directive
 		var ddo = {
 			restrict: 	'A',
-			replace:	true, 
+			replace:	true,
 			scope: {
-				twoWayBind:	'=', //2-way binding 
-				oneWayBind:	'&', //1-way binding 
+				twoWayBind:	'=', //2-way binding
+				oneWayBind:	'&', //1-way binding
 				textBind: 	'@', //text bind
 			},
 			template: '\
@@ -45,7 +45,7 @@
 			<b>Root Scope</b><br>
 			<input type="text" ng-model="theirUrl" placeholder="$rootScope.theirUrl">
 		</p>
-		<p 
+		<p
 			my-directive
 			one-way-bind="theirUrl"
 			two-way-bind="theirUrl"
@@ -57,7 +57,7 @@
 		<div><dt><sup>&amp;</sup></dt>
 		<dd>One-way bindings are prefixed with & and they can be of any type. They are going be defined as getter functions (e.g. oneWayBind()) in the directive scope.</dd></div>
 		<div><dt><sup>=</sup></dt>
-		<dd>Two-way bindings are prefixed by = and can be of any type. These work like actual bindings, any changes to a bound value will be reflected in everywhere.</dd></div>
+		<dd>Two-way bindings are prefixed by = and can be of any type. These work like actual bindings, any changes to a bound value will be reflected everywhere.</dd></div>
 	</div>
 </body>
 </html>
