@@ -13,16 +13,24 @@
 <h2>For isolated directives</h2>
 <!-- APP -->
 <div ng-app="databinding-demo" class="scope">
+	<h4>Text and Two-way binding:</h4>
 	<say-hello
 		text="Text Binding, {{text1}}, and {{text2}}"
 		one-way="oneWay"
 		two-way="twoWay">
 	</say-hello>
+
+	<h4>One-way binding:</h4>
+	<product sale-price="price - discount"></product>
 </div>
 <!-- NOTES -->
 <div class="footnotes">
 	<div><dt><sup>1</sup></dt>
-	<dd><b></b> </dd></div>
+	<dd><b>"@" Text binding</b> returns parsed value using $interpolate from the nearest parent scope, so the expression won't be parsed again against the current scope.</dd></div>
+	<div><dt><sup>2</sup></dt>
+	<dd><b>"&" One-way binding</b> expression in attribute value is $parsed against parent scope and retuns as an getter function to be called in the local(directive) scope with the option to pass in local data.</dd></div>
+	<div><dt><sup>3</sup></dt>
+	<dd><b>"=" Two-way binding</b> sets a $watch on the current scope member, updates can affect parent members.</dd></div>
 </div>
 <!-- JS -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -33,10 +41,11 @@ var app = angular.module('databinding-demo', []);
 
 //run
 app.run(['$rootScope', function($rootScope){
+	$rootScope.text1 = 'parsed value 1 (root)';
+	$rootScope.text2 = 'parsed value 2 (root)';
 	$rootScope.oneWay = 'One-way binding';
-	$rootScope.twoWay = { value: "Two-way binding", type: "This is a JS obj." };
-	$rootScope.text1 = 'parsed value 1';
-	$rootScope.text2 = 'parsed value 2';
+	$rootScope.twoWay = { value: "Two-way binding (root)", type: "This is a JS obj (root)." };
+	$rootScope.discount = 2;
 }]);
 
 //directives
@@ -49,19 +58,48 @@ app.directive('sayHello', [function(){
 			oneWayBind:	'&oneWay', //1-way binding
 			twoWayBind:	'=twoWay' //2-way binding
 		},
+		link: function (scope, element) {
+			//text-bind expression won't be parsed again against the current scope.
+			//updated values below won't be shown'
+			scope.text1 = 'parsed value 1 (directive)';
+			scope.text2 = 'parsed value 2 (directive)';
+		},
+		controller: ['$scope', function($scope) {
+			//two way bind sets a $watch on the current scope member(twoWayBind)
+			//updates can affect parent members(twoWay)
+			$scope.twoWayBind = { value: "Two-way binding (directive)", type: "This is a JS obj (directive)." };
+		}],
 		replace: true,
 		template: '\
 			<div class="sayHello">\
-				<p><b>"@" Text binding:</b> {{textBind}}</p>\
-				<p><b>"&" One-way binding:</b> {{oneWayBind()}}</p>\
-				<p><b>"=" Two-way binding:</b> {{twoWayBind}}</p>\
+				<p><b>"@" Text binding<sup>1</sup>:</b> {{textBind}}</p>\
+				<p><b>"&" One-way binding<sup>2</sup>:</b> {{oneWayBind()}}</p>\
+				<p><b>"=" Two-way binding<sup>3</sup>:</b> {{twoWayBind}}</p>\
 			</div>\
 			'
 	}
 }]);
 
-
-
+app.directive('product', [function(){
+	return {
+		restrict: 'AE',
+		//define a value of scope makes an isolated scope
+		scope: {
+			salePrice: '&',
+		},
+		link: function (scope, element) {
+			scope.product = {
+				price: 10
+			};
+		},
+		replace: true,
+		template: '\
+			<div class="product">\
+				<p><b>Your sale price is:</b> ${{salePrice({price: product.price})}}, <b>RRP:</b> ${{product.price}}</p>\
+			</div>\
+			'
+	}
+}]);
 </script>
 </body>
 </html>
