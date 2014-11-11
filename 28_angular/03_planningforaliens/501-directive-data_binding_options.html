@@ -28,7 +28,7 @@
 	<div><dt><sup>1</sup></dt>
 	<dd><b>"@" Text binding:</b> returns parsed value using $interpolate from the nearest parent scope, so the expression won't be parsed again against the current scope.</dd></div>
 	<div><dt><sup>2</sup></dt>
-	<dd><b>"&" Expression binding:</b> expression in attribute value is evaluated against parent scope and retuns as a function to be called in the local(directive) scope, with the option to pass in local data. Depending on the expression, external functions (from parent scope) might or might not get called.</dd></div>
+	<dd><b>"&" Expression binding:</b> expression in attribute value is evaluated against parent scope and exposes a function to be called in the local(directive) scope, with the option to pass in local data. Depending on the expression, external functions (from parent scope) might or might not get called.</dd></div>
 	<div><dt><sup>3</sup></dt>
 	<dd><b>"=" Two-way binding:</b> sets a $watch on the current scope member, updates can affect parent members.</dd></div>
 </div>
