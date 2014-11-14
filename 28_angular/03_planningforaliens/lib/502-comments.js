@@ -31,7 +31,7 @@
 						return;
 					}
 					//add to model via factory method
-					Comments.post($scope.commentMd);
+					Comments.post($scope.commentMd, $scope.UserAuth.user);
 					//reset textarea view model
 					$scope.commentMd = '';
 				};
@@ -48,6 +48,7 @@
 		}
 	});
 
+	//pending comments directive
 	app.directive('pending', [function(){
 		return {
 			restrict: 'AE',
@@ -94,12 +95,74 @@
 		}
 	}]);
 
-	//services
+	//karma directive
+	app.directive('karma', ['FirebaseRef', '$firebase', function(FirebaseRef, $firebase){
+		return {
+			restrict: 'A',
+			templateUrl: 'partial/502-karma.html',
+			transclude: true,
+			scope: {
+				voter: '=',
+				poster: '=',
+				object: '='
+			},
+			link: function(scope, elem, attrs, controller, transclude){
+				//get firebase ref for the passed in comment object
+				var ObjectRef = FirebaseRef.child(scope.object.$id);
+				//create children to the passed in comment object on firebase
+				var upvotes = $firebase(ObjectRef.child('upvotes')).$asArray();
+				var downvotes = $firebase(ObjectRef.child('downvotes')).$asArray();
+
+				//scope model
+				scope.points = 0;
+				$firebase(ObjectRef).$asObject().$loaded(function(){
+					scope.points = upvotes.length - downvotes.length;
+				});
+
+				//scope methods
+				scope.canVote = function(){
+					if (!scope.voter) return false;
+					for (var i=0; i<upvotes.length; i++) {
+						var voted = upvotes[i];
+						if (voted.$value === scope.voter.id) {
+							return false;
+						}
+					}
+					for (var i=0; i<downvotes.length; i++) {
+						var voted = downvotes[i];
+						if (voted.$value === scope.voter.id) {
+							return false;
+						}
+					}
+					return true;
+				};
+				scope.upVote = function(){
+					if (scope.canVote()) {
+						upvotes.$add(scope.voter.id);
+					}
+				};
+				scope.downVote = function(){
+					if (scope.canVote()) {
+						downvotes.$add(scope.voter.id);
+					}
+				};
+
+				//transclude into comment elem (parent) with its scope
+				transclude(elem.scope(), function(clone){
+					//clone is the original content within comment
+					elem.append(clone);
+				});
+			}
+		}
+	}]);
+
+	//service - firebase ref
 	app.factory('FirebaseRef', ['FIREBASE_URL', function(FIREBASE_URL){
 		var ref = new Firebase(FIREBASE_URL);
 		return ref;
 	}]);
 
+	//service - comments data and methods
 	app.factory('Comments', ['$firebase', 'FirebaseRef', function($firebase, FirebaseRef){
 		//firebase
 		var sync = $firebase(FirebaseRef);
@@ -107,14 +170,21 @@
 		var comments = sync.$asArray();
 		//methods
 		//adding methods to obj won't be synced over to firebase
-		comments.post = function(md){
+		comments.post = function(md, user){
 			//add to model
-			comments.$add({ "md": md });
+			comments.$add({
+				"md": md,
+				"user": {
+					"id": user.id
+				}
+			});
+			console.log(user);
 		};
 		//return obj
 		return comments;
 	}]);
 
+	//service - firebase simple login
 	app.factory('UserAuth', ['FirebaseRef', '$rootScope', function(FirebaseRef, $rootScope){
 		//auth client
 		var authClient = new FirebaseSimpleLogin(FirebaseRef, function(error, user){

@@ -1,5 +1,7 @@
 <!-- COMMENTS LIST -->
-<div class="comment" ng-repeat="comment in loaded">
+<div class="comment"
+	ng-repeat="comment in loaded"
+	karma voter="UserAuth.user" poster="comment.user" object="comment">
 	<p ng-bind-html="comment.md | mdToHtml"></p>
 </div>
 <!-- PENDING COMMENTS -->

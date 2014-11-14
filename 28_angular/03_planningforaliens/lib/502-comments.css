@@ -21,14 +21,18 @@ comments.ng-scope {
   padding: 0 1rem;
   overflow: hidden;
 }
+.comment.ng-isolate-scope {
+  background-color: #fff;
+  background-image:repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,0,0,0.02) 20px, rgba(255,0,0,0.02) 40px);
+}
+.comment.ng-isolate-scope:nth-of-type(even) {
+  background-color: #f8f8f8;
+}
 .comment p {
   font-weight: 400;
   font-style: normal;
   line-height: 1.5em;
   margin: 1rem 0;
-}
-.comment:nth-of-type(even) {
-  background: #f8f8f8;
 }
 
 .post {
@@ -82,3 +86,27 @@ button {
   text-align: center;
   font-weight: bold;
 }
+
+.karma {
+  overflow: hidden;
+}
+.karma p {
+  margin-bottom: 0;
+  width: auto;
+  font-size: 0.8em;
+}
+.karma a {
+  margin-left: 0.5em;
+  text-decoration: none;
+}
+.karma a:hover{
+  text-decoration: underline;
+}
+.karma .msg {
+  float: left;
+}
+.karma .voting {
+  float: right;
+  text-align: right;
+}
+
