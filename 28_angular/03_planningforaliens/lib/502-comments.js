@@ -60,45 +60,45 @@
 				//this is just a alias for refresh from parent
 				reload: '&update'
 			},
-			link: function(scope){
+			controller: ['$scope', function($scope){
 				//private var to track start: the full list length on initial start
 				var start;
 
 				//view model
-				scope.pending = 0;
+				$scope.pending = 0;
 
 				//on start: firebase data 'Comments' loaded
-				scope.data.$loaded(function(){
+				$scope.data.$loaded(function(){
 					//make start the full list length on start: data load
-					start = scope.data.length;
+					start = $scope.data.length;
 					//call parent scope's exposed function through expression binding
 					//pass in full list data, to display the full list, on start: data load
-					scope.reload({data: scope.data.slice(0)});
+					$scope.reload({data: $scope.data.slice(0)});
 				});
 
 				//watch for comments list data updates
-				scope.$watchCollection('data', function(){
+				$scope.$watchCollection('data', function(){
 					//updates 'pending' view model: unshown comments count
 					//this assumes comments can NOT be removed
-					scope.pending = scope.data.length - start;
+					$scope.pending = $scope.data.length - start;
 				});
 
 				//upon click, show all comments
-				scope.update = function(){
+				$scope.update = function(){
 					//call parent scope's exposed function through expression binding
 					//display the latest full list
-					scope.reload({data: scope.data.slice(0)});
+					$scope.reload({data: $scope.data.slice(0)});
 					//reset 'pending' view model to nothing is unshown
-					scope.pending = 0;
+					$scope.pending = 0;
 				};
-			}
+			}]
 		}
 	}]);
 
 	//karma directive
 	app.directive('karma', ['FirebaseRef', '$firebase', function(FirebaseRef, $firebase){
 		return {
-			restrict: 'A',
+			restrict: 'AE',
 			templateUrl: 'partial/502-karma.html',
 			transclude: true,
 			scope: {
@@ -106,47 +106,48 @@
 				poster: '=',
 				object: '='
 			},
-			link: function(scope, elem, attrs, controller, transclude){
+			controller: ['$scope', function($scope){
 				//get firebase ref for the passed in comment object
-				var ObjectRef = FirebaseRef.child(scope.object.$id);
+				var ObjectRef = FirebaseRef.child($scope.object.$id);
 				//create children to the passed in comment object on firebase
 				var upvotes = $firebase(ObjectRef.child('upvotes')).$asArray();
 				var downvotes = $firebase(ObjectRef.child('downvotes')).$asArray();
 
 				//scope model
-				scope.points = 0;
+				$scope.points = 0;
 				$firebase(ObjectRef).$asObject().$loaded(function(){
-					scope.points = upvotes.length - downvotes.length;
+					$scope.points = upvotes.length - downvotes.length;
 				});
 
 				//scope methods
-				scope.canVote = function(){
-					if (!scope.voter) return false;
+				$scope.canVote = function(){
+					if (!$scope.voter) return false;
 					for (var i=0; i<upvotes.length; i++) {
 						var voted = upvotes[i];
-						if (voted.$value === scope.voter.id) {
+						if (voted.$value === $scope.voter.id) {
 							return false;
 						}
 					}
 					for (var i=0; i<downvotes.length; i++) {
 						var voted = downvotes[i];
-						if (voted.$value === scope.voter.id) {
+						if (voted.$value === $scope.voter.id) {
 							return false;
 						}
 					}
 					return true;
 				};
-				scope.upVote = function(){
-					if (scope.canVote()) {
-						upvotes.$add(scope.voter.id);
+				$scope.upVote = function(){
+					if ($scope.canVote()) {
+						upvotes.$add($scope.voter.id);
 					}
 				};
-				scope.downVote = function(){
-					if (scope.canVote()) {
-						downvotes.$add(scope.voter.id);
+				$scope.downVote = function(){
+					if ($scope.canVote()) {
+						downvotes.$add($scope.voter.id);
 					}
 				};
-
+			}],
+			link: function(scope, elem, attrs, controller, transclude){
 				//transclude into comment elem (parent) with its scope
 				transclude(elem.scope(), function(clone){
 					//clone is the original content within comment
@@ -178,7 +179,6 @@
 					"id": user.id
 				}
 			});
-			console.log(user);
 		};
 		//return obj
 		return comments;
