@@ -35,13 +35,12 @@
 					//reset textarea view model
 					$scope.commentMd = '';
 				};
-				//create loaded comments array for display in list
-				$scope.loaded = [];
+				//create display limit for comments array
+				$scope.limit = Comments.length;
 				//refresh fn, to be called by pending directive
 				$scope.refresh = function(data){
-					//update the loaded display list
-					//to list data from pending
-					$scope.loaded = data;
+					//refresh display limit to full comments list
+					$scope.limit = Comments.length;
 				};
 			}],
 			templateUrl: 'partial/502-comments.html'

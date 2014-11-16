@@ -1,6 +1,7 @@
 <!-- COMMENTS LIST -->
 <div class="comment"
-	ng-repeat="comment in loaded"
+	ng-repeat="comment in comments"
+	ng-show="$index < limit"
 	karma voter="UserAuth.user" poster="comment.user" object="comment">
 	<p ng-bind-html="comment.md | mdToHtml"></p>
 </div>
