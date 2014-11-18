@@ -115,7 +115,7 @@
 				//scope model
 				$scope.points = 0;
 				$firebase(ObjectRef).$asObject().$loaded(function(){
-					$scope.points = upvotes.length - downvotes.length;
+					refreshPoint();
 				});
 
 				//scope methods
@@ -137,14 +137,23 @@
 				};
 				$scope.upVote = function(){
 					if ($scope.canVote()) {
-						upvotes.$add($scope.voter.id);
+						upvotes.$add($scope.voter.id).then(function(ref){
+							refreshPoint();
+						});
 					}
 				};
 				$scope.downVote = function(){
 					if ($scope.canVote()) {
-						downvotes.$add($scope.voter.id);
+						downvotes.$add($scope.voter.id).then(function(ref){
+							refreshPoint();
+						});
 					}
 				};
+
+				//utils
+				function refreshPoint(){
+					$scope.points = upvotes.length - downvotes.length;
+				}
 			}],
 			link: function(scope, elem, attrs, controller, transclude){
 				//transclude into comment elem (parent) with its scope
@@ -233,7 +242,7 @@
 		$scope.UserAuth = UserAuth;
 		//monitor service data updates
 		$scope.$watch('UserAuth.user', function(user){
-			console.log('User $watch: ', user);
+			//console.log('User $watch: ', user);
 		});
 	}]);
 
