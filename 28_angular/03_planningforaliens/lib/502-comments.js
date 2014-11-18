@@ -40,6 +40,7 @@
 				//refresh fn, to be called by pending directive
 				$scope.refresh = function(data){
 					//refresh display limit to full comments list
+					//no need to use the passed in data
 					$scope.limit = Comments.length;
 				};
 			}],
@@ -120,7 +121,11 @@
 
 				//scope methods
 				$scope.canVote = function(){
+					//must login to vote
 					if (!$scope.voter) return false;
+					//poster cannot vote
+					if ($scope.poster.id === $scope.voter.id) return false;
+					//voted users cannot vote again
 					for (var i=0; i<upvotes.length; i++) {
 						var voted = upvotes[i];
 						if (voted.$value === $scope.voter.id) {
@@ -133,6 +138,7 @@
 							return false;
 						}
 					}
+					//otherwise can vote
 					return true;
 				};
 				$scope.upVote = function(){
