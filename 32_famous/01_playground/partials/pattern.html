@@ -1,0 +1,23 @@
+<!-- Repo CSS dependencies -->
+<link rel="stylesheet"
+	ng-repeat="file in repo.css"
+	ng-href="{{repo.path}}{{file.path}}{{file.filename}}.css">
+
+<!-- pattern container -->
+<div class="app-pattern">
+	<!-- pattern editor -->
+	<div class="app-pattern-editor" id="app-pattern-editor_{{pattern.id}}">
+		<textarea ng-model="pattern.input" rows="10"></textarea>
+	</div>
+
+	<!-- pattern source -->
+	<div class="app-pattern-source" id="app-pattern-source_{{pattern.id}}" ng-bind="pattern.safeInput"></div>
+
+	<!-- pattern display -->
+	<div class="app-pattern-display" id="app-pattern-display_{{pattern.id}}" ng-bind-html="pattern.safeInput"></div>
+</div>
+
+<!-- Repo JS dependencies -->
+<script
+	ng-repeat="file in repo.js"
+	ng-href="{{repo.path}}{{file.path}}{{file.filename}}.js">

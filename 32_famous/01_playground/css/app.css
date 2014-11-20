@@ -1,0 +1,27 @@
+/* pattern container */
+.app-pattern {
+	width: auto;
+	height: auto;
+	margin: auto;
+	padding: 20px;
+	min-width: 1024px;
+	max-width: 1280px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+/* pattern sections */
+[class^="app-pattern-"] {
+	width: 640px;
+	margin: 0 auto;
+	padding: 20px 0;
+	box-sizing: border-box;
+}
+.app-pattern-display {
+	width: auto;
+}
+.app-pattern-editor textarea {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
