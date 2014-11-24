@@ -11,15 +11,20 @@
 	<meta name="format-detection" content="telephone=no">
 <!-- CSS:NG -->
 	<link rel="stylesheet" href="vendor/angular/angular-csp.css">
-<!-- CSS:FAMOUS -->
+<!-- CSS:FAMOUS
 	<link rel="stylesheet" href="vendor/famous/famous.css">
 	<link rel="stylesheet" href="vendor/famous-angular/famous-angular.css">
+ -->
 <!-- CSS:APP -->
 	<link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 <!-- VIEW -->
 	<div ui-view></div>
+<!-- JS:LIB -->
+	<script src="vendor/modernizr-2.8.3.min.js"></script>
+	<script src="vendor/jquery-1.8.3.min.js"></script>
+	<script src="vendor/ace/ace.js"></script>
 <!-- JS:NG -->
 	<script src="vendor/angular/angular.js"></script>
 	<script src="vendor/angular/angular-animate.js"></script>
@@ -28,15 +33,17 @@
 	<script src="vendor/angular/angular-sanitize.js"></script>
 	<script src="vendor/angular/angular-resource.js"></script>
 	<script src="vendor/angular-ui/angular-ui-router.js"></script>
-<!-- JS:FAMOUS -->
+	<script src="vendor/angular-ui/angular-ui-ace.js"></script>
+	<script src="vendor/angular-bindonce/bindonce.js"></script>
+<!-- JS:FAMOUS
 	<script src="vendor/famous/famous-global.js"></script>
 	<script src="vendor/famous-angular/famous-angular.js"></script>
-<!-- JS:UTILS -->
+ -->
+<!-- JS:UTILS
 	<script src="vendor/underscore.js"></script>
+ -->
 <!-- JS:APP -->
 	<script src="js/playground.js"></script>
 	<script src="js/pattern-ctrl.js"></script>
-	<script src="js/main-ctrl.js"></script>
-	<script src="js/test-ctrl.js"></script>
 </body>
 </html>

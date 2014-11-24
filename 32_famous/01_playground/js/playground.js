@@ -1,10 +1,9 @@
-'use strict';
-
 angular.module('playground',
-	['ngAnimate', 'ngCookies',
-		'ngTouch', 'ngSanitize',
-		'ngResource', 'ui.router',
-		'famous.angular' ])
+	[
+		'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource',
+		'ui.router', 'ui.ace',
+		'pasvaz.bindonce'
+	])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		$stateProvider
 			.state('home', {
@@ -17,7 +16,6 @@ angular.module('playground',
 				templateUrl: 'partials/jade.html',
 				controller: 'MainCtrl'
 			});
-
 		$urlRouterProvider.otherwise('/');
 	})
 ;

@@ -20,8 +20,6 @@
 .app-pattern-display {
 	width: auto;
 }
-.app-pattern-editor textarea {
-	display: block;
-	width: 100%;
-	box-sizing: border-box;
+.app-pattern-editor [ui-ace] {
+	height: 200px;
 }
