@@ -1,0 +1,64 @@
+body {
+	margin:20px;
+	font-family:Arial, Helvetica, sans-serif; }
+
+/* table */
+table { width:100%; border-top:1px solid #ccc; border-right:1px solid #ccc;}
+th, td { padding:0.5em; border-left:1px solid #ccc; border-bottom:1px solid #ccc; text-align:left; }
+th { font-weight:bold; }
+
+/* page title */
+h1 {
+	margin-bottom: 1em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #ddd
+}
+
+/* footnotes */
+.footnotes {
+	margin:4em 0 0 0; padding:1em 0;
+	color:#888; border-top:1px solid #ddd;
+	font-size:0.8em; }
+
+.footnotes dt,
+.footnotes dd { display:inline-block; vertical-align:text-top; }
+.footnotes dt { font-weight:bold; }
+.footnotes dd { width:90%; margin:0 0 1em 1em; }
+
+/* ng-scope */
+.ng-scope {
+	padding:0.5em;
+	background-color:rgba(0,0,0,0.05); }
+/* ng-isolate-scope */
+.ng-isolate-scope {
+	padding:0.5em;
+	background-color:rgba(0,0,0,0.05);
+	background-image:repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,0,0,0.05) 20px, rgba(255,0,0,0.05) 40px); }
+html.ng-scope,
+html.ng-isolate-scope {
+	padding:0;
+	background-color:transparent;
+	background-image:none; }
+
+/* block */
+.block { display:block; margin:1em 0; }
+
+/* directive */
+.directive {
+	position:relative; margin:1em 0; border:1px solid #ccc; }
+	.directive:before {
+		content:'directive';
+		display:block; position:absolute; top:-1.2em; left:0;
+		color:#ccc; font-size:12px; }
+
+/* helpers */
+.cfix {
+	*zoom: 1;
+}
+.cfix:before, .cfix:after {
+	content: " ";
+	display: table;
+}
+.cfix:after {
+	clear: both;
+}
