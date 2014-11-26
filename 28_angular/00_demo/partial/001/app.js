@@ -12,7 +12,7 @@ app.directive('sbTimer', function(){
 		controller: ['$scope', function($scope){
 
 		}],
-		link: function(scope, elem, attrs, controller, transclude){
+		link: function(scope, elem, attrs, controller){
 
 		}
 	}
@@ -24,10 +24,7 @@ app.directive('sbTimer', function(){
 app.directive('sbRipple', function(){
 	return {
 		restrict: 'A',
-		controller: ['$scope', function($scope){
-
-		}],
-		link: function(scope, elem, attrs, controller, transclude){
+		link: function(scope, elem, attrs, controller){
 			elem.on('click', function(e){
 				//cleanup
 				var oldRippleContainer = elem[0].querySelector('.ui-ripple-container');
@@ -64,6 +61,47 @@ app.directive('sbRipple', function(){
 					rippleContainer.remove();
 				});
 			});
+		}
+	}
+});
+
+// Directive - sb-currency
+// -------------------------------------------------------------------------------------------
+
+app.directive('sbCurrency', function(){
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		controller: ['$scope', function($scope){
+
+		}],
+		link: function(scope, elem, attrs, ngModelCtrl){
+			//console.log(ngModelCtrl, attrs);
+
+			//get directive params
+			var symbol = attrs.sbCurrencySymbol || '';
+
+			//main fn
+			function addPrefix(modelValue) {
+				modelValue += '';
+				if (modelValue) {
+					var viewValue = symbol + modelValue;
+					return viewValue;
+				} else {
+					return symbol;
+				}
+			}
+			function removePrefix(viewValue) {
+				if(viewValue && viewValue.indexOf(symbol) !== -1 && viewValue.length > symbol.length) {
+					var modelValue = viewValue.replace(symbol, '');
+					return parseInt(modelValue, 10);
+				} else {
+					return 0;
+				}
+			}
+
+			ngModelCtrl.$formatters.push(addPrefix);
+			ngModelCtrl.$parsers.push(removePrefix);
 		}
 	}
 });

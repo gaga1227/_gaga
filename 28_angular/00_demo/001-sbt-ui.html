@@ -66,6 +66,7 @@
 				<span class="text-right fluc1">Fluc 1</span>
 				<span class="text-right win">Win | Place</span>
 			</li>
+			<!-- NG-REPEAT -->
 			<li class="tr mkt" ng-repeat="mkt in mkts">
 				<h4 class="title" ng-bind="mkt.title"></h4>
 				<span class="text-right id" ng-bind="mkt.id | uppercase"></span>
@@ -79,15 +80,21 @@
 						<span class="label" ng-bind="mkt.place | number:2"></span>
 					</a>
 				</span>
-			</li>
+			</li><!-- /NG-REPEAT -->
 		</ol>
 	</div>
 
 	<h3>Currency</h3>
 	<div class="sec-demo cfix" ng-controller="FormCtrl">
-		<span ng-bind="deposit | currency:'$'"></span>
-		<input ng-model="deposit | currency:'NZD':0" sb-currentcy>
-		<input ng-model="deposit | currency:'$':0" sb-currentcy>
+		<h4>Model Value: <span ng-bind="deposit"></span></h4>
+		<!-- SB-CURRENCY -->
+		<input
+			ng-model="deposit"
+			sb-currency sb-currency-symbol="NZD">
+		<input
+			ng-model="deposit"
+			sb-currency sb-currency-symbol="$">
+		<!-- /SB-CURRENCY -->
 	</div>
 
 	<div class="footnotes">
