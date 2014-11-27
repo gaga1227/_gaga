@@ -86,15 +86,13 @@
 
 	<h3>Currency</h3>
 	<div class="sec-demo cfix" ng-controller="FormCtrl">
-		<h4>Model Value: <span ng-bind="deposit"></span></h4>
 		<!-- SB-CURRENCY -->
-		<input
-			ng-model="deposit"
-			sb-currency sb-currency-symbol="NZD">
-		<input
-			ng-model="deposit"
-			sb-currency sb-currency-symbol="$">
-		<!-- /SB-CURRENCY -->
+		<fieldset>
+			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="Model Value: " disabled>
+			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="$" sb-currency-rate="1">
+			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="NZD " sb-currency-rate="0.6">
+			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="HKD $" sb-currency-rate="8">
+		</fieldset><!-- /SB-CURRENCY -->
 	</div>
 
 	<div class="footnotes">

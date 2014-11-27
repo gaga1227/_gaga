@@ -1,4 +1,11 @@
 /* override */
+fieldset {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
 .ng-scope,
 .ng-isolate-scope {
 	padding: auto;
@@ -92,6 +99,29 @@ a.card:hover {
 ol.card li,
 ul.card li {
 	list-style: none;
+}
+
+/* input */
+input.text {
+	display: block;
+	width: 50%;
+	max-width: 300px;
+	margin: 10px 0;
+	padding: 10px;
+	border: 1px solid #e2e2e2;
+	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+input.text:focus {
+	border-color: #2a9fd8;
+	outline: none;
+	-webkit-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.40);
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.40);
+}
+input.text[disabled] {
+	font-weight: bold;
 }
 
 /* btn */
