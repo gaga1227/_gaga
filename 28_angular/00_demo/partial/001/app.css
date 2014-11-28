@@ -8,8 +8,13 @@ fieldset {
 
 .ng-scope,
 .ng-isolate-scope {
-	padding: auto;
+	padding: 0;
 	background: none;
+}
+
+/* section */
+.sec {
+	overflow: hidden;
 }
 
 /* sec-demo */
@@ -53,23 +58,23 @@ fieldset {
 
 /* animations */
 @-webkit-keyframes anim-ripple {
-	0% { background-color: rgba(0,0,0,0); }
-	50% { background-color: rgba(0,0,0,0.1); }
-	100% { background-color: rgba(0,0,0,0); width: 600px; height: 600px; }
+	0% { background-color: rgba(255,255,0,0); }
+	50% { background-color: rgba(255,255,0,0.3); }
+	100% { background-color: rgba(255,255,0,0); width: 600px; height: 600px; }
 }
 @keyframes anim-ripple {
-	0% { background-color: rgba(0,0,0,0); }
-	50% { background-color: rgba(0,0,0,0.1); }
-	100% { background-color: rgba(0,0,0,0); width: 600px; height: 600px; }
+	0% { background-color: rgba(255,255,0,0); }
+	50% { background-color: rgba(255,255,0,0.3); }
+	100% { background-color: rgba(255,255,0,0); width: 600px; height: 600px; }
 }
 @-webkit-keyframes anim-ripple-btn {
 	0% { background-color: rgba(0,0,0,0); }
-	50% { background-color: rgba(0,0,0,0.1); }
+	50% { background-color: rgba(0,0,0,0.2); }
 	100% { background-color: rgba(0,0,0,0); width: 200px; height: 200px; }
 }
 @keyframes anim-ripple-btn {
 	0% { background-color: rgba(0,0,0,0); }
-	50% { background-color: rgba(0,0,0,0.1); }
+	50% { background-color: rgba(0,0,0,0.2); }
 	100% { background-color: rgba(0,0,0,0); width: 200px; height: 200px; }
 }
 
@@ -101,11 +106,70 @@ ul.card li {
 	list-style: none;
 }
 
+/* sb-input */
+.inputContainer {
+	display: block;
+	position: relative;
+}
+.inputContainer > .prefix {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	width: auto;
+	height: auto;
+	min-width: 1.2em;
+	max-width: 35%;
+	margin: 0;
+	padding: 4px 6px;
+	color: #fff;
+	background: #b0c1cc;
+	text-align: center;
+	font-size: 12px;
+	line-height: 1.2em;
+	font-weight: bold;
+	border-radius: 5px;
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+.inputContainer > .prefix.active {
+	background: #2ea5dd;
+}
+.inputContainer > .ico[data-icon] {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	width: 26px;
+	height: 26px;
+	margin: 0;
+	color: #b0c1cc;
+	text-align: center;
+	font-size: 24px;
+	line-height: 26px;
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+.inputContainer > .ico[data-icon]:before {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+	text-align: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+.inputContainer > .ico[data-icon].active {
+	color: #2ea5dd;
+}
+
 /* input */
 input.text {
 	display: block;
-	width: 50%;
-	max-width: 300px;
+	width: 100%;
 	margin: 10px 0;
 	padding: 10px;
 	border: 1px solid #e2e2e2;
@@ -216,7 +280,7 @@ a.btn-action:hover {
 
 /* list-mkt */
 .list-mkt {
-	max-width: 500px;
+	max-width: 620px;
 }
 	.list-mkt .title {
 		font-size: 14px;
@@ -298,6 +362,13 @@ a.btn-action:hover {
 			.btn-price > .content p {
 				margin: 0;
 			}
+
+/* form col */
+fieldset.col {
+	width: 300px;
+	margin-right: 20px;
+	float: left;
+}
 
 /* helpers */
 .text-center {

@@ -12,88 +12,105 @@
 <body>
 	<h1>UI Enhancement Demos</h1>
 
-	<h3>Buttons</h3>
-	<div class="sec-demo cfix">
-		<!-- button price -->
-		<a class="card btn-price" href="javascript:void(0);" sb-ripple>
-			<img class="icon-jersey" src="http://i.sbstatic.com.au/silks/aa493b1d01d58d0f634c2e41224f97a3.gif" alt="">
-			<div class="price">1.86</div>
-			<div class="content">
-				<h4 class="title">6. Marty's Order <span class="num">(3)</span></h4>
-				<div class="desc">
-					<p><b>T</b>:L J Tilley</p>
-					<p><b>J</b>:Samantha Clento <b>(a0)</b></p>
-					<p><b>W</b>:59 kg</p>
+	<section class="sec">
+		<h3>Buttons</h3>
+		<p>Custom directive</p>
+		<div class="sec-demo cfix">
+			<!-- button price -->
+			<a class="card btn-price" href="javascript:void(0);" sb-ripple>
+				<img class="icon-jersey" src="http://i.sbstatic.com.au/silks/aa493b1d01d58d0f634c2e41224f97a3.gif" alt="">
+				<div class="price">1.86</div>
+				<div class="content">
+					<h4 class="title">6. Marty's Order <span class="num">(3)</span></h4>
+					<div class="desc">
+						<p><b>T</b>:L J Tilley</p>
+						<p><b>J</b>:Samantha Clento <b>(a0)</b></p>
+						<p><b>W</b>:59 kg</p>
+					</div>
 				</div>
-			</div>
-		</a>
-		<!-- button price -->
-		<a class="card btn-price" href="javascript:void(0);" sb-ripple>
-			<img class="icon-jersey" src="http://i.sbstatic.com.au/silks/febb0ac6f08612b333c61b95e0097813.gif" alt="">
-			<div class="price">1.80</div>
-			<div class="content">
-				<h4 class="title">11. The Governor <span class="num">(1)</span></h4>
-				<div class="desc">
-					<p><b>T</b>:P M Perry</p>
-					<p><b>J</b>:Priscilla Schmi <b>(a0)</b></p>
-					<p><b>W</b>:57.5 kg</p>
+			</a>
+			<!-- button price -->
+			<a class="card btn-price" href="javascript:void(0);" sb-ripple>
+				<img class="icon-jersey" src="http://i.sbstatic.com.au/silks/febb0ac6f08612b333c61b95e0097813.gif" alt="">
+				<div class="price">1.80</div>
+				<div class="content">
+					<h4 class="title">11. The Governor <span class="num">(1)</span></h4>
+					<div class="desc">
+						<p><b>T</b>:P M Perry</p>
+						<p><b>J</b>:Priscilla Schmi <b>(a0)</b></p>
+						<p><b>W</b>:57.5 kg</p>
+					</div>
 				</div>
-			</div>
-		</a>
-	</div>
-	<div class="sec-demo cfix">
-		<!-- button -->
-		<a class="btn btn-action btn-lrg" href="" sb-ripple>
-			<span class="label">Bet Now</span>
-		</a>
-		<!-- button -->
-		<a class="btn btn-std" href="" sb-ripple>
-			<span class="label">Desposit</span>
-		</a>
-		<!-- button -->
-		<a class="btn btn-std btn-sml" href="" sb-ripple>
-			<span class="label">8.00</span>
-		</a>
-	</div>
+			</a>
+		</div>
+		<div class="sec-demo cfix">
+			<!-- button -->
+			<a class="btn btn-action btn-lrg" href="" sb-ripple>
+				<span class="label">Bet Now</span>
+			</a>
+			<!-- button -->
+			<a class="btn btn-std" href="" sb-ripple>
+				<span class="label">Desposit</span>
+			</a>
+			<!-- button -->
+			<a class="btn btn-std btn-sml" href="" sb-ripple>
+				<span class="label">8.00</span>
+			</a>
+		</div>
+	</section>
 
-	<h3>List</h3>
-	<div class="sec-demo cfix" ng-controller="ListCtrl">
-		<ol class="card table list-mkt">
-			<li class="th">
-				<h4 class="title">Title</h4>
-				<span class="text-right id">Form</span>
-				<span class="text-right open">Open</span>
-				<span class="text-right fluc1">Fluc 1</span>
-				<span class="text-right win">Win | Place</span>
-			</li>
-			<!-- NG-REPEAT -->
-			<li class="tr mkt" ng-repeat="mkt in mkts">
-				<h4 class="title" ng-bind="mkt.title"></h4>
-				<span class="text-right id" ng-bind="mkt.id | uppercase"></span>
-				<span class="text-right open" ng-bind="mkt.open | number:2"></span>
-				<span class="text-right fluc1" ng-bind="mkt.fluc1 | number:2"></span>
-				<span class="text-right win">
-					<a class="btn btn-std btn-sml" href="" sb-ripple>
-						<span class="label" ng-bind="mkt.win | number:2"></span>
-					</a>
-					<a class="btn btn-std btn-sml" href="" sb-ripple>
-						<span class="label" ng-bind="mkt.place | number:2"></span>
-					</a>
-				</span>
-			</li><!-- /NG-REPEAT -->
-		</ol>
-	</div>
+	<section class="sec">
+		<h3>List</h3>
+		<p>ngRepeat</p>
+		<div class="sec-demo cfix" ng-controller="ListCtrl">
+			<ol class="card table list-mkt">
+				<li class="th">
+					<h4 class="title">Title</h4>
+					<span class="text-right id">Form</span>
+					<span class="text-right open">Open</span>
+					<span class="text-right fluc1">Fluc 1</span>
+					<span class="text-right win">Win | Place</span>
+				</li>
+				<!-- NG-REPEAT -->
+				<li class="tr mkt" ng-repeat="mkt in mkts">
+					<h4 class="title" ng-bind="mkt.title"></h4>
+					<span class="text-right id" ng-bind="mkt.id | uppercase"></span>
+					<span class="text-right open" ng-bind="mkt.open | number:2"></span>
+					<span class="text-right fluc1" ng-bind="mkt.fluc1 | number:2"></span>
+					<span class="text-right win">
+						<a class="btn btn-std btn-sml" href="" sb-ripple>
+							<span class="label" ng-bind="mkt.win | number:2"></span>
+						</a>
+						<a class="btn btn-std btn-sml" href="" sb-ripple>
+							<span class="label" ng-bind="mkt.place | number:2"></span>
+						</a>
+					</span>
+				</li><!-- /NG-REPEAT -->
+			</ol>
+		</div>
+	</section>
 
-	<h3>Currency</h3>
-	<div class="sec-demo cfix" ng-controller="FormCtrl">
-		<!-- SB-CURRENCY -->
-		<fieldset>
-			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="Model Value: " disabled>
-			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="$" sb-currency-rate="1">
-			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="NZD " sb-currency-rate="0.6">
-			<input class="text" ng-model="deposit" sb-currency sb-currency-symbol="HKD $" sb-currency-rate="8">
-		</fieldset><!-- /SB-CURRENCY -->
-	</div>
+	<section class="sec">
+		<h3>Currency</h3>
+		<p>Custom directive, ngModel, $formatters, $parsers, transclusion</p>
+		<div class="sec-demo cfix" ng-controller="FormCtrl">
+			<!-- SB-CURRENCY -->
+			<fieldset class="col">
+				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="Model Value: " disabled>
+				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="$" sb-currency-rate="1">
+				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="NZD " sb-currency-rate="0.6">
+				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="HKD $" sb-currency-rate="8">
+			</fieldset><!-- /SB-CURRENCY -->
+
+			<!-- SB-CURRENCY -->
+			<fieldset class="col">
+				<sb-input></sb-input>
+				<sb-input sb-input-prefix="$"></sb-input>
+				<sb-input sb-input-prefix="NZD "></sb-input>
+				<sb-input sb-input-icon="deposit"></sb-input>
+			</fieldset><!-- /SB-CURRENCY -->
+		</div>
+	</section>
 
 	<div class="footnotes">
 		<div><dt><sup></sup></dt>

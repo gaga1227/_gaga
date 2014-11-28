@@ -45,6 +45,15 @@ utils.isDelKeyPress = function (which, keyCode) {
 	return utils.getMatchingKey(which, keyCode, keys);
 };
 
+// Returns numeric value of css style
+utils.getNumCSSVal = function (val) {
+	if (!val || val == 'auto' || val.indexOf('px') == -1) return 0;
+	val = val.replace('px', '');
+	val = parseInt(val, 10);
+	val = Math.abs(val);
+	return val;
+};
+
 
 // APP Module - sb-app
 // -------------------------------------------------------------------------------------------
@@ -75,14 +84,25 @@ app.directive('sbRipple', function(){
 	return {
 		restrict: 'A',
 		link: function(scope, elem, attrs, controller){
-			elem.on('click', function(e){
-				//cleanup
+			//bind behaviors
+			elem.on('click', clickHandler);
+
+			//clean up binding
+			scope.$on('destroy', function(e){
+				elem.off('click', clickHandler);
+			});
+
+			//handler
+			function clickHandler(e){
+				//elems to cleanup
 				var oldRippleContainer = elem[0].querySelector('.ui-ripple-container');
 				var oldRipple = elem[0].querySelector('.ui-ripple');
+
 				//cancel if last one hasn't finish
 				if (oldRipple && oldRipple.getAttribute('anim-status') == 'on') {
 					return false;
 				}
+
 				//remove old elem in case left in the dom
 				if (oldRippleContainer) {
 					elem[0].removeChild(oldRippleContainer);
@@ -102,15 +122,17 @@ app.directive('sbRipple', function(){
 
 				//add elem
 				elem.append(rippleContainer);
+
 				//start anim
 				ripple.addClass('ui-visible');
 				ripple.attr('anim-status', 'on');
+
 				//bind self-removal
 				elem.one(animEndEvts, function(e){
 					ripple.attr('anim-status', 'off');
 					rippleContainer.remove();
 				});
-			});
+			}
 		}
 	}
 });
@@ -136,7 +158,52 @@ app.directive('sbCurrency', function(){
 				symbol += ' ';
 			}
 
-			//main fn
+			//filtering invalid model value
+			var cancelModelWatch = scope.$watch(modelToken, modelWatchHandler);
+
+			//formatters
+			ngModelCtrl.$formatters.push(applyRate);
+			ngModelCtrl.$formatters.push(addPrefix);
+
+			//parsers
+			ngModelCtrl.$parsers.push(removePrefix);
+			ngModelCtrl.$parsers.push(revertRate);
+
+			//bind input events
+			elem
+				.on('keydown', keydownInputHandler)
+				.on('keypress', keyPressInputHandler)
+				.on('paste', pasteInputHandler)
+				.on('focus select selectstart', selectInputHandler);
+
+			//on scope destroy
+			scope.$on('destroy', function(e){
+				//clean up watches and bindings
+				cancelModelWatch();
+				elem
+					.off('keydown', keydownInputHandler)
+					.off('keypress', keyPressInputHandler)
+					.off('paste', pasteInputHandler)
+					.off('focus select selectstart', selectInputHandler);
+			});
+
+			//model watch handler
+			function modelWatchHandler(newValue, oldValue) {
+				var arr = String(newValue).split('');
+
+				//handles negative and fractions
+				if (arr.length === 0) return;
+				if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
+				if (arr.length === 2 && newValue === '-.') return;
+
+				//if input is not a number
+				if (isNaN(newValue)) {
+					//ignore new value
+					ngModelCtrl.$setViewValue(oldValue);
+				}
+			}
+
+			//formatters and parsers functions
 			function addPrefix(modelValue) {
 				if (isNaN(modelValue) || modelValue == 0) {
 					modelValue = '';
@@ -178,35 +245,6 @@ app.directive('sbCurrency', function(){
 				return val;
 			}
 
-			//formatters
-			ngModelCtrl.$formatters.push(applyRate);
-			ngModelCtrl.$formatters.push(addPrefix);
-
-			//parsers
-			ngModelCtrl.$parsers.push(removePrefix);
-			ngModelCtrl.$parsers.push(revertRate);
-
-			//filtering invalid model value
-			var cancelModelWatch = scope.$watch(modelToken, function(newValue, oldValue) {
-				var arr = String(newValue).split('');
-
-				//handles negative and fractions
-				if (arr.length === 0) return;
-				if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
-				if (arr.length === 2 && newValue === '-.') return;
-
-				//if input is not a number
-				if (isNaN(newValue)) {
-					//ignore new value
-					ngModelCtrl.$setViewValue(oldValue);
-				}
-			});
-
-			//bind input events
-			elem.on('keydown', keydownInputHandler);
-			elem.on('keypress', keyPressInputHandler);
-			elem.on('paste', pasteInputHandler);
-
 			//input handlers
 			function keydownInputHandler(e) {
 				var key = e.which || e.keyCode;
@@ -234,8 +272,13 @@ app.directive('sbCurrency', function(){
 				//suppress pasting
 				e.preventDefault();
 			}
+			function selectInputHandler(e) {
+				//clear selection and set cursor after symbol
+				var pos = symbol.length;
+				e.target.setSelectionRange(pos, pos);
+			}
 
-			//check if can delete
+			//check if can delete further
 			function processDelKey(e, symbol) {
 				var viewValue = ngModelCtrl.$viewValue;
 				if (viewValue.length > symbol.length) {
@@ -244,15 +287,100 @@ app.directive('sbCurrency', function(){
 					return false;
 				}
 			}
+		}
+	}
+});
 
-			//on scope destroy
+// Directive - sb-input
+// -------------------------------------------------------------------------------------------
+
+app.directive('sbInput', function(){
+	return {
+		restrict: 'E',
+		replace: true,
+		scope: true,
+		template: '<div class="inputContainer"><input class="text" ng-model="amount"><span class="prefix"></span><i class="ico"></i></div>',
+		controller: ['$scope', function($scope){
+			$scope.amount = $scope.amount == 0 ? '' : $scope.amount;
+		}],
+		link: function(scope, elem, attrs, ctrls, transcludeFn){
+			//get attrs
+			var prefixString = attrs.sbInputPrefix;
+			var iconString = attrs.sbInputIcon;
+
+			//get elems
+			var prefixElem = elem.find('span');
+			var iconElem = elem.find('i');
+			var input = elem.find('input');
+
+			//prefix
+			if (prefixString && prefixString.length >= 1) {
+				prefixElem.text(prefixString);
+				applyInputOffset(prefixString);
+			} else {
+				prefixElem.remove();
+			}
+
+			//icon
+			if (iconString && iconString.length >= 1) {
+				iconElem.attr('data-icon', iconString);
+				applyInputOffset();
+			} else {
+				iconElem.remove();
+			}
+
+			//bind behaviors
+			input
+				.on('focus', inputFocusHandler)
+				.on('blur', inputBlurHandler);
 			scope.$on('destroy', function(e){
-				//clean up watches and bindings
-				cancelModelWatch();
-				elem.off('keydown', keydownInputHandler);
-				elem.off('keypress', keyPressInputHandler);
-				elem.off('paste', pasteInputHandler);
+				input
+					.off('focus', inputFocusHandler)
+					.off('blur', inputBlurHandler);
 			});
+
+			//handlers
+			function inputFocusHandler(e){
+				var prefix = angular.element(e.target).parent().find('span');
+				var icon = angular.element(e.target).parent().find('i');
+				var target = prefix.length ? prefix : icon;
+				if (target.length) {
+					target.addClass('active');
+				}
+			}
+			function inputBlurHandler(e){
+				var prefix = angular.element(e.target).parent().find('span');
+				var icon = angular.element(e.target).parent().find('i');
+				var target = prefix.length ? prefix : icon;
+				if (target.length) {
+					target.removeClass('active');
+				}
+			}
+
+			//function - applyInputOffset
+			function applyInputOffset(string){
+				//get element mode
+				var isIcon = string ? false : true;
+				var preElem = isIcon ? iconElem : prefixElem;
+
+				//prep for offset calculation
+				var inputStyle = window.getComputedStyle(input[0]);
+				var preStyle;
+				var offset = 0;
+
+				//if has pre element
+				if (preElem.length) {
+					//get pre element styles
+					preStyle = window.getComputedStyle(preElem[0]);
+					//calculate offset
+					offset += utils.getNumCSSVal(preStyle["width"]);
+					offset += utils.getNumCSSVal(preStyle["margin-left"]);
+					offset += utils.getNumCSSVal(preStyle["left"]);
+					offset += utils.getNumCSSVal(inputStyle["padding-left"]) / 2;
+					//apply offset
+					input.css("padding-left", offset+'px');
+				}
+			}
 		}
 	}
 });
@@ -311,6 +439,6 @@ app.controller('ListCtrl', ["$scope", function($scope){
 
 app.controller('FormCtrl', ["$scope", function($scope){
 	//model data
-	$scope.deposit = 0;
+	$scope.amount = $scope.amount || 0;
 }]);
 
