@@ -217,6 +217,9 @@ input.text[disabled] {
 	/*pointer-events: none;*/
 	cursor: not-allowed;
 }
+input.bold {
+	font-weight: bold;
+}
 
 /* btn */
 .btn {

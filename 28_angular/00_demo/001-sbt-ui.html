@@ -100,7 +100,7 @@
 				<p><b>sb-currency</b></p>
 				<div><small>1. Two-way translation</small></div>
 				<div><small>2. Input value prefix (string)</small></div>
-				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="Model Value: " disabled>
+				<input class="text bold" ng-model="amount" sb-currency sb-currency-symbol="Model Value: " disabled>
 				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="$" sb-currency-rate="1">
 				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="NZD " sb-currency-rate="0.92">
 				<input class="text" ng-model="amount" sb-currency sb-currency-symbol="HKD $" sb-currency-rate="8">
@@ -108,7 +108,7 @@
 
 			<!-- SB-CURRENCY -->
 			<fieldset class="col">
-				<p><b>sb-input</b></p>
+				<p><b>sb-input, sb-ripple</b></p>
 				<div><small>1. One-way translation</small></div>
 				<div><small>2. Input field prefix (html)</small></div>
 				<sb-input
@@ -116,8 +116,7 @@
 					sb-input-watch="amount"
 					sb-input-rate="0.0022"
 					sb-input-decnum="4"
-					sb-ripple
-					disabled></sb-input>
+					sb-ripple></sb-input>
 				<sb-input
 					sb-input-prefix="$"
 					sb-input-watch="amount"
