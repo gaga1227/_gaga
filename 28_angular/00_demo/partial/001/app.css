@@ -16,6 +16,11 @@ fieldset {
 .sec {
 	overflow: hidden;
 }
+.sec h3 {
+	font-size: 24px;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #eee;
+}
 
 /* sec-demo */
 .sec-demo {
@@ -55,6 +60,10 @@ fieldset {
 		-webkit-animation: 'anim-ripple-btn' 0.7s;
 		animation: 'anim-ripple-btn' 0.7s;
 	}
+	.inputContainer .ui-ripple-container .ui-ripple.ui-visible {
+		-webkit-animation: 'anim-ripple-input' 0.7s;
+		animation: 'anim-ripple-input' 0.7s;
+	}
 
 /* animations */
 @-webkit-keyframes anim-ripple {
@@ -76,6 +85,16 @@ fieldset {
 	0% { background-color: rgba(0,0,0,0); }
 	50% { background-color: rgba(0,0,0,0.2); }
 	100% { background-color: rgba(0,0,0,0); width: 200px; height: 200px; }
+}
+@-webkit-keyframes anim-ripple-input {
+	0% { background-color: rgba(0,190,255,0); }
+	50% { background-color: rgba(0,190,255,0.25); }
+	100% { background-color: rgba(0,190,255,0); width: 500px; height: 500px; }
+}
+@keyframes anim-ripple-input {
+	0% { background-color: rgba(0,190,255,0); }
+	50% { background-color: rgba(0,190,255,0.25); }
+	100% { background-color: rgba(0,190,255,0); width: 500px; height: 500px; }
 }
 
 /* card */
@@ -122,18 +141,25 @@ ul.card li {
 	max-width: 35%;
 	margin: 0;
 	padding: 4px 6px;
-	color: #fff;
-	background: #b0c1cc;
+	color: #88a2b3;
+	background: #f2f2f2;
 	text-align: center;
 	font-size: 12px;
 	line-height: 1.2em;
 	font-weight: bold;
 	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05) inset;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05) inset;
 	-webkit-transform: translate(0, -50%);
 	transform: translate(0, -50%);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 .inputContainer > .prefix.active {
+	color: #fff;
 	background: #2ea5dd;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 .inputContainer > .ico[data-icon] {
 	display: block;
@@ -143,12 +169,14 @@ ul.card li {
 	width: 26px;
 	height: 26px;
 	margin: 0;
-	color: #b0c1cc;
+	color: #88a2b3;
 	text-align: center;
 	font-size: 24px;
 	line-height: 26px;
 	-webkit-transform: translate(0, -50%);
 	transform: translate(0, -50%);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 .inputContainer > .ico[data-icon]:before {
 	display: block;
@@ -158,6 +186,7 @@ ul.card li {
 	margin: 0;
 	padding: 0;
 	color: inherit;
+	background: none;
 	text-align: inherit;
 	font-size: inherit;
 	line-height: inherit;
@@ -185,7 +214,8 @@ input.text:focus {
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.40);
 }
 input.text[disabled] {
-	font-weight: bold;
+	/*pointer-events: none;*/
+	cursor: not-allowed;
 }
 
 /* btn */

@@ -94,6 +94,10 @@ app.directive('sbRipple', function(){
 
 			//handler
 			function clickHandler(e){
+				//exit if elem is disabled
+				var disabled = (attrs.disabled == undefined) ? false : true;
+				if (disabled) return;
+
 				//elems to cleanup
 				var oldRippleContainer = elem[0].querySelector('.ui-ripple-container');
 				var oldRipple = elem[0].querySelector('.ui-ripple');
@@ -153,6 +157,11 @@ app.directive('sbCurrency', function(){
 			var rate = attrs.sbCurrencyRate || 1;
 			var modelToken = attrs.ngModel;
 
+			//regex patterns
+			var regex = {
+				num: /^[1-9]\d*(?:\.\d{0,2})?$/
+			};
+
 			//process symbols
 			if (symbol.indexOf('$') == -1) {
 				symbol += ' ';
@@ -205,8 +214,8 @@ app.directive('sbCurrency', function(){
 
 			//formatters and parsers functions
 			function addPrefix(modelValue) {
-				if (isNaN(modelValue) || modelValue == 0) {
-					modelValue = '';
+				if (isNaN(modelValue)) {
+					modelValue = 0;
 				}
 				modelValue += '';
 				if (modelValue) {
@@ -227,22 +236,17 @@ app.directive('sbCurrency', function(){
 			function applyRate(val) {
 				if (isNaN(val)) {
 					if (val && val.indexOf(symbol) != -1) {
-						val.replace(symbol, '');
+						val = val.replace(symbol, '');
+						val = parseFloat(val);
 					}
-				} else {
-					val *= rate;
 				}
-				return val;
+				return symbol + (val * rate);
 			}
 			function revertRate(val) {
 				if (isNaN(val)) {
-					if (val && val.indexOf(symbol) != -1) {
-						val.replace(symbol, '');
-					}
-				} else {
-					val /= rate;
+					val = 0;
 				}
-				return val;
+				return val / rate;
 			}
 
 			//input handlers
@@ -298,15 +302,68 @@ app.directive('sbInput', function(){
 	return {
 		restrict: 'E',
 		replace: true,
-		scope: true,
-		template: '<div class="inputContainer"><input class="text" ng-model="amount"><span class="prefix"></span><i class="ico"></i></div>',
+		scope: {
+			model: '=sbInputWatch',
+			rate: '@sbInputRate',
+			decnum: '@sbInputDecnum'
+		},
+		template: '<div class="inputContainer"><input class="text" ng-model="value"><span class="prefix"></span><i class="ico"></i></div>',
 		controller: ['$scope', function($scope){
-			$scope.amount = $scope.amount == 0 ? '' : $scope.amount;
+			//apply rate to value
+			$scope.applyRate = function(){
+				$scope.value *= $scope.rate;
+			};
+			//apply decimal num formatting to value
+			$scope.applyFormat = function(){
+				if (isNaN($scope.value)) {
+					$scope.value = 0;
+				}
+				$scope.value = parseFloat($scope.value);
+				$scope.value = $scope.value.toFixed($scope.decnum);
+			};
+			//validate and update model values
+			$scope.updateModelValue = function(){
+				//validate model value as a number and copy to value
+				if ($scope.model) {
+					$scope.value = isNaN($scope.model) ? 0 : $scope.model;
+				} else {
+					$scope.value = 0;
+				}
+
+				//validate rate as a factor number
+				if ($scope.rate) {
+					$scope.rate = isNaN($scope.rate) ? 0 : $scope.rate;
+				} else {
+					$scope.rate = 1;
+				}
+				$scope.rate = parseFloat($scope.rate);
+
+				//validate decimal number
+				if ($scope.decnum) {
+					$scope.decnum = isNaN($scope.decnum) ? 0 : $scope.decnum;
+				} else {
+					$scope.decnum = 0;
+				}
+				$scope.decnum = parseInt($scope.decnum, 10);
+
+				//updates
+				$scope.applyRate();
+				$scope.applyFormat();
+			};
+
+			//watch model value and call update
+			var cancelModelWatch = $scope.$watch('model', function(){
+				$scope.updateModelValue();
+			});
+			$scope.$on('destroy', function(e){
+				cancelModelWatch();
+			});
 		}],
-		link: function(scope, elem, attrs, ctrls, transcludeFn){
+		link: function(scope, elem, attrs, ctrls){
 			//get attrs
 			var prefixString = attrs.sbInputPrefix;
 			var iconString = attrs.sbInputIcon;
+			var disabled = (attrs.disabled == undefined) ? false : true;
 
 			//get elems
 			var prefixElem = elem.find('span');
@@ -329,14 +386,21 @@ app.directive('sbInput', function(){
 				iconElem.remove();
 			}
 
+			//apply disabled flag
+			if (disabled) {
+				input.attr('disabled', 'disabled');
+			}
+
 			//bind behaviors
 			input
 				.on('focus', inputFocusHandler)
-				.on('blur', inputBlurHandler);
+				.on('blur', inputBlurHandler)
+				.on('input', inputInputHandler);
 			scope.$on('destroy', function(e){
 				input
 					.off('focus', inputFocusHandler)
-					.off('blur', inputBlurHandler);
+					.off('blur', inputBlurHandler)
+					.off('input', inputInputHandler);
 			});
 
 			//handlers
@@ -355,6 +419,9 @@ app.directive('sbInput', function(){
 				if (target.length) {
 					target.removeClass('active');
 				}
+			}
+			function inputInputHandler(e){
+				scope.applyFormat();
 			}
 
 			//function - applyInputOffset
@@ -439,6 +506,6 @@ app.controller('ListCtrl', ["$scope", function($scope){
 
 app.controller('FormCtrl', ["$scope", function($scope){
 	//model data
-	$scope.amount = $scope.amount || 0;
+	$scope.amount = 100;
 }]);
 
