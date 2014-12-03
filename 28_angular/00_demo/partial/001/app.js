@@ -54,12 +54,6 @@ utils.getNumCSSVal = function (val) {
 	return val;
 };
 
-// TIMER
-// -------------------------------------------------------------------------------------------
-
-var timer = {};
-
-
 // APP Module - sb-app
 // -------------------------------------------------------------------------------------------
 
@@ -446,24 +440,31 @@ app.directive('sbInput', function(){
 app.directive('sbTimer', function(){
 	return {
 		restrict: 'E',
-		// template: '<div>{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s</div>',
+		template: '<span></span>',
 		replace: true,
-		scope: {
+		scope: {},
+		controller: [
+		'$scope', '$element', '$attrs', '$interpolate',
+		function($scope, $element, $attrs, $interpolate){
+			//view templates
+			var _tmpls = {
+				dhms : '{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s',
+				hms : '{{hrs}}h : {{mins}}m : {{secs}}s',
+				ms : '{{mins}}m : {{secs}}s',
+				s : '{{secs}}s'
+			}
 
-		},
-		controller: ['$scope', '$element', '$attrs', '$compile', function($scope, $element, $attrs, $compile){
-			//vars
+			//timer data
 			var _timer = {
 				id: $attrs.sbTimerId,
 				interval: $attrs.sbTimerInterval ? $attrs.sbTimerId : 1000,
 				startTime: $attrs.sbTimerStartTime ? $attrs.sbTimerStartTime : new Date().getTime(),
 				eventTime: $attrs.sbTimerEventTime
 			};
-			$scope.timeleft = _timer.eventTime - _timer.startTime;
-			console.log($scope.timeleft);
 
 			//called every interval
 			var _tick = function(){
+				//update timeleft in model
 				$scope.timeleft = $scope.timeleft - _timer.interval;
 
 				//calculate timer fields
@@ -479,10 +480,14 @@ app.directive('sbTimer', function(){
 					$scope.days = Math.ceil((($scope.timeleft / (3600000)) / 24));
 				}
 
-				var linkFn = $compile('<div>{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s</div>');
-				var elem = linkFn($scope);
-				// console.log(elem.html());
-				$element.html(elem[0].innerHTML);
+				//interpolate view template with current scope data
+				var template = _tmpls.hms;
+				var interpolateFn = $interpolate(template);
+				var result = interpolateFn($scope);
+
+				//update DOM with result
+				$element.addClass('soon');
+				$element.html(result);
 
 				//keep ticking...
 				_timer.timeoutId = setTimeout(function(){
@@ -492,13 +497,12 @@ app.directive('sbTimer', function(){
 				}, _timer.interval);
 			}
 
-			//init timer
+			//update timeleft in model
 			$scope.timeleft = _timer.eventTime - _timer.startTime;
-			_tick();
-		}],
-		link: function(scope, elem, attrs, controller){
 
-		}
+			//init timer
+			_tick();
+		}]
 	}
 });
 
