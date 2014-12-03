@@ -54,28 +54,16 @@ utils.getNumCSSVal = function (val) {
 	return val;
 };
 
+// TIMER
+// -------------------------------------------------------------------------------------------
+
+var timer = {};
+
 
 // APP Module - sb-app
 // -------------------------------------------------------------------------------------------
 
 var app = angular.module('sb-app', []);
-
-// Directive - sb-timer
-// -------------------------------------------------------------------------------------------
-
-app.directive('sbTimer', function(){
-	return {
-		restrict: 'AE',
-		template: '<div></div>',
-		scope: {},
-		controller: ['$scope', function($scope){
-
-		}],
-		link: function(scope, elem, attrs, controller){
-
-		}
-	}
-});
 
 // Directive - sb-ripple
 // -------------------------------------------------------------------------------------------
@@ -448,6 +436,68 @@ app.directive('sbInput', function(){
 					input.css("padding-left", offset+'px');
 				}
 			}
+		}
+	}
+});
+
+// Directive - sb-timer
+// -------------------------------------------------------------------------------------------
+
+app.directive('sbTimer', function(){
+	return {
+		restrict: 'E',
+		// template: '<div>{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s</div>',
+		replace: true,
+		scope: {
+
+		},
+		controller: ['$scope', '$element', '$attrs', '$compile', function($scope, $element, $attrs, $compile){
+			//vars
+			var _timer = {
+				id: $attrs.sbTimerId,
+				interval: $attrs.sbTimerInterval ? $attrs.sbTimerId : 1000,
+				startTime: $attrs.sbTimerStartTime ? $attrs.sbTimerStartTime : new Date().getTime(),
+				eventTime: $attrs.sbTimerEventTime
+			};
+			$scope.timeleft = _timer.eventTime - _timer.startTime;
+			console.log($scope.timeleft);
+
+			//called every interval
+			var _tick = function(){
+				$scope.timeleft = $scope.timeleft - _timer.interval;
+
+				//calculate timer fields
+				if ($scope.timeleft >= 0) {
+					$scope.secs = Math.round(($scope.timeleft / 1000) % 60);
+					$scope.mins = Math.floor((($scope.timeleft / (60000)) % 60));
+					$scope.hrs = Math.floor((($scope.timeleft / (3600000)) % 24));
+					$scope.days = Math.floor((($scope.timeleft / (3600000)) / 24));
+				} else {
+					$scope.secs =  Math.round(($scope.timeleft / 1000) % 60);
+					$scope.mins = Math.ceil((($scope.timeleft / (60000)) % 60));
+					$scope.hrs = Math.ceil((($scope.timeleft / (3600000)) % 24));
+					$scope.days = Math.ceil((($scope.timeleft / (3600000)) / 24));
+				}
+
+				var linkFn = $compile('<div>{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s</div>');
+				var elem = linkFn($scope);
+				// console.log(elem.html());
+				$element.html(elem[0].innerHTML);
+
+				//keep ticking...
+				_timer.timeoutId = setTimeout(function(){
+					_tick();
+					//manually call angular digest on current scope
+					$scope.$digest();
+				}, _timer.interval);
+			}
+
+			//init timer
+			$scope.timeleft = _timer.eventTime - _timer.startTime;
+			_tick();
+		}],
+		link: function(scope, elem, attrs, controller){
+
 		}
 	}
 });
