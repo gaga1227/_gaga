@@ -66,6 +66,11 @@ app.directive('sbRipple', function(){
 	return {
 		restrict: 'A',
 		link: function(scope, elem, attrs, controller){
+			//make sure element has relative positioning
+			if (window.getComputedStyle(elem[0]).position == 'static') {
+				elem.css('position', 'relative');
+			}
+
 			//bind behaviors
 			elem.on('click', clickHandler);
 
@@ -437,7 +442,7 @@ app.directive('sbInput', function(){
 // Directive - sb-timer
 // -------------------------------------------------------------------------------------------
 
-app.directive('sbTimer', function(){
+app.directive('sbTimer', ['$interpolate', function($interpolate){
 	return {
 		restrict: 'E',
 		template: '<span></span>',
@@ -445,9 +450,9 @@ app.directive('sbTimer', function(){
 		scope: {
 			partyMode: '=sbTimerAnimated'
 		},
-		controller: [
-		'$scope', '$element', '$attrs', '$interpolate',
-		function($scope, $element, $attrs, $interpolate){
+		controller: ['$scope', function($scope){
+		}],
+		link: function($scope, $element, $attrs, $controller){
 			//view classes and templates
 			var _classes = [ 'soon', 'sooner', 'passed' ];
 			var _tmpls = {
@@ -552,9 +557,9 @@ app.directive('sbTimer', function(){
 			$scope.timeleft = _timer.eventTime - _timer.startTime;
 			//init timer
 			_tick();
-		}]
+		}
 	}
-});
+}]);
 
 // Controller - list
 // -------------------------------------------------------------------------------------------
@@ -569,6 +574,7 @@ app.controller('ListCtrl', ["$scope", function($scope){
 			"fluc1": 2,
 			"win": 12,
 			"place": 8,
+			"evtTime": new Date().getTime() + 194200000
 		},
 		{
 			"title": "2. Carnival Knight",
@@ -577,6 +583,7 @@ app.controller('ListCtrl', ["$scope", function($scope){
 			"fluc1": 2,
 			"win": 26,
 			"place": 10,
+			"evtTime": new Date().getTime() + 1800000
 		},
 		{
 			"title": "3. Copper Thief",
@@ -585,6 +592,7 @@ app.controller('ListCtrl', ["$scope", function($scope){
 			"fluc1": 1.8,
 			"win": 12,
 			"place": 8,
+			"evtTime": new Date().getTime() + 65000
 		},
 		{
 			"title": "4. The Governor",
@@ -593,6 +601,7 @@ app.controller('ListCtrl', ["$scope", function($scope){
 			"fluc1": 3,
 			"win": 16,
 			"place": 9,
+			"evtTime": new Date().getTime() - 14200000
 		},
 		{
 			"title": "5. Mickey Can Do",
@@ -601,8 +610,11 @@ app.controller('ListCtrl', ["$scope", function($scope){
 			"fluc1": 2,
 			"win": 32,
 			"place": 8,
+			"evtTime": new Date().getTime() - 1200000
 		}
 	];
+
+	$scope.animated = true;
 }]);
 
 // Controller - form

@@ -26,7 +26,16 @@
 				</li>
 				<!-- NG-REPEAT -->
 				<li class="tr mkt" ng-repeat="mkt in mkts">
-					<h4 class="title" ng-bind="mkt.title"></h4>
+					<h4 class="title">
+						<span ng-bind="mkt.title"></span>
+						<sb-timer
+							sb-timer-animated="animated"
+							sb-timer-id="sb-timer-{{mkt.id}}"
+							sb-timer-start-time=""
+							sb-timer-event-time="{{mkt.evtTime}}"
+							sb-ripple>
+						</sb-timer>
+					</h4>
 					<span class="text-right id" ng-bind="mkt.id | uppercase"></span>
 					<span class="text-right open" ng-bind="mkt.open | number:2"></span>
 					<span class="text-right fluc1" ng-bind="mkt.fluc1 | number:2"></span>
@@ -174,13 +183,18 @@
 					sb-timer-event-time="1417574610126"></sb-timer>
 				<sb-timer
 					sb-timer-animated="animated"
-					sb-timer-id="1705827"
-					sb-timer-start-time="1417574550126"
+					sb-timer-id="1705828"
+					sb-timer-start-time="1417574549126"
 					sb-timer-event-time="1417574610126"></sb-timer>
 				<sb-timer
 					sb-timer-animated="animated"
-					sb-timer-id="1705827"
-					sb-timer-start-time="1417574550126"
+					sb-timer-id="1705829"
+					sb-timer-start-time="1417574548126"
+					sb-timer-event-time="1417574610126"></sb-timer>
+				<sb-timer
+					sb-timer-animated="animated"
+					sb-timer-id="1705830"
+					sb-timer-start-time="1417574547126"
 					sb-timer-event-time="1417574610126"></sb-timer>
 
 				<!-- anim control -->
