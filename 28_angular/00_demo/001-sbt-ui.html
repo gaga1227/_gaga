@@ -142,23 +142,61 @@
 	<section class="sec">
 		<h3>4. Timer</h3>
 		<p>$interpolate, $digest</p>
-		<div class="sec-demo cfix">
-			<sb-timer
-				sb-timer-id="1705827"
-				sb-timer-start-time="1417575510126"
-				sb-timer-event-time="1417574520126"></sb-timer>
-			<sb-timer
-				sb-timer-id="1705828"
-				sb-timer-start-time="1417574500126"
-				sb-timer-event-time="1417575510126"></sb-timer>
-			<sb-timer
-				sb-timer-id="1705828"
-				sb-timer-start-time=""
-				sb-timer-event-time="1417574610126"></sb-timer>
-			<sb-timer
-				sb-timer-id="1705828"
-				sb-timer-start-time=""
-				sb-timer-event-time="1418591829908"></sb-timer>
+		<p><b>sb-timer</b></p>
+		<div class="sec-demo cfix" ng-controller="FormCtrl">
+			<!-- normal countdown -->
+			<div><small>1. Normal countdown</small></div>
+			<div class="ui-timer">
+				<sb-timer
+					sb-timer-id="1705830"
+					sb-timer-start-time=""
+					sb-timer-event-time="1418591829908"></sb-timer>
+			</div>
+
+			<!-- less than 30 min -->
+			<div><small>2. Soon (less than 30 mins)</small></div>
+			<div class="ui-timer">
+				<sb-timer
+					sb-timer-id="1705827"
+					sb-timer-start-time="1417572810126"
+					sb-timer-event-time="1417574610126"></sb-timer>
+			</div>
+
+			<!-- less than 10 sec -->
+			<div>
+				<small>3. Sooner (less than 1 min)</small>
+			</div>
+			<div class="ui-timer">
+				<sb-timer
+					sb-timer-animated="animated"
+					sb-timer-id="1705827"
+					sb-timer-start-time="1417574550126"
+					sb-timer-event-time="1417574610126"></sb-timer>
+				<sb-timer
+					sb-timer-animated="animated"
+					sb-timer-id="1705827"
+					sb-timer-start-time="1417574550126"
+					sb-timer-event-time="1417574610126"></sb-timer>
+				<sb-timer
+					sb-timer-animated="animated"
+					sb-timer-id="1705827"
+					sb-timer-start-time="1417574550126"
+					sb-timer-event-time="1417574610126"></sb-timer>
+
+				<!-- anim control -->
+				<a class="btn btn-action btn-sml" href="" sb-ripple="" ng-click="toggleAnimated()">
+					<span class="label">Party Mode</span>
+				</a>
+			</div>
+
+			<!-- passed -->
+			<div><small>4. Passed (negative count up)</small></div>
+			<div class="ui-timer">
+				<sb-timer
+					sb-timer-id="1705829"
+					sb-timer-start-time=""
+					sb-timer-event-time="1417574610126"></sb-timer>
+			</div>
 		</div>
 	</section>
 

@@ -442,17 +442,20 @@ app.directive('sbTimer', function(){
 		restrict: 'E',
 		template: '<span></span>',
 		replace: true,
-		scope: {},
+		scope: {
+			partyMode: '=sbTimerAnimated'
+		},
 		controller: [
 		'$scope', '$element', '$attrs', '$interpolate',
 		function($scope, $element, $attrs, $interpolate){
-			//view templates
+			//view classes and templates
+			var _classes = [ 'soon', 'sooner', 'passed' ];
 			var _tmpls = {
-				dhms : '{{days}}d : {{hrs}}h : {{mins}}m : {{secs}}s',
-				hms : '{{hrs}}h : {{mins}}m : {{secs}}s',
-				ms : '{{mins}}m : {{secs}}s',
+				dhms : '{{days}}d<b>:</b>{{hrs}}h<b>:</b>{{mins}}m<b>:</b>{{secs}}s',
+				hms : '{{hrs}}h<b>:</b>{{mins}}m<b>:</b>{{secs}}s',
+				ms : '{{mins}}m<b>:</b>{{secs}}s',
 				s : '{{secs}}s'
-			}
+			};
 
 			//timer data
 			var _timer = {
@@ -460,6 +463,55 @@ app.directive('sbTimer', function(){
 				interval: $attrs.sbTimerInterval ? $attrs.sbTimerId : 1000,
 				startTime: $attrs.sbTimerStartTime ? $attrs.sbTimerStartTime : new Date().getTime(),
 				eventTime: $attrs.sbTimerEventTime
+			};
+
+			//apply view variations
+			var _applyViewVariations = function(data){
+				//check current timeleft length to determine display units required
+				var dispD = Math.abs((data.timeleft / (3600000 * 24))) >= 1,
+					dispH = Math.abs((data.timeleft / 3600000)) >= 1,
+					dispM = Math.abs((data.timeleft / 60000)) >= 1,
+					dispS = Math.abs((data.timeleft / 1000)) >= 1;
+
+				//choose view template based on display units
+				var tmpl = _tmpls.s;
+				if (dispM) tmpl = _tmpls.ms;
+				if (dispH) tmpl = _tmpls.hms;
+				if (dispD) tmpl = _tmpls.dhms;
+
+				//check if decoration classes is required
+				var isSoon = (data.timeleft >= 0) && (data.timeleft < (3600000 / 2)),
+					isSooner = (data.timeleft >= 0) && (data.timeleft < 60000),
+					isPassed = data.timeleft < 0;
+
+				//choose decoration class
+				var cls = '';
+				if (isPassed) {
+					cls = _classes[2];
+				} else {
+					if (isSoon) cls = _classes[0];
+					if (isSooner) cls = _classes[1];
+				}
+
+				//compile chosen template into an interpolation function
+				var interpolationFn = $interpolate(tmpl);
+
+				//update DOM
+				$element
+					.html(interpolationFn($scope))
+					.removeClass(_classes.join(' '));
+
+				//add animated class if enabled
+				if ($scope.partyMode) {
+					$element.addClass('animated');
+				} else {
+					$element.removeClass('animated');
+				}
+
+				//trigger CSS layout and paint
+				window.getComputedStyle($element[0]).width;
+				//update new CSS class
+				$element.addClass(cls);
 			};
 
 			//called every interval
@@ -480,26 +532,24 @@ app.directive('sbTimer', function(){
 					$scope.days = Math.ceil((($scope.timeleft / (3600000)) / 24));
 				}
 
-				//interpolate view template with current scope data
-				var template = _tmpls.hms;
-				var interpolateFn = $interpolate(template);
-				var result = interpolateFn($scope);
+				if ($scope.timeleft < 0) {
+					$scope.secs *= -1;
+					$scope.mins *= -1;
+					$scope.hrs *= -1;
+					$scope.days *= -1;
+				}
 
-				//update DOM with result
-				$element.addClass('soon');
-				$element.html(result);
+				//interpolate view template with current scope data
+				_applyViewVariations($scope);
 
 				//keep ticking...
 				_timer.timeoutId = setTimeout(function(){
 					_tick();
-					//manually call angular digest on current scope
-					$scope.$digest();
 				}, _timer.interval);
 			}
 
-			//update timeleft in model
+			//init timeleft value in model
 			$scope.timeleft = _timer.eventTime - _timer.startTime;
-
 			//init timer
 			_tick();
 		}]
@@ -561,5 +611,11 @@ app.controller('ListCtrl', ["$scope", function($scope){
 app.controller('FormCtrl', ["$scope", function($scope){
 	//model data
 	$scope.amount = 100;
+	$scope.animated = false;
+
+	//model methods
+	$scope.toggleAnimated = function(){
+		$scope.animated = !$scope.animated;
+	};
 }]);
 
