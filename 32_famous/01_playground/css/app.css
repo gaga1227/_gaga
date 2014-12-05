@@ -1,25 +1,47 @@
 /* pattern container */
 .app-pattern {
-	width: auto;
-	height: auto;
-	margin: auto;
-	padding: 20px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 	min-width: 1024px;
-	max-width: 1280px;
 	box-sizing: border-box;
 	overflow: hidden;
 }
 
 /* pattern sections */
 [class^="app-pattern-"] {
-	width: 640px;
-	margin: 0 auto;
-	padding: 20px 0;
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
-}
-.app-pattern-display {
-	width: auto;
+	overflow: hidden;
 }
 .app-pattern-editor [ui-ace] {
-	height: 200px;
+	top: 0;
+	height: 300px;
+}
+.app-pattern-display {
+	top: 300px;
+	bottom: 0;
+	background: red;
+	border: 0;
+}
+.app-pattern-display iframe {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	background: yellow;
+	border: 0;
 }

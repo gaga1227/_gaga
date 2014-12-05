@@ -31,22 +31,70 @@ angular.module('playground')
 	$scope.aceLoaded = function(_editor) {
 		//options
 		_editor.setOptions({
-			maxLines: 'Infinity',
+			// maxLines: 'Infinity',
+			vScrollBarAlwaysVisible: true,
+			showInvisibles: true,
 			fontSize: '16px'
 		});
 	};
 	// on change
 	$scope.aceChanged = function(e) {
-		console.log(e);
+		// console.log(e);
 	};
 
 	// inputs
 	// -------------------------------------------------------------------------------------------
 
-	$scope.pattern.input = $scope.pattern.html;
-	$scope.offPatternInputWatch = $scope.$watch('pattern.input', function(){
-		$scope.pattern.safeInput = $sce.trustAsHtml($scope.pattern.input);
+	//beautify stored html before display
+	var style_html_options = {
+		indent_char : '	',
+		indent_size : 1,
+		max_char : 0
+	};
+	$scope.pattern.input = style_html($scope.pattern.html, style_html_options);
+
+	// display
+	// -------------------------------------------------------------------------------------------
+
+	//common vars
+	var $frame = $('#app-pattern-display');
+	var $frameHead = $frame.contents().find('head');
+	var $frameBody = $frame.contents().find('body');
+
+	//generate repo file
+	var getRepoFile = function(file, ext) {
+		var url = $scope.repo.path + file.path + file.filename + '.' + ext;
+		var $file;
+		if (ext == 'css') {
+			$file = $('<link>');
+			$file.attr({
+				"rel" : "stylesheet",
+				"href" : url
+			});
+		}
+		else if (ext == 'js') {
+			$file = $('<script></script>');
+			$file.attr({
+				"src" : url
+			});
+		}
+		return $file;
+	}
+
+	//inject repo css dependencies
+	$.each($scope.repo.css, function(idx, ele){
+		$frameHead.append( getRepoFile(ele, 'css') );
 	});
-	//console.log($scope.offPatternInputWatch);
+
+	//watch input value and translate to display
+	var cancelPatternInputWatch = $scope.$watch('pattern.input', function(){
+		//inject to iframe
+		$frameBody.html($scope.pattern.input);
+	});
+
+	//clean up watch
+	$scope.$on('destroy', function(e){
+		cancelPatternInputWatch();
+	});
 
 }]);

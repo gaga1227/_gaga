@@ -1,9 +1,3 @@
-<!-- Repo CSS dependencies -->
-<link rel="stylesheet"
-	ng-repeat="file in repo.css"
-	bindonce="file"
-	bo-href="repo.path + file.path + file.filename + '.css'">
-
 <!-- pattern container -->
 <div class="app-pattern">
 	<!-- pattern editor -->
@@ -20,8 +14,7 @@
 	</div>
 
 	<!-- pattern display -->
-	<div class="app-pattern-display"
-		bindonce="pattern"
-		bo-id="'app-pattern-display_' + pattern.id"
-		ng-bind-html="pattern.safeInput"></div>
+	<div class="app-pattern-display">
+		<iframe id="app-pattern-display"></iframe>
+	</div>
 </div>
