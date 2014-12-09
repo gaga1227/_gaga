@@ -371,6 +371,9 @@ fieldset.col {
 	margin-right: 20px;
 	float: left;
 }
+fieldset.col:last-child {
+	margin-right: 0;
+}
 
 /* timer */
 .ui-timer {
