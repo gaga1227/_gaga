@@ -227,7 +227,7 @@ app.directive('sbCurrency', function(){
 						val = parseFloat(val);
 					}
 				}
-				return symbol + (val * rate);
+				return symbol + (val * rate).toFixed(0);
 			}
 			function revertRate(val) {
 				if (isNaN(val)) {
