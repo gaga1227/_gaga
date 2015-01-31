@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link rel="stylesheet" href="lib/normalize.css">
+<link rel="stylesheet" href="lib/main.css">
+<script src="../angular-1.3.6/angular.js"></script>
+<style>
+	h2,
+	h3,
+	h4 {
+		margin:0;
+	}
+</style>
+</head>
+<body>
+	<h1>What Property Can I Afford?<sup>1</sup></h1>
+	<div ng-controller="mainCtrl">
+		<h4>Cash Savings</h4>
+		<div><small>This covers the deposit (20%) and Stamp Duty.</small></div>
+		<p>$ <input ng-model="cashsaving" ng-change="calculateAll()"></p>
+
+		<h4>Borrowing Capacity</h4>
+		<div><small>Maximum borrowing capacity, this covers the rest of the property price (80%).</small></div>
+		<p>$ <input ng-model="maxhomeloan" ng-change="calculateAll()"></p>
+
+		<h4>Principal Place of Residence (PPR): <input type="checkbox" ng-model="ppr" ng-change="calculateAll()"></h4>
+		<div><small>If you are elegible to PPR Stamp Duty concessions.</small></div>
+
+		<hr>
+		<h2>Property Price: $<span ng-bind="propertyprice"></span></h2>
+		<div><small>This is the maximum affordable property price.</small></div>
+		<hr>
+		<p><b>Stamp duty:<sup>*</sup></b> $<span ng-bind="stampduty"></span></p>
+		<p><b>Registration of transfer<sup>*^2</sup>:</b> $<span ng-bind="titletransfer"></span></p>
+		<p><b>Registration of mortgage<sup>*^2</sup>:</b> $<span ng-bind="mortgageregister"></span></p>
+		<p><b>Legal fees<sup>^3</sup>:</b> $<span ng-bind="legalfees"></span></p>
+
+		<hr>
+		<h2>Total Cost: $<span ng-bind="totalcost"></span></h2>
+		<hr>
+	</div>
+	<div class="footnotes">
+		<div><dt><sup>*</sup></dt>
+		<dd>State goverment charges</dd></div>
+		<div><dt><sup>^</sup></dt>
+		<dd>These costs are not included in the affordability calculation.</dd></div>
+		<div><dt><sup>1</sup></dt>
+		<dd>The tool gives you an indication of what property you can afford based on your savings and borrowing capacity. (Borrowing capacity should be calculated and advised by your homeloan provider.)</dd></div>
+		<div><dt><sup>2</sup></dt>
+		<dd>Fixed for my price range.</dd></div>
+		<div><dt><sup>3</sup></dt>
+		<dd>General market prices for solicitor/conveyance fee plus title search.</dd></div>
+	</div>
+</body>
+<script src="partial/002/app.js"></script>
+</html>
