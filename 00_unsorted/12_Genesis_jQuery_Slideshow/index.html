@@ -1,0 +1,120 @@
+<!--------------------------------------------------------------------------------->
+<!-- UPDATES V0.07 20111104 -->
+<!--
+	1. added switch to hide control UI when slideshow only has single image
+  -->
+<!--------------------------------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>FW jQuery Slideshow</title>
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		
+		<!-- Plugin scripts -->
+		<script type="text/javascript" src="_lib/js/jquery-1.5.2.min.js"></script>
+		<script type="text/javascript" src="_lib/js/jquery.sliderkit.1.5.1.js"></script>
+		<script type="text/javascript" src="_lib/js/init-config.js"></script>
+
+		<!-- Plugin styles -->
+		<link rel="stylesheet" type="text/css" href="_lib/css/sliderkit-core.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="_lib/css/sliderkit-skin.css" media="screen, projection" />
+		
+		<!-- Compatibility -->
+		
+		<!--[if IE 6]>
+			<link rel="stylesheet" type="text/css" href="_lib/css/sliderkit-demos-ie6.css" />
+		<![endif]-->
+		
+		<!--[if IE 7]>
+			<link rel="stylesheet" type="text/css" href="_lib/css/sliderkit-demos-ie7.css" />
+		<![endif]-->
+		
+		<!--[if IE 8]>
+			<link rel="stylesheet" type="text/css" href="_lib/css/sliderkit-demos-ie8.css" />
+		<![endif]-->
+
+	</head>
+	<body>
+		<div class="sliderkit slideshow">
+			
+			<div class="sliderkit-nav">
+				<div class="sliderkit-nav-clip">
+					<ul>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb01.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb02.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb03.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb04.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb05.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+						<li><a href="#" rel="nofollow" title="[link title]"><img src="_lib/img/thumb06.jpg" alt="[Alternative text]" /><div class="frame"></div></a></li>
+					</ul>
+				</div><!-- .sliderkit-nav-clip -->
+				<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-prev"><a rel="nofollow" href="#" title="Previous photo"><span>Previous photo</span></a></div>
+				<div class="sliderkit-btn sliderkit-go-btn sliderkit-go-next"><a rel="nofollow" href="#" title="Next photo"><span>Next photo</span></a></div>
+				
+			</div><!-- .sliderkit-nav -->
+			<div class="sliderkit-play-container">
+				<div class="sliderkit-play-btn"><a href="#" title="Play/Pause"><span>Play</span></a></div>
+			</div><!-- .sliderkit-slideshow-play -->
+			
+			
+			<div class="sliderkit-panels">
+				<div class="sliderkit-panel">
+					<img src="_lib/img/01.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>HUGE image. AR > Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+				<div class="sliderkit-panel">
+					<img src="_lib/img/02.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>HUGE image. AR = Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+				<div class="sliderkit-panel">
+					<img src="_lib/img/03.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>HUGE image. AR < Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+				<div class="sliderkit-panel">
+					<img src="_lib/img/04.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>SMALL image. AR > Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+				<div class="sliderkit-panel">
+					<img src="_lib/img/05.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>SMALL image. AR = Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+				<div class="sliderkit-panel">
+					<img src="_lib/img/06.jpg" alt="[Alternative text]" />
+					<div class="sliderkit-panel-textbox">
+						<div class="sliderkit-panel-text">
+							<p>SMALL image. AR < Container</p>
+						</div>
+						<div class="sliderkit-panel-overlay"></div>
+					</div>
+				</div>
+			</div><!-- .sliderkit-panels -->
+		</div><!-- .sliderkit .slideshow -->
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 9]>    <html class="ie9" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<!-- Mobile viewport optimized -->
+<meta name="viewport" content="width=device-width,maximum-scale=1.0" />
+<!-- Base URL -->
+<base href="../" />
+<!-- Title -->
+<title>Fraynework Front-End Template</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- CSS:COMMON -->
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/css/video.css" /><!-- video container -->
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/js/video-js/video-js.synod.css" /><!-- videoJS player Skin -->
+<!-- CSS:CUSTOM -->
+	<style type="text/css">
+	body { background:#f2f2f2; margin:0; }
+	/*video player related*/
+	#video1Container { width:640px!important; height:400px; }
+	</style>
+<!-- JS:COMMON -->
+	<script type="text/javascript" src="_lib/js/jquery-1.6.4.min.js"></script><!-- jQuery -->
+	<script type="text/javascript" src="_lib/js/modernizr.custom.media.js"></script><!-- modernizr media -->
+	<script type="text/javascript" src="_lib/js/video-js/video.js"></script><!-- videoJS -->
+	<script type="text/javascript" src="_lib/js/videoplayer.src.js"></script><!-- videoplayer -->
+<!-- JS:CUSTOM -->
+	<script type="text/javascript"><!-- page specifics -->
+	</script>
+</head>
+
+<!-- BODY -->
+<body>
+
+	<!-- VIDEO WIDGET -->
+	<div id='video1Container' class='videoContainer nfp'>		
+		<!-- PLAYER -->
+		<div id='video1' class='video'>	
+			<!-- HTML5 -->
+			<video id='video1HTML5' class='videoHTML5 video-js vjs-synod-skin' controls='controls' preload='auto' width='640' height='400' poster="http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.jpg">
+				<source type='video/mp4' src='http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.mp4'>
+				<source type='video/ogg' src='http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.ogv'>
+				<source type='video/webm' src='http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.webm'>
+			</video>
+			<!-- FLASH -->
+			<div id='video1Flash' class='videoFlash'>
+				<object id='video1FlashObj' data='_lib/swf/vidplayer_multi_purpose.swf' width='640' height='400' align='top' type='application/x-shockwave-flash' flashvars='tint=#0083c7&amp;loadBarTint=#666666&amp;autoplay=0&amp;mediaType=Progressive&amp;stream=http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.flv'>
+					<param name='allowScriptAccess' value='sameDomain' />
+					<param name='allowFullScreen' value='true' />
+					<param name='movie' value='_lib/swf/vidplayer_multi_purpose.swf' />
+					<param name='quality' value='high' />
+					<param name='bgcolor' value='#000000' />
+					<param name="wmode" value="opaque" />
+					<param name='flashVars' value='tint=#0083c7&amp;loadBarTint=#666666&amp;autoplay=0&amp;mediaType=Progressive&amp;stream=http://dl.dropbox.com/u/3578306/Work/vids/vid_logo.flv' />
+					<!-- FALLBACK -->
+					<p class='noflash'><b>Please <a href='http://get.adobe.com/flashplayer/' target='_blank'>Install Adobe Flash Player to view this content.</a></b></p>
+				</object>						
+			</div> 
+		</div><!-- PLAYER ends -->
+	</div><!-- VIDEO WIDGET ends -->
+								
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 9]>    <html class="ie9" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<!-- Mobile viewport optimized -->
+<meta name="viewport" content="width=device-width,maximum-scale=1.0" />
+<!-- Base URL -->
+<base href="../" /> 
+<!-- Title -->
+<title>Fraynework Front-End Template</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- CSS:FONTS -->
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/font/DINPro-webfont/font.css" />
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/font/PTSans-webfont/font.css" />
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/font/StMarie-Thin-webfont/font.css" />
+<!-- CSS:COMMON -->
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/css/common.css" /><!-- main -->
+	<link type="text/css" rel="stylesheet" media="print" href="_lib/css/print.css" /><!-- print -->
+<!-- CSS:CUSTOM -->
+	<link type="text/css" rel="stylesheet" media="screen" href="_lib/css/slideshow.css" /><!-- slideshow -->
+	<style type="text/css"><!-- page specifics -->
+		/*insert code here*/
+	</style>
+<!-- JS:COMMON -->
+	<script type="text/javascript" src="_lib/js/jquery-1.6.4.min.js"></script><!-- jQuery -->
+	<script type="text/javascript" src="_lib/js/common.js"></script><!-- common utils -->
+<!-- JS:LIB -->
+	<script type="text/javascript" src="_lib/js/jquery.cycle.js"></script><!-- cycle -->
+	<!--[if lt IE 7 ]>
+	<script type="text/javascript" src="_lib/js/dd_belatedpng.js"></script>
+	<script type="text/javascript">DD_belatedPNG.fix("img,.pngBg");</script>
+	<![endif]-->
+<!-- JS:CUSTOM -->
+	<script type="text/javascript"><!-- page specifics -->
+		$(document).ready(function(){
+			/**********************************************************/ 
+			/* Cycle Plugin (for slideshow or carousels)
+			/* Demo: 
+			/* http://jquery.malsup.com/cycle/more.html?v2.23
+			/* http://jquery.malsup.com/cycle/goto2.html
+			/**********************************************************/
+			$('#slideshow').cycle({
+				fx: 'fade',//transition effect
+				speed: '1000',//transition speed(ms)
+				timeout: 6000,//slideshow interval(ms)
+				pager: '#slideshowControls',//'null' if none
+				slideExpr: '.slide'//class for slide items
+			}); 
+		});
+	</script>
+</head>
+
+<!-- BODY -->
+<body class="home">
+
+<!-- CONTAINER -->
+<div id="container">
+	
+	<!-- HEADER -->
+	<div id="header">
+		
+		<h1>Fraynework Front-End Template</h1>
+		<p>Version: 0.13 (XHTML) | Date: 2012.02.27</p>
+		
+		<!-- NAV -->
+		<ul id="nav">
+			<li id="nav00"><a class="ir selected" href="___samples/sample-home.html">Homepage</a></li>
+			<li id="nav01"><a class="ir" href="___samples/sample-standard.html">Standard</a></li>
+			<li id="nav02"><a class="ir" href="___samples/sample-standard-columns.html">Columns</a></li>
+			<li id="nav03"><a class="ir" href="___samples/sample-standard-styles.html">Styles</a></li>
+			<li id="nav04"><a class="ir" href="___samples/sample-standard-images.html">Images</a></li>
+			<li id="nav05"><a class="ir" href="___samples/sample-calendar.html">Calendar</a></li>
+		</ul><!-- NAV ends -->
+	
+	</div><!-- HEADER ends -->
+
+	<!-- MAIN -->
+	<div id="main">
+	
+		<!-- BANNER -->
+		<div id="banner">
+			
+			<!-- SLIDESHOW -->
+			<div id="slideshow">
+				<a id="slide1" class="slide" href="___samples/sample-standard.html"><img src="_lib/img/slideshow1.jpg" border="0" alt="" /></a>
+				<a id="slide2" class="slide" href="___samples/sample-standard-columns.html"><img src="_lib/img/slideshow2.jpg" border="0" alt="" /></a>
+				<a id="slide3" class="slide" href="___samples/sample-standard-styles.html"><img src="_lib/img/slideshow3.jpg" border="0" alt="" /></a>
+				<a id="slide4" class="slide" href="___samples/sample-standard-images.html"><img src="_lib/img/slideshow4.jpg" border="0" alt="" /></a>
+				<!-- 
+				<a id="slide5" class="slide" href=""><img src="_lib/img/slideshow5.jpg" border="0" alt="" /></a>
+				<a id="slide6" class="slide" href=""><img src="_lib/img/slideshow6.jpg" border="0" alt="" /></a>
+				-->
+				<div id="slideshowControls"></div>
+			</div>
+			<!-- SLIDESHOW ends -->
+			
+		</div><!-- BANNER ends -->
+		
+		<!-- CONTENT -->
+		<div id="content">
+			
+			<!-- COLUMNS -->
+			<div id="columns" class="clearfix">
+				
+				<!-- COLUMN LEFT -->
+				<div class="columnLeft">
+					<!-- WELCOME -->
+					<p id="welcomeText">Welcome to Fraynework's Front-End Template. This serves as a template or starting point of Fraynework's standard website offering. You can also use it for other website projects but not everything included will be useful. Use the main navigation to see different sections of demonstrations and usages, and there'll be more stuff coming as we go...</p>
+				</div><!-- COLUMN LEFT ends -->
+				
+				<!-- COLUMN RIGHT -->
+				<div class="columnRight">
+					
+					<!-- NEWS -->
+					<div id="news">
+						
+						<h2>Latest News</h2>
+						
+						<!-- NEWS LISTING -->
+						<div class="newsListing">
+							<div class="newsItem">
+								<div class="imgThumb"><a href="#"><img src="http://placehold.it/110x90" border="0" alt=""/></a></div>
+								<div class="newsContent">
+									<p class="title"><a href="#">Lorem ipsum dolor sit</a></p>
+									<p class="date">6 September</p>
+									<p>Lorem ipsum dolor sit amet consectetur adipiscing</p>
+								</div>
+							</div>
+							<div class="newsItem">
+								<div class="imgThumb"><a href="#"><img src="http://placehold.it/110x90" border="0" alt=""/></a></div>
+								<div class="newsContent">
+									<p class="title"><a href="#">Lorem ipsum dolor sit</a></p>
+									<p class="date">6 September</p>
+									<p>Lorem ipsum dolor sit amet consectetur adipiscing</p>
+								</div>
+							</div>
+							<!-- HTML5 compliant markup
+							<a class="newsItem last-child" href="">
+								<div class="imgThumb"><img src="http://placehold.it/110x90" border="0" alt=""/></div>
+								<div class="newsContent">
+									<p class="title">Nunc luctus et erdiet ante</p>
+									<p class="date">10 September</p>
+									<p>Aenean vitae nisi in nunc luctus et erdiet ante.</p>
+								</div>
+							</a>
+							-->
+						</div><!-- NEWS LISTING ends -->
+						
+					</div><!-- NEWS ends -->
+					
+				</div><!-- COLUMN RIGHT ends -->
+							
+			</div><!-- COLUMNS ends -->
+					
+		</div><!-- CONTENT ends -->	
+		
+	</div><!-- MAIN ends -->
+	
+	<!-- FOOTER -->
+	<div id="footer">
+		<ul class="listLinks clearfix">
+			<li>&copy;&nbsp;2011 Fraynework&nbsp;Limited.</li>
+			<li><a href="">Contact Us</a></li>
+			<li><a href="">Terms of Use</a></li>
+			<li><a href="">Site Map</a></li>
+			<li class="last-child"><a href="" target="_blank">Login</a></li>
+			<li id="FWenabled"><a class="ir pngBg" href="http://www.fraynework.com.au" target="_blank"><strong>fraynework</strong>&nbsp;<em>enabled</em></a></li>
+		</ul>
+	</div><!-- FOOTER ends -->
+
+</div><!-- CONTAINER ends -->
+</body>
+</html>

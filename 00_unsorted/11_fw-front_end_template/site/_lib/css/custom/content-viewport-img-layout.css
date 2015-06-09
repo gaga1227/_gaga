@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* ------------------------------------------------------------------------------ */
+/* image object styles (for fckstyles.xml) */
+/* ------------------------------------------------------------------------------ */
+.contentViewport img.designBorderedImage {	border:none; border-bottom:3px solid #999; padding-bottom:2px; }
+
+/* ------------------------------------------------------------------------------ */
+/* image in content */
+/* ------------------------------------------------------------------------------ */
+.contentViewport img,
+.contentViewport img.designBorderedImage,
+.contentViewport img.leftAligned,
+.contentViewport img.rightAligned { margin-top:0px; }
+
+.contentViewport img.leftAligned { float:left; margin:0 20px 20px 0; }
+.contentViewport img.rightAligned { float:right; margin:0 0 20px 20px; }
+
+/* ------------------------------------------------------------------------------ */
+/* image wrapper universal */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .imgWrapper { margin:0 0 20px 0; }
+.contentViewport .imgWrapper img { 
+	display:block!important;
+	margin:0!important;
+	border-bottom:0px solid #fff!important;
+	background:transparent!important; 
+}
+.contentViewport .imgWrapper .caption {	
+	display:block!important; 
+	margin:0!important; 
+	float:none!important; 
+	clear:both!important;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* image sizes */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .imgWrapper_151, 
+.contentViewport .imgWrapper_200, 
+.contentViewport .imgWrapper_250, 
+.contentViewport .imgWrapper_310,
+.contentViewport .imgWrapper_420,
+.contentViewport .imgWrapper_640 { display:block; border-bottom:0px solid #999; overflow:hidden; }
+
+.contentViewport .imgWrapper_151 { width:151px; }
+.contentViewport .imgWrapper_200 { width:200px; }
+.contentViewport .imgWrapper_250 { width:250px; }
+.contentViewport .imgWrapper_310 { width:310px; }
+.contentViewport .imgWrapper_420 { width:420px; }
+.contentViewport .imgWrapper_640 { width:640px; }
+
+/* ------------------------------------------------------------------------------ */
+/* single-image layouts */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .imgWrapper.leftAligned { float:left; margin:0 30px 20px 0; }
+.contentViewport .imgWrapper.rightAligned {	float:right; margin:0 0 20px 30px; }
+.contentViewport .column200 .imgWrapper { float:none!important; clear:both!important; margin:0 0 20px 0!important; }
+
+/* ------------------------------------------------------------------------------ */
+/* multi-image layouts (you can add new gap sizes to suit your design) */
+/* ------------------------------------------------------------------------------ */
+
+/*multi-image layouts to occupy full width*/
+.contentViewport .imgWrapper.gap_10, 
+.contentViewport .imgWrapper.gap_12,
+.contentViewport .imgWrapper.gap_15,
+.contentViewport .imgWrapper.gap_20,
+.contentViewport .imgWrapper.gap_25 { float:none; clear:both; overflow:hidden;}
+/*float*/
+.contentViewport .imgWrapper.gap_10 div, 
+.contentViewport .imgWrapper.gap_12 div,
+.contentViewport .imgWrapper.gap_15 div,
+.contentViewport .imgWrapper.gap_20 div,
+.contentViewport .imgWrapper.gap_25 div { float:left; }
+/*gap sizes*/
+.contentViewport .imgWrapper.gap_10 div { margin-left:10px; }
+.contentViewport .imgWrapper.gap_12 div { margin-left:12px; }
+.contentViewport .imgWrapper.gap_15 div { margin-left:15px; }
+.contentViewport .imgWrapper.gap_20 div { margin-left:20px; }
+.contentViewport .imgWrapper.gap_25 div { margin-left:25px; }
+/*cancel first image's margin-left*/
+.contentViewport .imgWrapper.gap_10 div:first-child,
+.contentViewport .imgWrapper.gap_10 div.first-child, 
+.contentViewport .imgWrapper.gap_12 div:first-child,
+.contentViewport .imgWrapper.gap_12 div.first-child,
+.contentViewport .imgWrapper.gap_15 div:first-child,
+.contentViewport .imgWrapper.gap_15 div.first-child,
+.contentViewport .imgWrapper.gap_20 div:first-child,
+.contentViewport .imgWrapper.gap_20 div.first-child,
+.contentViewport .imgWrapper.gap_25 div:first-child,
+.contentViewport .imgWrapper.gap_25 div.first-child { margin:0; padding:0; }
+
+/* ------------------------------------------------------------------------------ */
+/* CSS for printing */
+/* ------------------------------------------------------------------------------ */
+@media print
+{
+/*to avoid print issue for floated items across pages*/
+.contentViewport .imgWrapper.gap_10, 
+.contentViewport .imgWrapper.gap_12,
+.contentViewport .imgWrapper.gap_15,
+.contentViewport .imgWrapper.gap_20,
+.contentViewport .imgWrapper.gap_25 { page-break-before:always; }
+}

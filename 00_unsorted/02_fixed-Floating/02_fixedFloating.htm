@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fixed floating elements</title>
+<link href="web.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var top = $("#floatContent").offset().top - parseFloat($("#floatContent").css("margin-top").replace(/auto/,0));
+		$(window).scroll(function() {
+			// what the y position of the scroll is
+			var y = $(this).scrollTop();
+			console.log('current Y: ' + y);
+			// whether that's below the form
+			if (y >= top) {
+			  // if so, ad the fixed class
+			  if ($('#floatContent').css('position') != 'fixed') {
+				  $('#floatContent').addClass('fixed');
+				  console.log('switched to position:fixed');
+			  }	
+			} else {
+			  // otherwise remove it
+			  if ($('#floatContent').css('position') == 'fixed') {
+				$('#floatContent').removeClass('fixed'); 
+				console.log('switched to position:absolute'); 
+			  }			  
+			}
+		});
+	});
+</script>
+</head>
+
+<body>
+<div id="container">
+	<div id="notes">
+		<h1>Fixed Floating Elements</h1>
+		<p>Last update:2011.05.10</p>
+		<p>From a tutorial on jQuery for Designers</p>
+		<p>Notes: CSS based. Fixed positioning not working in IE6, unless using JS to set top positioning in realtime.</p>
+	</div>
+	
+	<div id="pageContent">
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed lorem   enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices   posuere cubilia Curae; Pellentesque in scelerisque lacus. Mauris rhoncus   dui sed purus condimentum commodo. Praesent varius massa at est   vestibulum vitae suscipit quam ullamcorper. Sed lobortis nunc sed leo   tempor eget gravida arcu accumsan. Phasellus at quam magna, in convallis   nibh. Aenean facilisis consectetur felis a ultrices. Vestibulum eget   quam libero. Fusce et enim nibh. Morbi ultrices metus vel nibh lobortis   id venenatis lectus dignissim. Aenean sagittis volutpat purus non   pellentesque. </p>
+		<p> Fusce vel risus magna. Aliquam convallis justo vitae mauris congue   fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et   ultrices posuere cubilia Curae; Cras sodales scelerisque felis, quis   varius quam venenatis quis. Proin laoreet pulvinar suscipit. Donec at   lectus id neque volutpat venenatis vel nec mauris. Suspendisse vel dolor   nibh. Proin at augue quis risus ultrices tincidunt. Nulla id tortor   dui. Mauris elementum mollis sapien ut commodo. Sed vel neque elit.   Suspendisse in enim vitae nisl facilisis convallis id a arcu. Integer   nec velit arcu, a lacinia odio. Vestibulum ante ipsum primis in faucibus   orci luctus et ultrices posuere cubilia Curae; Sed non orci arcu.   Suspendisse pretium turpis in augue tempus non pharetra lacus   consectetur. Etiam auctor neque quis dui posuere pulvinar. </p>
+		<p> Donec et mi sem, at placerat lacus. Integer ut risus feugiat nulla   ultricies blandit. Cras at suscipit nulla. Duis aliquet dui eu elit   vulputate laoreet. Nunc erat nisi, molestie blandit congue non,   fringilla in tellus. Sed dui nulla, iaculis vitae rutrum et, pharetra   pulvinar justo. Phasellus cursus eros id libero molestie at dictum odio   fringilla. Nunc vel mauris at massa scelerisque commodo luctus quis   purus. In quis libero elit. Mauris massa lorem, tempor in commodo sed,   venenatis at nunc. Nullam erat magna, vestibulum sed pharetra a, ornare   porttitor mi. </p>
+		<p> Nam interdum dignissim sapien, et pulvinar mi luctus eu. Lorem ipsum   dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,   consectetur adipiscing elit. Integer placerat est eu nisi vestibulum   eget sagittis quam convallis. Nulla egestas vestibulum nibh, sit amet   scelerisque risus viverra eget. Suspendisse faucibus massa hendrerit   libero luctus semper. In lacinia eleifend augue, quis consectetur tellus   varius nec. Phasellus nec felis felis, at posuere dui. Nam augue est,   aliquet a auctor quis, adipiscing quis est. Curabitur luctus iaculis   accumsan. Curabitur gravida, velit id imperdiet fermentum, libero elit   laoreet libero, in varius felis leo eget lorem. Fusce ultricies   ullamcorper augue et semper. Praesent iaculis pretium nisi, eget   vehicula purus consequat ut. Nulla volutpat molestie nibh, id   ullamcorper nisl placerat quis. Pellentesque lacinia tristique arcu id   fermentum. Sed eget nunc odio. Donec ac enim leo, sit amet elementum   est. Sed non nulla quam, ac viverra enim. Cum sociis natoque penatibus   et magnis dis parturient montes, nascetur ridiculus mus. </p>
+		<p> Phasellus non arcu eget nisl condimentum ullamcorper eget ac est. Sed   consequat fringilla auctor. Phasellus consequat faucibus aliquet. Mauris   fermentum eleifend nisl id vehicula. Sed risus lacus, accumsan in   scelerisque sed, congue et neque. Pellentesque erat nibh, egestas in   tincidunt consectetur, molestie at sapien. Praesent at mi eu nisl   pretium sodales id vel orci. Phasellus malesuada, metus vitae fringilla   semper, ligula diam blandit odio, vitae ullamcorper odio turpis ut   neque. Aenean condimentum, est nec faucibus hendrerit, augue elit   interdum nisi, eu cursus velit diam in tortor. Vivamus rhoncus dignissim   sapien. Nullam ipsum risus, interdum et interdum at, mollis vel tortor.   Donec et est velit. Duis ac tincidunt justo. Aliquam sit amet felis   risus, eget pellentesque magna. </p>
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed lorem   enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices   posuere cubilia Curae; Pellentesque in scelerisque lacus. Mauris rhoncus   dui sed purus condimentum commodo. Praesent varius massa at est   vestibulum vitae suscipit quam ullamcorper. Sed lobortis nunc sed leo   tempor eget gravida arcu accumsan. Phasellus at quam magna, in convallis   nibh. Aenean facilisis consectetur felis a ultrices. Vestibulum eget   quam libero. Fusce et enim nibh. Morbi ultrices metus vel nibh lobortis   id venenatis lectus dignissim. Aenean sagittis volutpat purus non   pellentesque. </p>
+		<p> Fusce vel risus magna. Aliquam convallis justo vitae mauris congue   fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et   ultrices posuere cubilia Curae; Cras sodales scelerisque felis, quis   varius quam venenatis quis. Proin laoreet pulvinar suscipit. Donec at   lectus id neque volutpat venenatis vel nec mauris. Suspendisse vel dolor   nibh. Proin at augue quis risus ultrices tincidunt. Nulla id tortor   dui. Mauris elementum mollis sapien ut commodo. Sed vel neque elit.   Suspendisse in enim vitae nisl facilisis convallis id a arcu. Integer   nec velit arcu, a lacinia odio. Vestibulum ante ipsum primis in faucibus   orci luctus et ultrices posuere cubilia Curae; Sed non orci arcu.   Suspendisse pretium turpis in augue tempus non pharetra lacus   consectetur. Etiam auctor neque quis dui posuere pulvinar. </p>
+		<p> Donec et mi sem, at placerat lacus. Integer ut risus feugiat nulla   ultricies blandit. Cras at suscipit nulla. Duis aliquet dui eu elit   vulputate laoreet. Nunc erat nisi, molestie blandit congue non,   fringilla in tellus. Sed dui nulla, iaculis vitae rutrum et, pharetra   pulvinar justo. Phasellus cursus eros id libero molestie at dictum odio   fringilla. Nunc vel mauris at massa scelerisque commodo luctus quis   purus. In quis libero elit. Mauris massa lorem, tempor in commodo sed,   venenatis at nunc. Nullam erat magna, vestibulum sed pharetra a, ornare   porttitor mi. </p>
+		<p> Nam interdum dignissim sapien, et pulvinar mi luctus eu. Lorem ipsum   dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,   consectetur adipiscing elit. Integer placerat est eu nisi vestibulum   eget sagittis quam convallis. Nulla egestas vestibulum nibh, sit amet   scelerisque risus viverra eget. Suspendisse faucibus massa hendrerit   libero luctus semper. In lacinia eleifend augue, quis consectetur tellus   varius nec. Phasellus nec felis felis, at posuere dui. Nam augue est,   aliquet a auctor quis, adipiscing quis est. Curabitur luctus iaculis   accumsan. Curabitur gravida, velit id imperdiet fermentum, libero elit   laoreet libero, in varius felis leo eget lorem. Fusce ultricies   ullamcorper augue et semper. Praesent iaculis pretium nisi, eget   vehicula purus consequat ut. Nulla volutpat molestie nibh, id   ullamcorper nisl placerat quis. Pellentesque lacinia tristique arcu id   fermentum. Sed eget nunc odio. Donec ac enim leo, sit amet elementum   est. Sed non nulla quam, ac viverra enim. Cum sociis natoque penatibus   et magnis dis parturient montes, nascetur ridiculus mus. </p>
+		<p> Phasellus non arcu eget nisl condimentum ullamcorper eget ac est. Sed   consequat fringilla auctor. Phasellus consequat faucibus aliquet. Mauris   fermentum eleifend nisl id vehicula. Sed risus lacus, accumsan in   scelerisque sed, congue et neque. Pellentesque erat nibh, egestas in   tincidunt consectetur, molestie at sapien. Praesent at mi eu nisl   pretium sodales id vel orci. Phasellus malesuada, metus vitae fringilla   semper, ligula diam blandit odio, vitae ullamcorper odio turpis ut   neque. Aenean condimentum, est nec faucibus hendrerit, augue elit   interdum nisi, eu cursus velit diam in tortor. Vivamus rhoncus dignissim   sapien. Nullam ipsum risus, interdum et interdum at, mollis vel tortor.   Donec et est velit. Duis ac tincidunt justo. Aliquam sit amet felis   risus, eget pellentesque magna. </p>
+	</div>
+	
+	<div id="floatContentWrapper">
+		<div id="floatContent">
+			<form>
+			<p class="formrow"><label for="yourname">Name:</label>
+			  <input type="text" value="" name="name" id="yourname" class="text"></p>
+			<p class="formrow"><label for="yoururl">URL:</label>
+			  <input type="text" name="url" id="yoururl" class="text"></p>
+			<p class="formrow"><textarea name="body" cols="35" rows="10"></textarea></p>
+			<p><input type="button" value="Preview comment"></p>
+			</form>
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>

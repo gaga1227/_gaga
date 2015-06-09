@@ -1,0 +1,480 @@
+@charset "utf-8";
+
+/* Normalisation Adapted from HTML5 Boilerplate 2 (20111003 JX) */   
+/* =============================================================================
+   Base
+   ========================================================================== */
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+ */
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body { margin: 0; font-size: 13px; line-height: 1.231;height:100%; /* Important */ }
+body, button, input, select, textarea { font-family: sans-serif; color: #222; }
+/* 
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Customize the background color to match your design
+ */
+::-moz-selection { background: #666; /*grey*/ color: #fff; text-shadow: none; }
+::selection { background: #666; /*grey*/ color: #fff; text-shadow: none; }
+/* =============================================================================
+   Links
+   ========================================================================== */
+a { color: #6e6e6e; /*grey*/ } 
+a:visited { color: #000000; /*black*/ }
+a:hover { color: #000000; /*black*/ }
+a:focus { outline: thin dotted; }
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+a:hover, a:active { outline: 0; }
+/* CSS3 transitions on links */
+a {
+	/* Firefox 4 */
+	-moz-transition-property:color, background-color, border-color;
+	-moz-transition-duration:0.2s;
+	-moz-transition-timing-function:ease-in-out;
+	-moz-transition-delay:0s;
+	/* Safari and Chrome */
+	-webkit-transition-property:color, background-color, border-color;
+	-webkit-transition-duration:0.2s;
+	-webkit-transition-timing-function:ease-in-out;
+	-webkit-transition-delay:0s;
+	/*native CSS3*/
+	transition-property: color, background-color, border-color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+	transition-delay: 0s;
+}
+
+.last-child {margin:0;padding:0; border:0;}
+.first-child {margin:0;padding:0; border:0;}
+
+/* =============================================================================
+   Typography
+   ========================================================================== */
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+blockquote { margin: 1em 40px; }
+dfn { font-style: italic; }
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #949494; margin: 1em 0; padding: 0; }
+ins { background: #ff9; color: #000; text-decoration: none; }
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; } 
+/* Improve readability of pre-formatted text in all browsers */
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+small { font-size: 85%; }
+/* Position subscript and superscript content without affecting line-height: h5bp.com/k */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+/* =============================================================================
+   Lists
+   ========================================================================== */
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+dd { margin: 0 0 0 40px; }
+nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
+ 
+
+/* ==|== primary styles =====================================================
+   Author: MP 20120206
+   ========================================================================== */
+   
+/* ------------------------------------------------------------------------------ */
+/* global */
+/* ------------------------------------------------------------------------------ */
+body { 
+	background:#f3f1e5;  
+	font-family:Arial,;
+	font-size:13px;
+	font-weight:normal;
+	line-height:20px;/*1.5x of font-size*/ 
+}
+
+	/* container (can be used as a page background container) */
+	#container {
+		background:#FFF;  
+		position:relative;
+		width:880px; 
+		min-width:880px; 
+		margin:50px auto 0;
+		padding:0 50px 0;  /*50px margines on either side*/
+	}
+	
+
+/* ------------------------------------------------------------------------------ */
+/* header */
+/* ------------------------------------------------------------------------------ */
+#header {
+	width:880px; 
+	min-height:48px;
+	position:relative; 
+	margin:0 auto;
+	padding:0 0 20px;
+	overflow:visible;  
+}
+
+
+	#title{
+	font-family: Arial;
+	font-stretch: expanded;
+	font-weight: bold;
+	font-size:20px;
+	line-height:42px;
+	color:#FFF;
+	text-transform: uppercase;
+	/*Styling*/
+	background:#3e3d3c;
+	margin:0;
+	padding: 8px 15px 10px;
+	letter-spacing: 0.05em;
+	}
+	
+	/*nav*/ 
+	#nav { 
+		position:relative;
+		padding:0;
+		top:0;
+		left:0; 
+		margin:0; 
+		width:880px;
+		height:70px;
+		overflow:hidden;  
+	}
+	
+		/*nav items*/
+		#nav li{border-left: 1px solid;}
+		
+		#nav li, #nav a { 
+			color:#000;
+			text-transform: uppercase;
+			text-decoration:none;
+			font-size:12px;
+			font-weight:bold;
+			display:inline; 
+			top:0; 
+			margin:0;
+			padding:0 10px 0 10px;
+			height:55px; 
+		}	
+		
+		
+		#nav li.first-child, #nav li.first-child a{margin-left:0 !important ;padding-left:0 !important ; border:0 !important;}
+		 
+		#nav a:hover{text-decoration:underline !important;}
+		#nav a:visited{text-decoration:none;}
+		
+	
+ /* ------------------------------------------------------------------------------ */
+/* content */
+/* ------------------------------------------------------------------------------ */
+.content {
+	width:880px;  
+	position:relative; 
+	margin:0;
+	padding:0 0 30px;
+	overflow:visible; 
+	background-color:#FFF; 
+}
+
+.titlesWrapper{
+		display:table;
+		width:880px;   
+		margin:0;
+		padding:0;
+		overflow: hidden;
+}
+
+	.sectionTitle{   
+		float:left;
+		clear:left;
+		display:table-cell;   
+		width:22.72727272727273%; 
+		height:100%;
+		border-top: 4px solid #949494;
+		border-bottom: 2px solid #949494;
+		padding:15px 0 35px;  
+		margin-bottom: -1000px; 
+		padding-bottom: 1000px;
+	}
+	
+	.gap{   
+		display:table-cell; 
+		width:4.545454545454545%;  
+		margin:0;
+		padding:0;
+	}
+	 
+	 
+	.pageTitle{   
+		float:right;
+		clear:right;
+		display:table-cell;   
+		width:72.72727272727273%;  
+		height:100%; 
+		border-top: 4px solid #000;
+		border-bottom: 2px solid #000;
+		padding:12px 0 35px; 
+		margin-bottom: -1000px;  
+		padding-bottom: 1000px;
+	} 
+	
+	.sectionTitle h2 {
+		color: #6e6e6e;
+		font-family: Arial,sans-serif;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 17px;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		padding:0;
+		margin:0 0 35px;
+	}
+	.pageTitle h1 {
+		color: #000;
+		font-family: Arial ,sans-serif;
+		font-size: 30px;
+		font-weight: bold;
+		line-height: 33px; 
+		letter-spacing: 0.02em;
+		padding:0;
+		margin:0 0 35px;
+	}
+	
+	
+	.columnLeft{
+		float:left;
+		clear:left; 
+		width:22.72727272727273%; 
+		border-top: 2px solid #949494;
+	}
+	
+	
+	
+	.columnRight{ 
+		float:right;
+		clear:right;
+		width:72.72727272727273%;  
+		border-top: 2px solid #000; 
+	}
+	
+	
+	
+
+/* ------------------------------------------------------------------------------ */
+/* side nav */ 
+/* ------------------------------------------------------------------------------ */
+#sideNav {
+	list-style:none;
+	margin:20px 0 50px 0;
+	padding:0;
+	width:200px;
+	overflow:hidden;
+}
+	/*level 1 nav items*/
+	#sideNav li {
+		color:#232323;
+		font-size:13px;
+		font-weight:bold;
+		line-height:16px;
+		margin:0;
+		padding:0 0 6px 0;
+		width:100%;
+		overflow:hidden;
+		border-bottom:1px solid #999;
+	}	
+	#sideNav li.last-child { border-bottom:none; }
+	#sideNav li:last-child { border-bottom:none; }
+	
+	/*level 1 links*/
+	#sideNav li a,
+	#sideNav li a:link,
+	#sideNav li a:active,
+	#sideNav li a:visited {
+		color: #555; 
+		text-decoration: none; 
+		display: block; 
+		margin:0;
+		padding:10px 0 10px 0px;
+	}
+	#sideNav li a:hover { color:#000; }
+	
+		/*level 2 nav items*/
+		#sideNav li ul { list-style:none; margin:0; padding:7px 0 10px 0; display: none; }
+		#sideNav li.selected ul { display: block; }
+		.ie6 #sideNav li.selected ul { 
+			list-style-type: none;  
+			 margin:0; 
+			 padding:0;
+		}
+		
+		#sideNav li li {
+			color:#555;
+			font-size:12px;
+			font-weight:bold;
+			line-height:14px;
+			margin:0;
+			padding:0;
+			width:200px;			
+		}		
+		
+		.ie6 #sideNav li li {  
+		}		
+		
+		#sideNav li li { border-bottom:none; }
+		#sideNav li li.last-child { border-bottom:none; }
+		#sideNav li li:last-child { border-bottom:none; }
+		
+		/*level 2 links*/
+		/*#sideNav li li a:before{content: "> "; padding:0 0 15px 0px;} */ 
+		
+		.arrow-right {
+			position:absolute;
+			width:5px;
+			height:5px;
+			left:0;
+			border-bottom: 4px solid transparent;
+			border-left: 4px solid #6e6e6e;
+			border-top: 4px solid transparent;
+			margin-top:3px;
+			height: 0;
+			width: 0;
+		}
+		
+		.ie6 .arrow-right { 
+			border-bottom: none;
+			border-left: none;
+			border-top: none; 
+			margin:0;
+			padding:0; 	
+				
+		}
+		
+		
+		#sideNav li li a,
+		#sideNav li li a:link,
+		#sideNav li li a:active,
+		#sideNav li li a:visited { color: #555; padding:0 0 15px 0; margin-left:10px; }
+		#sideNav li li a:hover { color: #000 !important;	}
+	
+	/*selected*/
+	#sideNav li .selected,
+	#sideNav li li.selected a { color: #000 !important;}
+	#sideNav li a.selected:hover,  	
+	#sideNav li li.selected a:hover { color: #000 !important; cursor: default !important; } 	
+	
+	.ie6 #sideNav li .selected,
+	#sideNav li li.selected a { color: #000 !important; margin-top:1px;}
+	
+	.ie7 #sideNav li .selected,
+	#sideNav li li.selected a { color: #000 !important; margin-top:1px;}
+	
+
+
+/* ------------------------------------------------------------------------------ */
+/* content styles */ 
+/* ------------------------------------------------------------------------------ */
+
+
+.leaderText{
+    color: #000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    margin: 0;
+    padding: 25px 0 15px;
+}
+
+p {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 24px;
+    margin: 0;
+    padding: 10px 0 15px;
+}
+
+
+
+/*players*/
+.audioPlayer, .galleryPlayer,
+.videoPlayer{ text-align:center; background-color:#c0c0bf;display:table;vertical-align:middle; margin-top:25px;} 
+
+/*video player styles*/
+.videoPlayer{width:640px; height:360px;} 
+
+/*audio player styles*/
+.audioPlayer{width:640px; height:120px;} 
+
+/*gallery player styles*/
+.galleryPlayer{width:640px; height:520px;}
+
+
+.audioPlayer p, .galleryPlayer p,
+.videoPlayer p{display: table-cell; vertical-align: middle; text-align: center; color:#FFF; margin-top:0;} 
+
+
+/*ie hack to vertically centre the text*/
+.audioPlayer p, .galleryPlayer p,
+.videoPlayer p{*margin-top: expression(this.offsetHeight < this.parentNode.offsetHeight ? parseInt((this.parentNode.offsetHeight - this.offsetHeight) / 2) + "px" : "0");}
+
+
+
+/* ------------------------------------------------------------------------------ */
+/* footer */ 
+/* ------------------------------------------------------------------------------ */
+
+
+.footer {   
+		position:relative;
+		width:880px; 
+		min-width:880px; 
+		margin:5px auto;
+		padding:0 50px 100px;  /*50px margines on either side*/ 
+}
+
+.footer p a{ 
+    color: #555;
+	text-decoration:none;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 24px;
+    margin: 0;
+    padding: 10px 0 15px; 
+}
+
+.footer p a:hover{ 
+	text-decoration:underline;
+	color: #000;
+}
+
+
+	
+/* ==|== non-semantic helper classes ========================================
+   Please define your styles before this section.
+   ========================================================================== */
+/* For image replacement */
+.ir { display:block; border:0; text-indent:-999em; overflow:hidden; background-color:transparent; background-repeat:no-repeat; text-align:left; direction:ltr; line-height:1px; }
+.ir br { display: none; }
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+/* Contain floats: h5bp.com/q */ 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+.clear { clear:both; }
+.clearer { float: none;	clear: both; height: 0;	line-height: 0;	overflow: hidden; visibility: hidden; }
+/* convert a list of links to a horizontal line of links with pipe seps (JX 20111004) */
+.listLinks { list-style:none; overflow:visible; }
+	.listLinks li { float:left; padding-right:8px; margin-right:8px; border-right: 1px solid; background: none; }
+	/*.listLinks li:last-child { border-right:none; padding-right:0; }*/
+	.listLinks li.last-child { border-right:none; padding-right:0; }

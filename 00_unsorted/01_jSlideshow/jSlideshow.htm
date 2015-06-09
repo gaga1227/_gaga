@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>01_jSlideshow</title>
+<link href="css/web.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+<script src="js/jSlideshow.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//if there's any slide elements
+		if ($('#slideShow .slide').size() > 1) { 
+			//show slideControl #wrapper and center align by giving a width
+			$('#slideControl #wrapper')
+				//show control element
+				.css('display', 'block')
+				//calculate and set width 
+				.width((($('#slideShow .slide').size() * 12/*dot size*/) + 35 * 2)/*prev,next size*/);
+
+			//invoke slides function
+			jSlideshow(
+				'#slideShow', //Slide container
+				'.slide', //Slide element
+				'#slideControlDots', //Pagination control
+				3, //Seconds between slides
+				10, //Max number of changes, set to '0' for unlimited looping
+				800 //Speed of transition (ms)
+			);
+		}
+    });
+</script>
+</head>
+
+<body>
+<div id="container">
+
+	<!-- general info-->
+	<div id="notes">
+		<h1>jQuery Slideshow Test</h1>
+		<p>Inspired by<a href="http://www.myer.com.au/">www.myer.com.au</a></p>
+		<p>Last update: 2011.05.09</p>
+	</div>
+	
+	<!-- test page HTML start -->
+	<div id="testContainer">
+		<div id="slideControl">
+			<div id="wrapper">
+				<a title="Prev" class="slideprev" href="javascript:void(0);"><img width="31" height="31" alt="" src="img/ico_arrow-lt-home.png"></a>
+				<div id="slideControlDots">
+					<!-- content added dynamicly -->
+				</div>
+				<a title="Next" class="slidenext" href="javascript:void(0);"><img width="31" height="31" alt="" src="img/ico_arrow-rt-home.png"></a>
+			</div>
+		</div>
+		<div id="slideShow">
+			<div class="slide" style="background: red;">1</div>
+			<div class="slide" style="background: green;">2</div>
+			<div class="slide" style="background: blue;">3</div>
+			<div class="slide" style="background: gold;">4</div>
+			<div class="slide" style="background: purple;">5</div>
+		</div>
+	
+	</div>
+	<!-- test page HTML end -->
+	
+</div>
+</body>
+</html>
+
+

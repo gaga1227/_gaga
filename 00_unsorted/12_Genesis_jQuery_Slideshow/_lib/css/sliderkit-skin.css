@@ -1,0 +1,124 @@
+/*  
+ *  This file is part of Slider Kit jQuery plugin.
+ *  http://www.kyrielles.net/sliderkit/
+ *  
+ *  Copyright (c) 2010-2011 Alan Frog
+ *  Licensed under the GNU General Public License
+ *  See <license.txt> or <http://www.gnu.org/licenses/>
+
+ */
+
+/* General */
+*{font-family: helvetica, arial, "sans-serif"}
+.slideshow{width:640px;height:443px;padding:0 0 76px;}
+.slideshow .sliderkit-panel { width:100%; height:400px; background:#333; text-align:center; vertical-align:middle;}
+
+/* Navbar */
+.slideshow .sliderkit-nav { left:0; top:400px; width:636px; padding:1px; background:#ebebd7; border:1px solid #ceceac; }
+	.slideshow .sliderkit-nav-clip ul li { float:left;margin:0; }
+		.slideshow .sliderkit-nav-clip ul li a { display:block; position:relative; width:100px; height:64px; overflow:hidden; margin:0; padding:0px 1px 0px 0px;
+		}
+		.slideshow .sliderkit-nav-clip ul li a .frame {
+			position:absolute; display:block; top:0px; left:0px; width:96px; height:60px; border:2px solid #fa8181; overflow:hidden; margin:0; padding:0px 0px 0px 0px;
+			/* transitions  */
+			opacity:0;
+			-webkit-transition-property: border-color, opacity;
+			-webkit-transition-duration: 0.2s, 0.2s;
+			-webkit-transition-timing-function: linear, linear;
+			-moz-transition-property: border-color, opacity;
+			-moz-transition-duration: 0.2s, 0.2s;
+			-moz-transition-timing-function: linear, linear;
+			-o-transition-property: border-color, opacity;
+			-o-transition-duration: 0.2s, 0.2s;
+			-o-transition-timing-function: linear, linear;
+			-ms-transition-property: border-color, opacity;
+			-ms-transition-duration: 0.2s, 0.2s;
+			-ms-transition-timing-function: linear, linear;
+			transition-property: border-color, opacity;
+			transition-duration: 0.2s, 0.2s;
+			transition-timing-function: linear, linear;
+		}
+		.slideshow .sliderkit-nav-clip ul li a:hover{}
+			.slideshow .sliderkit-nav-clip ul li a:hover .frame { opacity:1; }
+			.slideshow .sliderkit-nav-clip ul li.sliderkit-selected a .frame { opacity:1; border:2px solid #f0591c; }
+	
+
+
+/* Buttons */
+.slideshow .sliderkit-btn{position:absolute;top:1px;}
+.slideshow .sliderkit-btn a{display:block;height:64px;background-image:url("../img/arrows.png");background-repeat:no-repeat;}
+.slideshow .sliderkit-btn span{display:none;}
+
+/* Buttons > Go buttons */
+.slideshow .sliderkit-go-btn{width:14px;}
+.slideshow .sliderkit-nav .sliderkit-go-prev{left:1px;}
+.slideshow .sliderkit-nav .sliderkit-go-next{right:1px;}
+
+.slideshow .sliderkit-nav .sliderkit-go-prev a{background-position:-14px 0px;}
+.slideshow .sliderkit-nav .sliderkit-go-next a{background-position:-14px -65px;}
+
+.slideshow .sliderkit-nav .sliderkit-go-prev.sliderkit-btn-disable a{background-position:-28px 0px;}
+.slideshow .sliderkit-nav .sliderkit-go-next.sliderkit-btn-disable a{background-position:-28px -65px;}
+
+.slideshow .sliderkit-nav .sliderkit-go-prev a:hover,
+.slideshow .sliderkit-nav .sliderkit-go-prev a:focus{background-position:0px 0px;}
+.slideshow .sliderkit-nav .sliderkit-go-next a:hover,
+.slideshow .sliderkit-nav .sliderkit-go-next a:focus{background-position:0px -65px;}
+
+/* Panel > Textbox */
+.slideshow .sliderkit-panel .sliderkit-panel-textbox{bottom:0;left:0;height:26px;width:640px;}
+.slideshow .sliderkit-panel .sliderkit-panel-text{height:30px;padding:5px 15px;margin:0px;font-size:12px;color:#888;}
+.slideshow .sliderkit-panel .sliderkit-panel-text p{padding:0px;margin:0px;font-size:12px;font-weight:normal;color:#888;}
+.slideshow .sliderkit-panel .sliderkit-panel-overlay{height:30px;width:640px;background:#000;opacity:0.6;}
+
+/* Play Container */
+.slideshow .sliderkit-play-container {
+	position:absolute;
+	left:0;
+	top:468px;
+	width:636px;
+	padding:1px;
+	background:#f1f1e1;
+	border:1px solid #ceceac;
+	border-top:none;
+	height:44px;z-index:100;
+	
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
+	
+	background: #ebebd6; /* Old browsers */
+	background: -moz-linear-gradient(top, #ebebd6 0%, #dcdcbd 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebebd6), color-stop(100%,#dcdcbd)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ebebd6 0%,#dcdcbd 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ebebd6 0%,#dcdcbd 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #ebebd6 0%,#dcdcbd 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebebd6', endColorstr='#dcdcbd',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #ebebd6 0%,#dcdcbd 100%); /* W3C */
+}
+	.slideshow .sliderkit-play-btn {
+		position:absolute;
+		top:10px;
+		width:134px;
+		height:30px;
+	}
+		.slideshow .sliderkit-play-btn a {
+			display:block;
+			width:134px;
+			height:40px;
+			background-image:url("../img/controls.png");
+			background-repeat:no-repeat;
+			background-position:0px 0px;
+		}
+			.slideshow .sliderkit-play-btn a:hover { background-position:0px -40px; }
+			.slideshow .sliderkit-play-btn.sliderkit-pause-btn a { background-position:0px -80px; }
+			.slideshow .sliderkit-play-btn.sliderkit-pause-btn a:hover { background-position:0px -120px; }
+				.slideshow .sliderkit-play-btn span{ display:none; }
+
+
+/*custom extension - hidden control nav UI*/
+.slideshowNoUI{height:400px!important;padding-bottom:0!important;}
+.slideshowNoUI .sliderkit-nav,.slideshowNoUI .sliderkit-play-container{display:none!important;}

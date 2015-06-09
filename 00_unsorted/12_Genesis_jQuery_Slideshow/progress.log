@@ -1,0 +1,17 @@
+LOG:
+
+
+20111104
+
+- added custom switch 'hideControl' in options to hide control nav UI when slideshow only has single image
+- added custom function to hide UI depending on 'hideControl' value
+
+
+20110909
+
+- added autoresize function to accommodate any size images uploaded and properly displayed in viewport area
+
+
+
+WISHLIST:
+- rearrange resources for easier integration for projects

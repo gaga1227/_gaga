@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the sample templates definitions file. It makes the "templates"
+ * command completely customizable.
+ *
+ * See FCKConfig.TemplatesXmlPath in the configuration file.
+ *
+ * Sample: 
+ *
+ * <Template title="Image and Title" image="template1.gif">
+ *		<Description>One main image with a title and text that surround the image.</Description>
+ *		<Html>
+ *			<![CDATA[
+ *				<img style="MARGIN-RIGHT: 10px" height="100" alt="" width="100" align="left"/>
+ *				<h3>Type the title here</h3>
+ *				Type the text here
+ *			]]>
+ *		</Html>
+ *	</Template>
+ *
+-->
+<Templates imagesBasePath="fck_template/images/">
+
+	<!-- DIVIDERS -->
+	<Template title="Solid divider" image="tmpl-divider-solid.gif">
+		<Description>Inserts a red solid divider</Description>
+		<Html>
+			<![CDATA[
+			<div class="divider dividerSolid">&nbsp;</div>
+			]]>
+		</Html>
+	</Template>
+	
+	<Template title="Graphical divider" image="tmpl-divider-graphic.gif">
+		<Description>Inserts a graphical divider</Description>
+		<Html>
+			<![CDATA[
+			<div class="divider dividerGraphic">&nbsp;</div>
+			]]>
+		</Html>
+	</Template>
+	
+	<Template title="Lite divider" image="tmpl-divider-lite.gif">
+		<Description>Inserts a lite divider</Description>
+		<Html>
+			<![CDATA[
+			<div class="divider dividerLite">&nbsp;</div>
+			]]>
+		</Html>
+	</Template>
+	
+	<Template title="Dotted divider" image="tmpl-divider-dotted.gif">
+		<Description>Inserts a dotted divider</Description>
+		<Html>
+			<![CDATA[
+			<div class="divider dividerDotted">&nbsp;</div>
+			]]>
+		</Html>
+	</Template>	
+	
+	<!-- HIGHLIGHT BOXES -->
+	<Template title="Highlight text block" image="tmpl-box-highlightbox.gif">
+		<Description>Inserts a highlighted block of text</Description>
+		<Html>
+			<![CDATA[
+			<div class="blockTextHighlight">
+				<p>[Content here ...]</p>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- SPECIAL BOXES -->
+	<Template title="Special link box" image="tmpl-box-link.gif">
+		<Description>Inserts a special styled box for a link and its description</Description>
+		<Html>
+			<![CDATA[
+			<div class="specialBox link">
+				<p><a href="#">[link title]</a> <span class="note">([link note])</span><br />[Description for link]</p>
+			</div>
+			<p>&nbsp;</p>			
+			]]>
+		</Html>
+	</Template>	
+	
+	<Template title="Special Download box" image="tmpl-box-dl.gif">
+		<Description>Inserts a special styled box for a download item and its description</Description>
+		<Html>
+			<![CDATA[
+			<div class="specialBox dl">
+				<p><a href="#">[URL or title]</a> <span class="note">([note, e.g. Filesize, Format])</span><br />[Description for download item]</p>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- TABLE -->
+	<Template title="Table (two-column)" image="tmpl-table-styled.gif">
+		<Description>Inserts a two-column table with table headings in default styles.</Description>
+		<Html>
+			<![CDATA[
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="styledTable">
+				<tr class="noBorder">
+					<th>[column 1 heading]</th>
+					<th>[column 2 heading]</th>
+				</tr>
+				<tr>
+					<td>[cell content]</td>
+					<td>[cell content]</td>
+				</tr>
+				<tr>
+					<td>[cell content]</td>
+					<td>[cell content]</td>
+				</tr>
+				<tr>
+					<td>[cell content]</td>
+					<td>[cell content]</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<Template title="Table (Layout Mode)" image="tmpl-table-layout.gif">
+		<Description>Inserts a table with no borders, margins, cell-padding, or cell-spacing. Ideal for laying-out content.</Description>
+		<Html>
+			<![CDATA[
+			<table class="layoutMode">
+				<tr>
+					<td>[cell]</td>
+					<td>[cell]</td>
+				</tr>
+				<tr>
+					<td>[cell]</td>
+					<td>[cell]</td>
+				</tr>
+				<tr>
+					<td>[cell]</td>
+					<td>[cell]</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- IMAGES LAYOUTS -->
+	
+	<!-- 1up short -->
+	<Template title="Single short image (left)" image="tmpl-img-1up-short-lt.gif">
+		<Description>Inserts a single, short, left-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper leftAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x250.gif" width="250" height="250" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="Single short image (right)" image="tmpl-img-1up-short-rt.gif">
+		<Description>Inserts a single, short, right-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper rightAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x250.gif" width="250" height="250" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 1up medium -->
+	<Template title="Single medium image (left)" image="tmpl-img-1up-med-lt.gif">
+		<Description>Inserts a single, medium, left-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper leftAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x300.gif" width="250" height="300" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="Single medium image (right)" image="tmpl-img-1up-med-rt.gif">
+		<Description>Inserts a single, medium, right-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper rightAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x300.gif" width="250" height="300" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 1up tall -->
+	<Template title="Single tall image (left)" image="tmpl-img-1up-tall-lt.gif">
+		<Description>Inserts a single, tall, left-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper leftAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x400.gif" width="250" height="400" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>	
+	<Template title="Single tall image (right)" image="tmpl-img-1up-tall-rt.gif">
+		<Description>Inserts a single, tall, right-aligned image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper rightAligned">
+				<div class="imgWrapper_250"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-250x400.gif" width="250" height="400" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>	
+
+	<!-- 1up full short -->
+	<Template title="Single short full image" image="tmpl-img-1up-full-short.gif">
+		<Description>Inserts a single, short, full-width image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper">
+				<div class="imgWrapper_640"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-640x220.gif" width="640" height="220" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 1up full small -->
+	<Template title="Single small full image" image="tmpl-img-1up-full-sml.gif">
+		<Description>Inserts a single, small, full-width image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper">
+				<div class="imgWrapper_640"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-640x400.gif" width="640" height="400" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 1up full medium -->
+	<Template title="Single medium full image" image="tmpl-img-1up-full-med.gif">
+		<Description>Inserts a single, medium, full-width image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper">
+				<div class="imgWrapper_640"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-640x480.gif" width="640" height="480" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 1up full tall -->
+	<Template title="Single tall full image" image="tmpl-img-1up-full-tall.gif">
+		<Description>Inserts a single, tall, full-width image.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper">
+				<div class="imgWrapper_640"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-640x640.gif" width="640" height="640" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 2up Short -->
+	<Template title="2up short with caption" image="tmpl-img-2up-short-cap.gif">
+		<Description>Inserts a short 2up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_310 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x210.gif" width="310" height="210" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_310"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x210.gif" width="310" height="210" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="2up short" image="tmpl-img-2up-short.gif">
+		<Description>Inserts a short 2up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_310 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x210.gif" width="310" height="210" alt=""></div>
+				<div class="imgWrapper_310"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x210.gif" width="310" height="210" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 2up med -->
+	<Template title="2up medium with caption" image="tmpl-img-2up-med-cap.gif">
+		<Description>Inserts a medium 2up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_310 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x310.gif" width="310" height="310" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_310"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x310.gif" width="310" height="310" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="2up medium" image="tmpl-img-2up-med.gif">
+		<Description>Inserts a medium 2up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_310 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x310.gif" width="310" height="310" alt=""></div>
+				<div class="imgWrapper_310"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-310x310.gif" width="310" height="310" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>	
+	
+	<!-- 2up uneven A -->
+	<Template title="2up uneven A with caption" image="tmpl-img-2up-uneven-lt-cap.gif">
+		<Description>Inserts uneven 2up image layout A with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_420 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-420x200.gif" width="420" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="2up uneven A" image="tmpl-img-2up-uneven-lt.gif">
+		<Description>Inserts uneven 2up image layout A.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_420 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-420x200.gif" width="420" height="200" alt=""></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 2up uneven B -->
+	<Template title="2up uneven B with caption" image="tmpl-img-2up-uneven-rt-cap.gif">
+		<Description>Inserts uneven 2up image layout B with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_420"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-420x200.gif" width="420" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="2up uneven B" image="tmpl-img-2up-uneven-rt.gif">
+		<Description>Inserts uneven 2up image layout B.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""></div>
+				<div class="imgWrapper_420"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-420x200.gif" width="420" height="200" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 3up medium -->
+	<Template title="3up medium with caption" image="tmpl-img-3up-med-cap.gif">
+		<Description>Inserts a medium 3up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="3up medium" image="tmpl-img-3up-med.gif">
+		<Description>Inserts a medium 3up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x200.gif" width="200" height="200" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 3up tall -->
+	<Template title="3up tall with caption" image="tmpl-img-3up-tall-cap.gif">
+		<Description>Inserts a tall 3up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="3up tall" image="tmpl-img-3up-tall.gif">
+		<Description>Inserts a tall 3up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_20 clearfix">
+				<div class="imgWrapper_200 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""></div>
+				<div class="imgWrapper_200"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-200x300.gif" width="200" height="300" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+	<!-- 4up medium -->
+	<Template title="4up medium with caption" image="tmpl-img-4up-med-cap.gif">
+		<Description>Inserts a medium 4up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_12 clearfix">
+				<div class="imgWrapper_151 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="4up medium" image="tmpl-img-4up-med.gif">
+		<Description>Inserts a medium 4up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_12 clearfix">
+				<div class="imgWrapper_151 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x151.gif" width="151" height="151" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+
+	<!-- 4up tall -->
+	<Template title="4up tall with caption" image="tmpl-img-4up-tall-cap.gif">
+		<Description>Inserts a tall 4up image layout with captions.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_12 clearfix">
+				<div class="imgWrapper_151 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""><div class="caption">[Caption Text (optional)]</div></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	<Template title="4up tall" image="tmpl-img-4up-tall.gif">
+		<Description>Inserts a tall 4up image layout.</Description>
+		<Html>
+			<![CDATA[
+			<div class="imgWrapper gap_12 clearfix">
+				<div class="imgWrapper_151 first-child"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""></div>
+				<div class="imgWrapper_151"><img src="private/_lib/ckeditor/editor/dialog/fck_template/images/img-ph-151x200.gif" width="151" height="200" alt=""></div>
+			</div>
+			<p>&nbsp;</p>
+			]]>
+		</Html>
+	</Template>
+	
+</Templates>

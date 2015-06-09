@@ -1,0 +1,306 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------------------------ */
+/* calendarView fonts */
+/* ------------------------------------------------------------------------------ */
+@import url('../font/Museo500-Regular-webfont/font.css');
+@import url('../font/Museo700-Regular-webfont/font.css');
+
+/* ------------------------------------------------------------------------------ */
+/* calendarView reset */
+/* ------------------------------------------------------------------------------ */
+.calendarView div,.calendarView p,.calendarView ul,.calendarView ol,.calendarView li
+.calendarView ul ul,.calendarView ul ol,.calendarView ol ul,.calendarView ol ol,
+.calendarView ul li,.calendarView ol li,.calendarView li li { margin:0; padding:0; zoom:1;/*IE6 fix*/ }
+.calendarView img { border: 0; }
+.calendarView ul, .calendarView ol { position: relative; list-style:none; background:none; }
+.calendarView a:focus { outline: none; }
+.calendarView .clear { clear:both; }
+.calendarView .clearer { float: none; clear: both; height: 0; line-height: 0; overflow: hidden; visibility: hidden; }
+
+/* ------------------------------------------------------------------------------ */
+/* calendarView container */
+/* ------------------------------------------------------------------------------ */
+.calendarView {
+	background: #fefefe;
+	position: relative;
+	margin: 0 auto 25px auto;
+	padding: 0 0 5px 0;
+	width: 620px;
+	overflow: hidden;
+	/*border-radius*/
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px; 
+	/*box-shdaow*/
+	-webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2); 
+}
+
+/* ------------------------------------------------------------------------------ */
+/* calendarView header */
+/* ------------------------------------------------------------------------------ */
+.calendarView .calendarViewHeader {
+	position: relative;
+	background: none;
+	width: 100%;
+	height: 90px;
+	overflow: hidden; 
+}
+	/*title*/
+	.calendarViewHeader h1 {
+		position: absolute;
+		top: 20px;
+		left: 20px; 
+		margin:0;
+		padding:0 0 15px 0;
+		color: #555; 
+		font-family:'Museo700', Arial, sans-serif;
+		font-size: 20px;
+		font-weight: normal;
+		line-height: 22px; 
+		text-transform:uppercase;
+	}
+	
+	/*navigation buttons*/
+	.calendarViewHeader .navigation {
+		position: absolute;
+		top: 15px;
+		right: 15px; 
+		width: 88px;
+		height: 34px; 
+		overflow: hidden; 
+	}
+	.calendarViewHeader .navigation a {
+		background: transparent url(../img/calendar/cal-btn-month.png) 0 0 no-repeat; 
+		display: block;
+		width: 44px;
+		height: 34px;
+		float: left;
+		overflow: hidden;
+		text-indent: -9999px;  	
+	}
+	.calendarViewHeader .navigation a.prev { background-position:     0 0; }
+	.calendarViewHeader .navigation a.next { background-position: -44px 0; } 
+	.calendarViewHeader .navigation a.prev:hover,
+	.calendarViewHeader .navigation a.prev:focus { background-position:     0 -34px; }
+	.calendarViewHeader .navigation a.next:hover,
+	.calendarViewHeader .navigation a.next:focus { background-position: -44px -34px; } 
+	
+	/*list of days*/
+	.calendarViewHeader .days,
+	.calendarViewHeader .days li { list-style:none; margin:0; padding:0; }
+	.calendarViewHeader .days {
+		position:absolute;
+		left:0;
+		bottom:0;
+		width:100%;
+		height:30px;
+		overflow:hidden;
+	}
+		.calendarViewHeader .days li {
+			float:left;	
+			width:84px;
+			padding-left:4px;
+		}
+			.calendarViewHeader .days li span{
+				display:block;
+				width:100%;
+				height:30px;
+				color:#666;
+				font-family:'Museo500',Arial,sans-serif;
+				font-size:15px;
+				font-weight:normal;
+				line-height:30px;
+				text-align:center;
+				text-transform:uppercase;
+			}
+	
+
+/* ------------------------------------------------------------------------------ */
+/* calendarView body */
+/* ------------------------------------------------------------------------------ */
+.calendarView .calendarViewBody { width: 100%; }
+
+/* ------------------------------------------------------------------------------ */
+/* month */
+/* ------------------------------------------------------------------------------ */
+.calendarView .month {  }
+	
+/* ------------------------------------------------------------------------------ */
+/* week */
+/* ------------------------------------------------------------------------------ */
+.calendarView .week { clear: right; overflow: hidden; }
+		
+/* ------------------------------------------------------------------------------ */
+/* day */
+/* ------------------------------------------------------------------------------ */
+
+/*day layout*/
+.calendarView .day {
+	background: #eaeaea;
+	float: left;
+	margin-left: 4px; /* = padding-top of child entry */
+	width: 84px;
+	overflow: hidden; 
+	/*equal height trick for all day elements*/
+	margin-bottom: -1000px; 
+	padding-bottom: 1000px; 	
+}
+* html .calendarView .day { display: inline; /*IE6 double margin fix*/ } 
+.calendarView .day.today { background: #e8e6db; } /*different color for today*/
+
+/*day header*/
+.calendarView .currentMonth .date,
+.calendarView .pastMonth .date,
+.calendarView .nextMonth .date,
+.calendarView .today .date { 
+	background-color: #f5f5f5; 
+	background-repeat: no-repeat;
+	padding: 4px 0; /* = padding-top of child entry */
+	width: 84px;
+	height: 25px;
+	overflow: hidden;
+	font-family:'Museo700',Arial,sans-serif;
+	font-size:14px!important;
+	font-weight:normal!important;
+	line-height:25px!important;
+	text-align:center;
+	/*text-indent: -9999px; Use this to hide text when using background images */ 
+}
+			
+/*day header bg images*/
+.calendarView .currentMonth .date { color: #505050!important; /*background-image:url(../img/calendar/cal-bg-current-month.png)*/}
+.calendarView .pastMonth .date,
+.calendarView .nextMonth .date { color: #afafaf!important; /*background-image:url(../img/calendar/cal-bg-past-month.png)*/}
+.calendarView .today .date { color: #fff!important; background-color:#bdbbb7; /*background-image:url(../img/calendar/cal-bg-today.png);*/ }
+
+/*day header bg positions (when using background images) 
+.calendarView .date01 .date { background-position: 0    0px; }
+.calendarView .date02 .date { background-position: 0  -30px; }
+.calendarView .date03 .date { background-position: 0  -60px; }
+.calendarView .date04 .date { background-position: 0  -90px; }
+.calendarView .date05 .date { background-position: 0 -120px; }
+.calendarView .date06 .date { background-position: 0 -150px; }
+.calendarView .date07 .date { background-position: 0 -180px; }
+.calendarView .date08 .date { background-position: 0 -210px; }
+.calendarView .date09 .date { background-position: 0 -240px; }
+.calendarView .date10 .date { background-position: 0 -270px; }
+.calendarView .date11 .date { background-position: 0 -300px; }
+.calendarView .date12 .date { background-position: 0 -330px; }
+.calendarView .date13 .date { background-position: 0 -360px; }
+.calendarView .date14 .date { background-position: 0 -390px; }
+.calendarView .date15 .date { background-position: 0 -420px; }
+.calendarView .date16 .date { background-position: 0 -450px; }
+.calendarView .date17 .date { background-position: 0 -480px; }
+.calendarView .date18 .date { background-position: 0 -510px; }
+.calendarView .date19 .date { background-position: 0 -540px; }
+.calendarView .date20 .date { background-position: 0 -570px; }
+.calendarView .date21 .date { background-position: 0 -600px; }
+.calendarView .date22 .date { background-position: 0 -630px; }
+.calendarView .date23 .date { background-position: 0 -660px; }
+.calendarView .date24 .date { background-position: 0 -690px; }
+.calendarView .date25 .date { background-position: 0 -720px; }
+.calendarView .date26 .date { background-position: 0 -750px; }
+.calendarView .date27 .date { background-position: 0 -780px; }
+.calendarView .date28 .date { background-position: 0 -810px; }
+.calendarView .date29 .date { background-position: 0 -840px; }
+.calendarView .date30 .date { background-position: 0 -870px; }
+.calendarView .date31 .date { background-position: 0 -900px; }		
+*/
+
+/* ------------------------------------------------------------------------------ */
+/* entry */
+/* ------------------------------------------------------------------------------ */
+.calendarView .entries { min-height: 50px; }
+* html .calendarView .entries { height: 50px; /*IE6 min-height*/ }
+
+.calendarView .entry {
+	width: 84px!important;
+	padding-top: 4px; /* = margin-left of the day container*/
+	overflow: hidden;
+}
+.calendarView .entries,
+.calendarView .entry a,
+.calendarView .entry .event  {
+	/*border-radius*/
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;			
+}
+.calendarView .entry:first-child,
+.calendarView .entry.first-child { padding-top:0!important; }
+.calendarView .entry a,
+.calendarView .entry .event { 
+	background:#8e99a8;
+	display:block;
+	width:100%; 
+}
+.calendarView .entry a,
+.calendarView .entry a:link,
+.calendarView .entry a:visited,
+.calendarView .entry a:active,
+.calendarView p { color: #fff; text-decoration: none; }
+.calendarView .entry a:hover { 
+	color: #fff; 
+	text-decoration: none; 
+	background: #6a809d; 
+	/*text-shadow*/
+	text-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+}
+.calendarView .entry a p,
+.calendarView .entry p  {
+	color: #fff; 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	line-height: 13px; 
+	margin: 0;
+	padding: 4px 4px 8px 4px; 
+}
+.calendarView .entry a p.time,
+.calendarView .entry p.time  {
+	font-weight: bold; 
+	padding-bottom: 0;	
+}
+
+/* ------------------------------------------------------------------------------ */
+/* extend calendarView for different widths */
+/* ------------------------------------------------------------------------------ */
+
+/*640*/
+.calendarView640 { width:640px; }
+	/*day width*/
+	.calendarView640 .days li,/*list of days*/
+	.calendarView640 .day,/*day layout*/
+	.calendarView640 .currentMonth .date,/*day header*/
+	.calendarView640 .pastMonth .date,
+	.calendarView640 .nextMonth .date,
+	.calendarView640 .today .date,
+	.calendarView640 .entry /*entry*/
+	{ width:88px!important; }
+	/*gutter*/
+	.calendarView640 { padding-bottom:3px; }
+	.calendarView640 .days li {	padding-left:3px; }
+	.calendarView640 .day {	margin-left:3px; }
+	.calendarView640 .entry { padding-top:3px; } 
+
+/*fluid*/
+.calendarViewFluid { width:100%; }
+	/*day width*/
+	.calendarViewFluid .days li, /*list of days*/
+	.calendarViewFluid .day /*day layout*/
+	{ width:13%!important; } 
+	/*day elements width (100% of day width)*/
+	.calendarViewFluid .currentMonth .date,/*day header*/
+	.calendarViewFluid .pastMonth .date,
+	.calendarViewFluid .nextMonth .date,
+	.calendarViewFluid .today .date,
+	.calendarViewFluid .entry /*entry*/
+	{ width:100%!important; }
+	/*gutter*/
+	.calendarViewFluid { padding-bottom:1.125%; }
+	.calendarViewFluid .days li { padding-left:1.125%; }
+	.calendarViewFluid .day { margin-left:1.125%; }
+	.calendarView640 .entry { /*padding-top:???;*/ }

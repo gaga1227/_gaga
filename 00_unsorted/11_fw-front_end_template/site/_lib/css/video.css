@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* ------------------------------------------------------------------------------ */
+/* video */
+/* ------------------------------------------------------------------------------ */
+/*videoContainer - video object container*/
+.videoContainer { display:block; position:relative; width:auto; height:auto; margin:0 auto!important; padding:0 0 0 0; overflow:hidden; }		
+	/*video - video player container*/
+	.videoContainer .video { height:auto; margin:0 auto; padding:0;	background-color:#000; }
+.noflash { color:#aaa; text-align:center; padding:0!important; }
+.noflash a,.noflash a:hover,.noflash a:focus { color:#ccc; text-decoration:underline; }

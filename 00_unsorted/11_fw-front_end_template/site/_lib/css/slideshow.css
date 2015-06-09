@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------------------------ */
+/* Home Slideshow */
+/* ------------------------------------------------------------------------------ */
+
+/*container and common*/
+body.home #slideshow,
+body.home #slideshow .slide {
+	display:block;
+	position:relative;
+	width:980px;
+	height:260px;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	z-index:90;
+}
+	/*slide item*/
+	body.home #slideshow .slide {
+		position:absolute;
+		top:0;
+		left:0;
+	}
+	/*slideshowControls*/
+	body.home #slideshowControls {
+		position:absolute;
+		width:auto;
+		height:22px;
+		bottom:0px;
+		right:20px;
+		z-index:99;
+	}
+		/*slideshowControls buttons*/
+		body.home #slideshowControls .btnSlide {
+			font-family:Arial, Helvetica, sans-serif;
+			font-size:14px;
+			font-weight:bold;
+			line-height:14px;
+			text-align:center;
+			padding:4px 8px;
+			margin:0 4px;
+			display:inline-block;
+			background:#eee;
+		}
+		body.home #slideshowControls .btnSlide,
+		body.home #slideshowControls .btnSlide:link,
+		body.home #slideshowControls .btnSlide:active,
+		body.home #slideshowControls .btnSlide:visited {
+			color:#999;
+			text-decoration:none;
+			outline:0 none;
+		}
+		body.home #slideshowControls .btnSlide:hover,
+		body.home #slideshowControls .btnSlide:focus {
+			color:#000;
+			background:#fff;
+			text-decoration:none;
+		}
+		/*current item*/
+		body.home #slideshowControls .activeSlide,
+		body.home #slideshowControls .activeSlide:hover,
+		body.home #slideshowControls .activeSlide:focus {
+			color:#eee!important;
+			background:#222;	
+			cursor:default!important;
+		}

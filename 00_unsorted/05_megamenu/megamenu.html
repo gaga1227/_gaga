@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mega Menu example</title>
+<link type="text/css" rel="stylesheet" media="screen" href="common.css">
+<link type="text/css" rel="stylesheet" media="screen" href="megamenu.css">
+<!-- jQuery library -->
+<script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+<!-- megamenu function -->
+<script type="text/javascript" src="megamenu.js"></script>
+<!-- megamenu setup -->
+<script type="text/javascript">
+$(document).ready(function(){
+	megamenu(
+		'#primaryNavigation', //id name for nav button container
+		'.navBtn', //class name for nav buttons
+		'active', //class name for active nav button
+		'#megamenus', //id name for menu container
+		'.megamenu', //class name for menu items
+		'.btnClose', //class name for menu close btn
+		'fast' //animation speed: 'fast','slow', or milliseconds
+	);
+});
+</script>
+</head>
+
+<body>
+<div id="container">
+	
+	<!--------------------------------------------------------------------------------->
+	<!-- HEADER CONTAINER -->
+	<!--------------------------------------------------------------------------------->
+	<div id="header">
+		
+		<!--------------------------------------------------------------------------------->
+		<!-- NAVIGATION CONTAINER -->
+		<!--------------------------------------------------------------------------------->
+		<div id="navigation">
+			<ul id="primaryNavigation">
+				<li id="nav1"><a class="navBtn" href="target.html?msg=Overview"><span>Overview</span></a></li>
+				<li id="nav2"><a class="navBtn" href="target.html?msg=How_it_works" ><span>How it works</span></a></li>
+				<li id="nav3"><a class="navBtn" href="target.html?msg=Compatibility"><span>Compatibility</span></a></li>
+				<li id="nav4"><a class="navBtn" href="target.html?msg=How_to_use" ><span>How to use</span></a></li>
+				<li id="nav5"><a class="navBtn" href="target.html?msg=Menu_5"><span>Menu 5</span></a></li>
+				<li id="nav6"><a class="navBtn" href="target.html?msg=Menu_6" ><span>Menu 6</span></a></li>
+				<li id="nav7"><a class="navBtn" href="target.html?msg=Menu_7"><span>Menu 7</span></a></li>
+				<li id="nav8"><a class="navBtn" href="target.html?msg=Menu_8" ><span>Menu 8</span></a></li>
+				<li id="nav9"><a class="navBtn" href="target.html?msg=Menu_9"><span>Menu 9</span></a></li>
+				<li id="nav10"><a class="navBtn" href="target.html?msg=Menu_10" ><span>Menu 10</span></a></li>
+				<li id="nav11"><a class="navBtn" href="target.html?msg=Menu_11"><span>Menu 11</span></a></li>
+				<li id="nav12"><a class="navBtn" href="target.html?msg=Menu_12" ><span>Menu 12</span></a></li>
+				<li id="nav13"><a class="navBtn" href="target.html?msg=Menu_13"><span>Menu 13</span></a></li>
+				<li id="nav14"><a class="navBtn" href="target.html?msg=Menu_14" ><span>Menu 14</span></a></li>
+				<li id="nav15"><a class="navBtn" href="target.html?msg=Menu_15"><span>Menu 15</span></a></li>
+				<li id="nav16"><a class="navBtn" href="target.html?msg=Menu_16" ><span>Menu 16</span></a></li>
+				<li id="nav17"><a class="navBtn" href="target.html?msg=Menu_17"><span>Menu 17</span></a></li>
+				<li id="nav18"><a class="navBtn" href="target.html?msg=Menu_18" ><span>Menu 18</span></a></li>
+				<li id="nav19"><a class="navBtn" href="target.html?msg=Menu_19"><span>Menu 19</span></a></li>
+				<li id="nav20"><a class="navBtn" href="target.html?msg=Menu_20" ><span>Menu 20</span></a></li>
+			</ul>
+		</div><!-- NAVIGATION ends -->
+		
+		<!--------------------------------------------------------------------------------->
+		<!-- MEGAMENUS CONTAINER -->
+		<!--------------------------------------------------------------------------------->
+		<div id="megamenus">
+			<div id="megamenu1" class="megamenu">
+				<a href="javascript:void(0);" class="btnClose">X</a>
+				<div class="megamenuContent">
+					<h3>Overview</h3>
+					<p>I've prepared this mega menu example for the purpose of flexibility, reusability and easy integration. If you don't require any customisation on how the mega menu works, you can pretty much rely on the example and just customize the look of it using CSS.</p>
+					<h4>What has been taken care of:</h4>
+					<ul>
+						<li>Menu Interactions</li>
+						<li>CSS layout and Structure</li>
+						<li>Tested</li>
+					</ul>
+					<h4>What you still need to do:</h4>
+					<ul>
+						<li>Update your content to the given HTML structure</li>
+						<li>Customize CSS styles and layout</li>
+						<li>Set up required parameters by the interaction</li>
+					</ul>
+				</div>
+			</div>
+			<div id="megamenu2" class="megamenu">
+				<a href="javascript:void(0);" class="btnClose">X</a>
+				<div class="megamenuContent">
+					<h3>How it works</h3>
+					<h4>This mega menu work as follow:</h4>
+					<ul>
+						<li>1st click on menu buttons will open the corresponding mega menu</li>
+						<li>2nd click on the same menu button closes the mega menu and goes to the specified URL</li>
+						<li>Only one mage menu will be active</li>
+						<li>Click on other menu buttons with mega menu open will switch to other mega menus</li>
+						<li>Click on the close button within the menus will close the active menu</li>
+						<li>Click out of the menus and buttons will close the active menu</li>
+						<li>Only has animation when openning and closing the mega menu, no animation for switching between menus</li>
+						<li>Can have any number of menu buttons and mega menus, as allowed by the container width</li>
+						<li>The menu buttons and menus should pair each other in number</li>
+					</ul>
+				</div>
+			</div>
+			<div id="megamenu3" class="megamenu">
+				<a href="javascript:void(0);" class="btnClose">X</a>
+				<div class="megamenuContent">
+					<h3>Compatibility</h3>
+					<h4>The example is fully tested on:</h4>
+					<ul>
+						<li>FireFox</li>
+						<li>Safari</li>
+						<li>Chrome</li>
+						<li>IE6<sup>*</sup>-9</li>
+					</ul>
+					<p>&nbsp;</p>
+					<hr />
+					<p><sup>*</sup> IE6 has minor issues with CSS styles on menu buttons, recommend to use a consistent style for hover and the active states.</p>
+				</div>
+			</div>
+			<div id="megamenu4" class="megamenu">
+				<a href="javascript:void(0);" class="btnClose">X</a>
+				<div class="megamenuContent">
+					<h3>How to use</h3>
+					<p>You can use this example directly or you can also have your own setup as long as meeting the following points:</p>
+					<h4>HTML and CSS</h4>
+					<ul>
+						<li>All navigation buttons should share a class name and a parent container</li>
+						<li>All navigation buttons should also share an active state CSS class</li>
+						<li>All mega menu items should share a class name and a parent container</li>
+						<li>All close button in the mega menus should share a class name</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul>
+						<li>Make sure you supply all the variables in the specified order from the funciton call.</li>
+					</ul>					
+				</div>
+			</div>
+			<div id="megamenu5" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 5 content</h3></div></div>
+			<div id="megamenu6" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 6 content</h3></div></div>
+			<div id="megamenu7" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 7 content</h3></div></div>
+			<div id="megamenu8" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 8 content</h3></div></div>
+			<div id="megamenu9" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 9 content</h3></div></div>
+			<div id="megamenu10" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 10 content</h3></div></div>
+			<div id="megamenu11" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 11 content</h3></div></div>
+			<div id="megamenu12" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 12 content</h3></div></div>
+			<div id="megamenu13" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 13 content</h3></div></div>
+			<div id="megamenu14" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 14 content</h3></div></div>
+			<div id="megamenu15" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 15 content</h3></div></div>
+			<div id="megamenu16" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 16 content</h3></div></div>
+			<div id="megamenu17" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 17 content</h3></div></div>
+			<div id="megamenu18" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 18 content</h3></div></div>
+			<div id="megamenu19" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 19 content</h3></div></div>
+			<div id="megamenu20" class="megamenu"><a href="javascript:void(0);" class="btnClose">X</a><div class="megamenuContent"><h3>megamenu 20 content</h3></div></div>
+		</div><!-- MEGAMENUS ends -->
+		
+	</div><!-- HEADER ends -->
+	
+	<!--------------------------------------------------------------------------------->
+	<!-- BODY CONTAINER -->
+	<!--------------------------------------------------------------------------------->
+	<div id="body">
+		<h3>NiTV-like Mega Menu example</h3>
+		<p>Last update: 2011-07-01</p>
+		<h4>Please click on the menu buttons above to see how it works and how you can use it for your projects with minimal effort.<br />
+		Or you can <br /><br /><a href="megamenu_example.zip">Download the example in ZIP</a></h4>
+	</div><!-- BODY CONTAINER ends -->
+	
+</div>
+</body>
+</html>

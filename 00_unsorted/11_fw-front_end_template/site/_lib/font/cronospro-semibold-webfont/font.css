@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'CronosProSemibold';
+    src: url('cronospro-semibold-webfont.eot');
+    src: url('cronospro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('cronospro-semibold-webfont.woff') format('woff'),
+         url('cronospro-semibold-webfont.ttf') format('truetype'),
+         url('cronospro-semibold-webfont.svg#CronosProSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

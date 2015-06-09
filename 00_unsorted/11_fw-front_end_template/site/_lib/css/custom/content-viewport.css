@@ -1,0 +1,262 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------------------------ */
+/* imports */
+/* ------------------------------------------------------------------------------ */
+@import url("../../../private/_lib/css/core/content-viewport.css");
+@import url("content-viewport-img-layout.css");
+
+/* ------------------------------------------------------------------------------ */
+/* reset */
+/* ------------------------------------------------------------------------------ */
+.contentViewport h1:first-child,.contentViewport h1.first-child,
+.contentViewport h2:first-child,.contentViewport h2.first-child,
+.contentViewport p:first-child,.contentViewport p.first-child,
+.contentViewport div:first-child,.contentViewport div.first-child,
+.contentViewport table:first-child,.contentViewport table.first-child {	margin-top:0; }
+
+/* ------------------------------------------------------------------------------ */
+/* headings and paragraph */ 
+/* ------------------------------------------------------------------------------ */
+/* JX: 20120227
+	verticle-rhythm base value: 20px
+	-----------------------------------------------------------
+	apply to all content below leaderText
+	'line-height', 'height', 'outerHeight' should equal to 
+	an even multiply/division of the base value 
+	(e.g. 10px(0.5x), 20px(1x), 30px(1.5x), 40px(2x), so on...
+*/
+.contentViewport h1 { color:#333333; font-size:30px; line-height:40px; font-weight:normal; font-style:normal; margin:0px 0px 0px 0px; padding: 0px 0px 20px 0px; }
+.contentViewport h2 { color:#666666; font-size:18px; line-height:30px; font-weight:bold;   font-style:normal; margin:0px 0px 0px 0px; padding:10px 0px 20px 0px; }
+.contentViewport h3 { color:#555555; font-size:16px; line-height:20px; font-weight:bold;   font-style:normal; margin:0px 0px 0px 0px; padding:10px 0px 20px 0px; }
+.contentViewport h4 { color:#666666; font-size:14px; line-height:20px; font-weight:bold;   font-style:normal; margin:0px 0px 0px 0px; padding:10px 0px 20px 0px; }
+.contentViewport p  { color:#232323; font-size:13px; line-height:20px; font-weight:normal; font-style:normal; margin:0px 0px 0px 0px; padding: 0px 0px 20px 0px; }
+/* custom heading treatment (define your customised heading styles treatment here) */
+.contentViewport h1 { }
+
+/* ------------------------------------------------------------------------------ */
+/* link */
+/* ------------------------------------------------------------------------------ */
+.contentViewport a       { color:#36F; text-decoration:none; }
+.contentViewport a:hover,
+.contentViewport a:focus { color:#F30; text-decoration:underline; }
+
+/* ------------------------------------------------------------------------------ */
+/* leader text */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .leaderText,
+.contentViewport .leaderText p { color:#555; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:20px; font-weight:bold; }
+
+/* ------------------------------------------------------------------------------ */
+/* highlight content */
+/* ------------------------------------------------------------------------------ */
+/*blockquote*/
+.contentViewport blockquote { display:block; margin:0; padding:0 30px; overflow:hidden; }
+.contentViewport blockquote,
+.contentViewport blockquote p,
+.contentViewport .blockquote { color:#888; font-size:16px; font-weight:bold; line-height:20px; }
+.contentViewport blockquote p:before,
+.contentViewport blockquote p:after { content:'"'; }/*lack support in IE6*/
+	
+/*blockquote in columns*/
+.contentViewport .column200 blockquote,
+.contentViewport .column300 blockquote,
+.contentViewport .column420 blockquote { text-align:left; padding:0 12px; }
+
+/* ------------------------------------------------------------------------------ */
+/* highlightbox */ 
+/* ------------------------------------------------------------------------------ */
+/*blockTextHighlight  */
+.contentViewport .blockTextHighlight { 
+	background:#999; 
+	display:block; 
+	margin:0 0 20px 0; 
+	padding:20px 30px 0 30px; 
+	max-width:580px;/*640-30x2(pad)*/
+	overflow:visible; 
+	float:none;
+	clear:both;
+	/*border-radius*/
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px; 
+}
+.contentViewport .blockTextHighlight,
+.contentViewport .blockTextHighlight p {
+	color:#fff;
+	font-size:16px;
+	line-height:20px; 
+	font-weight:bold;
+	text-align:left;
+	position:relative;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* date */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .date { color:#232323; font-size:11px; font-weight:bold; line-height:20px; text-transform:uppercase; }
+
+/* ------------------------------------------------------------------------------ */
+/* caption */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .caption {
+	display:block; margin:0 0 20px 0; padding:10px;
+	color:#fff; background:#999; 
+	font-size:11px; font-weight:normal; font-style:italic; line-height:20px;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* dividers */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .divider { 
+	display:block;
+	font-size:0px; 
+	line-height:0px;
+	text-indent:-9999em;
+	margin:0;
+	padding:0; 
+	width:100%; 
+	overflow:hidden;
+	float:none; 
+	clear:both;
+}
+/*extend divider*/
+.contentViewport .dividerGraphic {
+	background:url(../../img/sprite-contentviewport-divider.png) center 6px no-repeat; 
+	height:20px;
+	margin:0 0 20px 0;
+}
+.contentViewport .dividerSolid { border-top:2px solid #fff; height:18px;  }
+.contentViewport .dividerLite { border-top:1px solid #bbb; height:19px;  }
+.contentViewport .dividerDotted { border-top:1px dotted #888; height:19px; }
+
+/* ------------------------------------------------------------------------------ */
+/* list */
+/* ------------------------------------------------------------------------------ */
+/*lv1(common) - list container*/
+.contentViewport ul,
+.contentViewport ol { margin:0px; padding:0 0 20px 15px; list-style:none; }
+.contentViewport ol { margin-left:18px; list-style-type:decimal; list-style-position:outside; }
+/*lv1(common) - list item*/
+.contentViewport li { color:#252525; font-size:13px; line-height:20px; margin:20px 0 0 0; }
+/*lv1(common) - list item - verticle spacing*/
+.contentViewport li.first-child,
+.contentViewport li:first-child { margin-top:0; }
+/*lv1(common) - list item - bullet and spacing*/
+.contentViewport li { padding:0 0 0 17px; background:url(../../img/blt-list-lv1.png) 0 6px no-repeat; }
+.contentViewport ol li { padding:0 0 0 0; background:none; }
+
+/*lv2(override) - list container*/
+.contentViewport ul ul,
+.contentViewport ul ol,
+.contentViewport ol ol,
+.contentViewport ol ul { padding:0 0 0 1px; }
+.contentViewport ol ol { list-style:lower-alpha; }
+/*lv2(override) - list item - verticle spacing*/
+.contentViewport li li.first-child,
+.contentViewport li li:first-child { margin-top:20px; }
+/*lv2*(override) - list item - bullet and spacing*/
+.contentViewport li li { padding:0 0 0 17px; background:url(../../img/blt-list-lv2.png) 0 7px no-repeat; }
+.contentViewport li ol li { padding:0 0 0 0; background:none; }
+
+/*ordered list extension(common)*/
+.contentViewport ol.listAlpha   { list-style:lower-alpha; }
+.contentViewport ol.listRoman   { list-style:lower-roman; }
+.contentViewport ol.listDecimal { list-style:decimal; }
+
+/*make IE6 to play nice*/
+.ie6 .contentViewport ul { margin-left:12px; }
+.ie6 .contentViewport ol { margin-left:18px; }
+.ie6 .contentViewport ul li { list-style:disc; background:none; padding-left:6px; } 
+.ie6 .contentViewport ol li { list-style:decimal; }
+.ie6 .contentViewport ol ul li { list-style:disc; }
+.ie6 .contentViewport ol ol li { list-style:lower-alpha; } 
+.ie6 .contentViewport li ul { margin-left:16px; }
+.ie6 .contentViewport li ol { margin-left:22px; }
+.ie6 .contentViewport li ul li { padding-left:6px; }
+.ie6 .contentViewport li ol li { padding-left:0; }
+
+/* ------------------------------------------------------------------------------ */
+/* special boxes */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .specialBox {
+	margin:0 0 20px 0;
+	padding:20px 20px 0 65px;
+	overflow:hidden;
+	float:none;
+	clear:both;
+	background-color:#fff;
+	background-position:10px 0;
+	background-repeat:no-repeat; 
+	/*border-radius*/
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px; 
+}
+.contentViewport .specialBox p { 
+	background:none; 
+	color:#4d494b;
+	font-size:13px;
+	font-weight:bold;
+}
+.contentViewport .specialBox.dl { background-image:url(../../img/ico-dl.png); }
+.contentViewport .specialBox.link { background-image:url(../../img/ico-link.png); }
+
+.contentViewport .specialBox .note { color:#777!important; font-size:13px; font-style:italic; font-weight:normal; }
+
+.contentViewport .specialBox a,
+.contentViewport .specialBox a:link,
+.contentViewport .specialBox a:visited,
+.contentViewport .specialBox a:active {	color:#444444; text-decoration:none; }
+.contentViewport .specialBox a:hover  {	color:#232323; text-decoration:underline; }
+
+/* ------------------------------------------------------------------------------ */
+/* buttons */
+/* ------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------ */
+/* table */
+/* ------------------------------------------------------------------------------ */
+/*styledTable*/
+.contentViewport .styledTable {
+	color:#232323; background:#fff; 
+	font-size:13px; line-height:20px;
+	border-bottom:2px solid #e1e2e3; 
+	width:640px; margin:0 0 18px/*20-2(border)*/ 0;
+	display:table;  
+}
+.contentViewport .styledTable p { font-size:13px; line-height:20px;	padding:0 0 20px 0; }
+.contentViewport .styledTable p:last-child { padding-bottom:0; }
+.contentViewport .styledTable th,
+.contentViewport .styledTable td { text-align:left; border:0; padding:10px; }
+.contentViewport .styledTable td { border-bottom:1px solid #dbdbdb; padding:10px 10px 9px/*10-1(border)*/ 10px; }
+.contentViewport .styledTable tr.noBorder td { border:none; padding-bottom:10px; }
+.contentViewport .styledTable th,
+.contentViewport .styledTable th p { background:#909090; color:#fff; font-size:14px; font-weight:bold; line-height:20px; }
+.contentViewport .styledTable th p { padding-bottom:0; }
+.contentViewport .styledTable a:hover { text-decoration:underline; cursor: pointer; }
+.contentViewport .styledTable .title { color:#232323; font-size:13px; }
+.contentViewport .styledTable td.highlight { background:#efefef; }
+
+/*layoutMode*/
+.contentViewport table.layoutMode { border-collapse:collapse; margin:0; width:auto; color:#232323; }
+
+/* ------------------------------------------------------------------------------ */
+/* columns */
+/* ------------------------------------------------------------------------------ */
+/*300-(40)-300*/
+.contentViewport .column300 { width: 300px;	float: right; }
+.contentViewport .column300.first-child { float: left; padding-right: 38px;/*40-2*/ clear:left; }
+/*200-(20)-420*/
+.contentViewport .column200 { width: 200px;	float: right; }
+.contentViewport .column420 { width: 420px; float: left; clear:left; padding-right: 18px/*20-2*/; }
+.ie6 .contentViewport .column200 { width: 200px!important; margin:0; }
+
+/* ------------------------------------------------------------------------------ */
+/* misc generic classes */
+/* ------------------------------------------------------------------------------ */
+.contentViewport .clearer {	float:none; clear:both; height:0; line-height:0; overflow:hidden; visibility:hidden; }
+.contentViewport .title { color:#222; font-size:16px; line-height:20px; font-weight:bold; }
+.contentViewport .title a { color:#222; text-decoration:none; }
+.contentViewport .title a:hover { color:#000; text-decoration:underline; }
+.contentViewport .highlightText { color:#dc3c52; font-weight:bold; }

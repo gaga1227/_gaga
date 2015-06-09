@@ -1,0 +1,69 @@
+@CHARSET "ISO-8859-1";
+
+/*
+ * Add any CSS to adjust the display of elements within the CKEditor
+ * WYSIWYG pane. These CSS directives ONLY apply to the CKEditor
+ * WYSIWYG pane. A typical entry in this file relates to elements
+ * within table-cells: they might display correctly when viewed
+ * normally through a browser, but incorrectly when being edited 
+ * within CKEditor (might have something to do with the use of em's).
+ * To counteract this, usually repeating any CSS directives aimed at 
+ * the 'body' element for table-cells seems to work.
+ *
+ */
+.contentViewport table tr td {
+	/* ENABLE ONLY IF NECESSARY: 
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#60696e;
+	*/
+}
+
+/* Class 'layouMode' means tables are displayed with no borders. Perfect
+ * when viewed through a browser, very difficult to work with when
+ * editing in CKEditor. So, when in CKEditor, we add a faint dotted
+ * border to the table-cells.
+ */ 
+.contentViewport table.layoutMode td {border:1px dotted #dddddd!important;}
+
+/* The following section is for the Genesis 'Magic Button' element replacements. */
+.contentViewport div.genesisSWF {
+	width:100px;
+	height:100px;
+	background-color:#434542;
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+	overflow:hidden;
+}
+
+.contentViewport div.genesisSWF * {display:none;}
+
+.contentViewport div.genesisSWF_typeVideoPlayer {
+	width:620px;
+	height:385px;
+	background-image:url("../../../private/_lib/img/var/fck_fake_video.jpg");
+}
+
+.contentViewport div.genesisSWF_typeMultiVideoPlayer {
+	width:620px;
+	height:385px;
+	background-image:url("../../../private/_lib/img/var/fck_fake_multivideo.jpg");
+}
+
+.contentViewport div.genesisSWF_typeAudioPlayer {
+	width:620px;
+	height:110px;
+	background-image:url("../../../private/_lib/img/var/fck_fake_audio.jpg");
+}
+
+.contentViewport div.genesisSWF_typeMultiAudioPlayer {
+	width:620px;
+	height:385px;
+	background-image:url("../../../private/_lib/img/var/fck_fake_multiaudio.jpg");
+}
+
+.contentViewport div.genesisSWF_typeImageViewer {
+	width:620px;
+	height:385px;
+	background-image:url("../../../private/_lib/img/var/fck_fake_photo.jpg");
+}

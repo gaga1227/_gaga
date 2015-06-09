@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>       <html class="no-js ie ie6 oldie"> <![endif]-->
+<!--[if IE 7]>          <html class="no-js ie ie7 oldie"> <![endif]-->
+<!--[if IE 8]>          <html class="no-js ie ie8 oldie"> <![endif]-->
+<!--[if IE 9]>          <html class="no-js ie ie9"> <![endif]-->
+<!--[if IE 10]>         <html class="no-js ie ie10"> <![endif]-->
+<!--[if gt IE 10]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<!-- IE optimized -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!-- Viewport optimized -->
+<meta name="viewport" content="width=device-width,maximum-scale=1.0">
+<!-- Title -->
+<title>HTML5 Audio Player v02 with MediaElements</title>
+<!-- CSS:FONT/ICON -->
+<!-- CSS:LIB -->
+	<link rel="stylesheet" href="_lib/css/normalize.css"><!-- normalize -->
+	<link rel="stylesheet" href="_lib/js/mejs/mediaelementplayer.css"><!-- mejs -->
+	<link rel="stylesheet" href="_lib/js/mejs/mejs-fw-skin.css"><!-- mejs skin -->
+<!-- CSS:SITE -->
+	<link rel="stylesheet" href="_lib/css/audio.css"><!-- audio -->
+<!-- CSS:CUSTOM -->
+	<style>
+		body { background:#e4e4e4; }
+		#container { padding:4%; }
+	</style>
+<!-- JS:LIB -->
+	<script src="_lib/js/modernizr-2.6.2.min.js"></script><!-- modernizr -->
+	<script src="_lib/js/jquery-1.8.3.min.js"></script><!-- jquery -->
+	<script src="_lib/js/mejs/mediaelement-and-player.js"></script><!-- mediaelement -->
+<!-- JS:SITE -->
+	<script src="_lib/js/fw.media.js"></script>
+	<script src="_lib/js/common.js"></script>
+<!-- JS:CUSTOM -->
+	<script>
+		/*insert code here*/
+	</script>
+</head>
+<body>
+
+<!-- CONTAINER -->
+<div id="container">
+
+	<h1>FW HTML5 Audio Player</h1>
+	<h2>v02 with MediaElements</h2>
+	<hr>
+	
+	<!-- CONTENT -->
+	<div id="content">
+		
+		<h3>Single Track Player with Multi Formats (mp3, oga)</h3>
+		
+		<!-- STATIC AUDIO -->
+		<div class="genesisSWF genesisSWF_typeAudioPlayer">
+			<div class="audioContainer nfp" id="audioXXXXXContainer">
+				<div class="audioHeader"><div class="audioTitle" title="Rockaway Life (extra long title, extra long title, extra long title, extra long title)"><span class="audioTrackID">01.</span>Rockaway Life (extra long title, extra long title, extra long title, extra long title)</div></div>
+				<audio class="audioHTML5 mejs-fw" preload="auto" controls>
+					<source type="audio/mp3" src="https://dl.dropbox.com/u/3578306/Work/aud/rockaway-life.mp3">
+					<source type="audio/ogg" src="https://dl.dropbox.com/u/3578306/Work/aud/rockaway-life.oga">
+				</audio>
+			</div>
+		</div><!-- STATIC AUDIO ends -->
+		
+		<!-- STATIC AUDIO -->
+		<div class="genesisSWF genesisSWF_typeAudioPlayer">
+			<div class="audioContainer nfp" id="audioYYYYYContainer">
+				<div class="audioHeader"><div class="audioTitle" title="Chasing Corporate"><span class="audioTrackID">02.</span>Chasing Corporate</div></div>
+				<audio class="audioHTML5 mejs-fw" preload="auto" controls>
+					<source type="audio/mp3" src="https://dl.dropbox.com/u/3578306/Work/aud/chasing-corporate.mp3">
+					<source type="audio/ogg" src="https://dl.dropbox.com/u/3578306/Work/aud/chasing-corporate.oga">
+				</audio>
+			</div>
+		</div><!-- STATIC AUDIO ends -->		
+		
+	</div><!-- /CONTENT -->
+
+</div><!-- /CONTAINER -->
+
+</body>
+</html>

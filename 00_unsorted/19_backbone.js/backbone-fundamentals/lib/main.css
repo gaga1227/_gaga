@@ -1,0 +1,24 @@
+body { 
+	margin:20px;
+	font-family:Arial, Helvetica, sans-serif; }
+
+/* table */
+table { width:100%; border-top:1px solid #ccc; border-right:1px solid #ccc;}
+th, td { padding:0.5em; border-left:1px solid #ccc; border-bottom:1px solid #ccc; text-align:left; }
+th { font-weight:bold; }
+
+/* footnotes */
+.footnotes {
+	margin:4em 0 0 0; padding:1em 0;
+	color:#888; border-top:1px solid #ddd;
+	font-size:0.8em; }
+	
+.footnotes dt,
+.footnotes dd { display:inline-block; vertical-align:text-top; }
+.footnotes dt { font-weight:bold; }
+.footnotes dd { width:90%; margin:0 0 1em 1em; }
+	
+/* block */
+.block { display:block; margin:1em 0; }
+
+

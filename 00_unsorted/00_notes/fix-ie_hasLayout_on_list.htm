@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>IE hasLayout Explained</title>
+<!-- CSS -->
+<link href="../_shared/css/style.css" rel="stylesheet" type="text/css" media="screen">
+<!-- JS -->
+
+</head>
+
+<body>
+<div id="container">
+
+	<h1>IE hasLayout Explained</h1>
+	
+	<p>Last update: 2011-07-04</p>	   
+
+	<h3>Problem:</h3>
+	<p>hasLayout issue with ordered list in IE6,7</p>
+	
+	<h3>Symptoms: </h3>
+	<ul>
+		<li>Only happens with ordered list in IE6, 7</li>
+		<li>The list item number always shows 1 for all  items, not counting</li>
+		<li>The list item number is showing at the bottom of  the li elements instead of top</li>
+	</ul>
+	
+	<h3>Cause:</h3>
+	<p>The ordered list item has &ldquo;hasLayout&rdquo; turned on. <br>It can be turned on by:</p>
+	<ul type="disc">
+		<li>position:       absolute</li>
+		<li>float:       left | right</li>
+		<li>display:       inline-block</li>
+		<li>height:       any value other than 'auto'</li>
+		<li>zoom:       any value other than 'normal' (MS proprietary)</li>
+		<li>writing-mode:       tb-rl (MS proprietary)</li>
+	</ul>
+	
+	<p>As of IE7, overflow became a trigger for hasLayout.</p>
+	<ul>
+		<li>overflow:       hidden | scroll | auto</li>
+	</ul>
+	
+	<h3>Fix:</h3>
+	<p>Make sure "hasLayout" is off for ordered list items</p>
+	
+</div>
+</body>
+</html>

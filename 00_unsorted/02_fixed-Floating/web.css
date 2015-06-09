@@ -1,0 +1,38 @@
+body {
+	background: #ccc;
+	margin: 0; 
+}
+#container {
+	font-family: Arial, Helvetica, sans-serif;
+	overflow:auto;
+}
+#notes p {
+	margin: 4px 0;	
+}
+#pageContent {
+	background: #FFF;
+	width: 500px;
+	float: left; 
+	padding: 0 10px; 
+	margin-top: 20px; 	
+}
+#floatContentWrapper {
+	position: absolute;	
+	left: 520px;
+}
+
+/*switching between this and fixed */
+#floatContent {
+	position: absolute;
+	top: 0; 
+	width: 300px; 
+	background: #999;
+	margin-top: 20px;
+	margin-left: 20px; 
+	border: 1px solid #666;
+	padding: 0 10px; 
+}
+#floatContent.fixed {
+	position: fixed;	
+	top: 0; 
+}

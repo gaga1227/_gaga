@@ -1,0 +1,105 @@
+======================================================================
+ PROGRESS LOG:
+======================================================================
+
+20120906
+
+- fixed incorrect 'date' values in calendar pages
+
+20120629
+
+- updated 'newsItem' hover css for XHTML version
+- added 'Platform' and 'console debug' function in 'common.js'
+- added static video player solution from LSF v2, supporting static videos
+
+20120621
+
+- resized apple-touch-icon.psd to 144x144 to support retina iPad
+- added apple-touch-icon-precomposed.psd as an option
+
+20120504
+
+- added webfonts:
+	'myriadpro-webfonts',
+	'AFBatterseaRegMedBld-webfont'
+
+20120504
+
+- added webfonts: 
+	'cronospro-semibold-webfont',
+	'lucidaSansItalic-webfont',
+	'ChaparralProRegularItalicBold-webfont',
+	'myriadpro-it-webfont'
+- updated 'jquery.cycle.[src.]js', fixed bug in 'updatePrevNextBtns'
+
+20120307
+
+- updated homepage to XHTML compliant markup, pending CSS update
+- updated 'common.js' not to match column heights for homepage and use CSS instead
+
+20120227
+
+- updated 'content-viewport.css' to have a verticle rhythm based on 20px
+- updated 'content-viewport-img-layout.css' to match the updated verticle rhythm
+- updated few style classes in 'common.css'
+- added 'commonBW.css'
+
+20120217
+
+- added 'jquery.hoverIntent.js' to js lib
+- added customised 'jquery.cycle.js' to js lib, which adds 'disabled' class to prev, next buttons when set to 'nowrap'
+- added 'IsonormBeckerRegular-webfont' to font lib
+- added 'SerifaStd455565-webfont' to font lib
+
+20120216
+
+- optimized HTML header structure
+- updated conditioanl <html> tags to remove unecessary code
+- updated mobile optimized viewport <meta> tag
+- added div.bodyBg to sample-DOM page
+
+20111107
+
+- added calendar view sample pages and templates (HTML,CSS)
+- calendar view is now compatible with IE6-9,FF,Chrome,Safari,Opera
+- extended default calendar view to multiple widths: 620, 640, fluid
+- updated calendar view to use text instead of bg images
+
+20111031
+
+- Updated Styles XML for Genesis Editor
+- Updated Cogs XML for Genesis Editor
+- Updated all Cogs Thumbnail Images to match template
+- Updated print.css
+
+20111028
+
+- Added traditional favicon link reference
+- Removed <p> breaks after divider cogs for better Genesis usage
+
+20111027
+
+- XHTML version completed
+- revisited default html, JS, CSS with latest projects and HTML Boilplate 2.0 
+- added sample pages templates for standard website project
+- added slideshow support and sample
+- added webfonts support and sample
+- added standard Genesis site structure 
+- added helper functions to 'common.js' 
+
+
+======================================================================
+ PENDING:
+======================================================================
+
+- XHTML validated version (need to fix elements inside <a> tag )
+- HTML5 version
+- News Listing Sample
+- Events Listing Sample
+- Resources Listing Sample
+- Form elements sample
+- Sitemap Sample
+- Google Search Sample
+- Make a clearer sample-DOM page
+- Update image placeholders to match the updated verticle rhythm
+- review and update 'commonBW.css'
