@@ -13,7 +13,7 @@ var utils = {};
 // calculates stamp duty based on victoria's duty rate
 utils.getStampDuty = function (price, isPPR) {
 	// exit
-	if (price == undefined || isNaN(price)) return 0;
+	if (price === undefined || isNaN(price)) return 0;
 	// vars
 	var base;
 	var rate;
@@ -59,7 +59,7 @@ utils.getStampDuty = function (price, isPPR) {
 // calculate property price based on total savings and required duty
 utils.getPropertyPrice = function (saving, isPPR) {
 	// exit
-	if (saving == undefined || isNaN(saving)) return 0;
+	if (saving === undefined || isNaN(saving)) return 0;
 	// vars
 	var price;
 	var duty;
@@ -73,21 +73,21 @@ utils.getPropertyPrice = function (saving, isPPR) {
 		duty = this.getStampDuty(price, isPPR);
 		if ((deposit + duty) > saving) {
 			console.group('Trying Price: ' + price);
-			console.log('Required Cash Savings: ' + (deposit+duty));
+			console.log('Required Cash Savings: ' + (deposit + duty));
 			console.log('Available Savings: ' + saving);
 			console.groupEnd();
 
 			continue;
 		} else {
 			console.group('Final Affordable Price: ' + price);
-			console.log('Required Cash Savings: ' + (deposit+duty));
+			console.log('Required Cash Savings: ' + (deposit + duty));
 			console.log('Available Savings: ' + saving);
 			console.groupEnd();
 
 			return price;
 		}
 	}
-}
+};
 
 // APP Module - app
 // -------------------------------------------------------------------------------------------
@@ -97,38 +97,41 @@ var app = angular.module('app', []);
 // Controller - list
 // -------------------------------------------------------------------------------------------
 
-app.controller('mainCtrl', ["$scope", "$timeout", function($scope, $timeout){
-	// vars
-	var depositrate = statics.depositrate;
+app.controller('mainCtrl', ["$scope", "$timeout",
+	function ($scope, $timeout) {
+		// vars
+		var depositrate = statics.depositrate;
 
-	// model
-	$scope.cashsaving = 151200;
-	$scope.maxhomeloan = 480000;
+		// model
+		$scope.cashsaving = 151200;
+		$scope.maxhomeloan = 480000;
 
-	$scope.ppr = false;
-	$scope.titletransfer = 1366;
-	$scope.mortgageregister = 111;
-	$scope.legalfees = 1000;
+		$scope.ppr = false;
+		$scope.titletransfer = 1366;
+		$scope.mortgageregister = 111;
+		$scope.legalfees = 1000;
+		$scope.overheads = $scope.titletransfer + $scope.mortgageregister + $scope.legalfees;
 
-	$propertypriceFromSaving = 0;
-	$propertypriceFromLoan = 0;
-	$scope.propertyprice = 0;
-	$scope.stampduty = 0;
-	$scope.totalcost = 0;
+		$scope.propertypriceFromSaving = 0;
+		$scope.propertypriceFromLoan = 0;
+		$scope.propertyprice = 0;
+		$scope.deposit = 0;
+		$scope.stampduty = 0;
+		$scope.totalcost = 0;
 
-	// methods
-	$scope.calculateAll = function() {
-		$scope.propertypriceFromSaving = utils.getPropertyPrice($scope.cashsaving, $scope.ppr);
-		$scope.propertypriceFromLoan = $scope.maxhomeloan / (1 - depositrate);
-		$scope.propertyprice = Math.min($scope.propertypriceFromSaving, $scope.propertypriceFromLoan);
-		$scope.stampduty = utils.getStampDuty($scope.propertyprice, $scope.ppr);
-		$scope.totalcost = $scope.propertyprice + $scope.stampduty +
-			$scope.titletransfer +
-			$scope.mortgageregister +
-			$scope.legalfees;
+		// methods
+		$scope.calculateAll = function () {
+			$scope.propertypriceFromSaving = utils.getPropertyPrice($scope.cashsaving, $scope.ppr);
+			$scope.propertypriceFromLoan = $scope.maxhomeloan / (1 - depositrate);
+			$scope.propertyprice = Math.min($scope.propertypriceFromSaving, $scope.propertypriceFromLoan);
+
+			$scope.stampduty = utils.getStampDuty($scope.propertyprice, $scope.ppr);
+			$scope.deposit = $scope.propertyprice * depositrate;
+
+			$scope.totalcost = $scope.propertyprice + $scope.stampduty + $scope.overheads;
+		};
+
+		// init
+		$scope.calculateAll();
 	}
-
-	// init
-	$scope.calculateAll();
-}]);
-
+]);

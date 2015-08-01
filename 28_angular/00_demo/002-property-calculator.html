@@ -17,8 +17,16 @@
 	<h1>What Property Can I Afford?<sup>1</sup></h1>
 	<div ng-controller="mainCtrl">
 		<h4>Cash Savings</h4>
-		<div><small>This covers the deposit (20%) and Stamp Duty.</small></div>
-		<p>$ <input ng-model="cashsaving" ng-change="calculateAll()"></p>
+		<div>
+			<small>
+				This covers the
+				<b>deposit(20%): $<span ng-bind="deposit"></span></b> and
+				<b>Stamp Duty: $<span ng-bind="stampduty"></span></b>.
+			</small>
+		</div>
+		<p>
+			$ <input ng-model="cashsaving" ng-change="calculateAll()">
+		</p>
 
 		<h4>Borrowing Capacity</h4>
 		<div><small>Maximum borrowing capacity, this covers the rest of the property price (80%).</small></div>
