@@ -4,7 +4,7 @@
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	<link rel="stylesheet" href="lib/normalize.css">
 	<link rel="stylesheet" href="lib/main.css">
-	<script src="../jquery-1.8.3.min.js"></script>
+	<script src="../vendor/jquery-1.8.3.min.js"></script>
 	<script src="../backbone-1.1.2/underscore.js"></script>
 	<script src="../backbone-1.1.2/backbone.js"></script>
 </head>
@@ -74,6 +74,9 @@
 		var todoView = new TodoView({
 			model: myTodo
 		});
+
+		//render view
+		todoView.render();
 	</script><!-- /app -->
 </body>
 </html>
