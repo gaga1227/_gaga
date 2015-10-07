@@ -81,7 +81,7 @@
 	<h2>ng-change</h2>
 
 	<div ng-controller="ngChangeController">
-		<h3>Check how much tax you need to pay (FY14):</h3>
+		<h3>Check how much tax you need to pay (FY16):</h3>
 		<form name="form" novalidate>
 		<p>
 			<b>Input your taxable income:</b>
@@ -97,7 +97,7 @@
 			<b>Annual income before tax:</b>
 			<b>
 				${{ equation.gross | number:2 }} (yr) >
-				${{ (equation.gross / 12) | number:2 }} (m) > 
+				${{ (equation.gross / 12) | number:2 }} (m) >
 				${{ (equation.gross / 26) | number:2 }} (f)
 			</b>
 		</p>
@@ -105,7 +105,7 @@
 			<b>Annual income after tax:</b>
 			<b>
 				${{ equation.afterTax | number:2 }} (yr) >
-				${{ equation.afterTax / 12 | number:2 }} (m) > 
+				${{ equation.afterTax / 12 | number:2 }} (m) >
 				${{ equation.afterTax / 26 | number:2 }} (f)
 			</b>
 		</p>
