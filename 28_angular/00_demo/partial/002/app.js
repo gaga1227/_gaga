@@ -103,8 +103,8 @@ app.controller('mainCtrl', ["$scope", "$timeout",
 		var depositrate = statics.depositrate;
 
 		// model
-		$scope.cashsaving = 151200;
-		$scope.maxhomeloan = 480000;
+		$scope.cashsaving = 200000;
+		$scope.maxhomeloan = 610000;
 
 		$scope.ppr = false;
 		$scope.titletransfer = 1366;
@@ -117,6 +117,7 @@ app.controller('mainCtrl', ["$scope", "$timeout",
 		$scope.propertyprice = 0;
 		$scope.deposit = 0;
 		$scope.stampduty = 0;
+		$scope.cashcost = 0;
 		$scope.totalcost = 0;
 
 		// methods
@@ -125,8 +126,10 @@ app.controller('mainCtrl', ["$scope", "$timeout",
 			$scope.propertypriceFromLoan = $scope.maxhomeloan / (1 - depositrate);
 			$scope.propertyprice = Math.min($scope.propertypriceFromSaving, $scope.propertypriceFromLoan);
 
+			$scope.mortgage = $scope.propertyprice * (1 - depositrate);
 			$scope.stampduty = utils.getStampDuty($scope.propertyprice, $scope.ppr);
 			$scope.deposit = $scope.propertyprice * depositrate;
+			$scope.cashcost = $scope.deposit + $scope.stampduty;
 
 			$scope.totalcost = $scope.propertyprice + $scope.stampduty + $scope.overheads;
 		};

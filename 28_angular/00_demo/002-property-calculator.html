@@ -20,32 +20,36 @@
 		<div>
 			<small>
 				This covers the
-				<b>deposit(20%): $<span ng-bind="deposit"></span></b> and
-				<b>Stamp Duty: $<span ng-bind="stampduty"></span></b>.
+				<b>deposit(20%): $<span ng-bind="deposit | number:2"></span></b> and
+				<b>Stamp Duty: $<span ng-bind="stampduty | number:2"></span></b>.
 			</small>
 		</div>
 		<p>
-			$ <input ng-model="cashsaving" ng-change="calculateAll()">
+			$ <input ng-model="cashsaving" ng-change="calculateAll()"><br>
+			<small>Cash cost: $<span ng-bind="cashcost | number:2"></span></small>
 		</p>
 
 		<h4>Borrowing Capacity</h4>
 		<div><small>Maximum borrowing capacity, this covers the rest of the property price (80%).</small></div>
-		<p>$ <input ng-model="maxhomeloan" ng-change="calculateAll()"></p>
+		<p>
+			$ <input ng-model="maxhomeloan" ng-change="calculateAll()"><br>
+			<small>Mortgage amount: $<span ng-bind="mortgage | number:2"></span></small>
+		</p>
 
 		<h4>Principal Place of Residence (PPR): <input type="checkbox" ng-model="ppr" ng-change="calculateAll()"></h4>
 		<div><small>If you are elegible to PPR Stamp Duty concessions.</small></div>
 
 		<hr>
-		<h2>Property Price: $<span ng-bind="propertyprice"></span></h2>
+		<h2>Property Price: $<span ng-bind="propertyprice | number:2"></span></h2>
 		<div><small>This is the maximum affordable property price.</small></div>
 		<hr>
-		<p><b>Stamp duty:<sup>*</sup></b> $<span ng-bind="stampduty"></span></p>
-		<p><b>Registration of transfer<sup>*^2</sup>:</b> $<span ng-bind="titletransfer"></span></p>
-		<p><b>Registration of mortgage<sup>*^2</sup>:</b> $<span ng-bind="mortgageregister"></span></p>
-		<p><b>Legal fees<sup>^3</sup>:</b> $<span ng-bind="legalfees"></span></p>
+		<p><b>Stamp duty:<sup>*</sup></b> $<span ng-bind="stampduty | number:2"></span></p>
+		<p><b>Registration of transfer<sup>*^2</sup>:</b> $<span ng-bind="titletransfer | number:2"></span></p>
+		<p><b>Registration of mortgage<sup>*^2</sup>:</b> $<span ng-bind="mortgageregister | number:2"></span></p>
+		<p><b>Legal fees<sup>^3</sup>:</b> $<span ng-bind="legalfees | number:2"></span></p>
 
 		<hr>
-		<h2>Total Cost: $<span ng-bind="totalcost"></span></h2>
+		<h2>Total Cost: $<span ng-bind="totalcost | number:2"></span></h2>
 		<hr>
 	</div>
 	<div class="footnotes">
