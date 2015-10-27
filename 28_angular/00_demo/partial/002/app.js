@@ -103,13 +103,13 @@ app.controller('mainCtrl', ["$scope", "$timeout",
 		var depositrate = statics.depositrate;
 
 		// model
-		$scope.cashsaving = 200000;
-		$scope.maxhomeloan = 610000;
+		$scope.cashsaving = 229200;
+		$scope.maxhomeloan = 1000000;
 
 		$scope.ppr = false;
-		$scope.titletransfer = 1366;
-		$scope.mortgageregister = 111;
-		$scope.legalfees = 1000;
+		$scope.titletransfer = 1369; //hard code fixed
+		$scope.mortgageregister = 114; //hard code fixed
+		$scope.legalfees = 1500; //hard code fixed
 		$scope.overheads = $scope.titletransfer + $scope.mortgageregister + $scope.legalfees;
 
 		$scope.propertypriceFromSaving = 0;

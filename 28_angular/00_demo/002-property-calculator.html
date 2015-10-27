@@ -20,36 +20,36 @@
 		<div>
 			<small>
 				This covers the
-				<b>deposit(20%): $<span ng-bind="deposit | number:2"></span></b> and
-				<b>Stamp Duty: $<span ng-bind="stampduty | number:2"></span></b>.
+				<b>deposit (20%): <span ng-bind="deposit | currency"></span></b> and
+				<b>Stamp Duty: <span ng-bind="stampduty | currency"></span></b>.
 			</small>
 		</div>
 		<p>
 			$ <input ng-model="cashsaving" ng-change="calculateAll()"><br>
-			<small>Cash cost: $<span ng-bind="cashcost | number:2"></span></small>
+			<small>Actual cash cost: <span ng-bind="cashcost | currency"></span></small>
 		</p>
 
 		<h4>Borrowing Capacity</h4>
 		<div><small>Maximum borrowing capacity, this covers the rest of the property price (80%).</small></div>
 		<p>
 			$ <input ng-model="maxhomeloan" ng-change="calculateAll()"><br>
-			<small>Mortgage amount: $<span ng-bind="mortgage | number:2"></span></small>
+			<small>Actual mortgage amount: <span ng-bind="mortgage | currency"></span></small>
 		</p>
 
 		<h4>Principal Place of Residence (PPR): <input type="checkbox" ng-model="ppr" ng-change="calculateAll()"></h4>
 		<div><small>If you are elegible to PPR Stamp Duty concessions.</small></div>
 
 		<hr>
-		<h2>Property Price: $<span ng-bind="propertyprice | number:2"></span></h2>
+		<h2>Property Price: <span ng-bind="propertyprice | currency"></span></h2>
 		<div><small>This is the maximum affordable property price.</small></div>
 		<hr>
-		<p><b>Stamp duty:<sup>*</sup></b> $<span ng-bind="stampduty | number:2"></span></p>
-		<p><b>Registration of transfer<sup>*^2</sup>:</b> $<span ng-bind="titletransfer | number:2"></span></p>
-		<p><b>Registration of mortgage<sup>*^2</sup>:</b> $<span ng-bind="mortgageregister | number:2"></span></p>
-		<p><b>Legal fees<sup>^3</sup>:</b> $<span ng-bind="legalfees | number:2"></span></p>
+		<p><b>Stamp duty:<sup>*</sup></b> <span ng-bind="stampduty | currency"></span></p>
+		<p><b>Registration of transfer<sup>*^2</sup>:</b> <span ng-bind="titletransfer | currency"></span></p>
+		<p><b>Registration of mortgage<sup>*^2</sup>:</b> <span ng-bind="mortgageregister | currency"></span></p>
+		<p><b>Legal fees<sup>^3</sup>:</b> <span ng-bind="legalfees | currency"></span></p>
 
 		<hr>
-		<h2>Total Cost: $<span ng-bind="totalcost | number:2"></span></h2>
+		<h2>Total Cost: <span ng-bind="totalcost | currency"></span></h2>
 		<hr>
 	</div>
 	<div class="footnotes">
@@ -60,9 +60,9 @@
 		<div><dt><sup>1</sup></dt>
 		<dd>The tool gives you an indication of what property you can afford based on your savings and borrowing capacity. (Borrowing capacity should be calculated and advised by your homeloan provider.)</dd></div>
 		<div><dt><sup>2</sup></dt>
-		<dd>Fixed for my price range.</dd></div>
+		<dd>Fixed for my price range. (as of 201510)</dd></div>
 		<div><dt><sup>3</sup></dt>
-		<dd>General market prices for solicitor/conveyance fee plus title search.</dd></div>
+		<dd>General market prices for solicitor/conveyance fee plus title search. (as of 201510)</dd></div>
 	</div>
 </body>
 <script src="partial/002/app.js"></script>
