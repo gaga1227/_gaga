@@ -1,0 +1,2 @@
+# exclude all snapkite engine related modules
+snapkite*/
