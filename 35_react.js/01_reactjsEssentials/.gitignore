@@ -1,2 +1,5 @@
 # exclude all snapkite engine related modules
 snapkite*/
+
+# node stuff
+node_modules
