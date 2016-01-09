@@ -293,3 +293,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+#############
+## Exceptions
+#############
+!35_react.js/01_reactjsEssentials/snapterest/build
