@@ -103,7 +103,7 @@ app.controller('mainCtrl', ["$scope", "$timeout",
 		var depositrate = statics.depositrate;
 
 		// model
-		$scope.cashsaving = 229200;
+		$scope.cashsaving = 270000; // 201606
 		$scope.maxhomeloan = 1000000;
 
 		$scope.ppr = false;
