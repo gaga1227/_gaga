@@ -358,27 +358,34 @@ body {
 /* -------------------------------------------------------------------------- */
 /* modal */
 .modal {
-	display: block;
+	display: inline-block;
 	background: #fff;
 	width: auto;
 	max-width: 400px;
-	margin: 20px auto;
+	margin: 20px;
 	padding: 24px;
 	overflow: hidden;
+	text-align: left;
 	/*transition*/
 	/*-webkit-transform:translate3d(0,0,0);*/
 	-webkit-transition:all 0.3s ease-in-out;
 	-moz-transition:all 0.3s ease-in-out;
 	-o-transition:all 0.3s ease-in-out;
 	transition:all 0.3s ease-in-out;
+	/*box-shadow*/
+	-webkit-box-shadow: 0 4px 16px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow:    0 4px 16px 0px rgba(0,0,0,0.4);
+	box-shadow:         0 4px 16px 0px rgba(0,0,0,0.4);
 }
 
 /* -------------------------------------------------------------------------- */
 /* container-modal default */
 #container-modal {
 	display: block; position: fixed; top: 0; left:0; right: 0; bottom: 0;
+	min-width: 320px;
 	background: rgba(0, 0, 0, 0.6);
 	opacity: 0;
+	text-align: center;
 	z-index: -999;
 	/*transition*/
 	/*-webkit-transform:translate3d(0,0,0);*/
