@@ -4,7 +4,7 @@
    ========================================================================== */
 
 /* base text style */
-html, button, input, select, textarea { color:#7C7C7C; font-family:sans-serif; }
+html, button, input, select, textarea { color:#7C7C7C; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body { font-size:1em; line-height:1.4; }
 
 /* text selection style */
@@ -42,6 +42,61 @@ a:hover    { color: #1C75BC; }
 a:focus    { color: #1C75BC; }
 a:active    { color: #08487C; }
 
+/* headings */
+h1 {
+	color: #1c75bc;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.3em;
+	margin: 0 0 0.8em 0;
+}
+h2 {
+	color: #000;
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 1.3em;
+	margin: 0 0 0.75em 0;
+}
+h3 {
+	color: #000;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.5em;
+	margin: 0 0 0.3em 0;
+}
+h4 {
+	color: #000;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.5em;
+	margin: 0 0 0.3em 0;
+}
+
+/* text */
+p {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.5em;
+	margin: 0 0 1em 0;
+}
+.highlight {
+	color: #000;
+}
+
+/* lists */
+ul, ol {
+	font-size: 13px;
+	margin-top: 0;
+	margin-bottom: 1em;
+	padding: 0 0 0 20px;
+}
+li {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.5em;
+	margin: 0;
+}
+
 
 /* ==========================================================================
    Primary Styles
@@ -58,7 +113,7 @@ a:active    { color: #08487C; }
 body {
 	position:relative; margin:0; padding:0;
 	color:#7C7C7C; background:#e8e8e8;
-	font-family:sans-serif; font-size:13px; font-weight:400; line-height:18px; }
+	font-family: Roboto, "Helvetica Neue", sans-serif; font-size:13px; font-weight:400; line-height:18px; }
 
 	/* -------------------------------------------------------------------------- */
 	/* blockings */
@@ -91,50 +146,116 @@ body {
    structure - CONTAINER
    ========================================================================== */
 
+#container {
+	background:#fff;
+}
+
 
 /* ==========================================================================
    structure - HEADER
    ========================================================================== */
+
+#header {
+	height: 45px;
+	overflow: hidden;
+	line-height: 45px;
+	/*background-gradient*/
+	background-color:#115CA0;
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#115CA0), color-stop(100%,#3DA7D8));
+	background-image:-webkit-linear-gradient(top, #115CA0 0%, #3DA7D8 100%);
+	background-image:-moz-linear-gradient(top, #115CA0 0%, #3DA7D8 100%);
+	background-image:linear-gradient(to bottom, #115CA0 0%, #3DA7D8 100%);
+}
 
 
 /* ==========================================================================
    structure - BANNER
    ========================================================================== */
 
+#banner {
+	height: auto;
+	overflow: hidden;
+	background:#333;
+}
+
+/* shadow */
+#banner:before {
+	content:" ";
+	display: block;
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 20px;
+	font-size: 0;
+	line-height: 0;
+	overflow: hidden;
+	z-index: 10;
+	/*background-gradient*/
+	background-color:transparent;
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,transparent));
+	background-image:-webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%, transparent 100%);
+	background-image:-moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, transparent 100%);
+	background-image:linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 100%);
+}
+
+/* slides */
+#banner .slide {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
 
 /* ==========================================================================
-   structure - CONTENT SHELL
+   structure - CONTENT
    ========================================================================== */
 
-
-/* ==========================================================================
-   structure - FOOTER
-   ========================================================================== */
-
-
-/* ==========================================================================
-   common - ICONS
-   ========================================================================== */
+#content {
+}
+#content > .padder {
+	padding: 20px;
+}
 
 /* -------------------------------------------------------------------------- */
-/* common */
-.icon, .iconInline {
-	/*transition*/
-	/*-webkit-transform:translate3d(0,0,0);*/
-	-webkit-transition:all 0.3s ease-in-out;
-	-moz-transition:all 0.3s ease-in-out;
-	-o-transition:all 0.3s ease-in-out;
-	transition:all 0.3s ease-in-out; }
+/* app download */
+#section-app #brand-icon {
+	margin: 0 20px 20px 0;
+}
+#section-app .intro {
+	color: #444;
+	font-size: 15px;
+	padding: 8px 0 0 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* step */
+.step {
+	display: block; position: relative;
+	padding-left: 60px;
+}
+.step .title {
+	display: inline-block;
+	position: absolute;
+	top:0; left:0;
+}
 
 /* -------------------------------------------------------------------------- */
 /* icon */
-.icon { position:absolute; text-align:center; }
+.icon {
+	display: inline-block;
+	width: auto;
+	height: 20px;
+	margin-top: -1px;
+	vertical-align: middle;
+}
 
 /* -------------------------------------------------------------------------- */
-/* iconInline */
-.iconInline 		{ display:inline-block; position:relative; padding:0 10px; vertical-align:middle; }
-.iconInline.left 		{ padding-left:0; text-align:left; }
-.iconInline.right	{ padding-right:0; text-align:right; }
+/* img-border */
+.img-border {
+	border: 1px solid #BDBDBD;
+}
 
 
 /* ==========================================================================
@@ -145,10 +266,10 @@ body {
 /* btnAction */
 .btnAction,
 .btnAction:visited {
-	display:block;  width:auto; min-width:150px; height:auto; margin:8px 0; padding:0 16px; overflow:hidden;
+	display:block;  width:auto; height:auto; margin:8px 0; padding:0 16px; overflow:hidden;
 	color:#fff; background:#66B615;
 	text-decoration:none!important; outline:0 none!important;
-	font-size:16px; font-weight:400; line-height:40px; text-align:center;
+	font-size:16px; font-weight:500; line-height:40px; text-align:center;
 	/*border-radius*/-webkit-border-radius:2px; border-radius:2px;
 	/*background-clip*/-moz-background-clip:padding; -webkit-background-clip:padding; background-clip:padding-box; }
 
@@ -156,6 +277,62 @@ body {
 .no-touch .btnAction:hover,
 .no-touch .btnAction:focus,
 .touch .btnAction:active { color:#fff; background:#4B9301; }
+
+/* -------------------------------------------------------------------------- */
+/* btnLink */
+.btnLink,
+.btnLink:visited {
+	display:block;  width:auto; height:auto; margin:8px 0; padding:0 16px; overflow:hidden;
+	color:#1c75bc; background:transparent;
+	text-decoration:none!important; outline:0 none!important;
+	font-size:13px; font-weight:500; line-height:40px; text-align:center; text-transform: uppercase; }
+
+/* interaction */
+.no-touch .btnLink:hover,
+.no-touch .btnLink:focus,
+.touch .btnLink:active { color:#1c75bc; }
+
+
+/* ==========================================================================
+   common - MODAL
+   ========================================================================== */
+
+.messageBox {
+	display: block;
+	width: auto;
+	margin: 0 auto 8px auto;
+	padding: 20px;
+	background: #ECF4FB;
+	/*border-radius*/-webkit-border-radius:2px; border-radius:2px;
+	/*background-clip*/-moz-background-clip:padding; -webkit-background-clip:padding; background-clip:padding-box;
+}
+.messageBox > :first-child {
+	margin-top: 0;
+}
+.messageBox > :last-child {
+	margin-bottom: 0;
+}
+
+/* ==========================================================================
+   common - COLLAPSABLE
+   ========================================================================== */
+
+.collapsable {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	/*transition*/
+	/*-webkit-transform:translate3d(0,0,0);*/
+	-webkit-transition:all 0.6s ease-in-out;
+	-moz-transition:all 0.6s ease-in-out;
+	-o-transition:all 0.6s ease-in-out;
+	transition:all 0.6s ease-in-out;
+}
+
+.collapsable.collapsed {
+	max-height: 400px;
+	opacity: 1;
+}
 
 
 /* ==========================================================================
@@ -170,7 +347,7 @@ body {
 	width: auto;
 	max-width: 400px;
 	margin: 20px;
-	padding: 40px;
+	padding: 24px;
 	overflow: hidden;
 	/*transition*/
 	/*-webkit-transform:translate3d(0,0,0);*/
@@ -209,6 +386,12 @@ body {
 #container-modal.shown .modal {
 	top: 200px;
 	opacity: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* btnDismiss */
+#container-modal .btnDismiss {
+	margin:0 -20px -20px 0;
 }
 
 

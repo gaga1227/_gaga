@@ -68,6 +68,7 @@ function init() {
 	initDownloadBtn();
 	initDownloadAPKBtn();
 	initBtnScroll();
+	initBtnToggleContent();
 }
 
 /* DOM Ready */

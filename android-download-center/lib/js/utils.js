@@ -69,3 +69,29 @@ function initBtnScroll(cls) {
 		});
 	});
 }
+
+/* ------------------------------------------------------------------------------ */
+/* common - initBtnToggleContent */
+/* ------------------------------------------------------------------------------ */
+function initBtnToggleContent(cls) {
+	var btnToggleContentCls = cls || '.btnToggleContent',
+		$btnToggles = $(btnToggleContentCls),
+		switchClass = 'collapsed',
+		onText = 'Read Less',
+		offText = 'Read More';
+
+	if ( !$btnToggles.length ) return false;
+
+	$.each($btnToggles, function(idx, ele) {
+		var $ele = $(ele);
+		var $target = $('#' + $ele.attr('data-target'));
+
+		if (!$target.length) return false;
+
+		$ele.on('click', function(e) {
+			e.preventDefault();
+			$target.toggleClass(switchClass);
+			$ele.text($target.hasClass(switchClass) ? onText : offText);
+		});
+	});
+}
