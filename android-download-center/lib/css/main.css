@@ -362,7 +362,7 @@ body {
 	background: #fff;
 	width: auto;
 	max-width: 400px;
-	margin: 20px;
+	margin: 20px auto;
 	padding: 24px;
 	overflow: hidden;
 	/*transition*/
@@ -389,8 +389,7 @@ body {
 }
 
 #container-modal .modal {
-	position: absolute;
-	top: 180px;
+	margin-top: 180px;
 	opacity: 0;
 }
 
@@ -400,7 +399,7 @@ body {
 	opacity: 1;
 }
 #container-modal.shown .modal {
-	top: 200px;
+	margin-top: 200px;
 	opacity: 1;
 }
 
