@@ -166,7 +166,11 @@ body {
 	background-image:-moz-linear-gradient(top, #115CA0 0%, #3DA7D8 100%);
 	background-image:linear-gradient(to bottom, #115CA0 0%, #3DA7D8 100%);
 }
-
+#header .brand-logo {
+	display: inline-block;
+	width:76px;
+	height: auto;
+}
 
 /* ==========================================================================
    structure - BANNER
@@ -221,6 +225,9 @@ body {
 /* -------------------------------------------------------------------------- */
 /* app download */
 #section-app #brand-icon {
+	display: block;
+	width: 60px;
+	height: 60px;
 	margin: 0 20px 20px 0;
 }
 #section-app .intro {
@@ -255,6 +262,15 @@ body {
 /* img-border */
 .img-border {
 	border: 1px solid #BDBDBD;
+}
+
+/* -------------------------------------------------------------------------- */
+/* img-border */
+.img-unknown-source {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 100%;
 }
 
 
