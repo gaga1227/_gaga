@@ -1,0 +1,428 @@
+/* ==========================================================================
+   Base styles: opinionated defaults
+   Author: JX 20130127 (Adapted from HTML5 Boilerplate 4)
+   ========================================================================== */
+
+/* base text style */
+html, button, input, select, textarea { color:#7C7C7C; font-family:sans-serif; }
+body { font-size:1em; line-height:1.4; }
+
+/* text selection style */
+::-moz-selection { color:#fff; background:#1C75BC; text-shadow:none; }
+::selection { color:#fff; background:#1C75BC; text-shadow:none; }
+
+/* simplified hr style */
+hr { display:block; height:1px; margin:1em 0; padding:0; border:0; border-top:1px solid #C4C4C4; }
+
+/* Remove the gap between images and the bottom of their containers: h5bp.com/i/440 */
+img { vertical-align:middle; }
+
+/* Remove default fieldset styles. */
+fieldset { border:0; margin:0; padding:0; }
+
+/* Remove default webkit styles on form elements. */
+button, input, select, textarea { -webkit-appearance:none; -webkit-border-radius:0; }
+button:focus, input:focus, select:focus, textarea:focus { outline: none; }
+
+/* Allow only vertical resizing of textareas. */
+textarea { resize:vertical; }
+
+/* Default table cell vertical alignment */
+th, td { vertical-align:top; }
+
+/* Chrome Frame prompt */
+.chromeframe {
+    margin:0.2em 0; padding:0.2em 0;
+    color:#000; background:#ccc; }
+
+/* Link styles*/
+a              { color: #1C75BC; text-decoration:none!important; }
+a:visited   { color: #1C75BC; }
+a:hover    { color: #1C75BC; }
+a:focus    { color: #1C75BC; }
+a:active    { color: #08487C; }
+
+
+/* ==========================================================================
+   Primary Styles
+   Author: JX 201611
+   ========================================================================== */
+
+
+/* ==========================================================================
+   structure - GLOBAL
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* body */
+body {
+	position:relative; margin:0; padding:0;
+	color:#7C7C7C; background:#e8e8e8;
+	font-family:sans-serif; font-size:13px; font-weight:400; line-height:18px; }
+
+	/* -------------------------------------------------------------------------- */
+	/* blockings */
+	#container,
+		#header, #banner, #content, #footer, .section,
+			#header 	> .padder,
+			#banner 	> .padder,
+			#content 	> .padder,
+			#footer 	> .padder,
+			.section 	> .padder {
+		display:block; position:relative; width:auto; height:auto; margin:0 auto; padding:0; }
+
+	/* container */
+	#container {
+		min-width:320px; max-width:600px; }
+
+	/* sections */
+	#header, #banner, #content, #footer, .section {
+		width:auto; }
+
+	/* padders */
+	#header 	> .padder,
+	#banner 	> .padder,
+	#content 	> .padder,
+	#footer 	> .padder,
+	.section 	> .padder {}
+
+
+/* ==========================================================================
+   structure - CONTAINER
+   ========================================================================== */
+
+
+/* ==========================================================================
+   structure - HEADER
+   ========================================================================== */
+
+
+/* ==========================================================================
+   structure - BANNER
+   ========================================================================== */
+
+
+/* ==========================================================================
+   structure - CONTENT SHELL
+   ========================================================================== */
+
+
+/* ==========================================================================
+   structure - FOOTER
+   ========================================================================== */
+
+
+/* ==========================================================================
+   common - ICONS
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* common */
+.icon, .iconInline {
+	/*transition*/
+	/*-webkit-transform:translate3d(0,0,0);*/
+	-webkit-transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
+	-o-transition:all 0.3s ease-in-out;
+	transition:all 0.3s ease-in-out; }
+
+/* -------------------------------------------------------------------------- */
+/* icon */
+.icon { position:absolute; text-align:center; }
+
+/* -------------------------------------------------------------------------- */
+/* iconInline */
+.iconInline 		{ display:inline-block; position:relative; padding:0 10px; vertical-align:middle; }
+.iconInline.left 		{ padding-left:0; text-align:left; }
+.iconInline.right	{ padding-right:0; text-align:right; }
+
+
+/* ==========================================================================
+   common - BUTTONS
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* btnAction */
+.btnAction,
+.btnAction:visited {
+	display:block;  width:auto; min-width:150px; height:auto; margin:8px 0; padding:0 16px; overflow:hidden;
+	color:#fff; background:#66B615;
+	text-decoration:none!important; outline:0 none!important;
+	font-size:16px; font-weight:400; line-height:40px; text-align:center;
+	/*border-radius*/-webkit-border-radius:2px; border-radius:2px;
+	/*background-clip*/-moz-background-clip:padding; -webkit-background-clip:padding; background-clip:padding-box; }
+
+/* interaction */
+.no-touch .btnAction:hover,
+.no-touch .btnAction:focus,
+.touch .btnAction:active { color:#fff; background:#4B9301; }
+
+
+/* ==========================================================================
+   common - MODAL
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* modal */
+.modal {
+	display: block;
+	background: #fff;
+	width: auto;
+	max-width: 400px;
+	margin: 20px;
+	padding: 40px;
+	overflow: hidden;
+	/*transition*/
+	/*-webkit-transform:translate3d(0,0,0);*/
+	-webkit-transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
+	-o-transition:all 0.3s ease-in-out;
+	transition:all 0.3s ease-in-out;
+}
+
+/* -------------------------------------------------------------------------- */
+/* container-modal default */
+#container-modal {
+	display: block; position: fixed; top: 0; left:0; right: 0; bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	opacity: 0;
+	z-index: -999;
+	/*transition*/
+	/*-webkit-transform:translate3d(0,0,0);*/
+	-webkit-transition:opacity 0.3s ease-in-out;
+	-moz-transition:opacity 0.3s ease-in-out;
+	-o-transition:opacity 0.3s ease-in-out;
+	transition:opacity 0.3s ease-in-out;
+}
+
+#container-modal .modal {
+	position: absolute;
+	top: 180px;
+	opacity: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* container-modal show */
+#container-modal.shown {
+	opacity: 1;
+}
+#container-modal.shown .modal {
+	top: 200px;
+	opacity: 1;
+}
+
+
+/* ==========================================================================
+   Common Styles
+   Author: JX 20120127
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* text style */
+.txtUpperCase       { text-transform:uppercase!important; }
+.txtLowerCase       { text-transform:lowercase!important; }
+.txtNormal	      	{ font-weight:normal!important; }
+.txtBold	      	{ font-weight:bold!important; }
+
+/* -------------------------------------------------------------------------- */
+/* layout */
+.posFix             { position:fixed!important; }
+.posAbs             { position:absolute!important; }
+.posRel             { position:relative!important; }
+
+.mcenter            { margin-left:auto!important; margin-right:auto!important; }
+.acenter            { text-align:center!important; }
+.aleft  	        { text-align:left!important; }
+.aright	    	    { text-align:right!important; }
+
+.whitespaceNowrap	{ white-space:nowrap!important; }
+.whitespaceNormal	{ white-space:normal!important; }
+
+.dispInline         { display:inline!important; }
+.dispInlineBlock    { display:inline-block!important; }
+.dispBlock          { display:block!important; }
+.dispNone          	{ display:none!important; }
+
+.overflowVis        { overflow:visible!important; }
+.overflowHid        { overflow:hidden!important; }
+
+.fleft              { float:left!important; }
+.fright             { float:right!important; }
+.fnone              { float:none!important; }
+.cleft              { clear:left!important; }
+.cright             { clear:right!important; }
+.cboth              { clear:both!important; }
+
+.bgNone				{ background:none!important; }
+.bgColorNone		{ background-color:none!important; }
+.bgImgNone			{ background-image:none!important; }
+
+.bdrNone			{ border:none!important; }
+.bdrTopNone			{ border-top:none!important; }
+.bdrBtmNone			{ border-bottom:none!important; }
+.bdrLftNone			{ border-left:none!important; }
+.bdrRgtNone			{ border-right:none!important; }
+
+/* -------------------------------------------------------------------------- */
+/* margin */
+.mgnNone            { margin:0!important; }
+
+.-mgnTop5            { margin-top:-5px!important; }
+.-mgnTop10           { margin-top:-10px!important; }
+.-mgnTop15           { margin-top:-15px!important; }
+.-mgnTop20           { margin-top:-20px!important; }
+.-mgnTop25           { margin-top:-25px!important; }
+.-mgnTop30           { margin-top:-30px!important; }
+.-mgnTop35           { margin-top:-35px!important; }
+.-mgnTop40           { margin-top:-40px!important; }
+.-mgnTop45           { margin-top:-45px!important; }
+.-mgnTop50           { margin-top:-50px!important; }
+
+.mgnTop0            { margin-top:0px!important; }
+.mgnTop5            { margin-top:5px!important; }
+.mgnTop10           { margin-top:10px!important; }
+.mgnTop15           { margin-top:15px!important; }
+.mgnTop20           { margin-top:20px!important; }
+.mgnTop25           { margin-top:25px!important; }
+.mgnTop30           { margin-top:30px!important; }
+.mgnTop35           { margin-top:35px!important; }
+.mgnTop40           { margin-top:40px!important; }
+.mgnTop45           { margin-top:45px!important; }
+.mgnTop50           { margin-top:50px!important; }
+
+.mgnBtm0            { margin-bottom:0px!important; }
+.mgnBtm5            { margin-bottom:5px!important; }
+.mgnBtm10           { margin-bottom:10px!important; }
+.mgnBtm15           { margin-bottom:15px!important; }
+.mgnBtm20           { margin-bottom:20px!important; }
+.mgnBtm25           { margin-bottom:25px!important; }
+.mgnBtm30           { margin-bottom:30px!important; }
+.mgnBtm35           { margin-bottom:35px!important; }
+.mgnBtm40           { margin-bottom:40px!important; }
+.mgnBtm45           { margin-bottom:45px!important; }
+.mgnBtm50           { margin-bottom:50px!important; }
+
+.mgnLft0            { margin-left:0px!important; }
+.mgnLft5            { margin-left:5px!important; }
+.mgnLft10           { margin-left:10px!important; }
+.mgnLft15           { margin-left:15px!important; }
+.mgnLft20           { margin-left:20px!important; }
+.mgnLft25           { margin-left:25px!important; }
+.mgnLft30           { margin-left:30px!important; }
+.mgnLft35           { margin-left:35px!important; }
+.mgnLft40           { margin-left:40px!important; }
+.mgnLft45           { margin-left:45px!important; }
+.mgnLft50           { margin-left:50px!important; }
+
+.mgnRgt0            { margin-right:0px!important; }
+.mgnRgt5            { margin-right:5px!important; }
+.mgnRgt10           { margin-right:10px!important; }
+.mgnRgt15           { margin-right:15px!important; }
+.mgnRgt20           { margin-right:20px!important; }
+.mgnRgt25           { margin-right:25px!important; }
+.mgnRgt30           { margin-right:30px!important; }
+.mgnRgt35           { margin-right:35px!important; }
+.mgnRgt40           { margin-right:40px!important; }
+.mgnRgt45           { margin-right:45px!important; }
+.mgnRgt50           { margin-right:50px!important; }
+
+/* -------------------------------------------------------------------------- */
+/* padding */
+.padNone            { padding:0!important; }
+
+.padTop0            { padding-top:0px!important; }
+.padTop5            { padding-top:5px!important; }
+.padTop10           { padding-top:10px!important; }
+.padTop15           { padding-top:15px!important; }
+.padTop20           { padding-top:20px!important; }
+.padTop25           { padding-top:25px!important; }
+.padTop30           { padding-top:30px!important; }
+.padTop35           { padding-top:35px!important; }
+.padTop40           { padding-top:40px!important; }
+.padTop45           { padding-top:45px!important; }
+.padTop50           { padding-top:50px!important; }
+
+.padBtm0            { padding-bottom:0px!important; }
+.padBtm5            { padding-bottom:5px!important; }
+.padBtm10           { padding-bottom:10px!important; }
+.padBtm15           { padding-bottom:15px!important; }
+.padBtm20           { padding-bottom:20px!important; }
+.padBtm25           { padding-bottom:25px!important; }
+.padBtm30           { padding-bottom:30px!important; }
+.padBtm35           { padding-bottom:35px!important; }
+.padBtm40           { padding-bottom:40px!important; }
+.padBtm45           { padding-bottom:45px!important; }
+.padBtm50           { padding-bottom:50px!important; }
+
+.padLft0            { padding-left:0px!important; }
+.padLft5            { padding-left:5px!important; }
+.padLft10           { padding-left:10px!important; }
+.padLft15           { padding-left:15px!important; }
+.padLft20           { padding-left:20px!important; }
+.padLft25           { padding-left:25px!important; }
+.padLft30           { padding-left:30px!important; }
+.padLft35           { padding-left:35px!important; }
+.padLft40           { padding-left:40px!important; }
+.padLft45           { padding-left:45px!important; }
+.padLft50           { padding-left:50px!important; }
+
+.padRgt0            { padding-right:0px!important; }
+.padRgt5            { padding-right:5px!important; }
+.padRgt10           { padding-right:10px!important; }
+.padRgt15           { padding-right:15px!important; }
+.padRgt20           { padding-right:20px!important; }
+.padRgt25           { padding-right:25px!important; }
+.padRgt30           { padding-right:30px!important; }
+.padRgt35           { padding-right:35px!important; }
+.padRgt40           { padding-right:40px!important; }
+.padRgt45           { padding-right:45px!important; }
+.padRgt50           { padding-right:50px!important; }
+
+
+/* ==========================================================================
+   Helper classes
+   Author: JX 20120127 (Adapted from HTML5 Boilerplate 4)
+   ========================================================================== */
+
+/* Image replacement */
+.ir { background-color:transparent; border:0; overflow:hidden; *text-indent:-9999px;/* IE 6/7 fallback */ }
+.ir:before { content:""; display:block; width:0; height:150%; }
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display:none!important; visibility:hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; border:0; clip:rect(0 0 0 0); }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable
+   when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility:hidden; }
+
+/* Clearfix */
+.clearfix:before,
+.clearfix:after { content:" "; /* 1 */ display:table; /* 2 */ }
+.clearfix:after { clear:both; }
+.clearfix { *zoom:1; } /* For IE 6/7 only */
+
+/* Clearer */
+.clearer { float:none; clear:both; height:0; line-height:0; overflow:hidden; visibility:hidden; }
+.clear { clear:both; }
+
+
+/* ==========================================================================
+   Media Queries Examples
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
