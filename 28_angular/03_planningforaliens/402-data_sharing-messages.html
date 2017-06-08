@@ -63,6 +63,7 @@
 			<div class="controls">
 				<input ng-model="inputMsg">
 				<button ng-click="emit()">$emit</button>
+				<button ng-click="emitSibling()">$emit (to sibling)</button>
 			</div>
 		</div><!-- /SIBLING -->
 		<!-- SELF -->
@@ -73,6 +74,7 @@
 				<input ng-model="inputMsg">
 				<button ng-click="broadcast()">$broadcast</button>
 				<button ng-click="emit()">$emit</button>
+				<button ng-click="emitSibling()">$emit (to sibling)</button>
 			</div>
 			<!-- CHILD -->
 			<div class="scope" ng-controller="ChildCtrl">
@@ -95,6 +97,8 @@
 	<div><dt><sup>3</sup></dt>
 	<dd><b>$on</b> registers messages event handlers</dd></div>
 	<div><dt><sup>4</sup></dt>
+	<dd>Use <b>$rootScope</b> or <b>common parent scopes</b> to pass messages between siblings</dd></div>
+	<div><dt><sup>5</sup></dt>
 	<dd><b>angular.element(ele).scope();</b> returns the scope obejct of DOM element: ele, outside of Angular</dd></div>
 </div>
 <!-- JS -->
@@ -115,6 +119,10 @@ app.run(['$rootScope', function($rootScope){
 	$rootScope.$on('to-parent', function(e, data){
 		msgHandler($rootScope, 'rootMsg', e, data);
 	});
+	$rootScope.$on('to-self', function(e, data){
+		if (e.targetScope == e.currentScope ) return;
+		broadcast($rootScope, 'to-self', data);
+	});
 }]);
 //controllers
 app.controller('ParentCtrl', ['$scope', function($scope){
@@ -134,6 +142,10 @@ app.controller('ParentCtrl', ['$scope', function($scope){
 	$scope.$on('to-parent', function(e, data){
 		msgHandler($scope, 'parentMsg', e, data);
 	});
+	$scope.$on('to-sibling', function(e, data){
+		if (e.targetScope == e.currentScope ) return;
+		broadcast($scope, 'to-sibling', data);
+	});
 }]);
 app.controller('SelfCtrl', ['$scope', function($scope){
 	//model
@@ -145,11 +157,17 @@ app.controller('SelfCtrl', ['$scope', function($scope){
 	$scope.emit = function(){
 		emit($scope, 'to-parent', $scope.inputMsg);
 	};
+	$scope.emitSibling = function(){
+		emit($scope, 'to-sibling', $scope.inputMsg);
+	};
 	//handler
 	$scope.$on('to-child', function(e, data){
 		msgHandler($scope, 'selfMsg', e, data);
 	});
 	$scope.$on('to-parent', function(e, data){
+		msgHandler($scope, 'selfMsg', e, data);
+	});
+	$scope.$on('to-self', function(e, data){
 		msgHandler($scope, 'selfMsg', e, data);
 	});
 }]);
@@ -172,8 +190,14 @@ app.controller('SiblingCtrl', ['$scope', function($scope){
 	$scope.emit = function(){
 		emit($scope, 'to-parent', $scope.inputMsg);
 	};
+	$scope.emitSibling = function(){
+		emit($scope, 'to-self', $scope.inputMsg);
+	};
 	//handler
 	$scope.$on('to-child', function(e, data){
+		msgHandler($scope, 'siblingMsg', e, data);
+	});
+	$scope.$on('to-sibling', function(e, data){
 		msgHandler($scope, 'siblingMsg', e, data);
 	});
 }]);
@@ -190,7 +214,6 @@ function broadcast(scope, evtname, msg){
 function msgHandler(scope, prop, evt, data){
 	if (evt.targetScope == evt.currentScope ) return;
 	scope[prop] = data;
-	//console.log(evt);
 }
 function reset(){
 	var $scopes = $('.ng-scope');
