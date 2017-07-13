@@ -6,7 +6,7 @@ public class CreditCard {
 	private String bank;
 	private String account;
 	private int limit;
-	protected double balance;
+	protected double balance; // can be overridden by same package class, or subclasses
 
 	// Constructors
 	public CreditCard(
