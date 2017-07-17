@@ -1,6 +1,6 @@
 package ch02;
 
-public class FibonacciProgression extends Progression {
+public class FibonacciProgression extends AbstractProgression {
 	private long prev;
 
 	// Constructs generalized Fibonacci, with give first and second values
@@ -15,6 +15,7 @@ public class FibonacciProgression extends Progression {
 	}
 
 	// Replaces (prev,current) with (current, current+prev)
+	// this overrides method in abstract class
 	@Override
 	protected void advance() {
 		long temp = prev;
@@ -24,7 +25,7 @@ public class FibonacciProgression extends Progression {
 
 	// main for demo purposes
 	public static void main(String[] args) {
-		Progression fp = new FibonacciProgression(2L, 10L);
+		AbstractProgression fp = new FibonacciProgression(2L, 10L);
 		fp.printProgression(5);
 	}
 }

@@ -4,6 +4,7 @@ public class TestProgression {
 	public static void main(String[] args) {
 		// polymorphism, a reference variable to take different forms
 		Progression progression;
+		AbstractProgression abstractProgression;
 
 		// test ArithmeticProgression
 		System.out.print("Arithmetic progression with default increment: ");
@@ -26,10 +27,10 @@ public class TestProgression {
 
 		// test FibonacciProgression
 		System.out.print("Fibonacci progression with default start values: ");
-		progression = new FibonacciProgression();
-		progression.printProgression(10);
+		abstractProgression = new FibonacciProgression();
+		abstractProgression.printProgression(10);
 		System.out.print("Fibonacci progression with start values 4 and 6: ");
-		progression = new FibonacciProgression(4, 6);
-		progression.printProgression(8);
+		abstractProgression = new FibonacciProgression(4, 6);
+		abstractProgression.printProgression(8);
 	}
 }
