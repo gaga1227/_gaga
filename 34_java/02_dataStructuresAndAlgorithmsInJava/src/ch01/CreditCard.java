@@ -73,6 +73,17 @@ public class CreditCard {
 		System.out.println("Limit = " + card.limit); // implicit cast
 	}
 
+	@Override
+	public String toString() {
+		String result = "";
+		result += "Customer: " + customer;
+		result += "; Bank: " + bank;
+		result += "; Account: " + account;
+		result += "; Balance: " + balance;
+		result += "; Limit: " + limit;
+		return result;
+	}
+
 	// main for demo purposes
 	public static void main(String[] args) {
 		CreditCard[] wallet = new CreditCard[3];
