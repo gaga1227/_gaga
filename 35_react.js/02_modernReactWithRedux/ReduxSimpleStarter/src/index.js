@@ -1,15 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+// ES6: import JS modules
+import React from "react";
+import ReactDom from "react-dom";
 
-import App from './components/app';
-import reducers from './reducers';
+// ES6: 
+// - 'const' declares a read only final var
+// - needs to be initialised immediately
+// - cannot be reassigned
+// - uses lambda to replace anonymouse function
+// React:
+// - creates a Type or Class of a component
+const App = () => {
+	// JSX: new syntax that produces HTML element via React.createElement()
+	return <div>Hi!</div>;
+};
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+// React:
+// - uses react-dom as renderer
+// - always use component instance in ReactDom.render(), not component class
+// - callback is optional
+ReactDom.render(<App />, document.querySelector(".container"), () => console.log("App Rendered!"));
