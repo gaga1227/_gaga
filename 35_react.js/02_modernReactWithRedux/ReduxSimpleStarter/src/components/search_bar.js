@@ -30,7 +30,7 @@ class SearchBar extends Component {
 	// React: class based component must contain 'render' method that returns react.element
 	render() {
 		// JSX:
-		// - assign state value to 'value' prop makes 'input' a controlled component
+		// - assign state value to 'value' prop makes 'input' a controlled component, React manages the rendering, not browser
 		// - pass event handler method ref as html prop value
 		return (
 			<div>
