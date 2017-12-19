@@ -4,6 +4,7 @@
 
 // ES6: import JS modules
 // libs
+import _ from 'lodash';
 import React, { Component } from 'react'; // uses namespace under node_modules
 import ReactDom from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -32,8 +33,32 @@ class App extends Component {
 		};
 
 		// React: Start with a initial search and update state
+		this.videoSearch('cat');
+
+		// event handlers
+		// ES6:
+		// - use lambda to make sure code is executed with correct 'this' context without binding
+		this.onSearchTermChange = _.debounce(term => {this.videoSearch(term)}, 300);
+		this.onVideoSelect = selectedVideo => this.setState({selectedVideo});
+	}
+
+	render() {
+		// JSX: new syntax that produces HTML element function via React.createElement()
+		// - use () to return multiline JSX template
+		// - pass 'videos' array as value of 'videos' prop into 'VideoList'
+		// - pass video item click handler to 'VideoList'
+		return (
+			<div>
+				<SearchBar onSearchTermChange={this.onSearchTermChange} />
+				<VideoDetail video={this.state.selectedVideo} />
+				<VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+			</div>
+		);
+	}
+
+	videoSearch(term) {
 		YTSearch({
-			term: 'cat',
+			term: term,
 			key: API_KEY
 		}, (videos) => {
 			// ES6:
@@ -46,24 +71,6 @@ class App extends Component {
 			console.log('videos', videos);
 		});
 	}
-
-	render() {
-		// JSX: new syntax that produces HTML element function via React.createElement()
-		// - use () to return multiline JSX template
-		// - pass 'videos' array as value of 'videos' prop into 'VideoList'
-		// - pass video item click handler to 'VideoList'
-		return (
-			<div>
-				<SearchBar />
-				<VideoDetail video={this.state.selectedVideo} />
-				<VideoList onVideoSelect={this.onVideoSelect.bind(this)} videos={this.state.videos} />
-			</div>
-		);
-	}
-
-	onVideoSelect(selectedVideo) {
-		this.setState({selectedVideo});
-	};
 }
 
 // React:

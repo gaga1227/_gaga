@@ -45,12 +45,13 @@ class SearchBar extends Component {
 
 	// event handler method
 	onInputChange(e) {
+		const term = e.target.value;
+
 		// React:
 		// - should always use 'setState' to update state
 		// - 'setState' informs React state changes, might or might not trigger render
-		this.setState({
-			term: e.target.value
-		});
+		this.setState({term});
+		this.props.onSearchTermChange(term);
 	}
 }
 
