@@ -27,7 +27,8 @@ class App extends Component {
 
 		// React: initialise component state
 		this.state = {
-			videos: []
+			videos: [],
+			selectedVideo: null
 		};
 
 		// React: Start with a initial search and update state
@@ -38,7 +39,10 @@ class App extends Component {
 			// ES6:
 			// - can use 'this' here because lambda carries parent context
 			// - use object literal shorthand when object key and value ref has same name
-			this.setState({ videos }); // equals to 'this.setState({ videos: videos })'
+			this.setState({
+				videos, // equals to 'videos: videos'
+				selectedVideo: videos[0]
+			});
 			console.log('videos', videos);
 		});
 	}
@@ -46,15 +50,20 @@ class App extends Component {
 	render() {
 		// JSX: new syntax that produces HTML element function via React.createElement()
 		// - use () to return multiline JSX template
-		// - passing 'videos' array as value of 'videos' prop into 'VideoList'
+		// - pass 'videos' array as value of 'videos' prop into 'VideoList'
+		// - pass video item click handler to 'VideoList'
 		return (
 			<div>
 				<SearchBar />
-				<VideoDetail video={this.state.videos[0]} />
-				<VideoList videos={this.state.videos} />
+				<VideoDetail video={this.state.selectedVideo} />
+				<VideoList onVideoSelect={this.onVideoSelect.bind(this)} videos={this.state.videos} />
 			</div>
 		);
 	}
+
+	onVideoSelect(selectedVideo) {
+		this.setState({selectedVideo});
+	};
 }
 
 // React:

@@ -33,7 +33,7 @@ class SearchBar extends Component {
 		// - assign state value to 'value' prop makes 'input' a controlled component, React manages the rendering, not browser
 		// - pass event handler method ref as html prop value
 		return (
-			<div>
+			<div className="search-bar">
 				<input
 					value={this.state.term}
 					placeholder={this.state.placeholder}
