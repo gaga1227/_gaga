@@ -10,6 +10,7 @@ import YTSearch from 'youtube-api-search';
 // components
 import SearchBar from './components/search_bar'; // use file reference
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 // ES6: 
 // - 'const' declares a read only final var
@@ -49,6 +50,7 @@ class App extends Component {
 		return (
 			<div>
 				<SearchBar />
+				<VideoDetail video={this.state.videos[0]} />
 				<VideoList videos={this.state.videos} />
 			</div>
 		);
