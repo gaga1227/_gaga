@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchWeather } from '../actions/index';
 
 class SearchBar extends Component {
 	constructor(props) {
@@ -11,6 +14,7 @@ class SearchBar extends Component {
 
 		// bind component event handlers requires 'this' context to component context
 		this.onInputChange = this.onInputChange.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
 	onInputChange(e) {
@@ -21,6 +25,13 @@ class SearchBar extends Component {
 
 	onFormSubmit(e) {
 		e.preventDefault();
+
+		// call mapped action creator in props
+		this.props.fetchWeather(this.state.term);
+		// clear search term
+		this.setState({
+			term: ''
+		});
 	}
 
 	render() {
@@ -45,4 +56,15 @@ class SearchBar extends Component {
 	}
 }
 
-export default SearchBar;
+// Redux:
+// - mapping function from Redux dispatch to props
+// - returns an object to be merged to component props object
+function mapDispatchToProps(dispatch) {
+	// map action creators to props keys, uses ES6 object literal short hand here
+	// action creator will be wrapped into dispatch call
+	return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+// Redux:
+// - use 'null' map states to props function, this component doesn't care Redux state
+export default connect(null, mapDispatchToProps)(SearchBar);
