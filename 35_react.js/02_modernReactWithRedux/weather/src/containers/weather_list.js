@@ -32,7 +32,7 @@ class WeatherList extends Component {
 						<th>Humidity (%)</th>
 					</tr>
 				</thead>
-				<tbody>{this.props.weather.map(this.renderWeather)}</tbody>
+				<tbody>{this.props.weather.map(WeatherList.renderWeather)}</tbody>
 			</table>
 		);
 	}
