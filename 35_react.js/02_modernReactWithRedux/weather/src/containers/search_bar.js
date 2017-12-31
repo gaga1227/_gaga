@@ -59,9 +59,11 @@ class SearchBar extends Component {
 // Redux:
 // - mapping function from Redux dispatch to props
 // - returns an object to be merged to component props object
+// - when react props method is called, corresponding dispatch function is called in Redux
 function mapDispatchToProps(dispatch) {
 	// map action creators to props keys, uses ES6 object literal short hand here
 	// action creator will be wrapped into dispatch call
+	// returns a mapping object { dispatchMethodKey: actionCreatorMethodRef }
 	return bindActionCreators({ fetchWeather }, dispatch);
 }
 
