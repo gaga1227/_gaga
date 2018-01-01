@@ -4,6 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 // Route components
 import App from './components/app';
 import PostsIndex from './components/posts_index';
+import PostsNew from './components/posts_new';
 
 /**
  * React Router
@@ -17,18 +18,9 @@ import PostsIndex from './components/posts_index';
  * <IndexRoute> component still renders as children but matches parents path
  */
 
-// views for testing
-const Greeting = () => {
-	return <div className="app-view">Greet View!</div>;
-};
-const Greeting2 = () => {
-	return <div className="app-view">Greet2 View!</div>;
-};
-
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={PostsIndex}/>
-		<Route path="greet" component={Greeting} />
-		<Route path="greet2" component={Greeting2} />
+		<Route path="posts/new" component={PostsNew} />
 	</Route>
 );

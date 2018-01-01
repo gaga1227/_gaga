@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // action creators
 import { fetchPosts } from '../actions/index';
@@ -12,8 +13,17 @@ class PostsIndex extends Component {
 		this.props.fetchPosts();
 	}
 
+	// React Router:
+	// - use <Link> component to trigger route changes
 	render() {
-		return <div>{JSON.stringify(this.props.posts)}</div>;
+		return (
+			<div>
+				<div className="text-xs-right">
+					<Link to="/posts/new" className="btn btn-primary">Add a Post</Link>
+				</div>
+				{JSON.stringify(this.props.posts)}
+			</div>
+		);
 	}
 }
 

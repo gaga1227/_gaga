@@ -8,9 +8,9 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className="app-container">
-				Common header...
+				<div className="header text-xs-center">Common Header</div>
 				{this.props.children}
-				Common footer...
+				<div className="footer text-xs-center">Common Footer</div>
 			</div>
 		);
 	}
