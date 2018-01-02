@@ -6,7 +6,7 @@ const API_KEY = '?key=justneedtobesomethingunique';
 
 // action type constants
 export const FETCH_POSTS = 'FETCH_POSTS';
-export const ADD_POSTS = 'ADD_POSTS';
+export const CREATE_POST = 'CREATE_POST';
 
 // Get blog posts list
 export function fetchPosts() {
@@ -19,14 +19,13 @@ export function fetchPosts() {
 	};
 }
 
-// Add new blog post
-export function addPost(post) {
-	const PATH = '/posts/new';
-	const data = {...post};
-	const request = axios.put(`${ROOT_URL}${PATH}${API_KEY}`, data); // returns a promise here
+// create new blog post
+export function createPost(formData) {
+	const PATH = '/posts';
+	const request = axios.post(`${ROOT_URL}${PATH}${API_KEY}`, formData); // returns a promise here
 
 	return {
-		type: ADD_POSTS,
+		type: CREATE_POST,
 		payload: request
 	};
 }
