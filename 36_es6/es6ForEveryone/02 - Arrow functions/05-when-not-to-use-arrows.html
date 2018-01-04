@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>When _not_ to use arrows =></title>
+</head>
+<body>
+<style>
+  button { font-size: 100px; }
+  .on { background: #ffc600; }
+</style>
+<button id="pushy">Push Me</button>
+
+<script>
+  // When you really need `this`
+  const button = document.querySelector('#pushy');
+  // anonymous function 'this' is bound to caller
+  // use arrow function will inherit parent's scope, which is 'window' here
+  button.addEventListener('click', function() {
+    console.log(this);
+    this.classList.toggle('on');
+  });
+
+  // When you need a method to bind to an object
+  // use arrow function will inherit parent's scope, which is 'window' here
+  const person = {
+    points: 23,
+    score() {
+      console.log(this);
+      this.points++;
+    }
+  };
+
+  // When you need to add a prototype method
+  // use arrow function will inherit parent's scope, which is 'window' here
+  class Car {
+    constructor(make, colour) {
+      this.make = make;
+      this.colour = colour;
+    }
+  }
+
+  const beemer = new Car('bmw', 'blue');
+  const subie = new Car('Subaru', 'white');
+
+  Car.prototype.summarize = function() {
+     return `This car is a ${this.make} in the colour ${this.colour}`;
+  };
+
+  // When you need arguments object
+  // use arrow function has no access to 'arguments' keyword object
+  const orderChildren = function() {
+    console.log(arguments);
+    // 'arguments' is special array like object, proto is Object
+    // convert 'arguments' to array
+    const children = Array.from(arguments);
+    return children.map((child, i) => {
+      return `${child} was child #${i + 1}`;
+    });
+    console.log(arguments);
+  }
+
+</script>
+</body>
+</html>

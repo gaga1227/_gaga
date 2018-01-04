@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Default Arguments</title>
+</head>
+<body>
+<script>
+  // uses default values for params
+  // default values are used when params are undefined
+  function calculateBill(total, tax = 0.13, tip = 0.15) {
+    return total + (total * tax) + (total * tip);
+  }
+
+  // to explicitly use default value, pass 'undefined' as param value
+  // default value is assigned to any param that has 'undefined' as value
+  const totalBill = calculateBill(100, undefined, 0.25);
+  console.log(totalBill);
+</script>
+</body>
+</html>
