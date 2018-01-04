@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const</title>
+</head>
+<body>
+<script>
+  // 'var' can be declared multiple times
+  // 'let, const' can only be initialised once in a scope
+  const key = 'abc123';
+  let points = 50;
+  let winner = false;
+
+  if (points > 0) {
+    // 'winner' is a new variable within current 'if' bock scope
+    let winner = true;
+
+    // updates 'points' in global scope
+    // 'let' can be updated, 'const' cannot be updated
+    points = 60;
+  }
+  // log out 'winner' in global scope
+  console.log('winner', winner);
+  console.log('points', points);
+
+  // 'const' cannot be re-assigned with new value/ref
+  const person = {
+    name: 'Wes',
+    age: 28
+  };
+  // values inside 'const' ref can be updated
+  person.age = 36;
+  console.log('person', person);
+
+  // 'const' makes a variable non-reassignable
+  // 'Object.freeze' (es5) makes an object/array readonly (immutable)
+  // 'person' now refs to readonly object
+  // 'wes' also refs to the same readonly object
+  const wes = Object.freeze(person);
+  person.age = 16;
+  console.log('person -> frozen object', person);
+  wes.newProp = 'newProp';
+  console.log('wes -> person -> frozen object', wes);
+
+</script>
+</body>
+</html>

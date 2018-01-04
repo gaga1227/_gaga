@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const real world</title>
+</head>
+<body>
+<script>
+  // use block scope to limit 'name' leaking into global scope
+  {
+    const name = 'wes';
+    console.log(name);
+  }
+
+  // if use 'var' here, 'i' is incremented in global scope by each iteration
+  // if use 'let' here, 'i' is incremented in each iteration's block scope
+  for(let i = 0; i < 10; i++) {
+    console.log(i);
+    setTimeout(function() {
+      console.log('The number is ' + i);
+    },1000);
+  }
+
+</script>
+</body>
+</html>

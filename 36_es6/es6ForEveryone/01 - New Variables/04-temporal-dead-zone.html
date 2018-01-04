@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const real world</title>
+</head>
+<body>
+<script>
+  console.log(pizza);
+  /**
+   * temporal dead zone
+   *
+   * In es6, let bindings are not subject to Variable Hoisting, which means that let declarations
+   * do not move to the top of the current execution context.
+   *
+   * Referencing the variable in the block before the initialization results in a ReferenceError
+   * (contrary to a variable declared with var, which will just have the undefined value).
+   *
+   * The variable is in a "temporal dead zone" from the start of the block until the initialization
+   * is processed.
+   */
+  const pizza = 'Deep Dish 🍕🍕🍕';
+</script>
+</body>
+</html>
