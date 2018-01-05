@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tagged Templates</title>
+  <style>
+    .hl {
+      background: #ffc600;
+    }
+  </style>
+</head>
+<body>
+<script>
+  // tagged method for string template
+  // - first param is an array of strings literals
+  // - rest of the params can be caught by using rest operator '...' as an array
+  // - up to author how they want to piece each part of the string template together
+  function highlight(strings, ...values) {
+    let str = '';
+    strings.forEach((string, i) => {
+      str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
+    });
+    return str;
+  }
+
+  const name = 'Snickers';
+  const age = 100;
+
+  // tagging a string template by adding a method name ref
+  // - the template will be broken down to pieces as params and passed to the tagged method
+  const sentence = highlight`My dog's name is ${name} and he is ${age} years old`;
+  document.body.innerHTML = sentence;
+  console.log(sentence);
+
+</script>
+</body>
+</html>
