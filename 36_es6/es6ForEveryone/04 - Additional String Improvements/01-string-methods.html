@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New String Methods</title>
+</head>
+<body>
+<script>
+const course = 'RFB2';
+const flightNumber = '20-AC2018-jz';
+const accountNumber = '825242631RT0001';
+
+const make = 'BMW';
+const model = 'x5';
+const colour = 'Royal Blue';
+
+// .startsWith()
+// str.startsWith(searchString[, position])
+// is case-sensitive
+console.log(course.startsWith('RFB'));
+console.log(course.toLocaleLowerCase().startsWith('rfb'));
+console.log(flightNumber.startsWith('AC', 3)); // specify a position index for search
+
+// .endsWith()
+// str.endsWith(searchString[, length])
+// is case-sensitive
+console.log(flightNumber.endsWith('jz'));
+console.log(accountNumber.endsWith('RT', 11)); // only match with first 11 chars from the string
+
+// .includes()
+// str.includes(searchString[, position])
+// is case sensitive
+console.log(flightNumber.includes('AC'));
+console.log(flightNumber.includes('AC', 3)); // specify a position index for search
+
+// .repeat()
+function leftPad(str, length = 20) {
+  // adds required space padding chars to the left of the original string
+  return `→ ${' '.repeat(length - str.length)}${str}`;
+}
+
+console.log(leftPad(make));
+console.log(leftPad(model));
+console.log(leftPad(colour));
+
+</script>
+</body>
+</html>
