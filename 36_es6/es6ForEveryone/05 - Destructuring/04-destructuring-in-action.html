@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Destructuring in Action!</title>
+</head>
+<body>
+<script>
+  // use 'let' rather than 'const' here so the new values can be assigned while 'swapping'
+  let inRing = 'Hulk Hogan';
+  let onSide = 'The Rock';
+
+  console.log(inRing, onSide);
+
+  // use destructuring to swap items/values in an array
+  // this is equal to re-assigning both variable values to each other at the same time
+  [inRing, onSide] = [onSide, inRing];
+
+  console.log(inRing, onSide);
+
+</script>
+</body>
+</html>
