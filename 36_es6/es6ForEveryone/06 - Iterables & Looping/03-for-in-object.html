@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Iterables & Looping</title>
+</head>
+<body>
+
+<script>
+  Object.prototype.testFn = function() {
+    return this;
+  };
+
+  const apple = {
+    color: 'Red',
+    size: 'Medium',
+    weight: 50,
+    sugar: 10
+  };
+
+  // loop through object keys: an array of property keys
+  for (const key of Object.keys(apple)) {
+    console.log('Object.keys', key, apple[key]);
+  }
+
+  // loop through all enumerables, including added properties in prototype
+  for (const prop in apple) {
+    console.log('for in', prop, apple[prop]);
+  }
+
+</script>
+</body>
+</html>
