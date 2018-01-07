@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spread Examples</title>
+</head>
+<body>
+  <div class="people">
+    <p>Wes</p>
+    <p>Kait</p>
+    <p>Randy</p>
+  </div>
+<script>
+  // spread NodeList (iterable type) elements into a new array
+  // same as using 'Array.from(NodeList)' to convert
+  const people = [...document.querySelectorAll('.people p')];
+  const names = people.map(p => p.textContent);
+  console.log('names', names);
+
+  const deepDish = {
+    pizzaName: 'Deep Dish',
+    size: 'Medium',
+    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+  };
+
+  // can spread from an object property
+  const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
+  console.log('shoppingList', shoppingList);
+
+  const comments = [
+    { id: 1, text: 'I love your dog!' },
+    { id: 2, text: 'Cuuute! 🐐' },
+    { id: 3, text: 'You are so dumb' },
+    { id: 4, text: 'Nice work on this wes!' },
+  ];
+  const id = 3;
+  const commentIndexToRemove = comments.findIndex(comment => comment.id === id); // 2
+
+  // remove a certain index from array by spread sliced portions into a new array
+  const newComments = [
+    // 'Array.slice' result doesn't include end index element
+    ...comments.slice(0, commentIndexToRemove), // from 0 to 1 (end - 1)
+    ...comments.slice(commentIndexToRemove + 1) // from 2 to the rest
+  ];
+  console.log('newComments', newComments);
+
+</script>
+</body>
+</html>

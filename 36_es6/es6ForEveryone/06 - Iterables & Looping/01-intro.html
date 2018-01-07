@@ -36,20 +36,23 @@
   });
 
   // loop through all enumerables: including array items and added properties to object and prototype
+  // - need to define 'index' with const to prevent leaking into parent scope
   for (const index in cuts) {
     console.log('in', cuts[index]);
   }
 
   // 'for ... of ...' is a better looping option
   // - works with all objects with a 'Symbol.iterator' function
-  // - e.g. NodeList, Strings, arguments, etc.
+  // - e.g. Array, NodeList, Strings, arguments, maps/sets etc.
   // - Array is iterable: 'Array[Symbol.iterator] === 'function', object is not
+  // - need to define 'cut' with const/let to prevent leaking into parent scope
   for (const cut of cuts) {
     console.log('for of', cut);
   }
 
   // loop through array's iterator
-  // iterator entry has both index and value of each entry
+  // - iterator entry has both index and value of each entry
+  // - need to define 'entry' with const to prevent leaking into parent scope
   for (const entry of cuts.entries()) {
     console.log('iterator', entry);
   }

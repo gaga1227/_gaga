@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The ...Spread Operator</title>
+</head>
+<body>
+<script>
+  const deepDish = {
+    pizzaName: 'Deep Dish',
+    size: 'Medium',
+    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+  };
+
+  const featured = [deepDish, 'Pepperoni', 'Hawaiian'];
+  const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
+
+  // use spread operator to add each item into new array
+  const pizzas = [...featured, 'veg', ...specialty];
+
+  // use spread operator to clone existing array
+  // by spread existing array items into an empty array container
+  // but any value by reference will be not cloned, is still referenced
+  // updates to 'deepDish' will impact reference values in all arrays
+  const pizzasClone = [...pizzas];
+
+</script>
+</body>
+</html>
