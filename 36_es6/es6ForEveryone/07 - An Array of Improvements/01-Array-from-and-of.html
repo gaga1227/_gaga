@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array .from() and .of()</title>
+</head>
+  <div class="people">
+    <p>Wes</p>
+    <p>Kait</p>
+    <p>Snickers</p>
+  </div>
+<body>
+<script>
+  // returns an array-ish 'NodeList' type
+  const people = document.querySelectorAll('.people p');
+
+  // use 'Array.from' to convert array like iterable objects into arrays
+  // takes second param, a map function callback on each element
+  const peopleArray = Array.from(people, person => {
+    return person.textContent;
+  });
+  console.log('peopleArray', peopleArray);
+
+  // use 'Array.from' to convert to array, then chain with map function
+  const names = Array.from(people).map(person => person.textContent);
+  console.log('names', names);
+
+  // use 'Array.from' to convert 'arguments' to array so to use 'reduce' function
+  function sumAll() {
+    const nums = Array.from(arguments);
+    return nums.reduce((sum, next) => sum + next);
+  }
+  console.log('sum', sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342));
+
+  // 'Array.of' takes a set of elements and convert into an array
+  const ages = Array.of(12, 4, 23, 62, 34, 'test');
+  console.log('ages', ages);
+
+</script>
+</body>
+</html>
