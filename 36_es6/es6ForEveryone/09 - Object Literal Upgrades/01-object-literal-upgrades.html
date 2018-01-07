@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Object Literal Upgrades</title>
+</head>
+<body>
+<script>
+  const first = 'snickers';
+  const last = 'bos';
+  const age = 2;
+  const breed = 'King Charles Cav';
+
+  // Use object literal shorthand to define property and values
+  const dog = {
+    firstName: first,
+    last, // last: 'last'
+    age,
+    breed,
+    pals: ['Hugo', 'Sunny']
+  };
+  console.log('dog', dog);
+
+  // Use short hand to define method properties with same name
+  const modal = {
+    create(selector) {}, // create: function(selector) {}
+    open(content) {},
+    close(goodbye) {}
+  }
+
+  function invertColor(color) {
+      return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1),16)).toString(16)).slice(-6);
+  }
+
+  const key = 'pocketColor';
+  const value = '#ffc600';
+
+  // use computed property names with '[]'
+  const tShirt = {
+    [key]: value,
+    [`${key}Opposite`]: invertColor(value)
+  };
+
+  const keys = ['size', 'color', 'weight'];
+  const values = ['medium', 'red', 100];
+
+  // can use returned value from method as computed property names
+  const shirt = {
+    [keys.shift()]: values.shift(), // get first value and assign it to first key, and removes it
+    [keys.shift()]: values.shift(), // keep doing it
+    [keys.shift()]: values.shift(), // keep doing it
+  };
+  console.log('shirt', shirt);
+
+</script>
+</body>
+</html>
