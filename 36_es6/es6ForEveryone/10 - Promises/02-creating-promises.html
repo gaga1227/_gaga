@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creating Promises!</title>
+</head>
+<body>
+<script>
+  // returns a Promise object
+  // use 'resolve' to return a value
+  // use 'reject' to give a reason
+  const p = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(Error('Err wes isn\'t cool'));
+    }, 1000);
+  });
+
+  p
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+</script>
+</body>
+</html>

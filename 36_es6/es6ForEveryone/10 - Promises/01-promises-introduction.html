@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promises!</title>
+</head>
+<body>
+<script>
+
+// use native 'fetch' method:
+const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
+console.log('postsPromise', postsPromise);
+
+// es6 promise:
+// - 'fetch' returns a 'response' type object
+// - get 'fetch' response json data promise from 'response.json()'
+// - then() - call back when promise is resolved
+// - catch() - call back when promise is rejected
+// - finally() - call back when promise is either resolved or rejected
+postsPromise
+  .then(response => {
+    console.log('response', response);
+    return response.json(); // returns a promise type
+  })
+  // chained to the returned value from previous 'then()', which is a promise from 'response.json()'
+  .then(data => {
+    console.log('data', data);
+  })
+  // just chained to previous 'then()', no data
+  .then(() => {
+    console.log('nothing here');
+  })
+  .catch((err) => {
+    console.error('err', err);
+  })
+  .finally(() => {
+    console.log('REQUEST DONE');
+  });
+
+</script>
+</body>
+</html>
