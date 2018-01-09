@@ -1,0 +1,13 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    // 0: off, 1: warn, 2: error
+    "no-console": 0,
+    "no-unused-vars": 1
+  },
+  "plugins": ["html", "markdown"]
+}
