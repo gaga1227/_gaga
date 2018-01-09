@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Symbols</title>
+</head>
+<body>
+<script>
+  /**
+   * ES6 Symbol:
+   * - introduced new primitive type: 'Symbol'
+   * - Existing primitive types: 'string, number, boolean, null, undefined'
+   */
+
+  // Symbols are unique identifiers
+  // Symbols are created with a constructor like function with a descriptor string
+  // same descriptor string do not create same symbols, they are unique
+  const wes = Symbol('Wes');
+  const wes2 = Symbol('Wes');
+  console.log(wes == wes2, wes === wes2); // always unique
+
+  // use symbols as keys to prevent naming collisions
+  // having two unique Olivia, rather than being over written
+  const classRoom = {
+    [Symbol('Mark')] : { grade: 50, gender: 'male' },
+    [Symbol('olivia')]: { grade: 80, gender: 'female' },
+    [Symbol('olivia')]: { grade: 80, gender: 'female' },
+  };
+  console.log('classRoom', classRoom);
+
+  // use symbols as object keys are private
+  // not enumerable, cannot be looped through with 'for ... in'
+  for (const person in classRoom) {
+    console.log('person', person); // logs nothing
+  }
+
+  // can only access object symbols via 'Object.getOwnPropertySymbols()'
+  const syms = Object.getOwnPropertySymbols(classRoom);
+  console.log('syms', syms);
+  const data = syms.map(sym => classRoom[sym]);
+  console.log('data', data);
+
+</script>
+</body>
+</html>
