@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inheritance Review</title>
+</head>
+<body>
+<script>
+  // ES6 class declaration
+  class Dog {
+    // constructor method, required
+    constructor(name, breed) {
+      this.name = name;
+      this.breed = breed;
+      this.nick = '';
+    }
+
+    // class level methods
+    // same as defined as classic prototype methods
+    bark() {
+      console.log(`Bark Bark! My name is ${this.name}`);
+    }
+
+    // needs to be invoked from class itself: 'Dog.cuddle()'
+    static cuddle() {
+      console.log(`I love you owner!`);
+    }
+
+    // instance property getter
+    // usage: 'instance.description'
+    get description() {
+      return `${this.name} is a ${this.breed} type of dog`;
+    }
+    get nicknames() {
+      return this.nick.toUpperCase();
+    }
+
+    // instance property setter
+    // usage: 'instance.nicknames = value'
+    set nicknames(value) {
+      this.nick = value.trim();
+    }
+  }
+
+  const snickers = new Dog('Snickers', 'King Charles');
+  const sunny = new Dog('Sunny', 'Golden Doodle');
+
+  // ES6 class expression
+  const Cat = class {
+    constructor(name, breed) {
+      this.name = name;
+      this.breed = breed;
+    }
+    meow() {
+      console.log(`Meow Meow! My name is ${this.name}`);
+    }
+  };
+
+  const cat = new Cat('monkey', 'pure');
+
+</script>
+</body>
+</html>

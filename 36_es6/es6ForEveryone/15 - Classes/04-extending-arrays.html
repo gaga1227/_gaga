@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Extending</title>
+</head>
+<body>
+<script>
+  // extends built in class
+  class MovieCollection extends Array {
+    // capture collection items with rest operator
+    constructor(name, ...items) {
+      // create super class: Array with collection items first before sub class specifics
+      super(...items); // same as 'new Array(item1, item2, item3, ...)'
+      // sub class specifics
+      this.name = name;
+    }
+    add(movie) {
+      this.push(movie);
+    }
+    topRated(limit = 10) {
+      return this.sort((a, b) => (a.stars > b.stars ? -1 : 1)).slice(0, limit);
+    }
+  }
+
+  const movies = new MovieCollection(
+    'Wes\'s Fav Movies', // name
+    { name: 'Bee Movie', stars: 10 }, // list of items...
+    { name: 'Star Wars Trek', stars: 1 },
+    { name: 'Virgin Suicides', stars: 7 },
+    { name: 'King of the Road', stars: 8 }
+  );
+  movies.add({ name: 'Titanic', stars: 5 });
+  console.table(movies.topRated(3));
+
+  // 'for...of' loops through all iterables
+  for (const iterable of movies) {
+    console.log('iterable', iterable);
+  }
+
+  // 'for...in' loops through all enumerables
+  for (const enumerable in movies) {
+    console.log('enumerable', enumerable, movies[enumerable]);
+  }
+</script>
+</body>
+</html>

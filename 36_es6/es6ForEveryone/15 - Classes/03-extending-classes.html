@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Extending Classes</title>
+</head>
+<body>
+<script>
+  // base animal class
+  class Animal {
+    constructor(name) {
+      // base class properties
+      this.name = name;
+      this.thirst = 100;
+      this.belly = [];
+    }
+    drink() {
+      this.thirst -= 10;
+      return this.thirst;
+    }
+    eat(food) {
+      this.belly.push(food);
+      return this.belly;
+    }
+    bark() {
+      console.log(this.name);
+    }
+  }
+
+  // sub class extending base animal class
+  class Dog extends Animal {
+    // sub class constructor
+    constructor(name, breed) {
+      // super class instance to be created first via super constructor
+      // calls super class constructor whether there's any shared params
+      // 'super()' needs to be called first before any sub class specifics
+      super(name);
+
+      // sub class specific property
+      this.breed = breed;
+    }
+    // overload super class method
+    bark() {
+      // calls super class method (optional)
+      // doesn't need to be called first, depends on method content
+      super.bark();
+      console.log('BARK BARK BARK!');
+    }
+  }
+
+  const rhino = new Animal('Rhiney');
+  const snickers = new Dog('Snickers', 'King Charles');
+</script>
+</body>
+</html>
