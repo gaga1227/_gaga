@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sets</title>
+</head>
+<body>
+<script>
+  // ES6 set:
+  // - array like but only contain unique value items
+  // - is of Symbol.iterable type
+  // - 'set.entries()' and 'set.values()' returns iterators
+  // - 'entry' is an array of key and value, both are of same value in a set
+
+  const people = new Set();
+  people.add('Wes');
+  people.add('Snickers');
+  people.add('Kait');
+
+  // set is iterable
+  for (const person of people) {
+    console.log('person', person);
+  }
+
+  // takes array as constructor input
+  const students = new Set(['Wes', 'Kara', 'Tony', 'Kara']); // only one 'Kara' retained in set
+  const dogs = ['Snickers', 'Sunny'];
+  const dogSet = new Set(dogs);
+
+  console.log('students', students);
+  console.log('dogSet', dogSet);
+
+</script>
+</body>
+</html>

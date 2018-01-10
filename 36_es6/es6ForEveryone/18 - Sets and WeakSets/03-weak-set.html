@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brunch with Sets</title>
+</head>
+<body>
+<script>
+  // ES6 WeakSet:
+  // - array like but only contain unique items
+  // - a more memory efficient set
+  // - takes objects only, held weakly by refs
+  // - is NOT of Symbol.iterable type
+  // - no 'entries()' or 'values()' iterators
+  // - no 'clear()'
+
+  let dog1 = { name: 'Snickers', age: 3 };
+  let dog2 = { name: 'sunny', age: 1 };
+  const weakSauce = new WeakSet([dog1, dog2]);
+
+  console.log('weakSauce', weakSauce);
+  dog1 = null; // WeakSet automatically updated when this is garbage collected
+  console.log('weakSauce', weakSauce);
+
+</script>
+</body>
+</html>

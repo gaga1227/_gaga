@@ -21,6 +21,7 @@
 
   // generator can be looped through, is sub class of 'Symbol.iterator' type
   // any return value with 'return' statement is not part of the iterations
+  // some native iterators are generators
   for (const iteration of lyricsGen) {
     console.log('iteration', iteration);
   }
