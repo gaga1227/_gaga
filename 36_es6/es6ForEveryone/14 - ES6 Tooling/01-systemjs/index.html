@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System JS</title>
+</head>
+<body>
+  <!-- A dynamic polyfill generator based on browser UA -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+  <!-- Use SystemJS does not require any setup from npm -->
+  <script src="https://jspm.io/system@0.19.js"></script>
+
+  <script>
+    // use config object with 'babel' as transpiler
+    System.config({ transpiler: 'babel' });
+
+    // start with main app JS file: 'main.js'
+    System.import('./main.js');
+  </script>
+</body>
+</html>

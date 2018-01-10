@@ -1,0 +1,13 @@
+{
+  "name": "systemjs",
+  "version": "1.0.0",
+  "description": "This is an example of using browser-sync for a local dev server",
+  "scripts": {
+    "server": "browser-sync start --directory --server  --files '*.js, *.html, *.css'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.13.0"
+  }
+}
