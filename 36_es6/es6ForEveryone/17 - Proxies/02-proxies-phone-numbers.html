@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proxies!</title>
+</head>
+<body>
+<script>
+  // handler object with traps
+  const phoneHandler = {
+    set(target, key, value) {
+      target[key] = value.match(/[0-9]/g).join('');
+    },
+    get(target, key) {
+      return target[key].replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+    }
+  }
+
+  const phoneNumbers = new Proxy({}, phoneHandler);
+</script>
+</body>
+</html>

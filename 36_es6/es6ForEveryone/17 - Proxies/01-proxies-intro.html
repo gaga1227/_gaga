@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proxies!</title>
+</head>
+<body>
+<script>
+  // target object
+  const person = { name: 'Wes', age: 100 };
+
+  // proxy object to target
+  // takes two params:
+  // 1. target object
+  // 2. handler object with traps
+  const personProxy = new Proxy(person, {
+    // defines handler traps between proxy and target object here
+    // use object literal shorthand
+    // overrides setter/getter for all properties
+    get(target, key) {
+      return target[key].toUpperCase();
+    },
+    set(target, key, value) {
+      if (typeof value === 'string') {
+        target[key] = value.trim().toUpperCase() + '✂️';
+      }
+    }
+  });
+
+  console.log('name', personProxy.name);
+  personProxy.name = 'Wesley';
+  console.log('name', personProxy.name);
+</script>
+</body>
+</html>
