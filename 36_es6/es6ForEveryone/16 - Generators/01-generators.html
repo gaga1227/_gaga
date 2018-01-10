@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generators</title>
+</head>
+<body>
+<script>
+  // ES6 generator function
+  // - use keyword 'function*' to define generator functions
+  // - generator functions returns generators
+  // - generator functions can be divided into multiple execution iterations via 'yield'
+  // - 'yield' can optionally return value for an execution iteration
+  // - each 'yield' will 'suspend' generators from continue execution, marks the end of an iteration
+  // - generators 'resumed' when it is called with 'next()'
+  // - generators jumps to 'closed' when it is called with 'return()', no next iteration anymore
+  // - when iteration is being executed, state is updated to 'running'
+  // - when last iteration/yield is executed, state is updated to 'closed', 'done' is true
+  function* listPeople() {
+    let i = 0;
+    yield i;
+    i++;
+    yield i;
+    // close generator immediately with '100'
+    return(100);
+    // never reached
+    i++;
+    yield i;
+  }
+  // returns generator to 'people' variable in a 'suspended' state: 'done: false'
+  const listPeopleGen = listPeople();
+
+  const inventors = [
+    { first: 'Albert', last: 'Einstein', year: 1879 },
+    { first: 'Isaac', last: 'Newton', year: 1643 },
+    { first: 'Galileo', last: 'Galilei', year: 1564 },
+    { first: 'Marie', last: 'Curie', year: 1867 },
+    { first: 'Johannes', last: 'Kepler', year: 1571 },
+    { first: 'Nicolaus', last: 'Copernicus', year: 1473 },
+    { first: 'Max', last: 'Planck', year: 1858 },
+  ];
+  function* loop(arr) {
+    console.log(inventors); // not logged until 'next()' is called
+    for (const item of arr) {
+      yield item;
+    }
+  }
+  const loopGen = loop(inventors);
+
+  // no yield value, only one execution iteration
+  function* noYield() {
+    console.log('aa');
+    console.log('bb');
+    console.log('cc');
+  }
+  const noYieldGen = noYield();
+
+</script>
+</body>
+</html>

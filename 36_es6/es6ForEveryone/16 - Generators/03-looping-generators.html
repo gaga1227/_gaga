@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Looping Generators</title>
+</head>
+<body>
+<script>
+  // generator function
+  function* lyrics() {
+    yield `But don't tell my heart`;
+    yield `My achy breaky heart`;
+    yield `I just don't think he'd understand`;
+    yield `And if you tell my heart`;
+    yield `My achy breaky heart`;
+    yield `He might blow up and kill this man`;
+  }
+
+  const lyricsGen = lyrics();
+  console.log('lyricsGen', lyricsGen);
+
+  // generator can be looped through, is sub class of 'Symbol.iterator' type
+  // any return value with 'return' statement is not part of the iterations
+  for (const iteration of lyricsGen) {
+    console.log('iteration', iteration);
+  }
+</script>
+</body>
+</html>

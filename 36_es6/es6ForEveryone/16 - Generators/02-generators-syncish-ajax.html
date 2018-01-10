@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generators</title>
+</head>
+<body>
+<script>
+
+  function ajax(url) {
+    fetch(url) // returns request promise
+      .then(response => response.json()) // returns data.json() promise
+      .then(data => {
+        // once current step data is resolved, kick off next step on generator
+        // anything passed into 'next()' will be returned as yield value
+        dataGen.next(data);
+      });
+  }
+
+  // generator function of waterfall like ajax requests flow
+  // makes multiple ajax calls into a sequential sync flow
+  function* steps() {
+    // iteration 1
+    console.log('fetching 1 beers', dataGen);
+    // waits for aync call to resolve, then assign value to variable, then suspend generator
+    const beers = yield ajax('http://api.react.beer/v2/search?q=hops&type=beer');
+
+    // iteration 2
+    console.log(beers);
+    console.log('fetching 2 wes', dataGen);
+    // waits for aync call to resolve, then assign value to variable, then suspend generator
+    const wes = yield ajax('https://api.github.com/users/');
+
+    // iteration 3
+    console.log(wes);
+    console.log('fetching 3 fat joe', dataGen);
+    // waits for aync call to resolve, then assign value to variable, then suspend generator
+    const fatJoe = yield ajax('https://api.discogs.com/artists/51988');
+
+    // iteration 4
+    console.log(fatJoe);
+    console.log('end', dataGen);
+  }
+
+  // create data generator on init
+  const dataGen = steps();
+  dataGen.next(); // kick it off
+
+</script>
+</body>
+</html>
