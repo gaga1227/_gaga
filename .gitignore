@@ -296,6 +296,15 @@ pip-log.txt
 
 
 #############
+## Node/NPM
+#############
+node_modules
+bundle.js
+bundle.js.map
+npm-debug.log
+
+
+#############
 ## Exceptions
 #############
 !35_react.js/01_reactjsEssentials/snapterest/build
