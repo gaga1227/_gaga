@@ -28,7 +28,9 @@
   });
 
   const ChangeTitleComponent = Vue.extend({
-    data: () => data, // ES6 lambda format
+    data() { // ES6 object literal short hand
+      return data;
+    },
     template: '<input v-model="title"/>' // plain string format
   });
 
