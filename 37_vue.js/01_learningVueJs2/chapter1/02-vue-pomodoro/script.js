@@ -13,7 +13,7 @@ const RESTING_TIME_LENGTH_IN_MINUTES = 5;
 (function() {
   'use strict';
 
-  new Vue({ // jshint ignore:line
+  new Vue({
     el: '#app',
     data: {
       state: STATES.STOPPED,

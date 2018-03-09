@@ -10,14 +10,12 @@ const data = {
 (function(){
   'use strict';
 
-  new Vue({ // jshint ignore:line
+  new Vue({
     el: '#app',
     data: data,
     methods: {
       addItem: function () {
-        var text; // jshint ignore:line
-
-        text = this.newItem.trim();
+        const text = this.newItem.trim();
         if (text) {
           this.items.push({
             text: text,
