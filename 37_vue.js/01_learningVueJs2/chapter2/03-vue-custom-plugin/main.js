@@ -10836,6 +10836,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Register custom plugin
 _vue2.default.use(_VueMathPlugin2.default);
 
+// Register custom plugin from inline function
+_vue2.default.use(function customInlinePlugin(Vue) {
+  Vue.directive('double', function (el, binding) {
+    el.innerHTML = binding.value * 2;
+  });
+});
+
 window.App = new _vue2.default({
   el: '#app',
   data: { item: 49 }
