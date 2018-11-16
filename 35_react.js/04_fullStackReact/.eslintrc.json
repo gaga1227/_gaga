@@ -1,0 +1,14 @@
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "semi": ["error", "always"],
+        "indent": ["error", 2]
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6
+    }
+}
