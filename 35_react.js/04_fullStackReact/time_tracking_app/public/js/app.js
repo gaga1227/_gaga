@@ -29,7 +29,7 @@ class TimersDashboard extends React.Component {
 
   updateTimer = attrs => {
     this.setState({
-      timers: this.state.timers.map((timer) => {
+      timers: this.state.timers.map(timer => {
         if (timer.id === attrs.id) {
           return Object.assign({}, timer, {
             title: attrs.title,
@@ -42,12 +42,24 @@ class TimersDashboard extends React.Component {
     });
   };
 
+  deleteTimer = timerId => {
+    this.setState({
+      timers: this.state.timers.filter(timer => {
+        return timer.id !== timerId;
+      })
+    });
+  };
+
   handleEditFormSubmit = timer => {
     this.updateTimer(timer);
   };
 
   handleCreateFormSubmit = timer => {
     this.createTimer(timer);
+  };
+
+  handleTrashClick = timerId => {
+    this.deleteTimer(timerId);
   };
 
   render() {
@@ -57,6 +69,7 @@ class TimersDashboard extends React.Component {
           <EditableTimerList
             timers={this.state.timers}
             onFormSubmit={this.handleEditFormSubmit}
+            onTrashClick={this.handleTrashClick}
           />
           <ToggleableTimerForm
             onFormSubmit={this.handleCreateFormSubmit}
@@ -79,6 +92,7 @@ class EditableTimerList extends React.Component {
         elapsed={timer.elapsed}
         runningSince={timer.runningSince}
         onFormSubmit={this.props.onFormSubmit}
+        onTrashClick={this.props.onTrashClick}
       />
     ));
 
@@ -115,11 +129,11 @@ class EditableTimer extends React.Component {
     this.closeForm();
   };
 
-  handleFormClose = (e) => {
+  handleFormClose = () => {
     this.closeForm();
   };
 
-  handleEditClick = (e) => {
+  handleEditClick = () => {
     this.openForm();
   };
 
@@ -144,6 +158,7 @@ class EditableTimer extends React.Component {
           elapsed={this.props.elapsed}
           runningSince={this.props.runningSince}
           onEditClick={this.handleEditClick}
+          onTrashClick={this.props.onTrashClick}
         />
       );
     }
@@ -221,8 +236,26 @@ class TimerForm extends React.Component {
 }
 
 class Timer extends React.Component {
+  // react lifecycle methods are automatically bound to 'this'
+  // no need to bind manually
+  componentDidMount() {
+    this.forceUpdateInterval = setInterval(() => {
+      this.forceUpdate();
+      console.log('forceUpdate');
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.forceUpdateInterval);
+  }
+
+  handleTrashClick = () => {
+    this.props.onTrashClick(this.props.id);
+  };
+
   render() {
-    const elapsedString = helpers.renderElapsedString(this.props.elapsed);
+    const elapsedString = helpers.renderElapsedString(this.props.elapsed, this.props.runningSince);
+
     return (
       <div className='ui centered card'>
         <div className='content'>
@@ -244,7 +277,10 @@ class Timer extends React.Component {
             >
               <i className='edit icon'/>
             </span>
-            <span className='right floated trash icon'>
+            <span
+              className='right floated trash icon'
+              onClick={this.handleTrashClick}
+            >
               <i className='trash icon'/>
             </span>
           </div>
