@@ -2,22 +2,20 @@ class TimersDashboard extends React.Component {
   // can use property initializer syntax thanks to 'transform-class-properties'
   // or have to use Babel ES7 stage 3 present
   state = {
-    timers: [
-      {
-        title: 'Practice squat',
-        project: 'Gym Chores',
-        id: uuid.v4(),
-        elapsed: 5456099,
-        runningSince: Date.now(),
-      },
-      {
-        title: 'Bake squash',
-        project: 'Kitchen Chores',
-        id: uuid.v4(),
-        elapsed: 1273998,
-        runningSince: null,
-      },
-    ],
+    timers: []
+  };
+
+  componentDidMount() {
+    this.loadTimersFromServer();
+    setInterval(this.loadTimersFromServer, 5000);
+  }
+
+  loadTimersFromServer = () => {
+    client.getTimers(serverTimers => {
+      this.setState({
+        timers: serverTimers
+      });
+    });
   };
 
   createTimer = timer => {
@@ -25,6 +23,9 @@ class TimersDashboard extends React.Component {
     this.setState({
       timers: this.state.timers.concat(t)
     });
+
+    // remote call
+    client.createTimer(t);
   };
 
   updateTimer = attrs => {
@@ -40,6 +41,9 @@ class TimersDashboard extends React.Component {
         }
       })
     });
+
+    // remote call
+    client.updateTimer(attrs);
   };
 
   deleteTimer = timerId => {
@@ -47,6 +51,11 @@ class TimersDashboard extends React.Component {
       timers: this.state.timers.filter(timer => {
         return timer.id !== timerId;
       })
+    });
+
+    // remote call
+    client.deleteTimer({
+      id: timerId
     });
   };
 
@@ -62,6 +71,12 @@ class TimersDashboard extends React.Component {
           return timer;
         }
       })
+    });
+
+    // remote call
+    client.startTimer({
+      id: timerId,
+      start: now
     });
   };
 
@@ -79,6 +94,12 @@ class TimersDashboard extends React.Component {
           return timer;
         }
       })
+    });
+
+    // remote call
+    client.stopTimer({
+      id: timerId,
+      stop: now
     });
   };
 
@@ -287,7 +308,6 @@ class Timer extends React.Component {
   componentDidMount() {
     this.forceUpdateInterval = setInterval(() => {
       this.forceUpdate();
-      console.log('forceUpdate');
     }, 1000);
   }
 
