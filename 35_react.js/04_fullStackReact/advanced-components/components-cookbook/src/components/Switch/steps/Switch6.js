@@ -4,6 +4,7 @@ import styles from '../Switch.css';
 const CREDITCARD = 'Creditcard';
 const BTC = 'Bitcoin';
 
+// dumb stateless function does pure rendering based on params (props)
 const Choice = function (props) {
   const cssClasses = [];
 

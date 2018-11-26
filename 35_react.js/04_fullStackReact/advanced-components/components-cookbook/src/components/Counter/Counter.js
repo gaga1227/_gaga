@@ -16,10 +16,16 @@ class Counter extends Component {
       value: this.props.initialValue
     };
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    // Note: no need to bind due to methods are defined as arrow functions so have access to 'this'
+    // this.increment = this.increment.bind(this);
+    // this.decrement = this.decrement.bind(this);
   }
 
+  // Note:
+  // Whenever a state transition depends on the current state, using a function to set the state helps to
+  // avoid the chance for such enigmatic bugs to materialize
+  // due to setState is async, so rather than return a static state object here right away,
+  // return a callback that will return the correct state object when eventually run when react updates the state
   decrement = () => {
     this.setState(prevState => {
       return {

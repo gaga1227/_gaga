@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const Newspaper = props => {
+  const element = props => (<section>{props.children}</section>);
+
   return (
-    <Container>
-      <Article headline="An interesting Article">
-        Content Here
-      </Article>
-    </Container>
+    <MultiChildContainer component={element}>
+      {props.children}
+    </MultiChildContainer>
   )
 }
 

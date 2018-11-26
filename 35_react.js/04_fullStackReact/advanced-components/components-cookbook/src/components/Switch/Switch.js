@@ -51,12 +51,14 @@ class Switch extends React.Component {
   //   )
   // }
   render() {
-    const presentStep = (title, Step) => (
-      <div>
-        <h2>{title}</h2>
-        <Step />
-      </div>
-    );
+    const presentStep = (title, Step) => {
+      return (
+        <div>
+          <h2>{title}</h2>
+          <Step />{/* same as {React.createElement(Step, null, null)} */}
+        </div>
+      );
+    };
 
     return (
       <div>

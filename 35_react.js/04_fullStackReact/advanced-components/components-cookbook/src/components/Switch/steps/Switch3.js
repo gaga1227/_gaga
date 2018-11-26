@@ -8,7 +8,9 @@ class Switch extends React.Component {
     payMethod: BTC,
   };
 
+  // is actually called during render, and it’s the return value of select that gets called onClick
   select = (choice) => {
+    // needs to return arrow function handler here based on choice
     return (evt) => {
       // <-- handler starts here
       this.setState({

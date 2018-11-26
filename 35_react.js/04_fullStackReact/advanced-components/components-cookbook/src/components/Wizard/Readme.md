@@ -10,7 +10,7 @@
                 type='string'
                 autoFocus={true}
                 onChange={props.onChangeInput('name')}
-                value={props.data && props.data['name']}
+                defaultValue={props.data && props.data['name']}
                 placeholder='Your name' />
               <input type='submit' value='Next'
                 disabled={!props.canGoNext}/>
@@ -26,7 +26,7 @@
                 type='email'
                 autoFocus={true}
                 onChange={props.onChangeInput('email')}
-                value={props.data && props.data['email']}
+                defaultValue={props.data && props.data['email']}
                 placeholder='Your email' />
 
               <input type='submit' value='Next'
