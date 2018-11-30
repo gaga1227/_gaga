@@ -58,12 +58,9 @@ function createRoute(nStr) {
   return (
     <div className="ui container">
       {React.createElement(routes[i])}
-      <div style={navStyle} 
-           className='ui fluid three item pagination menu'>
+      <div style={navStyle} className='ui fluid three item pagination menu'>
         { isFirst ? '' : <a href={`#/${i}`} className='item'>{'<'}</a> }
-        <a href={location.href.replace(location.hash, '')}
-           className='item'
-          >TOC</a>
+        <a href={location.href.replace(location.hash, '')} className='item'>TOC</a>
         { isLast ? '' : <a href={`#/${(i + 2)}`} className='item'>{' > '}</a> }
       </div>
     </div>

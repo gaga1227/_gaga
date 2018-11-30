@@ -7,11 +7,24 @@ module.exports = class extends React.Component {
   static displayName = "04-basic-input";
   state = { names: [] }; // <-- initial state
 
+  // auto focus on input
+  componentDidMount() {
+    // using ref callback pattern
+    const nameInput = this.inputElement; // this.refs.name; string ref is considered legacy now
+    if (nameInput) {
+      nameInput.focus();
+    }
+  }
+
+  setInputRef = element => {
+    this.inputElement = element;
+  };
+
   onFormSubmit = (evt) => {
-    const name = this.refs.name.value;
+    const name = this.inputElement.value; // this.refs.name.value;
     const names = [ ...this.state.names, name ];
     this.setState({ names: names });
-    this.refs.name.value = '';
+    this.inputElement.value = ''; // reset input value
     evt.preventDefault();
   };
 
@@ -23,7 +36,7 @@ module.exports = class extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <input
             placeholder='Name'
-            ref='name'
+            ref={this.setInputRef}
           />
 
           <input type='submit' />

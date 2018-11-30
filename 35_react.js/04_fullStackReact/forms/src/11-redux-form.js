@@ -39,6 +39,7 @@ module.exports = class extends React.Component {
 
     if (this.validate()) return;
 
+    // runs passed in submit handler
     this.props.onSubmit([ ...this.props.people, person ]);
   };
 

@@ -12,17 +12,18 @@ module.exports = class extends React.Component {
       name: '',
       email: '',
     },
-    fieldErrors: {},
+    fieldErrors: {}, // initial validation error states
     people: [],
   };
 
   onFormSubmit = (evt) => {
     const people = [ ...this.state.people ];
     const person = this.state.fields;
-    const fieldErrors = this.validate(person);
+    const fieldErrors = this.validate(person); // get validation errors
     this.setState({ fieldErrors });
     evt.preventDefault();
 
+    // if has validation errors, exit here, not updating people list
     if (Object.keys(fieldErrors).length) return;
 
     this.setState({
@@ -41,9 +42,13 @@ module.exports = class extends React.Component {
   };
 
   validate = (person) => {
-    const errors = {};
+    const errors = {}; // returns new object
+
+    // required fields validation
     if (!person.name) errors.name = 'Name Required';
     if (!person.email) errors.email = 'Email Required';
+
+    // email format validation
     if (person.email && !isEmail(person.email)) errors.email = 'Invalid Email';
     return errors;
   };
@@ -62,6 +67,7 @@ module.exports = class extends React.Component {
             onChange={this.onInputChange}
           />
 
+          {/* validation error display */}
           <span style={{ color: 'red' }}>{ this.state.fieldErrors.name }</span>
 
           <br />
@@ -73,6 +79,7 @@ module.exports = class extends React.Component {
             onChange={this.onInputChange}
           />
 
+          {/* validation error display */}
           <span style={{ color: 'red' }}>{ this.state.fieldErrors.email }</span>
 
           <br />

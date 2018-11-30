@@ -39,19 +39,25 @@ module.exports = class extends React.Component {
     const fields = this.state.fields;
     const fieldErrors = this.state.fieldErrors;
 
+    // passed value and error message from field component
     fields[name] = value;
     fieldErrors[name] = error;
 
+    // update form local states
     this.setState({ fields, fieldErrors });
   };
 
+  // this is run every time local state is updated and then rendered into DOM
   validate = () => {
     const person = this.state.fields;
     const fieldErrors = this.state.fieldErrors;
     const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
 
+    // required validation
     if (!person.name) return true;
     if (!person.email) return true;
+
+    // other custom validation based on error message
     if (errMessages.length) return true;
 
     return false;

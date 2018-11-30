@@ -5,6 +5,8 @@ function fetchPeopleRequest () {
 }
 
 export const FETCH_PEOPLE_SUCCESS = 'FETCH_PEOPLE_SUCCESS';
+// action creator functions, returns object of action type
+// plus data for the reducer to update data store
 function fetchPeopleSuccess (people) {
   return {type: FETCH_PEOPLE_SUCCESS, people};
 }
@@ -24,33 +26,41 @@ function savePeopleSuccess (people) {
   return {type: SAVE_PEOPLE_SUCCESS, people};
 }
 
+// async action creators, returns function that dispatch actions
+// rather than just action object (action type plus data)
+// not supported bu redux by default, need to use middleware wrapper
 export function fetchPeople () {
   return function (dispatch) {
-    dispatch(fetchPeopleRequest())
+    // to update fetching state, dispatch action object
+    dispatch(fetchPeopleRequest());
+    // update state when async op complete
     apiClient.loadPeople().then((people) => {
-      dispatch(fetchPeopleSuccess(people))
-    })
-  }
+      dispatch(fetchPeopleSuccess(people)); // dispatch action object
+    });
+  };
 }
 
 export function savePeople (people) {
   return function (dispatch) {
-    dispatch(savePeopleRequest())
+    // to update fetching state, dispatch action object
+    dispatch(savePeopleRequest());
+    // update state when async op complete
     apiClient.savePeople(people)
-      .then((resp) => { dispatch(savePeopleSuccess(people)) })
-      .catch((err) => { dispatch(savePeopleFailure(err)) })
-  }
+      .then((resp) => { dispatch(savePeopleSuccess(people)); }) // dispatch action object
+      .catch((err) => { dispatch(savePeopleFailure(err)); }); // dispatch action object
+  };
 }
 
+// async calls
 const apiClient = {
   loadPeople: function () {
     return {
       then: function (cb) {
         setTimeout( () => {
-          cb(JSON.parse(localStorage.people || '[]'))
+          cb(JSON.parse(localStorage.people || '[]'));
         }, 1000);
       }
-    }
+    };
   },
 
   savePeople: function (people) {
@@ -63,8 +73,8 @@ const apiClient = {
         localStorage.people = JSON.stringify(people);
         resolve({success});
       }, 1000);
-    })
+    });
   },
 
   count: 1
-}
+};

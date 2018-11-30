@@ -24,14 +24,14 @@ module.exports = class extends React.Component {
       fields: {
         name: '',
         email: ''
-      } 
+      }
     });
     evt.preventDefault();
   };
 
   onInputChange = (evt) => {
     const fields = this.state.fields;
-    fields[evt.target.name] = evt.target.value;
+    fields[evt.target.name] = evt.target.value; // use field name as key to avoid individual event handlers
     this.setState({ fields });
   };
 

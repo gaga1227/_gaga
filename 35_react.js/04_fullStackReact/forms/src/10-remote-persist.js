@@ -125,20 +125,22 @@ module.exports = class extends React.Component {
 
           <br />
 
-          {{
-            SAVING: <input value='Saving...' type='submit' disabled />,
-            SUCCESS: <input value='Saved!' type='submit' disabled />,
-            ERROR: <input
-              value='Save Failed - Retry?'
-              type='submit'
-              disabled={this.validate()}
-            />,
-            READY: <input
-              value='Submit'
-              type='submit'
-              disabled={this.validate()}
-            />,
-          }[this.state._saveStatus]}
+          {
+            {
+              SAVING: <input value='Saving...' type='submit' disabled />,
+              SUCCESS: <input value='Saved!' type='submit' disabled />,
+              ERROR: <input
+                value='Save Failed - Retry?'
+                type='submit'
+                disabled={this.validate()}
+              />,
+              READY: <input
+                value='Submit'
+                type='submit'
+                disabled={this.validate()}
+              />,
+            }[this.state._saveStatus]
+          }
 
         </form>
 
@@ -167,7 +169,7 @@ apiClient = {
   },
 
   savePeople: function (people) {
-    const success = !!(this.count++ % 2);
+    const success = !!(this.count++ % 2); // simulating alternative results for demo purposes
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {

@@ -23,6 +23,7 @@ module.exports = class extends React.Component {
     _loading: false,
   };
 
+  // this is for resetting select fields after submission
   componentWillReceiveProps(update) {
     this.setState({
       department: update.department,
@@ -32,11 +33,14 @@ module.exports = class extends React.Component {
 
   onSelectDepartment = (evt) => {
     const department = evt.target.value;
-    const course = null;
+    const course = null; // reset courses if department changes
     this.setState({ department, course });
+
+    // when selecting department, also reset available courses
     this.props.onChange({ name: 'department', value: department });
     this.props.onChange({ name: 'course', value: course });
 
+    // then request courses based on department
     if (department) this.fetch(department);
   };
 
@@ -85,17 +89,19 @@ module.exports = class extends React.Component {
         value={this.state.course || ''}
       >
 
-        { [
-          <option value='' key='course-none'>
-            Which course?
-          </option>,
+        {
+          [
+            <option value='' key='course-none'>
+              Which course?
+            </option>,
 
-          ...this.state.courses.map((course, i) => (
-            <option value={course} key={i}>
-              {course}
-            </option>
-          )),
-        ] }
+            ...(this.state.courses.map((course, i) => (
+              <option value={course} key={i}>
+                {course}
+              </option>
+            )))
+          ]
+        }
       </select>
     );
   };
@@ -111,6 +117,7 @@ module.exports = class extends React.Component {
   }
 };
 
+// simulating remote call
 function apiClient(department) {
   return {
     then: function (cb) {

@@ -22,11 +22,11 @@ module.exports = class extends React.Component {
   onChange = (evt) => {
     const name = this.props.name;
     const value = evt.target.value;
-    const error = this.props.validate ? this.props.validate(value) : false;
+    const error = this.props.validate ? this.props.validate(value) : false; // run passed in validation, could return error msg
 
-    this.setState({ value, error });
+    this.setState({ value, error }); // update local states
 
-    this.props.onChange({ name, value, error });
+    this.props.onChange({ name, value, error }); // using single parent method to handle change
   };
 
   render() {
