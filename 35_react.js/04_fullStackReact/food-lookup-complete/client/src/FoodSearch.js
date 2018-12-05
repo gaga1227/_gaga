@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Client from './Client';
 
@@ -11,6 +10,7 @@ class FoodSearch extends React.Component {
     searchValue: '',
   };
 
+  // search input change handler
   onSearchChange = (e) => {
     const value = e.target.value;
 
@@ -18,16 +18,19 @@ class FoodSearch extends React.Component {
       searchValue: value,
     });
 
+    // reset state if search term is empty
     if (value === '') {
       this.setState({
         foods: [],
         showRemoveIcon: false,
       });
     } else {
+      // otherwise set state to search result mode
       this.setState({
         showRemoveIcon: true,
       });
 
+      // update state with result once received from remote
       Client.search(value, (foods) => {
         this.setState({
           foods: foods.slice(0, MATCHING_ITEM_LIMIT),
@@ -36,6 +39,7 @@ class FoodSearch extends React.Component {
     }
   };
 
+  // reset any result list via state
   onRemoveIconClick = () => {
     this.setState({
       foods: [],
@@ -85,6 +89,7 @@ class FoodSearch extends React.Component {
           {
             this.state.foods.map((food, idx) => (
               <tr
+                className='foodDisplayRow'
                 key={idx}
                 onClick={() => this.props.onFoodClick(food)}
               >
