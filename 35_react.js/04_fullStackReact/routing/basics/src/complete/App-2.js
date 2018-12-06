@@ -1,34 +1,33 @@
 import React from 'react';
-
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory();
+const history = createHistory(); // create history utils helper
 
-const Route = ({ path, component }) => {
+const Route = ({path, component: ComponentPassedViaProp}) => {
   const pathname = window.location.pathname;
-  if (pathname.match(path)) {
-    return (
-      React.createElement(component)
-    );
-  } else {
+
+  if (!path || !path.length) {
     return null;
   }
-};
 
-const Link = ({ to, children }) => (
-  <a
-    onClick={(e) => {
-      e.preventDefault();
-      history.push(to);
-    }}
-    href={to}
-  >
-    {children}
-  </a>
-);
+  // match path and return component
+  if (pathname.toLowerCase() === path.toLowerCase()) {
+    console.log('same');
+    // normal render without JSX with a passed in component
+    // this is recommended due to its easy to identify as a dynamic component
+    // return React.createElement(component);
+
+    // alternative way to render passed in component, make sure component name is capitalized
+    return <ComponentPassedViaProp/>;
+  }
+
+  return null;
+};
 
 class App extends React.Component {
   componentDidMount() {
+    // make sure every time history changes, the component is forced to re-render
+    // so the Route component can match pathname and render correct route component
     history.listen(() => this.forceUpdate());
   }
 
@@ -56,12 +55,25 @@ class App extends React.Component {
 
         <hr />
 
+        {/* We'll insert the Route components here */}
         <Route path='/atlantic' component={Atlantic} />
         <Route path='/pacific' component={Pacific} />
       </div>
     );
   }
 }
+
+const Link = ({to, children}) => (
+  <a
+    href={to}
+    onClick={e => {
+      e.preventDefault(); // suppress default link behaviour
+      history.push(to); // update history
+    }}
+  >
+    {children}
+  </a>
+);
 
 const Atlantic = () => (
   <div>
