@@ -13,12 +13,21 @@ describe('FoodSearch', () => {
   let wrapper;
   let removeIcon;
 
+  // create a mock function that can be passed as prop
+  const mockOnFoodClickHandler = jest.fn();
+
   beforeEach(() => {
-    wrapper = shallow(<FoodSearch/>);
+    wrapper = shallow(
+      <FoodSearch
+        onFoodClick={mockOnFoodClickHandler}
+      />
+    );
   });
 
   afterEach(() => {
-    Client.search.mockClear(); // clean up mock calls
+    // clean up residue mock calls
+    Client.search.mockClear();
+    mockOnFoodClickHandler.mockClear();
   });
 
   // ... initial state specs
@@ -125,24 +134,68 @@ describe('FoodSearch', () => {
 
       describe('then user clicks food item', () => {
         beforeEach(() => {
-          // ... simulate user clicking food item
+          const foodRow = wrapper.find('tbody > tr.foodDisplayRow').first();
+          foodRow.simulate('click');
         });
 
-        // ... specs
+        it('should call prop `onFoodClick` with `food`', () => {
+          const foodData = foods[0]; // we simulated clicking on the first food row
+          expect(mockOnFoodClickHandler.mock.calls.length).toBe(1);
+          expect(mockOnFoodClickHandler.mock.calls[0][0]).toBe(foodData); // verify actual param data
+          expect(mockOnFoodClickHandler.mock.calls[0]).toEqual([foodData]); // verify param data by comparing args array, so use toEqual
+        });
       });
 
       describe('then user types more', () => {
+        const value = 'broccx';
+
         beforeEach(() => {
           // ... simulate user typing "x"
+          const input = wrapper.find('input').first();
+          const simulatedEvent = { target: { value } };
+          input.simulate('change', simulatedEvent);
         });
 
         describe('and API returns no results', () => {
           beforeEach(() => {
             // ... simulate API returning no results
+            const secondInvocationArgs = Client.search.mock.calls[1];
+            const callbackFn = secondInvocationArgs[1];
+            // trigger second time change callback with empty list
+            callbackFn([]);
+            wrapper.update();
           });
 
           // ... specs
+          it('should set the state property `foods`', () => {
+            expect(wrapper.state().foods).toEqual([]);
+            expect(wrapper.state().foods.length).toBe(0);
+          });
         });
+      });
+    });
+  });
+
+  describe('unit test actual react component methods', () => {
+    let wrapperInstance;
+
+    describe('`onSearchChange` method', () => {
+      it('should update search term state', () => {
+        // use instance method to get actual react component instance
+        // so can do more explicit unit tests on it
+        wrapperInstance = wrapper.instance();
+        expect(wrapperInstance).toBeInstanceOf(FoodSearch);
+
+        const inputValue = 'test value';
+
+        // call instance method
+        wrapperInstance.onSearchChange({
+          target: {
+            value: inputValue
+          }
+        });
+        // verify state
+        expect(wrapper.state().searchValue).toBe(inputValue);
       });
     });
   });
