@@ -1,21 +1,15 @@
 import React from 'react';
-
 import {
   BrowserRouter as Router,
   Route,
   Link,
   Redirect,
-} from 'react-router-dom'
+} from 'react-router-dom'; // use router for web, not native
 
 const App = () => (
   <Router>
-    <div
-      className='ui text container'
-    >
-      <h2 className='ui dividing header'>
-        Which body of water?
-      </h2>
-
+    <div className='ui text container'>
+      <h2 className='ui dividing header'>Which body of water?</h2>
       <ul>
         <li>
           <Link to='/atlantic'>
@@ -33,25 +27,32 @@ const App = () => (
           </Link>
         </li>
       </ul>
-
       <hr />
-      <Route path='/atlantic/ocean' render={() => (
-        <div>
-          <h3>Atlantic Ocean — Again!</h3>
-          <p>
-            Also known as "The Pond."
-          </p>
-        </div>
-      )} />
+      {/* We'll insert the Route components here */}
+      {/*
+       given how react router works, this route will render
+       given component on top of the /atlantic/ route
+       this is the default behaviour
+       */}
+      <Route path='/atlantic/ocean'
+             render={() => (
+               <div>
+                 {/* use inline function to define component to render */}
+                 <h3>Atlantic Ocean — Again!</h3>
+                 <p>
+                   Also known as "The Pond."
+                 </p>
+               </div>
+             )}/>
       <Route path='/atlantic' component={Atlantic} />
       <Route path='/pacific' component={Pacific} />
       <Route path='/black-sea' component={BlackSea} />
-
+      {/* use exact prop to make sure component only renders when path is exact match */}
+      {/* We’re using some JSX syntactic sugar here. `exact` = `exact={true}` */}
+      {/* In JSX, if the prop is listed but not assigned to a value it defaults the value to true */}
       <Route exact path='/' render={() => (
-        <h3>
-          Welcome! Select a body of saline water above.
-        </h3>
-      )} />
+        <h3>Welcome! Select a body of saline water above.</h3>
+      )}/>
     </div>
   </Router>
 );
@@ -77,21 +78,24 @@ const Pacific = () => (
 );
 
 class BlackSea extends React.Component {
+  // set initial states
   state = {
-    counter: 3,
+    counter: 3
   };
 
   componentDidMount() {
-    this.interval = setInterval(() => (
+    // start countdown and update state for render
+    this.interval = setInterval(() => {
       this.setState(prevState => {
         return {
-          counter: prevState.counter - 1,
-        };
-      }
-    )), 1000);
+          counter: prevState.counter - 1
+        }
+      });
+    }, 1000);
   }
 
   componentWillUnmount() {
+    // clear interval
     clearInterval(this.interval);
   }
 
@@ -102,9 +106,8 @@ class BlackSea extends React.Component {
         <p>Nothing to sea [sic] here ...</p>
         <p>Redirecting in {this.state.counter}...</p>
         {
-          (this.state.counter < 1) ? (
-            <Redirect to='/' />
-          ) : null
+          /* check counter and conditional render redirect */
+          this.state.counter < 1 ? <Redirect to='/'/> : null
         }
       </div>
     );

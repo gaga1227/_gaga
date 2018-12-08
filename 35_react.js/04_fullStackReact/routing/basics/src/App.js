@@ -1,36 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import createHistory from 'history/createBrowserHistory';
-
-class Router extends React.Component {
-  // In order to expose context to children, we must specify the type of each context
-  // React passes the information down automatically and any component in the subtree
-  // can access it by defining contextTypes.
-  //
-  // If contextTypes is not defined, then context will be an empty object
-  static childContextTypes = {
-    history: PropTypes.object,
-    location: PropTypes.object
-  };
-
-  constructor(props) {
-    super(props);
-    this.history = createHistory(); // create history utils helper
-    this.history.listen(() => this.forceUpdate()); // subscribe to history updates to re-render entire component
-  }
-
-  // expose certain class members to child components
-  getChildContext() {
-    return {
-      history: this.history,
-      location: window.location,
-    };
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  Switch
+} from 'react-router-dom'; // use router for web, not native
 
 const App = () => (
   <Router>
@@ -43,60 +18,70 @@ const App = () => (
           </Link>
         </li>
         <li>
+          <Link to='/atlantic/ocean'>
+            <code>/atlantic/ocean</code>
+          </Link>
+        </li>
+        <li>
           <Link to='/pacific'>
             <code>/pacific</code>
           </Link>
         </li>
+        <li>
+          <Link to='/black-sea'>
+            <code>/black-sea</code>
+          </Link>
+        </li>
       </ul>
       <hr />
-      {/* We'll insert the Route components here */}
-      <Route path='/atlantic' component={Atlantic} />
-      <Route path='/pacific' component={Pacific} />
+      <Switch>
+        {/* We'll insert the Route components here */}
+        {/*
+         given how react router works, this route will render
+         given component on top of the /atlantic/ route
+         this is the default behaviour
+
+         until we have put routes inside switch
+         */}
+        <Route path='/atlantic/ocean'
+               render={() => (
+                 <div>
+                   {/* use inline function to define component to render */}
+                   <h3>Atlantic Ocean — Again!</h3>
+                   <p>
+                     Also known as "The Pond."
+                   </p>
+                 </div>
+               )}/>
+
+        <Route path='/atlantic' component={Atlantic} />
+        <Route path='/pacific' component={Pacific} />
+        <Route path='/black-sea' component={BlackSea} />
+
+        {/* use exact prop to make sure component only renders when path is exact match */}
+        {/* We’re using some JSX syntactic sugar here. `exact` = `exact={true}` */}
+        {/* In JSX, if the prop is listed but not assigned to a value it defaults the value to true */}
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <h3>Welcome! Select a body of saline water above.</h3>
+          )}/>
+
+        {/* catch-all for other routes */}
+        {/* Route passes the prop location to the render function */}
+        <Route
+          render={({ location }) => (
+            <div className='ui inverted red segment'>
+              <h3>
+                Error! No matches for <code>{location.pathname}</code>
+              </h3>
+            </div>
+          )}/>
+      </Switch>
     </div>
   </Router>
 );
-
-const Route = ({path, component: ComponentPassedViaProp}, {location}) => {
-  const pathname = location.pathname;
-
-  if (!path || !path.length) {
-    return null;
-  }
-
-  // match path and return component
-  if (pathname.toLowerCase() === path.toLowerCase()) {
-    // normal render without JSX with a passed in component
-    // this is recommended due to its easy to identify as a dynamic component
-    // return React.createElement(component);
-
-    // alternative way to render passed in component, make sure component name is capitalized
-    return <ComponentPassedViaProp/>;
-  }
-
-  return null;
-};
-// define static members like this for stateless function components
-// need to add this context types to whitelist all required properties form parent context
-Route.contextTypes = {
-  location: PropTypes.object
-};
-
-const Link = ({to, children}, {history}) => (
-  <a
-    href={to}
-    onClick={e => {
-      e.preventDefault(); // suppress default link behaviour
-      history.push(to); // update history
-    }}
-  >
-    {children}
-  </a>
-);
-// define static members like this for stateless function components
-// need to add this context types to whitelist all required properties form parent context
-Link.contextTypes = {
-  history: PropTypes.object
-};
 
 const Atlantic = () => (
   <div>
@@ -117,5 +102,42 @@ const Pacific = () => (
     </p>
   </div>
 );
+
+class BlackSea extends React.Component {
+  // set initial states
+  state = {
+    counter: 3
+  };
+
+  componentDidMount() {
+    // start countdown and update state for render
+    this.interval = setInterval(() => {
+      this.setState(prevState => {
+        return {
+          counter: prevState.counter - 1
+        }
+      });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    // clear interval
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Black Sea</h3>
+        <p>Nothing to sea [sic] here ...</p>
+        <p>Redirecting in {this.state.counter}...</p>
+        {
+          /* check counter and conditional render redirect */
+          this.state.counter < 1 ? <Redirect to='/'/> : null
+        }
+      </div>
+    );
+  }
+}
 
 export default App;
