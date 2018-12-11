@@ -4,8 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "react-scripts": "1.0.14",
-    "fsr-helpers": "file:../../../fsr-helpers"
+    "react-scripts": "1.0.14"
   },
   "dependencies": {
     "isomorphic-fetch": "2.2.1",
