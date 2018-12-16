@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import Album from './Album';
+import VerticalMenu from './VerticalMenu';
 import { client } from '../Client';
 
 const ALBUM_IDS = [
@@ -38,25 +40,45 @@ class AlbumsContainer extends Component {
         <div className='ui active centered inline loader' />
       );
     } else {
+      // <Route> always pass the following three props to component
+      // 1. history
+      // 2. location
+      // 3. match
+
+      // get current route path from router props
+      const matchPath = this.props.match.path;
+
       return (
         <div className='ui two column divided grid'>
           <div
             className='ui six wide column'
             style={{ maxWidth: 250 }}
           >
-            {/* VerticalMenu will go here */}
+            <VerticalMenu
+              albums={this.state.albums}
+              albumsPathname={matchPath}
+            />
           </div>
           <div className='ui ten wide column'>
-            {
-              this.state.albums.map((a) => (
-                <div
-                  className='row'
-                  key={a.id}
-                >
-                  <Album album={a} />
-                </div>
-              ))
-            }
+            <Route
+              path={`${matchPath}/:albumId`}
+              render={routeData => {
+                /* get route match data */
+                /* routeData always has the following three props */
+                /* 1. history */
+                /* 2. location */
+                /* 3. match */
+                const match = routeData.match;
+
+                /* route path params are in 'match.params' */
+                const matchingAlbum = this.state.albums.find(album => album.id === match.params.albumId);
+
+                return <Album
+                  album={matchingAlbum}
+                  albumsPathname={matchPath}
+                />;
+              }}
+            />
           </div>
         </div>
       );
