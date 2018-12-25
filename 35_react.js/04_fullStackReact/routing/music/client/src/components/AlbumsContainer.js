@@ -24,7 +24,7 @@ class AlbumsContainer extends Component {
   }
 
   getAlbums = () => {
-    client.setToken('D6W69PRgCoDKgHZGJmRUNA');
+    // client.setToken('D6W69PRgCoDKgHZGJmRUNA'); // token is now set in client.js after login
     client.getAlbums(ALBUM_IDS)
       .then((albums) => (
         this.setState({
