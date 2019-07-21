@@ -1,7 +1,10 @@
 import {
   AfterContentChecked,
-  AfterContentInit, AfterViewChecked, AfterViewInit,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
+  ContentChild,
   DoCheck,
   ElementRef,
   Input,
@@ -31,6 +34,7 @@ export class ServerElementComponent implements
 
   @Input('srvElement') element: {name: string};
   @ViewChild('heading', {static: true}) heading: ElementRef;
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef;
 
   constructor() {
     console.log('[lifecycle]', 'constructor');
@@ -42,7 +46,9 @@ export class ServerElementComponent implements
 
   ngOnInit() {
     console.log('[lifecycle]', 'ngOnInit: called once when data-bound fields initial set and before child view is checked');
+    // {static: true} makes sure 'ElementRef' is available here
     console.log(this.heading.nativeElement.textContent); // nothing, view is not rendered yet
+    console.log(this.paragraph.nativeElement.textContent); // nothing, view is not rendered yet
   }
 
   ngDoCheck(): void {
@@ -51,6 +57,7 @@ export class ServerElementComponent implements
 
   ngAfterContentInit(): void {
     console.log('[lifecycle]', 'ngAfterContentInit: called once when content bound data set');
+    console.log(this.paragraph.nativeElement.textContent); // available, content is rendered
   }
 
   ngAfterContentChecked(): void {
@@ -60,6 +67,7 @@ export class ServerElementComponent implements
   ngAfterViewInit(): void {
     console.log('[lifecycle]', 'ngAfterViewInit: called once when view is initialised');
     console.log(this.heading.nativeElement.textContent); // available, view is rendered
+    console.log(this.paragraph.nativeElement.textContent); // nothing, view is not rendered yet
   }
 
   ngAfterViewChecked(): void {
