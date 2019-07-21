@@ -1,0 +1,8 @@
+/* these styles will be global due to 'ViewEncapsulation.None' */
+p {
+  color: blueviolet;
+}
+
+label {
+  color: darkgreen;
+}
