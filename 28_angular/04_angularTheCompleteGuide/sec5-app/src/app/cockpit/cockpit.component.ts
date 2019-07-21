@@ -19,7 +19,7 @@ export class CockpitComponent implements OnInit {
 
   onAddServer(serverNameInput: HTMLInputElement) {
     this.serverCreated.emit({
-      serverName: serverNameInput.value, // passed in from method param from template
+      serverName: serverNameInput.value, // passed in from method param from template local reference
       serverContent: this.serverContentInputRef.nativeElement.value // passed into component via @Viewchild
     });
   }
