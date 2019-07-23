@@ -26,9 +26,9 @@
         </div>
       </ul>
       <p appBasicHighlight>Style me as appBasicHighlight</p>
-      <p appBetterHighlight
+      <p [appBetterHighlight]="'#ffddff'"
         [defaultColor]="'yellow'"
-        [highlightColor]="'#ffddff'">Style me as appBetterHighlight</p>
+        >Style me as appBetterHighlight</p>
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
