@@ -15,7 +15,7 @@
             {{odd}}
           </li>
         </div>
-        <div *ngIf="!onlyOdd">
+        <div *appUnless="onlyOdd">
           <li
             class="list-group-item"
             [ngClass]="{odd: even % 2 !== 0}"
@@ -25,7 +25,7 @@
           </li>
         </div>
         <!-- This is how structural directive actually should look like, angular will desugar *ngIf into this -->
-        <ng-template [ngIf]="!onlyOdd">
+        <ng-template [appUnless]="onlyOdd">
           <div>
             <li
               class="list-group-item"
