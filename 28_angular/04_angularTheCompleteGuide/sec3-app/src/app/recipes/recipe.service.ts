@@ -1,10 +1,9 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
+@Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
@@ -28,11 +27,16 @@ export class RecipeService {
       ])
   ];
 
-  constructor() {
+  // injecting another service into this one to access shared data
+  constructor(private shoppingListService: ShoppingListService) {
   }
 
   getRecipes(): Recipe[] {
     // returns a copy of list
     return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.shoppingListService.addIngredients(ingredients);
   }
 }
