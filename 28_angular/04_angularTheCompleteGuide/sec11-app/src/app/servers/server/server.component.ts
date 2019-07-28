@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,6 +15,7 @@ export class ServerComponent implements OnInit, OnDestroy {
 
   constructor(
     private serversService: ServersService,
+    private router: Router,
     private route: ActivatedRoute
   ) {
   }
@@ -31,4 +32,8 @@ export class ServerComponent implements OnInit, OnDestroy {
     this.paramSubscription.unsubscribe();
   }
 
+  onEdit() {
+    // using relative route path
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 }
