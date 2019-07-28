@@ -19,4 +19,16 @@ export class HomeComponent implements OnInit {
     // some logics...
     this.router.navigate(['/servers']);
   }
+
+  onLoadServer(id: number) {
+    this.router.navigate(
+      ['/servers', id, 'edit'], // route path with dynamic value
+      {
+        queryParams: { // programmatically define queryParams attr value for route
+          allowEdit: '1'
+        },
+        fragment: 'loading' // programmatically define fragment attr value for route
+      }
+      );
+  }
 }
