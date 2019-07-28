@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   // inject global router and assign to field
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -29,6 +30,14 @@ export class HomeComponent implements OnInit {
         },
         fragment: 'loading' // programmatically define fragment attr value for route
       }
-      );
+    );
+  }
+
+  onLogin() {
+    this.authService.logIn();
+  }
+
+  onLogout() {
+    this.authService.logOut();
   }
 }
