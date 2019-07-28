@@ -17,7 +17,8 @@ const appRoutes: Routes = [
     ]
   },
   {path: 'servers', component: ServersComponent,
-    canActivate: [AuthGuard], // points to service that implements canActivate
+    // canActivate: [AuthGuard], // points to service that implements canActivate
+    canActivateChild: [AuthGuard], // points to service that implements canActivateChild
     children: [
       {path: ':id', component: ServerComponent},
       {path: ':id/edit', component: EditServerComponent}
