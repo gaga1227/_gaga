@@ -44,7 +44,9 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     // app module is eager loading, uses forRoot and root injector to provide services to all app
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {
+      useHash: true // add all route urls after # sign to have better browser/server support
+    })
   ],
   exports: [
     // need to also export RouterModule along with it as dependency
