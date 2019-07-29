@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthGuard } from './auth-guard.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -22,10 +23,15 @@ const appRoutes: Routes = [
     // canActivate: [AuthGuard], // points to service that implements canActivate
     canActivateChild: [AuthGuard], // points to service that implements canActivateChild
     children: [
-      {path: ':id', component: ServerComponent},
+      {path: ':id', component: ServerComponent,
+        // add resolver service to resolve data before route is displayed
+        // resolve value is a map so we can map data to component
+        resolve: {server: ServerResolver}
+      },
       {path: ':id/edit', component: EditServerComponent,
         // angular will run CanDeactivateGuard when navigating away from this route
-        canDeactivate: [CanDeactivateGuard]}
+        canDeactivate: [CanDeactivateGuard]
+      }
     ]
   },
   // {path: 'not-found', component: PageNotFoundComponent},
