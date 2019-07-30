@@ -4,6 +4,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 const appRoutes: Routes = [
   // 'pathMatch: full' to avoid infinite loop,
@@ -12,7 +13,10 @@ const appRoutes: Routes = [
   {path: 'recipes', component: RecipesComponent,
     children: [
       {path: '', component: RecipeStartComponent},
-      {path: ':id', component: RecipeDetailComponent}
+      // put this before :id route to make sure 'new' is not treated as :id value
+      {path: 'new', component: RecipeEditComponent},
+      {path: ':id', component: RecipeDetailComponent},
+      {path: ':id/edit', component: RecipeEditComponent}
     ]
   },
   {path: 'shopping-list', component: ShoppingListComponent},

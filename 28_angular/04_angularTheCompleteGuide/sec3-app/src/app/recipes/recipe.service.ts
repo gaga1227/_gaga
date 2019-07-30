@@ -1,11 +1,10 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  // recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -38,6 +37,18 @@ export class RecipeService {
 
   getRecipe(index: number) {
     return this.recipes[index];
+  }
+
+  newRecipe() {
+    const newRecipe = new Recipe(
+      'A new recipe',
+      'description',
+      'http://placehold.it/400x400',
+      [
+        new Ingredient('Ingredient', 0)
+      ]);
+    this.recipes.push(newRecipe);
+    return this.recipes[this.recipes.length - 1];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {

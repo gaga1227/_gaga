@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,10 +16,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private recipeService: RecipeService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {
+    // angular observables subscriptions will be cleaned up automatically
     this.paramSubscription = this.route.params
       .subscribe((params: Params) => {
         this.id = parseInt(params.id, 10);
@@ -33,5 +35,11 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramSubscription.unsubscribe();
+  }
+
+  onEditRecipe() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+    // for demo purposes
+    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 }
