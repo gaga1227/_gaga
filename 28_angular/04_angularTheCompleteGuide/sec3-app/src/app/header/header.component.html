@@ -6,16 +6,16 @@
 
     <div class="navbar-default">
       <ul class="nav navbar-nav">
-        <li [ngStyle]="{fontWeight: currentFeature === 'recipes' ? 'bold' : 'normal'}">
-          <a href="#" (click)="onSelect('recipes')">Recipes</a>
+        <li routerLinkActive="active">
+          <a routerLink="/recipes">Recipes</a>
         </li>
-        <li [ngStyle]="{fontWeight: currentFeature === 'shopping-list' ? 'bold' : 'normal'}">
-          <a href="#" (click)="onSelect('shopping-list')">Shopping List</a>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/shopping-list']">Shopping List</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li [appDropdown]="{defaultIsOpen: true}" class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Save Data</a></li>
             <li><a href="#">Fetch Data</a></li>
