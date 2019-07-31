@@ -33,7 +33,22 @@ export class HomeComponent implements OnInit, OnDestroy {
       (observer: Observer<number>) => {
         let count = 0;
         setInterval(() => {
+          // next can be called 0 or more times
           observer.next(count);
+
+          if (count === 2) {
+            // complete should only be called as the last call when done
+            // observer.complete call ends the subscription
+            observer.complete();
+          }
+
+          if (count > 3) {
+            // error should only be called as the last call when error occurs
+            // observer.error call ends the subscription
+            // error won't trigger complete call
+            observer.error(new Error('Count is larger than 3!'));
+          }
+
           count++;
         }, 1000);
       });
@@ -42,6 +57,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
         (count: number) => {
           console.log('custom interval', count);
+        },
+        (error: any) => {
+          console.log(error);
+        },
+        () => {
+          console.log('custom interval complete');
         }
       );
   }
