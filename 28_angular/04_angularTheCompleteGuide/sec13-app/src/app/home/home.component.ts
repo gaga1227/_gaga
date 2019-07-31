@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -53,10 +54,36 @@ export class HomeComponent implements OnInit, OnDestroy {
         }, 1000);
       });
 
+    // Subscribe to customIntervalObservable
+    // this.intervalSubscription = customIntervalObservable
+    //   .subscribe(
+    //     (count: number) => {
+    //       console.log('custom interval', count);
+    //     },
+    //     (error: any) => {
+    //       console.log(error);
+    //     },
+    //     () => {
+    //       console.log('custom interval complete');
+    //     }
+    //   );
+
+    // Subscribe to mapped customIntervalObservable
     this.intervalSubscription = customIntervalObservable
+      .pipe(
+        // filter out 0 so emit value starts from 1
+        filter((count: number) => {
+          return count > 0; // true to keep value
+        }),
+        // map count number data into string messages
+        map((count: number) => {
+          return `Round: ${count}`;
+        })
+      )
       .subscribe(
-        (count: number) => {
-          console.log('custom interval', count);
+        // use string type due to count is mapped to string from number
+        (data: string) => {
+          console.log(data);
         },
         (error: any) => {
           console.log(error);
