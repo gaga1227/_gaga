@@ -7,7 +7,8 @@
       <form
         #form
         #ngForm="ngForm"
-        (ngSubmit)="onSubmit($event, form, ngForm)">
+        (ngSubmit)="onSubmit($event, form, ngForm)"
+        (ngSubmit)="onSubmitWithViewChild()">
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
