@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,8 @@ import { NgForm } from '@angular/forms';
 export class AppComponent {
 
   // use @viewchild to get child form element via element ref name
-  @ViewChild('ngForm', {static: false})
-  ngForm: NgForm;
+  // @ViewChild('ngForm', {static: false})
+  // ngForm: NgForm;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -18,11 +18,11 @@ export class AppComponent {
 
   // ngSubmit handler, ref is passed form template
   onSubmit(event: Event, form: HTMLFormElement, ngForm: NgForm) {
-    console.log(event, form, ngForm);
+    console.log(ngForm);
   }
 
   // using ref from viewchild
-  onSubmitWithViewChild() {
-    console.log(this.ngForm);
-  }
+  // onSubmitWithViewChild() {
+  //   console.log(this.ngForm);
+  // }
 }
