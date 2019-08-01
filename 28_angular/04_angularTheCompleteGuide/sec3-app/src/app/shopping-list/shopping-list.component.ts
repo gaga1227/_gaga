@@ -19,13 +19,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // getting initial list data
     this.ingredients = this.shoppingListService.getIngredient();
     // getting list data updates
-    this.ingredientsChangedSubscription = this.shoppingListService.ingredientsChanged
+    this.ingredientsChangedSubscription = this.shoppingListService.ingredientsChangedSubject
       .subscribe((ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       });
   }
 
   ngOnDestroy(): void {
+    // needs to unsubscribe for non angular observables
     this.ingredientsChangedSubscription.unsubscribe();
   }
 }
